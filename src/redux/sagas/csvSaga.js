@@ -11,7 +11,7 @@ function* loadCsv(action) {
   }
 }
 
-function* csvSaga(action) {
+function* csvSaga() {
   console.log("inside csvSaga");
   yield takeLatest("LOAD_CSV_INTO_STORE", loadCsv);
 }
