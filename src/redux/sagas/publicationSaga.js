@@ -4,8 +4,8 @@ import axios from 'axios';
 function* getPublications(action){
   try {
     const response = yield axios.get('/publications');
-    yield put({ type: 'SET_PUBLICATIONS', payload: response});
-    console.log('putting this in the publications reducer:', response)
+    yield put({ type: 'SET_PUBLICATIONS', payload: response.data});
+    console.log('putting this in the publications reducer:', response.data)
   } catch (error) {
       console.log('error with getting publications', error);
   }
