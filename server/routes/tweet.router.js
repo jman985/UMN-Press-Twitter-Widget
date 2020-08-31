@@ -6,9 +6,9 @@ const router = express.Router();
  * GET route template
  */
 router.get( '/', ( req, res )=>{
-    console.log( 'in router /events GET',req.params.title );
+    console.log( 'in router /api/tweets GET',req.params.title );
     /// - query: SELECT * FROM "eventlist" - ///
-    let queryString = `SELECT "tweet_html" FROM "tweets" WHERE "publication_id"=253;`;
+    let queryString = `SELECT "tweet_id" FROM "tweets" WHERE "publication_id"=253;`;
     pool.query( queryString ).then( ( result )=>{
         // success
         res.send( result.rows );
