@@ -11,9 +11,14 @@ class CsvParser extends Component {
     }
   };
 
-  handleOnFileLoad = (data) => {
+  handleCsvLoad = (data) => {
     console.log("---------------------------");
-    console.log(data);
+    console.log("poopooooop", data);
+
+    this.props.dispatch({
+      type: "LOAD_CSV_INTO_STORE",
+      payload: data,
+    });
     console.log("---------------------------");
   };
 
@@ -32,8 +37,9 @@ class CsvParser extends Component {
       <>
         <CSVReader
           ref={buttonRef}
-          onFileLoad={this.handleOnFileLoad}
+          onFileLoad={this.handleCsvLoad}
           onError={this.handleOnError}
+          config={{ header: true }}
           noClick
           noDrag
           onRemoveFile={this.handleOnRemoveFile}
@@ -100,4 +106,7 @@ class CsvParser extends Component {
   }
 }
 
-export default CsvParser;
+const mapStateToProps = (state) => {
+  return state;
+};
+export default connect(mapStateToProps)(CsvParser);
