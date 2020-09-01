@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import InclusionToggle from './InclusionToggle'
 
 
 class Publications extends Component {
@@ -36,12 +37,7 @@ class Publications extends Component {
                 <td>{book.title}</td>
                 <td>{book.subtitle}</td>
                 <td>{book.author1}</td>
-                <td>
-                    <select name="include" id="include">
-                    <option value="true">Include</option>
-                    <option value="false">Exclude</option>
-                    </select> 
-                </td>
+                <td><InclusionToggle publicationId={book.id} include={book.include}/></td>
               </tr>
               )
             )}

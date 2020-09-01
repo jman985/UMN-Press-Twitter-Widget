@@ -16,7 +16,9 @@ CREATE TABLE "publication" (
     "author2" VARCHAR (1000),
     "author3" VARCHAR (1000),
     "author4" VARCHAR (1000),
-    "last_searched" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    -- last_searched defaults null so we can see that this publication has not been searched yet
+    "last_searched" TIMESTAMP DEFAULT NULL, 
+    "include" BOOLEAN DEFAULT TRUE
 );
 CREATE TABLE "tweet" (
     "id" SERIAL PRIMARY KEY,
@@ -27,7 +29,7 @@ CREATE TABLE "tweet" (
 
 INSERT INTO publication(title, subtitle, author1)
 VALUES 
-('Book1', 'subtitle1', 'author1'),
-('Book2', 'subtitle2', 'author2'),
-('Book3', 'subtitle3', 'author3'),
-('Book4', 'subtitle4', 'author4');
+('Art of Wonder', 'Inspiration, Creativity, and the Minneapolis Institute of Arts', 'Minneapolis Institute Of Arts'),
+('Awakening the Eye', 'Robert Frank''s American Cinema', 'Kouvaros, George'),
+('Bargaining for Women''s Rights', 'Activism in an Aspiring Muslim Democracy', 'Kang, Alice J.'),
+('Barnstorming the Prairies', 'How Aerial Vision Shaped the Midwest', 'Weems, Jason');
