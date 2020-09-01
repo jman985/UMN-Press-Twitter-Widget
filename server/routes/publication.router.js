@@ -11,7 +11,7 @@ router.get("/", (req, res) => {
   pool
     .query(queryText)
     .then((response) => {
-      console.log("Successfully got publication data", response.rows);
+      //console.log("Successfully got publication data", response.rows);
       res.send(response.rows);
     })
     .catch((err) => {
@@ -25,7 +25,7 @@ router.get("/", (req, res) => {
  */
 router.post("/csv", async (req, res) => {
   const csvData = req.body.payload;
-  console.log("OOOOO", csvData);
+  //console.log("OOOOO", csvData);
   const connection = await pool.connect();
   const notAvailable = "not provided";
 
@@ -41,9 +41,6 @@ router.post("/csv", async (req, res) => {
     const queryText = `INSERT INTO "publication" ("title", "author1", "subtitle") VALUES ($1, $2, $3);`;
 
     for (book of csvData) {
-      // if (book.data.title === null || undefined || "") {
-      //   return false;
-      // }
       await connection.query(queryText, [
         book.data.title,
         book.data.author,
@@ -51,7 +48,6 @@ router.post("/csv", async (req, res) => {
       ]);
     }
     await connection.query("COMMIT");
-    //await res.sendStatus(201);
   } catch (error) {
     await connection.query("ROLLBACK");
     throw error;

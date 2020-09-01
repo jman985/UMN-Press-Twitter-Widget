@@ -14,6 +14,7 @@ class UserPage extends Component {
       type: "SEND_CSV_TO_DB",
       payload: this.props.csv.data,
     });
+    this.props.history.push("/publications");
   };
 
   render() {
