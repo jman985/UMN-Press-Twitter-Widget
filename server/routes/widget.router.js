@@ -26,7 +26,7 @@ router.get( '/:publication_id', ( req, res )=>{
 router.get('/:publication_id/:tweet_id', (req, res) => {
     console.log( 'in router /api/tweets GET embed html', req.params );
     
-    axios.get(`https://publish.twitter.com/oembed?url=https://twitter.com/anyuser/status/${req.params.tweet_id}&omit_script=true`)
+    axios.get(`https://publish.twitter.com/oembed?url=https://twitter.com/anyuser/status/${req.params.tweet_id}`)
 
         .then((response)=>{
             console.log('sending back:', response.data.html);

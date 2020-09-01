@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { HashRouter as Router, Route, Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { withRouter } from "react-router";
+import { TwitterTimelineEmbed, TwitterShareButton, TwitterFollowButton, TwitterHashtagButton, TwitterMentionButton, TwitterTweetEmbed, TwitterMomentShare, TwitterDMButton, TwitterVideoEmbed, TwitterOnAirButton } from 'react-twitter-embed';
 
 
 
@@ -33,7 +34,7 @@ function fetchTweets() {
             ).then(response=> response.text()
             
             ).then(html => {console.log('this is the tweet html', html)
-
+                            
                 let tweetContainer = document.getElementById('viewTweets');
                 console.log(tweetContainer);
 
@@ -52,34 +53,11 @@ function fetchTweets() {
     ).catch( error => console.error('Error fetching tweet ID', error) )
 
     }
-// function fetchEmbedTweets(data) {
-//     console.log('this is the data', data);
-    
-//     for (let i=0; i<data.length; i++){
-
-//         console.log('this is the tweet_id', data[i].tweet_id);
-
-//         fetch('https://publish.twitter.com/oembed?url=https://twitter.com/anyuser/status/'+ data[i].tweet_id,
-//         {
-//             method: 'GET',
-//             headers: {
-//                 'Authorization': `Bearer AAAAAAAAAAAAAAAAAAAAALo%2FHAEAAAAADac6xyDfgK5%2F8F%2FOuotBdu5ScAQ%3D9KfnjQfZnNeDoS7yHkm9IKV833yOTRGNLFalNxa4aNHIpH0YDw`
-//                 },
-//             mode: 'no-cors',
-//           })
-//           .then(response => response.json())
-
-//           .then(json => console.log(json))
-
-
-//           .catch( error => console.error('error:', error))
-//     }
- 
-// }
 
  fetchTweets()
 
- return <div id="viewTweets"></div>
+ return (<div id="viewTweets">
+        </div>)
 
 }
   
