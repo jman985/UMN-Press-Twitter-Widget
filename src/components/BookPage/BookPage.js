@@ -13,7 +13,10 @@ import { TwitterTimelineEmbed, TwitterShareButton, TwitterFollowButton, TwitterH
 class BookPage extends Component {
 
     componentDidMount () {
-        console.log('book page mounted', window.location.href.replace('http://localhost:3000/#/books/',''));
+        console.log('book page mounted')
+        this.props.dispatch({type: 'FETCH_TWEETS', payload: this.props.match.params.publication_id});
+
+
   //       const script = document.createElement("script");
   // script.src = "https://platform.twitter.com/widgets.js";
   // script.async = true;
@@ -25,23 +28,38 @@ class BookPage extends Component {
     //   window.A.sort();
     // }
 
+
     render() {
       return (
         <>
         
       <div className="content">
         <h1>Book Sample Page</h1>
+
         <div >
         {/* <Widget/> */}
         </div>
-        <TwitterTweetEmbed tweetId={'1298894391763861504'}
-          options={{width: 250}}
-          />
+
+        {this.props.selectTweetID.map( tweetID =>
+        
+        <TwitterTweetEmbed key = {tweetID.index} tweetId={tweetID}
+          options={{width: 250}}/>
+
+        )}
+
       </div>
-
-
     </>
-    )}
+      )
   }
+}
 
-  export default connect()(withRouter(BookPage));
+  BookPage.propTypes = {
+    classes: PropTypes.object.isRequired
+  };
+
+  const mapStateToProps = state => ({
+    selectTweetID: state.selectTweetID,
+    
+    });
+
+  export default connect((mapStateToProps)(withRouter(BookPage)));
