@@ -7,7 +7,7 @@ const token = process.env.BEARER_TOKEN;
 
 // GET from Twitter API
 router.get('/:title', rejectUnauthenticated, (req, res) => {
-    console.log('=====>> router get', req.params.title);
+    // console.log('=====>> router get', req.params.title);
     // console.log('preparing to hit server with a request to the Twitter API');
     axios.get(`https://api.twitter.com/2/tweets/search/recent?query=${req.params.title}&max_results=10`, {
         headers: {
@@ -15,7 +15,7 @@ router.get('/:title', rejectUnauthenticated, (req, res) => {
         }
     })
         .then((response)=>{
-            console.log('sending back:', response.data.data);
+            // console.log('sending back:', response.data.data);
             res.send(response.data.data);
         })
         .catch((error)=>{
@@ -23,6 +23,9 @@ router.get('/:title', rejectUnauthenticated, (req, res) => {
             res.sendStatus(500);
         });
 })
+
+
+
 
 /**
  * POST route template
