@@ -1,7 +1,10 @@
-const csvReducer = (state = [], action) => {
+const csvReducer = (state = { loaded: false }, action) => {
   switch (action.type) {
     case "SET_CSV_DATA":
-      return action.payload;
+      return {
+        loaded: true,
+        data: action.payload,
+      };
 
     default:
       return state;

@@ -75,7 +75,7 @@ class CsvParser extends Component {
                   borderWidth: 1,
                   borderStyle: "solid",
                   borderColor: "#ccc",
-                  height: 45,
+                  height: 55,
                   lineHeight: 2.5,
                   marginTop: 5,
                   marginBottom: 5,
