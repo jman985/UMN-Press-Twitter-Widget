@@ -22,17 +22,26 @@ class Publications extends Component {
       <>
         <table>
           <thead>
-            <th>Title</th>
-            <th>Subtitle</th>
-            <th>Author</th>
+              <tr>
+                <th>Title</th>
+                <th>Subtitle</th>
+                <th>Author</th>
+                <th>Include/Exclude</th>
+              </tr>
           </thead>
           {/* {JSON.stringify(this.props.publication)} */}
           <tbody>
             {this.props.publication.map((book, index) => (
-              <tr id={index}>
+              <tr key={index}>
                 <td>{book.title}</td>
                 <td>{book.subtitle}</td>
                 <td>{book.author1}</td>
+                <td>
+                    <select name="include" id="include">
+                    <option value="true">Include</option>
+                    <option value="false">Exclude</option>
+                    </select> 
+                </td>
               </tr>
               )
             )}
