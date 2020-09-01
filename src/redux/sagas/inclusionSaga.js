@@ -4,6 +4,7 @@ import axios from 'axios';
 function* toggleInclusion(action){
   try {
     yield axios.put('/publications', {id: action.payload});
+    yield put({type: 'FETCH_PUBLICATIONS'});
   } catch (error) {
       console.log('error with bookmark add saga:', error);
   }

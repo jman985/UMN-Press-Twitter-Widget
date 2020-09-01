@@ -7,7 +7,9 @@ const router = express.Router();
  */
 router.get('/', (req, res) => {
   console.log('Getting Publications')
-  const queryText = `SELECT * FROM publication`
+  const queryText = `
+  SELECT * FROM publication
+  ORDER BY title ASC`
   pool.query(queryText)
   .then( (response) => {
       console.log( 'Successfully got publication data', response.rows);
