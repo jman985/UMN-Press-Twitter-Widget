@@ -23,11 +23,52 @@ router.get("/", (req, res) => {
 /**
  * POST route template
  */
-router.post("/csv", (req, res) => {
-  console.log("made it to post route", req.body);
-  for (let book of req.body.payload) {
-    console.log(book.data.author);
+router.post("/csv", async (req, res) => {
+  const csvData = req.body.payload;
+  console.log("OOOOO", csvData);
+  const connection = await pool.connect();
+  const notAvailable = "not provided";
+
+  try {
+    // for (book of csvData) {
+    //   if (book.data.title === undefined) {
+    //     console.log("pooooop");
+    //   } else {
+    //     console.log(book.data.title);
+    //   }
+    // }
+    await connection.query("BEGIN");
+    const queryText = `INSERT INTO "publication" ("title", "author1", "subtitle") VALUES ($1, $2, $3);`;
+
+    for (book of csvData) {
+      // if (book.data.title === null || undefined || "") {
+      //   return false;
+      // }
+      await connection.query(queryText, [
+        book.data.title,
+        book.data.author,
+        book.data.subtitle,
+      ]);
+    }
+    await connection.query("COMMIT");
+    //await res.sendStatus(201);
+  } catch (error) {
+    await connection.query("ROLLBACK");
+    throw error;
+  } finally {
+    connection.release();
   }
 });
 
 module.exports = router;
+
+// switch (book) {
+//   case book.data.title === undefined || "":
+//     book.data.title = "not provided";
+//     break;
+//   case book.data.author === undefined:
+//     book.data.author = notAvailable;
+//     break;
+//   case book.data.subtitile === undefined:
+//     book.data.subtitle = notAvailable;
+//     break;

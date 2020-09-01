@@ -3,6 +3,11 @@ import { put, takeLatest } from "redux-saga/effects";
 
 function* loadCsv(action) {
   //const response = yield axios.get('/api/user', config);
+  action.payload.pop();
+  console.log("what???", action.payload.length);
+  // for(let book of action.payload){
+  //   let data
+  // }
   try {
     console.log("loadCsv");
     yield put({ type: "SET_CSV_DATA", payload: action.payload });
