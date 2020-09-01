@@ -22,9 +22,7 @@ class BookPage extends Component {
         <div >
         <Widget/>
 
-        <ul id="viewTweets">
-
-        </ul>
+        
         </div>
 
       </div>
