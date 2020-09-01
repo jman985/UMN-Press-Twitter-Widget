@@ -12,6 +12,10 @@ class Publications extends Component {
   //   this.props.history.push('/Bills/' + id)
   // }
 
+  handleClick = () => {
+      this.props.dispatch({type: 'FETCH_TWEETS', payload: this.props.publication});
+  }
+
   render() {
     if (this.props.publication.map === undefined) return null;
     return(
@@ -34,6 +38,9 @@ class Publications extends Component {
             )}
           </tbody>
         </table>
+        <button onClick={this.handleClick}>
+            Search
+        </button>
       </>
     )
   } 
