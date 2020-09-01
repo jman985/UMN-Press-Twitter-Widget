@@ -3,9 +3,12 @@ import axios from 'axios';
 
 function* getTweets(action){
   try {
-    const response = yield axios.get('/tweets');
-    yield put({ type: 'SET_TWEETS', payload: response.data});
-    console.log('sending this to tweet reducer:', response.data)
+    yield console.log(action.payload);
+    for (let i=0; i<action.payload.length; i++){
+        const response = yield axios.get('/tweets/' + action.payload[i].title)
+        yield put({ type: 'SET_TWEETS', payload: response.data});
+        console.log('sending this to tweet reducer:', response.data)
+    }
   } catch (error) {
       console.log('error with getting tweets', error);
   }

@@ -6,9 +6,10 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const token = process.env.BEARER_TOKEN;
 
 // GET from Twitter API
-router.get('/', rejectUnauthenticated, (req, res) => {
+router.get('/:title', rejectUnauthenticated, (req, res) => {
+    console.log('=====>> router get', req.params.title);
     // console.log('preparing to hit server with a request to the Twitter API');
-    axios.get(`https://api.twitter.com/2/tweets/search/recent?query=book1&max_results=10`, {
+    axios.get(`https://api.twitter.com/2/tweets/search/recent?query=${req.params.title}&max_results=10`, {
         headers: {
         'Authorization': `Bearer ${token}`
         }
