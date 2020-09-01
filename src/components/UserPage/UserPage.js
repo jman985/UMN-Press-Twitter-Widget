@@ -5,6 +5,17 @@ import CSVReader from "../CsvParser/CsvParser";
 
 class UserPage extends Component {
   // this component doesn't do much to start, just renders some user info to the DOM
+  // keepAuthor = (title) => {
+  //   console.log("keep:", title);
+  // };
+
+  acceptCsv = () => {
+    this.props.dispatch({
+      type: "SEND_CSV_TO_DB",
+      payload: this.props.csv.data,
+    });
+  };
+
   render() {
     return (
       <div>
@@ -22,6 +33,7 @@ class UserPage extends Component {
               padding: "20px",
             }}
           >
+            <button onClick={this.acceptCsv}>Looks good!</button>
             <table>
               <thead>
                 <th>Title</th>
@@ -36,7 +48,9 @@ class UserPage extends Component {
                     <td>{book.data.subtitle}</td>
                     <td>{book.data.author}</td>
                     <td>
-                      <button>ok</button>
+                      {/* <button onClick={() => this.keepAuthor(book.data.title)}>
+                        ok
+                      </button> */}
                     </td>
                   </tr>
                 ))}
