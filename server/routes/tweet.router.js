@@ -1,15 +1,17 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {default: axios} = require('axios');
+const token = process.env.BEARER_TOKEN;
 
 /**
  * GET route template
  */
-router.get( '/', ( req, res )=>{
-    console.log( 'in router /api/tweets GET',req.params.title );
+router.get( '/:publication_id', ( req, res )=>{
+    console.log( 'in router /api/tweets GET', req.params );
     /// - query: SELECT * FROM "eventlist" - ///
-    let queryString = `SELECT "tweet_id" FROM "tweets" WHERE "publication_id"=253;`;
-    pool.query( queryString ).then( ( result )=>{
+    pool.query( `SELECT "tweet_id" FROM "tweets" WHERE "publication_id"=$1;`,[req.params.publication_id])
+    .then( ( result )=>{
         // success
         res.send( result.rows );
     }).catch( ( err )=>{
@@ -17,6 +19,28 @@ router.get( '/', ( req, res )=>{
         res.sendStatus( 500 );
     })
 })
+
+
+// GET Tweet from Twitter Embed API
+
+router.get('/:tweet_id', (req, res) => {
+    console.log( 'in router /api/tweets GET', req.params );
+    
+    axios.get(`https://publish.twitter.com/oembed?url=https://twitter.com/anyuser/status/$1`, {
+        headers: {
+        'Authorization': `Bearer ${token}`
+        }
+    })
+        .then((response)=>{
+            console.log('sending back:', response.data.html);
+            res.send(response.data.data);
+        })
+        .catch((error)=>{
+            console.log('error with Twitter GET', error);
+            res.sendStatus(500);
+        });
+})
+
 
 /**
  * POST route template

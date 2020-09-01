@@ -10,7 +10,7 @@ import Widget from '../Widget/Widget';
 class BookPage extends Component {
 
     componentDidMount () {
-        console.log('book page mounted');
+        console.log('book page mounted', window.location.href.replace('http://localhost:3000/#/books/',''));
         
     }
   
@@ -19,7 +19,14 @@ class BookPage extends Component {
         
         <div className="content">
         <h1>Book Sample Page</h1>
+        <div >
         <Widget/>
+
+        <ul id="viewTweets">
+
+        </ul>
+        </div>
+
       </div>
 
 
