@@ -19,6 +19,27 @@ router.get('/', (req, res) => {
   })
 })
 
+
+
+router.put('/', (req, res) => {
+  console.log('Toggling inclusion state of publication #', req.body.id)
+  const queryText = `
+  UPDATE publication
+  SET include = NOT include
+  WHERE id = ${req.body.id}
+  `
+  pool.query(queryText)
+  .then( (response) => {
+      console.log( 'Successfully toggled inclusion state');
+      res.send(response.rows);
+  })
+  .catch( (err) => {
+      console.log('An error occured while toggling inclusion state:', err);
+      res.sendStatus(500);
+  })
+})
+
+
 /**
  * POST route template
  */

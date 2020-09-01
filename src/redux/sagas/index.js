@@ -5,6 +5,7 @@ import userSaga from "./userSaga";
 import csvSaga from "./csvSaga";
 import publicationSaga from './publicationSaga';
 import tweetSaga from './tweetSaga';
+import inclusionSaga from './inclusionSaga';
 
 
 // rootSaga is the primary saga.
@@ -22,5 +23,6 @@ export default function* rootSaga() {
     publicationSaga(),
     tweetSaga(),
     csvSaga(),
+    inclusionSaga(),
   ]);
 }
