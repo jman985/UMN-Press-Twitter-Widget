@@ -17,6 +17,7 @@ class BookPage extends Component {
     render() {
       return (
         
+
         <div className="content">
         <h1>Book Sample Page</h1>
         <div >

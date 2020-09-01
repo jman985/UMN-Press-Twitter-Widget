@@ -10,32 +10,48 @@ const Widget = () => {
 
 
 function fetchTweets() {
+
     //pull out url into variable to be easily swapped out
+
     fetch('/api/tweets/'+ window.location.href.replace('http://localhost:3000/#/books/',''),
     { method: 'GET',
       mode: 'no-cors',
                       }
-  )
-  .then( response => response.json())
+    ).then( response => response.json()
+    
+    ).then(data=> {
+        console.log('tweet ids:',data);
 
-  .then( data => {console.log('tweet ids:',data)
+        for(let i=0;i<data.length;i++){
+            console.log('tweet id', data[i].tweet_id);
+            
+            fetch('/api/tweets/'+ window.location.href.replace('http://localhost:3000/#/books/','') + '/' +data[i].tweet_id,
+            { method: 'GET',
+            mode: 'no-cors',
+                            }
 
-    let tweetUL = document.getElementById('viewTweets');
-    console.log(tweetUL);
+            ).then(response=> response.text()
+            
+            ).then(html => {console.log('this is the tweet html', html)
 
-    for(let i=0;i<data.length;i++){
-    let tweetLi = document.createElement('li');
-    console.log(data[i].tweet_id);
-    tweetLi.innerHTML = data[i].tweet_id;
-    // console.log(tweetLi);
-    tweetUL.append(tweetLi);
+                let tweetContainer = document.getElementById('viewTweets');
+                console.log(tweetContainer);
+
+                let tweetDiv = document.createElement('div');
+                console.log(html);
+
+                tweetDiv.innerHTML = html;
+                // console.log(tweetLi);
+                tweetContainer.append(tweetDiv);
+
+            })
+
+        }}
+            ).catch((error) => {console.error('Error fetching embed html', error);}
+    
+    ).catch( error => console.error('Error fetching tweet ID', error) )
+
     }
-
-})
-
-
-  .catch( error => console.error('error:', error) )}
-
 // function fetchEmbedTweets(data) {
 //     console.log('this is the data', data);
     
@@ -63,7 +79,7 @@ function fetchTweets() {
 
  fetchTweets()
 
- return <ul id="viewTweets"></ul>
+ return <div id="viewTweets"></div>
 
 }
   
