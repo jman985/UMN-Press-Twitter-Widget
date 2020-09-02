@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 class PublicationItem extends Component {
 
     state = {
-        status: false
+        status: true
     }
 
     componentDidMount(){
