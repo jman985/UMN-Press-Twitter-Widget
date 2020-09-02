@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { put, takeEvery, takeLatest } from 'redux-saga/effects';
 
-//GET build data from the database
+//GET tweet ids from the database to display on book page
 function* fetchTweetIDs(action){
   try{
       console.log('querying with', action.payload);

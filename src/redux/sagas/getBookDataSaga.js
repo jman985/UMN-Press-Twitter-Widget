@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { put, takeEvery, takeLatest } from 'redux-saga/effects';
 
-//GET build data from the database
+//GET book data from the database to display on book page
+
 function* fetchBookData(action){
   try{
       console.log('querying with', action.payload);
@@ -12,7 +13,9 @@ function* fetchBookData(action){
     };
     const response = yield axios.get('/api/books/' + action.payload);
     console.log('response from server: ', response.data);
+    //configure title to match UMN press bookpage urls, then add to response
     let urlTitle = response.data[0].title.toLowerCase().replace(/ /g,'-').replace(/'/,'a')
+
     response.data[0].urlTitle = urlTitle;
 
     console.log('this is the book url', urlTitle);

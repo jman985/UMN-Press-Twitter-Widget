@@ -12,8 +12,9 @@ const Widget = () => {
 
 function fetchTweets() {
 
-    //pull out url into variable to be easily swapped out
-
+    //pull out url into variable to be easily swapped out?
+    //get publication id from url, then fetch tweet ids from the database
+    
     fetch('/api/tweets/'+ window.location.href.replace('http://localhost:3000/#/books/',''),
     { method: 'GET',
       mode: 'no-cors',
