@@ -6,13 +6,25 @@ function* getTweets(action){
     yield console.log(action.payload);
     for (let i=0; i<action.payload.length; i++){
       if (action.payload[i].include){
-        const response = yield axios.get('/tweets/' + action.payload[i].title)
+        const response = yield axios.get('/tweets/twitter' + action.payload[i].title)
         // send the response(tweet id) and the publication object from database to the save saga
         yield put({ type: 'SAVE_TWEETS', payload: {tweetArray: response.data, publicationId: action.payload[i].id}});
         console.log('sending this to save tweet saga:', response.data)
       }
 
     }
+  } catch (error) {
+      console.log('error with getting tweets', error);
+  }
+}
+
+
+function* getDbTweets(action){
+  try {
+    const response = yield axios.get('/tweets/database/')
+    // send the response(tweet id) and the publication object from database to the save saga
+    yield put({ type: 'STORE_ALL_TWEETS', payload: response.data});
+    console.log('sending this to tweet reducer:', response.data)
   } catch (error) {
       console.log('error with getting tweets', error);
   }
@@ -26,7 +38,7 @@ function* saveTweets(action){
       const tweetId = tweet.id
       const publicationId = action.payload.publicationId
       console.log('sending these to tweet save route:', {tweetId: tweetId, publicationId: publicationId})
-      yield axios.post('/tweets', {tweetId: tweet.id, publicationId: action.payload.publicationId});
+      yield axios.post('/tweets/database', {tweetId: tweet.id, publicationId: action.payload.publicationId});
     }
   } catch (error) {
       console.log('error with tweet save route', error);
@@ -36,6 +48,7 @@ function* saveTweets(action){
 
 function* tweetSaga() {  
   yield takeLatest('FETCH_TWEETS', getTweets);
+  yield takeLatest('FETCH_DATABASE_TWEETS', getDbTweets);
   yield takeLatest('SAVE_TWEETS', saveTweets);
 }
 

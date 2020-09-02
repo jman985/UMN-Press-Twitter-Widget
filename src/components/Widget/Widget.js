@@ -7,7 +7,7 @@ import { TwitterTimelineEmbed, TwitterShareButton, TwitterFollowButton, TwitterH
 
 
 
-const Widget = () => {
+const TweetsPage = () => {
 
 
 function fetchTweets() {
@@ -19,25 +19,18 @@ function fetchTweets() {
       mode: 'no-cors',
                       }
     ).then( response => response.json()
-    
     ).then(data=> {
         console.log('tweet ids:',data);
-
         for(let i=0;i<data.length;i++){
-            console.log('tweet id', data[i].tweet_id);
-            
+            console.log('tweet id', data[i].tweet_id);   
             fetch('/api/tweets/'+ window.location.href.replace('http://localhost:3000/#/books/','') + '/' +data[i].tweet_id,
             { method: 'GET',
             mode: 'no-cors',
                             }
-
             ).then(response=> response.text()
-            
-            ).then(html => {console.log('this is the tweet html', html)
-                            
+            ).then(html => {console.log('this is the tweet html', html)        
                 let tweetContainer = document.getElementById('viewTweets');
                 console.log(tweetContainer);
-
                 let tweetDiv = document.createElement('div');
                 console.log(html);
 
@@ -61,7 +54,7 @@ function fetchTweets() {
 
 }
   
-export default connect()(Widget);
+export default connect()(TweetsPage);
 
 
    
