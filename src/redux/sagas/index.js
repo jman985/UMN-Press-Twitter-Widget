@@ -1,3 +1,8 @@
+import { all } from 'redux-saga/effects';
+import loginSaga from './loginSaga';
+import registrationSaga from './registrationSaga';
+import userSaga from './userSaga';
+import getTweetIDSaga from './getTweetIDSaga'
 import { all } from "redux-saga/effects";
 import loginSaga from "./loginSaga";
 import registrationSaga from "./registrationSaga";
@@ -6,7 +11,6 @@ import csvSaga from "./csvSaga";
 import publicationSaga from './publicationSaga';
 import tweetSaga from './tweetSaga';
 import inclusionSaga from './inclusionSaga';
-
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -20,6 +24,7 @@ export default function* rootSaga() {
     loginSaga(),
     registrationSaga(),
     userSaga(),
+    getTweetIDSaga()
     publicationSaga(),
     tweetSaga(),
     csvSaga(),

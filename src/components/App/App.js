@@ -19,6 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import Publications from '../Publications/Publications';
 
 import './App.css';
+import BookPage from '../BookPage/BookPage';
 
 class App extends Component {
   componentDidMount () {
@@ -40,6 +41,11 @@ class App extends Component {
               exact
               path="/about"
               component={AboutPage}
+            />
+            <Route
+              exact
+              path="/books/:publication_id"
+              component={BookPage}
             />
             <Route
               exact
