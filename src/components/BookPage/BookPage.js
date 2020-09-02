@@ -15,13 +15,11 @@ class BookPage extends Component {
     componentDidMount () {
         console.log('book page mounted')
         this.props.dispatch({type: 'FETCH_TWEETS', payload: this.props.match.params.publication_id});
+    //       const script = document.createElement("script");
+    // script.src = "https://platform.twitter.com/widgets.js";
+    // script.async = true;
 
-
-  //       const script = document.createElement("script");
-  // script.src = "https://platform.twitter.com/widgets.js";
-  // script.async = true;
-
-  // document.body.appendChild(script);
+    // document.body.appendChild(script);
     }
 
     // scriptLoaded() {
@@ -42,7 +40,7 @@ class BookPage extends Component {
 
         {this.props.selectTweetID.map( tweetID =>
         
-        <TwitterTweetEmbed key = {tweetID.index} tweetId={tweetID}
+        <TwitterTweetEmbed key = {tweetID.index} tweetId={tweetID.tweet_id}
           options={{width: 250}}/>
 
         )}
@@ -62,4 +60,4 @@ class BookPage extends Component {
     
     });
 
-  export default connect((mapStateToProps)(withRouter(BookPage)));
+  export default withRouter(connect(mapStateToProps)(BookPage));
