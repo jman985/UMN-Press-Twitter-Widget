@@ -17,6 +17,7 @@ import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import Publications from '../Publications/Publications';
+import PublicationItem from '../PublicationItem/PublicationItem';
 
 import './App.css';
 import BookPage from '../BookPage/BookPage';
@@ -51,6 +52,11 @@ class App extends Component {
               exact
               path="/publications"
               component={Publications}
+            />
+            <Route
+                exact
+                path="/publications/:id"
+                component={PublicationItem}
             />
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.

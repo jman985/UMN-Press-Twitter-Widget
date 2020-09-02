@@ -17,6 +17,8 @@ class Publications extends Component {
       this.props.dispatch({type: 'FETCH_TWEETS', payload: this.props.publication});
   }
 
+
+
   render() {
     if (this.props.publication.map === undefined) return null;
     return(
@@ -34,7 +36,7 @@ class Publications extends Component {
           <tbody>
             {this.props.publication.map((book, index) => (
               <tr key={index}>
-                <td>{book.title}</td>
+                <td className="book-select" onClick={()=>{this.props.history.push(`publications/${book.id}`)}}>{book.title}</td>
                 <td>{book.subtitle}</td>
                 <td>{book.author1}</td>
                 <td><InclusionToggle publicationId={book.id} include={book.include}/></td>
