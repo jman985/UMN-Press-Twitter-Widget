@@ -8,3 +8,28 @@ CREATE TABLE "user" (
     "username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL
 );
+CREATE TABLE "publication" (
+    "id" SERIAL PRIMARY KEY,
+    "title" VARCHAR (1000) UNIQUE NOT NULL,
+    "subtitle" VARCHAR (1000) NOT NULL,
+    "author1" VARCHAR (1000),
+    "author2" VARCHAR (1000),
+    "author3" VARCHAR (1000),
+    "author4" VARCHAR (1000),
+    -- last_searched defaults null so we can see that this publication has not been searched yet
+    "last_searched" TIMESTAMP DEFAULT NULL, 
+    "include" BOOLEAN DEFAULT TRUE
+);
+CREATE TABLE "tweet" (
+    "id" SERIAL PRIMARY KEY,
+    "publication_id" INT REFERENCES publication(id),
+    "tweet_id" VARCHAR (100),
+    "approved" BOOLEAN
+);
+
+INSERT INTO publication(title, subtitle, author1)
+VALUES 
+('Art of Wonder', 'Inspiration, Creativity, and the Minneapolis Institute of Arts', 'Minneapolis Institute Of Arts'),
+('Awakening the Eye', 'Robert Frank''s American Cinema', 'Kouvaros, George'),
+('Bargaining for Women''s Rights', 'Activism in an Aspiring Muslim Democracy', 'Kang, Alice J.'),
+('Barnstorming the Prairies', 'How Aerial Vision Shaped the Midwest', 'Weems, Jason');
