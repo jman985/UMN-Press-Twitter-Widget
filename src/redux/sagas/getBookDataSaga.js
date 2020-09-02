@@ -12,9 +12,9 @@ function* fetchBookData(action){
     };
     const response = yield axios.get('/api/books/' + action.payload);
     console.log('response from server: ', response.data);
-    let urlTitle = response.data[0].title.toLowerCase().replace(/ /g,'-')
+    let urlTitle = response.data[0].title.toLowerCase().replace(/ /g,'-').replace(/'/,'a')
     response.data[0].urlTitle = urlTitle;
-    
+
     console.log('this is the book url', urlTitle);
     
     yield put({type:'SET_BOOK_DATA', payload: response.data[0] });
