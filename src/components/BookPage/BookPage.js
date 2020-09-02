@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { withRouter } from "react-router";
 import Widget from '../Widget/Widget';
 import { TwitterTimelineEmbed, TwitterShareButton, TwitterFollowButton, TwitterHashtagButton, TwitterMentionButton, TwitterTweetEmbed, TwitterMomentShare, TwitterDMButton, TwitterVideoEmbed, TwitterOnAirButton } from 'react-twitter-embed';
-
+import PropTypes from 'prop-types';
 
 
 

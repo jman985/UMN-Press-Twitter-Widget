@@ -1,7 +1,3 @@
-import { all } from 'redux-saga/effects';
-import loginSaga from './loginSaga';
-import registrationSaga from './registrationSaga';
-import userSaga from './userSaga';
 import getTweetIDSaga from './getTweetIDSaga'
 import { all } from "redux-saga/effects";
 import loginSaga from "./loginSaga";
@@ -24,7 +20,7 @@ export default function* rootSaga() {
     loginSaga(),
     registrationSaga(),
     userSaga(),
-    getTweetIDSaga()
+    getTweetIDSaga(),
     publicationSaga(),
     tweetSaga(),
     csvSaga(),
