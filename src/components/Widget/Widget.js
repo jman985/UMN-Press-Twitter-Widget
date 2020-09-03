@@ -40,9 +40,9 @@ function fetchTweets() {
 
             const scriptElement = document.createElement( "script" );
 
-            scriptElement.addEventListener(
-				    "load",
-				      function() {
+            // scriptElement.addEventListener(
+				    // "load",
+				    //   function() {
                     console.log( 'Successfully loaded twitter widget script using (addEventListener).' );
 
                     let tweetContainer = document.getElementById('viewTweets');
@@ -54,14 +54,13 @@ function fetchTweets() {
                     tweetDiv.innerHTML = html;
                     // console.log(tweetLi);
                     tweetContainer.append(tweetDiv);
-                }
-              )
-            scriptElement.src = "https://platform.twitter.com/widgets.js";
-            scriptElement.async = true;
 
-            document.body.appendChild( scriptElement );
-          })
+                })
+            // scriptElement.src = "https://platform.twitter.com/widgets.js";
+            // scriptElement.async = true;
 
+            // document.body.appendChild( scriptElement );
+          
         }}
             ).catch((error) => {console.error('Error fetching embed html', error);}
     

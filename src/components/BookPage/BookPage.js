@@ -47,12 +47,7 @@ class BookPage extends Component {
         this.props.dispatch({type: 'FETCH_TWEETS', payload: this.props.match.params.publication_id});
         this.props.dispatch({type: 'FETCH_BOOK_DATA', payload: this.props.match.params.publication_id});
 
-    //       const script = document.createElement("script");
-    // script.src = "https://platform.twitter.com/widgets.js";
-    // script.async = true;
-
-    // document.body.appendChild(script);
-    }
+      }
 
     // scriptLoaded() {
     //   window.A.sort();
@@ -98,7 +93,6 @@ class BookPage extends Component {
         container
         spacing={11}
         direction="column"
-        justify="right"
         alignItems="flex-start">
 
 
