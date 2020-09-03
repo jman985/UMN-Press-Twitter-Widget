@@ -66,27 +66,38 @@ class BookPage extends Component {
         <h1>{this.props.bookData.title}: {this.props.bookData.subtitle}</h1>
 
         <img src={'https://www.upress.umn.edu/book-division/books/'+this.props.bookData.urlTitle+'/image_mini'} 
-        
         alt={this.props.bookData.title}/>
         <h4> by {this.props.bookData.author1}</h4>
         </div>
 
       
       <AppBar position="static">
-        <Tabs  aria-label="simple tabs example">
-          <Tab label="Item One"  />
-          <Tab label="Item Two"  />
-          <Tab label="Item Three"  />
+        <Tabs  aria-label="book page tabs">
+          <Tab label="Overview"  />
+          <Tab label="Full Details"  />
+          <Tab label="Author Bio"  />
+          <Tab label="Reviews"  />
+          <Tab label="Table of Contents"  />
+          <Tab label="Twitter Convos"  />
         </Tabs>
       </AppBar>
       <Box p={3}>
-          <Typography>q</Typography>
+          <Typography></Typography>
         </Box>
       <Box p={3}>
-          <Typography>a</Typography>
+          <Typography></Typography>
         </Box>
       <Box p={3}>
-          <Typography>a</Typography>
+          <Typography></Typography>
+        </Box>
+        <Box p={3}>
+          <Typography></Typography>
+        </Box>
+      <Box p={3}>
+          <Typography></Typography>
+        </Box>
+      <Box p={3}>
+          <Typography></Typography>
         </Box>
       <div className={classes.Tweets}>
         <Grid
@@ -99,7 +110,7 @@ class BookPage extends Component {
         {this.props.selectTweetID.map( tweetID =>
         
         <TwitterTweetEmbed key = {tweetID.index} tweetId={tweetID.tweet_id}
-          options={{width: 500, height:550}}/>
+          options={{width: 220, height:550}}/>
 
         )}
 
