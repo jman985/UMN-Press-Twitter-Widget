@@ -12,7 +12,7 @@ function* fetchTweetIDs(action){
     };
     const response = yield axios.get('/api/tweets/' + action.payload);
     console.log('response from server: ', response.data);
-    yield put({type:'SET_TWEETS', payload: response.data});
+    yield put({type:'SET_TWEET_IDS', payload: response.data});
   }
   catch (error) {
     console.log('Error with fetchTweetIDs Saga:', error);
@@ -20,7 +20,7 @@ function* fetchTweetIDs(action){
 }
 
 function* getTweetIDSaga() {
-  yield takeLatest('FETCH_TWEETS', fetchTweetIDs);
+  yield takeLatest('FETCH_TWEET_IDS', fetchTweetIDs);
 }
   
 export default getTweetIDSaga;

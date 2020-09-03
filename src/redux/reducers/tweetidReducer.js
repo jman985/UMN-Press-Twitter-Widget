@@ -1,8 +1,8 @@
 const tweetIDReducer = (state = [], action) => {
     switch (action.type) {
-      case 'SET_TWEETS':
+      case 'SET_TWEET_IDS':
         return action.payload;
-      case 'UNSET_TWEETS':
+      case 'UNSET_TWEET_IDS':
         return [];
       default:
         return state;
