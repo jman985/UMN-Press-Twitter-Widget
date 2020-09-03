@@ -19,8 +19,11 @@ function fetchTweets() {
     { method: 'GET',
       mode: 'no-cors',
                       }
-    ).then( response => response.json()
+    ).then( response => {response.json()
+
+   
     
+    }
     ).then(data=> {
         console.log('tweet ids:',data);
 
@@ -35,18 +38,30 @@ function fetchTweets() {
             ).then(response=> response.text()
             
             ).then(html => {console.log('this is the tweet html', html)
-                            
-                let tweetContainer = document.getElementById('viewTweets');
-                console.log(tweetContainer);
 
-                let tweetDiv = document.createElement('div');
-                console.log(html);
+            const scriptElement = document.createElement( "script" );
 
-                tweetDiv.innerHTML = html;
-                // console.log(tweetLi);
-                tweetContainer.append(tweetDiv);
+            scriptElement.addEventListener(
+				"load",
+				function() {
+                    console.log( 'Successfully loaded twitter widget script using (addEventListener).' );
 
-            })
+                    let tweetContainer = document.getElementById('viewTweets');
+                    console.log(tweetContainer);
+
+                    let tweetDiv = document.createElement('div');
+                    console.log(html);
+
+                    tweetDiv.innerHTML = html;
+                    // console.log(tweetLi);
+                    tweetContainer.append(tweetDiv);
+                }
+            )
+            scriptElement.src = "https://platform.twitter.com/widgets.js";
+            scriptElement.async = true;
+
+            document.body.appendChild( scriptElement );
+          })
 
         }}
             ).catch((error) => {console.error('Error fetching embed html', error);}
