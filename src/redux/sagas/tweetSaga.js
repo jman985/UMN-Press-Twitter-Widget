@@ -6,7 +6,7 @@ function* getTweets(action){
     yield console.log(action.payload);
     for (let i=0; i<action.payload.length; i++){
       if (action.payload[i].include){
-        const response = yield axios.get('/tweets/twitter' + action.payload[i].title)
+        const response = yield axios.get('/tweets/twitter/' + action.payload[i].title)
         // send the response(tweet id) and the publication object from database to the save saga
         yield put({ type: 'SAVE_TWEETS', payload: {tweetArray: response.data, publicationId: action.payload[i].id}});
         console.log('sending this to save tweet saga:', response.data)
