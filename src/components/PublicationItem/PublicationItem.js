@@ -3,15 +3,17 @@ import {connect} from 'react-redux';
 import { withRouter } from "react-router";
 import { TwitterTweetEmbed } from 'react-twitter-embed';
 import PropTypes from 'prop-types';
+import InclusionToggle from './InclusionToggle'
 
 class PublicationItem extends Component {
 
     state = {
-        status: true
+        status: null
     }
 
     componentDidMount(){
         this.props.dispatch({type: 'FETCH_DATABASE_TWEETS'});
+        
         console.log(this.state)
     }
 
@@ -38,7 +40,16 @@ class PublicationItem extends Component {
         }
     }
     render() {
-        const status = document.getElementById("status-select");
+        // if (item === undefined) return null;
+        if (this.props.publication.findIndex === undefined) return null;
+        const query = Number(this.props.match.params.id);
+        const index = this.props.publication.findIndex(i=>i.id === query);
+
+        if (this.props.publication[index] === undefined) return null;
+        // if (this.props.publication[index].include === undefined) return null;
+        // if (this.props.publication[index] === undefined) return null;
+        // const item = this.props.publication[index];
+
         return (
             
             <>
@@ -53,7 +64,9 @@ class PublicationItem extends Component {
                     <div >
                     {/* <Widget/> */}
                     </div>
-
+                    {JSON.stringify(this.props.publication[index].include)}
+                    
+                    <InclusionToggle publicationId={this.props.match.params.id} include={this.props.publication[index].include}/>
                     {this.props.dbTweets.map( tweetID =>
                     
                     <>
@@ -78,7 +91,7 @@ PublicationItem.propTypes = {
     classes: PropTypes.object.isRequired
   };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     errors: state.errors,
     publication: state.publication,
     dbTweets: state.dbTweets,
