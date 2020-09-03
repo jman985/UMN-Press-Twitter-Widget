@@ -22,7 +22,6 @@ function fetchTweets() {
     ).then( response => {response.json()
 
    
-    
     }
     ).then(data=> {
         console.log('tweet ids:',data);
@@ -42,8 +41,8 @@ function fetchTweets() {
             const scriptElement = document.createElement( "script" );
 
             scriptElement.addEventListener(
-				"load",
-				function() {
+				    "load",
+				      function() {
                     console.log( 'Successfully loaded twitter widget script using (addEventListener).' );
 
                     let tweetContainer = document.getElementById('viewTweets');
@@ -56,7 +55,7 @@ function fetchTweets() {
                     // console.log(tweetLi);
                     tweetContainer.append(tweetDiv);
                 }
-            )
+              )
             scriptElement.src = "https://platform.twitter.com/widgets.js";
             scriptElement.async = true;
 

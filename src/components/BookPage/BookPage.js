@@ -109,7 +109,7 @@ class BookPage extends Component {
 
         )}
 
-    <Widget/>
+    {/* <Widget/> */}
 
         </Grid>
         </div>
