@@ -1,8 +1,8 @@
-const tweetIDReducer = (state = [], action) => {
+const bookDataReducer = (state = [], action) => {
     switch (action.type) {
-      case 'SET_TWEET_IDS':
+      case 'SET_BOOK_DATA':
         return action.payload;
-      case 'UNSET_TWEET_IDS':
+      case 'UNSET_BOOK_DATA':
         return [];
       default:
         return state;
@@ -11,4 +11,4 @@ const tweetIDReducer = (state = [], action) => {
   
   // user will be on the redux state at:
   // state.user
-  export default tweetIDReducer;
+  export default bookDataReducer;
