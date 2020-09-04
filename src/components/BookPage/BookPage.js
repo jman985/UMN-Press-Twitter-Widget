@@ -44,6 +44,7 @@ class BookPage extends Component {
 
     componentDidMount () {
         console.log('book page mounted')
+
         this.props.dispatch({type: 'FETCH_TWEET_IDS', payload: this.props.match.params.publication_id});
         this.props.dispatch({type: 'FETCH_BOOK_DATA', payload: this.props.match.params.publication_id});
 
@@ -52,11 +53,11 @@ class BookPage extends Component {
     // scriptLoaded() {
     //   window.A.sort();
     // }
-
     render() {
       const {classes} = this.props;
 
       return (
+
         <>
     <Box className={classes.BoxContainer}>
 
@@ -112,7 +113,9 @@ class BookPage extends Component {
         <TwitterTweetEmbed key = {tweetID.tweet_id} tweetId={tweetID.tweet_id}
           options={{width: 220, height:550}}/>
 
-        )}
+
+            {this.props.selectTweetID.map( tweetID =>
+
 
     {/* <Widget/> */}
 
@@ -121,6 +124,7 @@ class BookPage extends Component {
       </div>
       </Box>
     </>
+        
       )
   }
 }

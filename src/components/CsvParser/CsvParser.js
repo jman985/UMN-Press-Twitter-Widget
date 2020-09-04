@@ -15,14 +15,10 @@ class CsvParser extends Component {
   };
 
   handleCsvLoad = (data) => {
-    console.log("---------------------------");
-    console.log("poopooooop", data);
-
     this.props.dispatch({
       type: "LOAD_CSV_INTO_STORE",
       payload: data,
     });
-    console.log("---------------------------");
   };
 
   handleOnError = (err, file, inputElem, reason) => {
@@ -30,9 +26,7 @@ class CsvParser extends Component {
   };
 
   handleOnRemoveFile = (data) => {
-    console.log("---------------------------");
-    console.log(data);
-    console.log("---------------------------");
+    // console.log(data);
   };
 
   render() {
@@ -84,7 +78,9 @@ class CsvParser extends Component {
                   fontSize: "16px",
                 }}
               >
+
                 View Csv file
+      
               </button>
 
               {/* <div

@@ -13,7 +13,8 @@ class PublicationItem extends Component {
 
     componentDidMount(){
         this.props.dispatch({type: 'FETCH_DATABASE_TWEETS'});
-        
+        console.log(this.props.match.params.id);
+
         console.log(this.state)
     }
 
@@ -62,7 +63,7 @@ class PublicationItem extends Component {
                     {this.props.dbTweets.map( tweet =>
                     <>
                     {Number(tweet.publication_id) === Number(this.props.match.params.id) && tweet.approved === this.state.status ?
-                    <TwitterTweetEmbed key = {tweet.index} tweet={tweet.tweet_id}
+                    <TwitterTweetEmbed key = {tweet.index} tweetId={tweet.tweet_id}
                     options={{width: 250}}/>
                     : ''}
                     </>

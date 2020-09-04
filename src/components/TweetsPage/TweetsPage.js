@@ -54,6 +54,11 @@ class Publications extends Component {
 
 
   render() {
+      
+    // prevents TypeError from init reducer 'dbTweets'
+    if (this.props.dbTweets.map === undefined) return null;
+
+
     if (this.state.tweetsArray === []) return null;
     let undecided = this.props.dbTweets.filter(function (filteredTweets) {
     return filteredTweets.approved === null;
@@ -69,6 +74,7 @@ class Publications extends Component {
     // let undecided = this.props.dbTweets.filter(function (filteredTweets) {
     //   return filteredTweets.approved === null;
     // });
+
 
     return(
       <>

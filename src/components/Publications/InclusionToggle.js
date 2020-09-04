@@ -21,28 +21,15 @@ const styles = theme => ({
 });
 
 class ToggleButtons extends React.Component {
+
   state = {
     include: this.props.include,
-  };
-
-//  componentDidMount() {
-    // this.props.dispatch({type:'GET_BOOKMARKS', payload: this.props.user.id})
-    // check if the user has this page bookmarked and toggle the bookmark state if so.
-    // await this.props.dispatch({type:'GET_BOOKMARKS', payload: this.state.userId})
-    // console.log('these are the bookmarks on componenetDidMount',this.props.bookmarks, this.props.location.pathname)
-  //   this.props.publication.map((book)=>{
-  //     if (!book.include){
-  //       this.setState({include: false});
-  //     } 
-  //   })
-  // }
-  
+  };  
 
   handleInclusionToggle = (event, include) => {
     this.setState({ include });
     this.props.dispatch({type:'PUBLICATION_TOGGLE_INCLUSION', payload: this.props.publicationId});
   };
-
 
   render() {
     if (this.props.publication.map === undefined) return null;
@@ -59,12 +46,6 @@ class ToggleButtons extends React.Component {
                 <StarBorderIcon />
               </ToggleButton>}
             </ToggleButtonGroup>
-
-          {/* {JSON.stringify(this.props.bookmarks)}
-          {JSON.stringify(this.state)} */}
-          {/* <Typography variant="caption" gutterBottom>
-            Bookmark Button
-          </Typography> */}
         </>
     );
   }
