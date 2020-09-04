@@ -21,6 +21,7 @@ function* fetchTweetIDs(action){
 
 function* getTweetIDSaga() {
   yield takeLatest('FETCH_TWEET_IDS', fetchTweetIDs);
+
 }
   
 export default getTweetIDSaga;
