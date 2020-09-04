@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { put, takeEvery, takeLatest } from 'redux-saga/effects';
 
-//GET tweet ids from the database to display on book page
+// get all Tweets IDs in Tweet in table
 function* fetchTweetIDs(action){
   try{
       console.log('querying with', action.payload);
@@ -21,7 +21,6 @@ function* fetchTweetIDs(action){
 
 function* getTweetIDSaga() {
   yield takeLatest('FETCH_TWEET_IDS', fetchTweetIDs);
-
 }
   
 export default getTweetIDSaga;

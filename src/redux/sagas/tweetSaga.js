@@ -1,6 +1,7 @@
 import { put, takeLatest } from "redux-saga/effects";
 import axios from "axios";
 
+
 function* getTweets(action) {
   try {
     yield console.log(action.payload);
@@ -23,7 +24,8 @@ function* getTweets(action) {
   }
 }
 
-function* getDbTweets(action) {
+// gets all saved Tweets from Tweet table
+function* getDbTweets(action){
   try {
     const response = yield axios.get("/tweets/database/");
     // send the response(tweet id) and the publication object from database to the save saga
@@ -34,7 +36,9 @@ function* getDbTweets(action) {
   }
 }
 
-function* saveTweets(action) {
+
+// posts Tweets to Tweet table 
+function* saveTweets(action){
   try {
     const tweets = action.payload.tweetArray;
     yield console.log(action.payload);

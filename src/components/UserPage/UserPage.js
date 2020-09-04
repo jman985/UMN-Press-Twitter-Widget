@@ -35,10 +35,6 @@ const styles = (theme) => ({
 });
 
 class UserPage extends Component {
-  // this component doesn't do much to start, just renders some user info to the DOM
-  // keepAuthor = (title) => {
-  //   console.log("keep:", title);
-  // };
 
   acceptCsv = () => {
     this.props.dispatch({
