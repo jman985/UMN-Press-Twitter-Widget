@@ -15,6 +15,7 @@ class Publications extends Component {
 
   handleClick = () => {
       this.props.dispatch({type: 'FETCH_TWEETS', payload: this.props.publication});
+      
   }
 
 

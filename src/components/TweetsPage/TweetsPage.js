@@ -7,6 +7,7 @@ class Publications extends Component {
 
   componentDidMount() {
     this.props.dispatch({type:'FETCH_DATABASE_TWEETS'});
+
   }
 
   render() {
