@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { TwitterTweetEmbed } from 'react-twitter-embed';
 import PropTypes from 'prop-types';
@@ -37,6 +37,7 @@ class PublicationItem extends Component {
             return null;    
         }
     }
+    
     render() {
         // prevents init reducer from throwing TypeError when calling 'findIndex'
         if (this.props.publication.findIndex === undefined) return null;
@@ -77,10 +78,9 @@ PublicationItem.propTypes = {
   };
 
 const mapStateToProps = (state) => ({
-    errors: state.errors,
-    publication: state.publication,
-    dbTweets: state.dbTweets,
-
+  errors: state.errors,
+  publication: state.publication,
+  dbTweets: state.dbTweets,
 });
 
 export default connect(mapStateToProps)(PublicationItem);
