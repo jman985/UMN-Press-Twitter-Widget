@@ -5,12 +5,12 @@ import LogOutButton from "../LogOutButton/LogOutButton";
 import "./Nav.css";
 
 const Nav = (props) => (
-  <div className="nav">
+  <div className="nav" style={{display:"flex",flexDirection:"column"}}>
     <Link to="/home">
       <h2 className="nav-title">University of MN Twitter Admin</h2>
     </Link>
-    <div className="nav-right">
-      <Link className="nav-link" to="/home">
+    <div className="nav-right" style={{display:"flex",width:"100%",justifyContent: "space-around"}}>
+      <Link className="nav-link" to="/home" style={{width:"100%",borderRight:'2px solid black'}}>
         {/* Show this link if they are logged in or not,
         but call this link 'Home' if they are logged in,
         and call this link 'Login / Register' if they are not */}
@@ -19,13 +19,13 @@ const Nav = (props) => (
       {/* Show the link to the info page and the logout button if the user is logged in */}
       {props.user.id && (
         <>
-          <Link className="nav-link" to="/info">
+          <Link className="nav-link" to="/info" style={{width:"100%",borderRight:'2px solid black'}}>
             Info Page
           </Link>
-          <Link className="nav-link" to="/publications">
+          <Link className="nav-link" to="/publications" style={{width:"100%",borderRight:'2px solid black'}}>
             Publications
           </Link>
-          <Link className="nav-link" to="/tweets">
+          <Link className="nav-link" to="/tweets" style={{width:"100%",borderRight:'2px solid black'}}>
             Tweets
           </Link>
 
@@ -33,7 +33,7 @@ const Nav = (props) => (
         </>
       )}
       {/* Always show this link since the about page is not protected */}
-      <Link className="nav-link" to="/about">
+      <Link className="nav-link" to="/about" style={{width:"100%"}}>
         About
       </Link>
     </div>
