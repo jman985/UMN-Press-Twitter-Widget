@@ -33,14 +33,15 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Nav />
+        {window.location.href.includes('/books/') ? null : 
+        (<Nav />)}
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/publications" />
             {/* Visiting localhost:3000/about will show the about page.
             This is a route anyone can see, no login necessary */}
-            <Route exact path="/about" component={AboutPage} />
             <Route exact path="/books/:publication_id" component={BookPage} />
+            <Route exact path="/about" component={AboutPage} />
             <Route exact path="/publications" component={Publications} />
             <Route exact path="/publications/:id" component={PublicationItem} />
             <Route exact path="/tweets" component={TweetsPage} />
@@ -54,10 +55,11 @@ class App extends Component {
             <ProtectedRoute exact path="/info" component={InfoPage} />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
-          </Switch>
-          <Footer />
-        </div>
-      </Router>
+            </Switch>
+            <Footer />
+          </div>
+          </Router>
+        
     );
   }
 }
