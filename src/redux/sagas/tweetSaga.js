@@ -4,11 +4,9 @@ import axios from "axios";
 function* getTweets(action) {
   try {
     yield console.log(action.payload);
-    for (let i = 0; i < action.payload.length; i++) {
-      if (action.payload[i].include) {
-        const response = yield axios.get(
-          "/tweets/twitter/" + action.payload[i].title
-        );
+    for (let i=0; i<action.payload.length; i++){
+      if (action.payload[i].include){
+        const response = yield axios.get('/tweets/twitter/' + action.payload[i].title)
         // send the response(tweet id) and the publication object from database to the save saga
         yield put({
           type: "SAVE_TWEETS",
@@ -57,10 +55,28 @@ function* saveTweets(action) {
   }
 }
 
-function* tweetSaga() {
-  yield takeLatest("FETCH_TWEETS", getTweets);
-  yield takeLatest("FETCH_DATABASE_TWEETS", getDbTweets);
-  yield takeLatest("SAVE_TWEETS", saveTweets);
+function* approveTweet(action){
+  try {
+    const response = yield axios.put('/tweets/database/approve', {id: action.payload})
+  } catch (error) {
+      console.log('error with approving tweet', error);
+  }
+}
+
+function* rejectTweet(action){
+  try {
+    const response = yield axios.put('/tweets/database/reject', {id: action.payload})
+  } catch (error) {
+      console.log('error with rejecting tweet', error);
+  }
+}
+
+function* tweetSaga() {  
+  yield takeLatest('FETCH_TWEETS', getTweets);
+  yield takeLatest('FETCH_DATABASE_TWEETS', getDbTweets);
+  yield takeLatest('SAVE_TWEETS', saveTweets);
+  yield takeLatest('APPROVE_TWEET', approveTweet);
+  yield takeLatest('REJECT_TWEET', rejectTweet);
 }
 
 export default tweetSaga;

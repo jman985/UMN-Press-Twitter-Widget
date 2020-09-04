@@ -25,6 +25,9 @@ const Nav = (props) => (
           <Link className="nav-link" to="/publications">
             Publications
           </Link>
+          <Link className="nav-link" to="/tweets">
+            Tweets
+          </Link>
 
           <LogOutButton className="nav-link" />
         </>
