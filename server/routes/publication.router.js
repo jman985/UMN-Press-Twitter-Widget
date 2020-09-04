@@ -6,7 +6,6 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 /**
  * GET route template
  */
-
 router.get('/', (req, res) => {
   console.log('Getting Publications')
   const queryText = `
@@ -15,7 +14,6 @@ router.get('/', (req, res) => {
   pool.query(queryText)
   .then( (response) => {
       console.log( 'Successfully got publication data', response.rows);
-
       res.send(response.rows);
     })
     .catch((err) => {

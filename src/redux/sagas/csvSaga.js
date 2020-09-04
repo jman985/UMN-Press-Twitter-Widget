@@ -24,7 +24,7 @@ function* sendCsv(action) {
       payload: action.payload,
     });
     console.log("SendCSV", response);
-    //yield put({ type: "SEND_CSV_DATA", payload: action.payload });
+    yield put({ type: "SEND_CSV_DATA", payload: action.payload });
   } catch (err) {
     console.log("CSV SAGA ERROR", err);
   }
