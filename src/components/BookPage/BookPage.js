@@ -111,24 +111,15 @@ class BookPage extends Component {
         {this.props.selectTweetID.map( tweetID =>
         
         <TwitterTweetEmbed key = {tweetID.tweet_id} tweetId={tweetID.tweet_id}
-          options={{width: 220, height:550}}/>
-
-
-            {this.props.selectTweetID.map( tweetID =>
-
-
-    {/* <Widget/> */}
+          options={{width: 220, height:550}}/>)}
 
         </Grid>
         </div>
       </div>
       </Box>
     </>
-        
-      )
-  }
-}
-
+      )}}
+      
   BookPage.propTypes = {
     classes: PropTypes.object.isRequired
   };
