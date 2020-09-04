@@ -8,7 +8,11 @@ import InclusionToggle from './InclusionToggle'
 class PublicationItem extends Component {
 
     state = {
-        status: null
+        status: null,
+        tweetsArray: [1,2,3],
+        key1: 0,
+        key2: 1,
+        key3: 2,
     }
 
     componentDidMount(){
@@ -18,9 +22,51 @@ class PublicationItem extends Component {
         console.log(this.state)
     }
 
+      // this is needed to get the database tweets into this.state.tweetsArray
+    componentDidUpdate(prevProps, prevState) {
+      if (prevProps.dbTweets !== this.props.dbTweets || prevState.status !== this.state.status){
+        console.log('componentDidUpdate has triggered')
+        let status = this.state.status;
+        let filteredArray = this.props.dbTweets.filter(function (filteredTweets) {
+          return filteredTweets.approved === status});
+
+        let pubId = Number(this.props.match.params.id);
+        let finalArray = filteredArray.filter(function (filteredTweets) {
+          return Number(filteredTweets.publication_id) === pubId});
+
+
+        console.log('these are the tweets that match the status', filteredArray)
+        console.log('these are the tweets that match the status and pub_id', finalArray)
+        console.log('this should be the status:', status)
+        console.log('this should be the match id:', pubId)
+
+        this.setState({tweetsArray: finalArray});
+      }
+    } 
+
+    handleApprove = (tweetId, slot, approved) => {
+      // send the approve/reject based on which button was pressed
+      if (approved){
+        this.props.dispatch({type:'APPROVE_TWEET', payload: tweetId});
+      } else {
+        this.props.dispatch({type:'REJECT_TWEET', payload: tweetId});
+      }
+  
+      // check to see which slot was changed and update the corresponding key with the next index in the array of tweets
+      if (slot === 0){
+        this.setState({ key1: Math.max(this.state.key1,this.state.key2,this.state.key3)+1});
+      } else if (slot === 1){
+        this.setState({ key2: Math.max(this.state.key1,this.state.key2,this.state.key3)+1});
+      } else if (slot === 2){
+        this.setState({ key3: Math.max(this.state.key1,this.state.key2,this.state.key3)+1});
+      }
+      ;
+    }
+
     handleSelect = () => {
         // assign select drop-down menu from DOM to variable 'status'
         const status = document.getElementById("status-select");
+        console.log('status changed:', this.state.status)
         // conditional to check value from select drop-down menu
         if(status.value === "TRUE"){
             this.setState({
@@ -49,10 +95,43 @@ class PublicationItem extends Component {
         // prevents TypeError on load from referencing an index item of the init reducer
         if (this.props.publication[index] === undefined) return null;
 
+
         return (
             <>
+              <div style={{display: "flex",flexWrap: "wrap"}}>
+                <div key={this.state.status+1} style={{minWidth:'250px'}}>
+                  {this.state.tweetsArray[this.state.key1] ?
+                  <>
+                  <TwitterTweetEmbed key = {this.state.key1} tweetId={this.state.tweetsArray[this.state.key1].tweet_id}/>
+                  <div style={{display: "flex", justifyContent: "space-around"}}>
+                    <button onClick={()=>this.handleApprove(this.state.tweetsArray[this.state.key1].id,0,true)}>Approve</button>
+                    <button onClick={()=>this.handleApprove(this.state.tweetsArray[this.state.key1].id,0,false)}>Reject</button>
+                  </div> 
+                  </> : ''}       
+                </div>
+                <div key={this.state.status+2} style={{minWidth:'250px'}}>
+                  {this.state.tweetsArray[this.state.key2] ?
+                  <>
+                  <TwitterTweetEmbed key = {this.state.key2} tweetId={this.state.tweetsArray[this.state.key2].tweet_id}/>
+                  <div style={{display: "flex", justifyContent: "space-around"}}>
+                    <button onClick={()=>this.handleApprove(this.state.tweetsArray[this.state.key2].id,1,true)}>Approve</button>
+                    <button onClick={()=>this.handleApprove(this.state.tweetsArray[this.state.key2].id,1,false)}>Reject</button>
+                  </div>
+                    </> : ''} 
+                  </div>
+                <div key={this.state.status+3} style={{minWidth:'250px'}}>
+                  {this.state.tweetsArray[this.state.key3] ?
+                  <>
+                  <TwitterTweetEmbed key = {this.state.key3} tweetId={this.state.tweetsArray[this.state.key3].tweet_id}/>
+                  <div style={{display: "flex", justifyContent: "space-around"}}>
+                    <button onClick={()=>this.handleApprove(this.state.tweetsArray[this.state.key3].id,2,true)}>Approve</button>
+                    <button onClick={()=>this.handleApprove(this.state.tweetsArray[this.state.key3].id,2,false)}>Reject</button>
+                  </div> 
+                  </>: ''}
+                </div>
+              </div>
                 <div className="content">
-                    <h1>Tweets for Publication Item</h1>
+                    <h1>{this.props.publication[index].title}, {this.props.publication[index].author1} </h1>
                     <select id="status-select" onChange={this.handleSelect}>
                     <option value="NULL">Undecided</option>
                     <option value="TRUE">Approved</option>
@@ -60,14 +139,14 @@ class PublicationItem extends Component {
                     </select>
 
                     <InclusionToggle publicationId={this.props.match.params.id} include={this.props.publication[index].include}/>
-                    {this.props.dbTweets.map( tweet =>
+                    {/* {this.props.dbTweets.map( tweet =>
                     <>
                     {Number(tweet.publication_id) === Number(this.props.match.params.id) && tweet.approved === this.state.status ?
                     <TwitterTweetEmbed key = {tweet.index} tweetId={tweet.tweet_id}
                     options={{width: 250}}/>
                     : ''}
                     </>
-                    )}
+                    )} */}
                 </div>
             </>
         )
