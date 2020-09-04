@@ -16,6 +16,7 @@ class Publications extends Component {
 
   componentDidMount() {
     this.props.dispatch({type:'FETCH_DATABASE_TWEETS'});
+
   }
 
   // this is needed to get the database tweets into this.state.tweetsArray

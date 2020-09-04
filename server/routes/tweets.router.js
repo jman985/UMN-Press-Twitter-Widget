@@ -52,7 +52,6 @@ router.post('/database', (req, res) => {
         })
 });
 
-
 // sets approved value of tweets in tweet table to true
 router.put('/database/approve', (req, res) => {
   console.log('Approving tweet #', req.body.id)

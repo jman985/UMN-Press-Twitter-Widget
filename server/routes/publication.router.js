@@ -1,6 +1,7 @@
 const express = require("express");
 const pool = require("../modules/pool");
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 /**
  * GET route template
@@ -41,6 +42,19 @@ router.put('/', (req, res) => {
   })
 })
 
+//update timestamp 
+
+router.put('/timestamp', rejectUnauthenticated, (req, res) => {
+  console.log('update last_searched timestamp');
+    pool.query(`UPDATE "publication" 
+    SET "last_searched" = CURRENT_TIMESTAMP WHERE "publication"."include" = TRUE;`)
+    // pool.query(queryText, queryInput)
+    .then(() => res.sendStatus(201))
+    .catch((error) => {res.sendStatus(500);
+      console.log(error);
+      //console.log(req.body)
+    });
+  });
 
 /**
  * POST route template
