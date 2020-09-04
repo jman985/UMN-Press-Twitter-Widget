@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { put, takeEvery, takeLatest } from 'redux-saga/effects';
 
-//GET build data from the database
+// get all Tweets IDs in Tweet in table
 function* fetchTweetIDs(action){
     try { 
         console.log('querying with', action.payload);

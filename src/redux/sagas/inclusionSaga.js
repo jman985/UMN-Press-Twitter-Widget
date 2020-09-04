@@ -1,6 +1,7 @@
 import { put, takeLatest  } from 'redux-saga/effects';
 import axios from 'axios';
 
+// updates 'Approved' column from 'False' to 'True' or 'True' to 'False'
 function* toggleInclusion(action){
     try {
         yield axios.put('/publications', {id: action.payload});

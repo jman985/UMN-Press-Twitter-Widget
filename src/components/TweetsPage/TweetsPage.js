@@ -10,7 +10,10 @@ class Publications extends Component {
   }
 
   render() {
+      
+    // prevents TypeError from init reducer 'dbTweets'
     if (this.props.dbTweets.map === undefined) return null;
+
     return(
       <>
         <p>hello this is the tweets page</p>

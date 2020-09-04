@@ -17,23 +17,19 @@ class BookPage extends Component {
         this.props.dispatch({type: 'FETCH_TWEETS', payload: this.props.match.params.publication_id});
     }
 
-
     render() {
       return (
-        <>
-        
-      <div className="content">
-        <h1>Book Sample Page</h1>
+        <>  
+          <div className="content">
+            <h1>Book Sample Page</h1>
 
-        {this.props.selectTweetID.map( tweetID =>
-        
-        <TwitterTweetEmbed key = {tweetID.index} tweetId={tweetID.tweet_id}
-          options={{width: 250}}/>
+            {this.props.selectTweetID.map( tweetID =>
 
-        )}
-
-      </div>
-    </>
+            <TwitterTweetEmbed key = {tweetID.index} tweetId={tweetID.tweet_id}
+            options={{width: 250}}/>
+            )}
+          </div>
+        </>
       )
   }
 }

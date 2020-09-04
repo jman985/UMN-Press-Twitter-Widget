@@ -1,6 +1,7 @@
 import axios from "axios";
 import { put, takeLatest } from "redux-saga/effects";
 
+// loads csv rows onto DOM
 function* loadCsv(action) {
   action.payload.pop();
   try {
@@ -10,6 +11,7 @@ function* loadCsv(action) {
   }
 }
 
+// posts csv rows to publication table
 function* sendCsv(action) {
   try {
     const response = yield axios.post("/publications/csv", {

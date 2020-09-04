@@ -12,14 +12,10 @@ class CsvParser extends Component {
   };
 
   handleCsvLoad = (data) => {
-    console.log("---------------------------");
-    console.log("poopooooop", data);
-
     this.props.dispatch({
       type: "LOAD_CSV_INTO_STORE",
       payload: data,
     });
-    console.log("---------------------------");
   };
 
   handleOnError = (err, file, inputElem, reason) => {
@@ -27,9 +23,7 @@ class CsvParser extends Component {
   };
 
   handleOnRemoveFile = (data) => {
-    console.log("---------------------------");
-    console.log(data);
-    console.log("---------------------------");
+    // console.log(data);
   };
 
   render() {
@@ -68,7 +62,7 @@ class CsvParser extends Component {
                   paddingRight: 0,
                 }}
               >
-                Browe file
+                Browse file
               </button>
               <div
                 style={{
