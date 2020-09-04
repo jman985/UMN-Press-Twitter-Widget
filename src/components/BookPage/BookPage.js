@@ -15,16 +15,7 @@ class BookPage extends Component {
     componentDidMount () {
         console.log('book page mounted')
         this.props.dispatch({type: 'FETCH_TWEETS', payload: this.props.match.params.publication_id});
-    //       const script = document.createElement("script");
-    // script.src = "https://platform.twitter.com/widgets.js";
-    // script.async = true;
-
-    // document.body.appendChild(script);
     }
-
-    // scriptLoaded() {
-    //   window.A.sort();
-    // }
 
 
     render() {
@@ -33,10 +24,6 @@ class BookPage extends Component {
         
       <div className="content">
         <h1>Book Sample Page</h1>
-
-        <div >
-        {/* <Widget/> */}
-        </div>
 
         {this.props.selectTweetID.map( tweetID =>
         

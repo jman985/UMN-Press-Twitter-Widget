@@ -5,19 +5,9 @@ import InclusionToggle from './InclusionToggle'
 
 class Publications extends Component {
 
-  // componentDidMount() {
-  //   this.props.dispatch({type:'GET_RECENT_BILLS'});
-  // }
-
-  // handleBillClick = (id) => {
-  //   this.props.history.push('/Bills/' + id)
-  // }
-
   handleClick = () => {
       this.props.dispatch({type: 'FETCH_TWEETS', payload: this.props.publication});
   }
-
-
 
   render() {
     if (this.props.publication.map === undefined) return null;
@@ -32,7 +22,6 @@ class Publications extends Component {
                 <th>Include/Exclude</th>
               </tr>
           </thead>
-          {/* {JSON.stringify(this.props.publication)} */}
           <tbody>
             {this.props.publication.map((book, index) => (
               <tr key={index}>

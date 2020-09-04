@@ -4,10 +4,6 @@ import LogOutButton from "../LogOutButton/LogOutButton";
 import CSVReader from "../CsvParser/CsvParser";
 
 class UserPage extends Component {
-  // this component doesn't do much to start, just renders some user info to the DOM
-  // keepAuthor = (title) => {
-  //   console.log("keep:", title);
-  // };
 
   acceptCsv = () => {
     this.props.dispatch({
@@ -49,9 +45,6 @@ class UserPage extends Component {
                     <td>{book.data.subtitle}</td>
                     <td>{book.data.author}</td>
                     <td>
-                      {/* <button onClick={() => this.keepAuthor(book.data.title)}>
-                        ok
-                      </button> */}
                     </td>
                   </tr>
                 ))}
