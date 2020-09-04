@@ -45,11 +45,30 @@ function* saveTweets(action){
   }
 }
 
+function* approveTweet(action){
+  try {
+    const response = yield axios.put('/tweets/database/approve', {id: action.payload})
+  } catch (error) {
+      console.log('error with approving tweet', error);
+  }
+}
+
+function* rejectTweet(action){
+  try {
+    const response = yield axios.put('/tweets/database/reject', {id: action.payload})
+  } catch (error) {
+      console.log('error with rejecting tweet', error);
+  }
+}
+
+
 
 function* tweetSaga() {  
   yield takeLatest('FETCH_TWEETS', getTweets);
   yield takeLatest('FETCH_DATABASE_TWEETS', getDbTweets);
   yield takeLatest('SAVE_TWEETS', saveTweets);
+  yield takeLatest('APPROVE_TWEET', approveTweet);
+  yield takeLatest('REJECT_TWEET', rejectTweet);
 }
 
 export default tweetSaga;
