@@ -9,7 +9,7 @@ const token = process.env.BEARER_TOKEN;
 router.get('/twitter/:title', rejectUnauthenticated, (req, res) => {
     // console.log('=====>> router get', req.params.title);
     // console.log('preparing to hit server with a request to the Twitter API');
-    axios.get(`https://api.twitter.com/2/tweets/search/recent?query=${req.params.title}&max_results=10`, {
+    axios.get(`https://api.twitter.com/2/tweets/search/recent?query="${req.params.title}"&max_results=10`, {
         headers: {
         'Authorization': `Bearer ${token}`
         }
@@ -39,9 +39,6 @@ router.get('/database', (req, res) => {
 
 
 
-/**
- * POST route template
- */
 router.post('/database', (req, res) => {
     console.log('preparing insert query:', req.body)
     const queryText = `INSERT INTO tweet (tweet_id, publication_id)
@@ -54,5 +51,43 @@ router.post('/database', (req, res) => {
             res.sendStatus(500);
         })
 });
+
+// sets approved value of tweets in tweet table to true
+router.put('/database/approve', (req, res) => {
+  console.log('Approving tweet #', req.body.id)
+  const queryText = `
+  UPDATE tweet
+  SET approved = true
+  WHERE id = ${req.body.id}
+  `
+  pool.query(queryText)
+  .then( (response) => {
+      console.log( 'Successfully approved tweet');
+      res.send(response.rows);
+  })
+  .catch( (err) => {
+      console.log('An error occured while approving tweet:', err);
+      res.sendStatus(500);
+  })
+})
+
+// sets approved value of tweets in tweet table to false
+router.put('/database/reject', (req, res) => {
+  console.log('Rejecting tweet #', req.body.id)
+  const queryText = `
+  UPDATE tweet
+  SET approved = false
+  WHERE id = ${req.body.id}
+  `
+  pool.query(queryText)
+  .then( (response) => {
+      console.log( 'Successfully rejected tweet');
+      res.send(response.rows);
+  })
+  .catch( (err) => {
+      console.log('An error occured while rejecting tweet:', err);
+      res.sendStatus(500);
+  })
+})
 
 module.exports = router;

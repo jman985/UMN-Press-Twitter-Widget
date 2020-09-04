@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { CSVReader } from "react-papaparse";
 import { connect } from "react-redux";
+
+import Button from "@material-ui/core/Button";
+import { withStyles } from "@material-ui/core/styles";
 const buttonRef = React.createRef();
 
 class CsvParser extends Component {
@@ -27,6 +30,7 @@ class CsvParser extends Component {
   };
 
   render() {
+    const { classes } = this.props;
     return (
       <>
         <CSVReader
@@ -41,57 +45,61 @@ class CsvParser extends Component {
           {({ file }) => (
             <aside
               style={{
-                width: "60%",
+                width: "100%",
                 justifyContent: "center",
-                display: "flex",
+                display: "inline-block",
                 flexDirection: "row",
-                marginBottom: 10,
-                marginTop: "100px",
-                marginLeft: "10%",
+                marginBottom: "30px",
+                marginTop: "30px",
+                marginLeft: "3%",
               }}
             >
+              {/* <Button
+                variant="outlined"
+                component="span"
+                className={classes.button}
+              >
+                Upload
+              </Button> */}
               <button
                 type="button"
                 onClick={this.handleOpenDialog}
                 style={{
                   borderRadius: "15px",
+                  border: ".5px solid black",
                   marginLeft: 0,
-                  marginRight: 0,
-                  width: "20%",
+                  marginRight: 25,
+                  width: "18%",
+                  height: "50px",
                   paddingLeft: 0,
                   paddingRight: 0,
+                  backgroundColor: "#EEF5F5",
+
+                  fontSize: "16px",
                 }}
               >
-                Browse file
+
+                View Csv file
+      
               </button>
-              <div
+
+              {/* <div
                 style={{
-                  borderWidth: 1,
+                  borderWidth: 0.5,
                   borderStyle: "solid",
                   borderColor: "#ccc",
                   height: 55,
                   lineHeight: 2.5,
                   marginTop: 5,
                   marginBottom: 5,
-                  paddingLeft: 13,
+                  paddingLeft: "50px",
                   paddingTop: 3,
-                  width: "60%",
+                  width: "30%",
+                  height: "45px",
                 }}
               >
                 {file && file.name}
-              </div>
-              <button
-                style={{
-                  borderRadius: "15px",
-                  marginLeft: 0,
-                  marginRight: 0,
-                  paddingLeft: 20,
-                  paddingRight: 20,
-                }}
-                onClick={this.handleRemoveFile}
-              >
-                Remove
-              </button>
+              </div> */}
             </aside>
           )}
         </CSVReader>

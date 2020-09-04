@@ -6,6 +6,8 @@ import selectTweetID from './tweetidReducer'
 import csvReducer from "./csvReducer";
 import publication from './publicationReducer';
 import tweets from './tweetsReducer';
+import bookData from './bookDataReducer'
+
 import dbTweets from './dbTweetReducer';
 
 // rootReducer is the primary reducer for our entire project
@@ -22,6 +24,7 @@ const rootReducer = combineReducers({
   csvReducer,
   publication, // contains all publications from database 'publication' table
   tweets, // contains tweets returned from Axios request to Twitter API
+  bookData,
   dbTweets, // contains all tweets pulled from local database "tweet" table
 });
 

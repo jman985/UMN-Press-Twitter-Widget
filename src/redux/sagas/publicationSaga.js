@@ -13,9 +13,20 @@ function* getPublications(action){
   }
 }
 
+//this saga gets fired with every add component action
+function* updateTimestamp(action){
+  try {
+      yield axios.put('/publications/timestamp');
+      yield put({ type: 'FETCH_PUBLICATIONS'});
+  }  catch (error) {
+      console.log('Error with memory update:', error);
+  }
+}
 
 function* publicationSaga() {
   yield takeLatest('FETCH_PUBLICATIONS', getPublications);
+  yield takeLatest('UPDATE_TIMESTAMP', updateTimestamp);
+
 }
 
 export default publicationSaga;
