@@ -15,7 +15,6 @@ import { connect, useSelector, useDispatch } from "react-redux";
 const styles = (theme) => ({
   table: {
     fontFamily: theme.typography.fontFamily,
-    // fontFamily: "",
   },
   flexContainer: {
     display: "flex",
@@ -114,8 +113,6 @@ class MuiVirtualizedTable extends React.PureComponent {
   };
 
   render() {
-    // const dispatch = useDispatch();
-    // const csv = useSelector((state) => state.csv.data);
     const { publication } = this.props;
     console.log("Publication data RENDEr", publication);
     const { classes, columns, ...tableProps } = this.props;
@@ -193,42 +190,7 @@ MuiVirtualizedTable.defaultProps = {
   rowHeight: 56,
 };
 
-// const mapStateToProps = (state) => {
-//   return {
-//     publication: state.publication,
-//   };
-// };
 const WrappedVirtualizedTable = withStyles(styles)(MuiVirtualizedTable);
-
-// const rows = data;
-
-// const data = [
-//   ["Author name1", "there is a subttle", "paul boberg"],
-//   ["Another author", 237, 9.0, 37, 4.3],
-//   ["poop", 262, 16.0, 24, 6.0],
-//   ["Cupcake", 305, 3.7, 67, 4.3],
-//   ["Gingerbread", 356, 16.0, 49, 3.9],
-// ];
-
-// let id = 0;
-// function createData(poop, calories, fat, carbs, protein) {
-//   id += 1;
-//   return { id, poop, calories, fat, carbs, protein };
-// }
-
-// const rows = [];
-
-// const csvData = (props) => {
-//   const data = props.publications;
-//   for (let i = 0; i < data.length; i += 1) {
-//     rows.push("poop");
-//   }
-// };
-
-// for (let i = 0; i < 100; i += 1) {
-//   const randomSelection = data[Math.floor(Math.random() * data.length)];
-//   rows.push(createData(...randomSelection));
-// }
 
 function PublicationTable(props) {
   const rows = props.publication;
@@ -239,7 +201,6 @@ function PublicationTable(props) {
         rowCount={rows.length}
         rowGetter={({ index }) => rows[index]}
         onRowClick={(event) => {
-          //alert(event.rowData.id);
           props.history.push(`publications/${event.rowData.id}`);
         }}
         columns={[
