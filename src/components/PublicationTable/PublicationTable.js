@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from "react-router";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
@@ -44,7 +45,7 @@ class MuiVirtualizedTable extends React.PureComponent {
   getRowClassName = ({ index }) => {
     const { classes, rowClassName, onRowClick } = this.props;
     {
-      console.log("fart", classes.tableRowHover);
+      console.log("fartFART", onRowClick);
     }
     return classNames(classes.tableRow, classes.flexContainer, rowClassName, {
       [classes.tableRowHover]: index !== -1 && onRowClick != null,
@@ -54,6 +55,7 @@ class MuiVirtualizedTable extends React.PureComponent {
   cellRenderer = ({ cellData, columnIndex = null }) => {
     console.log("in cellRender", cellData);
     const { columns, classes, rowHeight, onRowClick } = this.props;
+    console.log("POOOOOPPPSSSS", onRowClick);
     return (
       <TableCell
         component="div"
@@ -92,7 +94,7 @@ class MuiVirtualizedTable extends React.PureComponent {
         label
       );
 
-    //console.log("POOP PROPS", this.props.classes);
+    console.log("POOP PROPS", this.props);
 
     return (
       <TableCell
@@ -236,7 +238,10 @@ function PublicationTable(props) {
       <WrappedVirtualizedTable
         rowCount={rows.length}
         rowGetter={({ index }) => rows[index]}
-        onRowClick={(event) => console.log(event)}
+        onRowClick={(event) => {
+          //alert(event.rowData.id);
+          props.history.push(`publications/${event.rowData.id}`);
+        }}
         columns={[
           {
             width: 200,
@@ -256,6 +261,12 @@ function PublicationTable(props) {
             dataKey: "author1",
             numeric: true,
           },
+          {
+            width: 180,
+            label: "Last Searched",
+            dataKey: "last_searched",
+            numeric: true,
+          },
         ]}
       />
     </Paper>
@@ -265,4 +276,4 @@ function PublicationTable(props) {
 const mapStateToProps = (state) => ({
   publication: state.publication,
 });
-export default connect(mapStateToProps)(PublicationTable);
+export default withRouter(connect(mapStateToProps)(PublicationTable));
