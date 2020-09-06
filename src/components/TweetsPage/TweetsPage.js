@@ -82,22 +82,22 @@ class Publications extends Component {
         {JSON.stringify(this.state.key2)}
         {JSON.stringify(this.state.key3)}
         {/* {JSON.stringify(this.state.tweetsArray)} */}
-        <div style={{display: "flex",flexWrap: "wrap"}}>
-          <div style={{minWidth:'250px'}}>
+        <div style={{display: "flex",flexWrap: "wrap",justifyContent:'space-between'}}>
+          <div style={{width:'450px',height:'600px'}}>
             <TwitterTweetEmbed key = {this.state.key1} tweetId={this.state.tweetsArray[this.state.key1].tweet_id}/>
             <div style={{display: "flex", justifyContent: "space-around"}}>
               <button onClick={()=>this.handleApprove(this.state.tweetsArray[this.state.key1].id,0,true)}>Approve</button>
               <button onClick={()=>this.handleApprove(this.state.tweetsArray[this.state.key1].id,0,false)}>Reject</button>
             </div>         
           </div>
-          <div style={{minWidth:'250px'}}>
+          <div style={{width:'450px',height:'600px'}}>
             <TwitterTweetEmbed key = {this.state.key2} tweetId={this.state.tweetsArray[this.state.key2].tweet_id}/>
             <div style={{display: "flex", justifyContent: "space-around"}}>
               <button onClick={()=>this.handleApprove(this.state.tweetsArray[this.state.key2].id,1,true)}>Approve</button>
               <button onClick={()=>this.handleApprove(this.state.tweetsArray[this.state.key2].id,1,false)}>Reject</button>
             </div>
           </div>
-          <div style={{minWidth:'250px'}}>
+          <div style={{width:'450px',height:'600px'}}>
             <TwitterTweetEmbed key = {this.state.key3} tweetId={this.state.tweetsArray[this.state.key3].tweet_id}/>
             <div style={{display: "flex", justifyContent: "space-around"}}>
               <button onClick={()=>this.handleApprove(this.state.tweetsArray[this.state.key3].id,2,true)}>Approve</button>
