@@ -9,7 +9,7 @@ const token = process.env.BEARER_TOKEN;
 router.get('/twitter/:title', rejectUnauthenticated, (req, res) => {
     // console.log('=====>> router get', req.params.title);
     // console.log('preparing to hit server with a request to the Twitter API');
-    axios.get(`https://api.twitter.com/2/tweets/search/recent?query="${req.params.title}"&max_results=10`, {
+    axios.get(`https://api.twitter.com/2/tweets/search/recent?query="${req.params.title}"&max_results=10&tweet.fields=possibly_sensitive`, {
         headers: {
         'Authorization': `Bearer ${token}`
         }

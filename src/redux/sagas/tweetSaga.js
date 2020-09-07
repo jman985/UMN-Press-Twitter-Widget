@@ -43,16 +43,20 @@ function* saveTweets(action){
     const tweets = action.payload.tweetArray;
     yield console.log(action.payload);
     for (let tweet of tweets) {
-      const tweetId = tweet.id;
-      const publicationId = action.payload.publicationId;
-      console.log("sending these to tweet save route:", {
-        tweetId: tweetId,
-        publicationId: publicationId,
-      });
-      yield axios.post("/tweets/database", {
-        tweetId: tweet.id,
-        publicationId: action.payload.publicationId,
-      });
+
+      if(tweet.possibly_sensitive===false){  //filter out sensitive content
+             
+        const tweetId = tweet.id;
+        const publicationId = action.payload.publicationId;
+        console.log("sending these to tweet save route:", {
+          tweetId: tweetId,
+          publicationId: publicationId,
+        });
+        yield axios.post("/tweets/database", {
+          tweetId: tweet.id,
+          publicationId: action.payload.publicationId,
+        });
+      }
     }
   } catch (error) {
     console.log("error with tweet save route", error);
