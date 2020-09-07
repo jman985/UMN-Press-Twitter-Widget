@@ -28,7 +28,7 @@ router.get('/twitter/:title', rejectUnauthenticated, (req, res) => {
 router.get('/database', (req, res) => {
   console.log('getting all tweets from database')
   const queryText = `
-  SELECT * FROM tweet
+  SELECT tweet.*, publication.title, publication.author1 FROM tweet
   JOIN publication ON tweet.publication_id = publication.id`
   pool.query(queryText)
       .then(response => {
@@ -56,7 +56,7 @@ router.post('/database', (req, res) => {
 
 // sets approved value of tweets in tweet table to true
 router.put('/database/approve', (req, res) => {
-  console.log('Approving tweet #', req.body.id)
+  console.log('Approving tweet id #', req.body.id)
   const queryText = `
   UPDATE tweet
   SET approved = true
