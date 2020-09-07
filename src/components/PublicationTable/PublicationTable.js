@@ -43,18 +43,16 @@ const styles = (theme) => ({
 class MuiVirtualizedTable extends React.PureComponent {
   getRowClassName = ({ index }) => {
     const { classes, rowClassName, onRowClick } = this.props;
-    {
-      console.log("fartFART", onRowClick);
-    }
+
     return classNames(classes.tableRow, classes.flexContainer, rowClassName, {
       [classes.tableRowHover]: index !== -1 && onRowClick != null,
     });
   };
 
   cellRenderer = ({ cellData, columnIndex = null }) => {
-    console.log("in cellRender", cellData);
+    //console.log("in cellRender", cellData);
     const { columns, classes, rowHeight, onRowClick } = this.props;
-    console.log("POOOOOPPPSSSS", onRowClick);
+    //console.log("POOOOOPPPSSSS", onRowClick);
     return (
       <TableCell
         component="div"
@@ -93,7 +91,7 @@ class MuiVirtualizedTable extends React.PureComponent {
         label
       );
 
-    console.log("POOP PROPS", this.props);
+    //console.log("POOP PROPS", this.props);
 
     return (
       <TableCell
@@ -113,10 +111,10 @@ class MuiVirtualizedTable extends React.PureComponent {
   };
 
   render() {
-    const { publication } = this.props;
-    console.log("Publication data RENDEr", publication);
+    //const { publication } = this.props;
+    //console.log("Publication data RENDEr", publication);
     const { classes, columns, ...tableProps } = this.props;
-    console.log("redux", this.props);
+    //console.log("redux", this.props);
     return (
       //AutoSizer will pass the function height and width values which then are  passed into the Table componenet
 
@@ -194,7 +192,7 @@ const WrappedVirtualizedTable = withStyles(styles)(MuiVirtualizedTable);
 
 function PublicationTable(props) {
   const rows = props.publication;
-  console.log("gjgjgjg", rows.length);
+  //console.log("gjgjgjg", rows.length);
   return (
     <Paper style={{ height: 500, width: "80%", margin: "50px auto" }}>
       <WrappedVirtualizedTable
