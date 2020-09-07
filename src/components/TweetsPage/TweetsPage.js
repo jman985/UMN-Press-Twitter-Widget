@@ -107,7 +107,7 @@ class TweetsPage extends Component {
 
     return(
       <>
-        <GridList className={classes.root} style={{display: "flex",flexWrap: "wrap",justifyContent:'space-around'}}>
+        <GridList className={classes.root} style={{display: "flex",flexWrap: "wrap",justifyContent:'center'}}>
         
         {/* conditional rendering around each card prevents crash if tweetsArray doesn't have a corresponding index */}
         {this.state.tweetsArray[this.state.key1] ?

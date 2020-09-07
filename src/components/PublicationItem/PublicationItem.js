@@ -145,7 +145,7 @@ class PublicationItem extends Component {
             <InclusionToggle publicationId={this.props.match.params.id} include={this.props.publication[index].include}/>
           </div>
 
-          <div className={classes.root} style={{display: "flex",flexWrap: "wrap",justifyContent:'space-around'}}>
+          <div className={classes.root} style={{display: "flex",flexWrap: "wrap",justifyContent:'center'}}>
             <div key={this.state.status+1} style={{display:'flex'}}>
             {this.state.tweetsArray[this.state.key1] ?
               <Card className={classes.card} variant="outlined" style={{width:'450px',height:'600px',backgroundColor:'#f3f3f3'}}>
