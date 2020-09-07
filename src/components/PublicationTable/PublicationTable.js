@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from "react-router";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
@@ -6,7 +7,10 @@ import TableCell from "@material-ui/core/TableCell";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Paper from "@material-ui/core/Paper";
 import { AutoSizer, Column, SortDirection, Table } from "react-virtualized";
-import { connect } from "react-redux";
+//Column, SortDirection, Table are regualr Componets from react-virtualized...///AutoSizer is a Higher Order Component HOC which takes a reg Component and
+//spits out a new one.
+
+import { connect, useSelector, useDispatch } from "react-redux";
 
 const styles = (theme) => ({
   table: {
@@ -31,6 +35,9 @@ const styles = (theme) => ({
   noClick: {
     cursor: "initial",
   },
+  poop: {
+    fontFamily: "monospace",
+  },
 });
 
 class MuiVirtualizedTable extends React.PureComponent {
@@ -43,7 +50,9 @@ class MuiVirtualizedTable extends React.PureComponent {
   };
 
   cellRenderer = ({ cellData, columnIndex = null }) => {
+    //console.log("in cellRender", cellData);
     const { columns, classes, rowHeight, onRowClick } = this.props;
+    //console.log("POOOOOPPPSSSS", onRowClick);
     return (
       <TableCell
         component="div"
@@ -82,6 +91,8 @@ class MuiVirtualizedTable extends React.PureComponent {
         label
       );
 
+    //console.log("POOP PROPS", this.props);
+
     return (
       <TableCell
         component="div"
@@ -100,8 +111,10 @@ class MuiVirtualizedTable extends React.PureComponent {
   };
 
   render() {
+    //const { publication } = this.props;
+    //console.log("Publication data RENDEr", publication);
     const { classes, columns, ...tableProps } = this.props;
-
+    //console.log("redux", this.props);
     return (
       //AutoSizer will pass the function height and width values which then are  passed into the Table componenet
 
@@ -177,70 +190,40 @@ MuiVirtualizedTable.defaultProps = {
 
 const WrappedVirtualizedTable = withStyles(styles)(MuiVirtualizedTable);
 
-const data = [
-  ["Author name1", 159, 6.0, 24, 4.0],
-  ["Another author", 237, 9.0, 37, 4.3],
-  ["poop", 262, 16.0, 24, 6.0],
-  ["Cupcake", 305, 3.7, 67, 4.3],
-  ["Gingerbread", 356, 16.0, 49, 3.9],
-];
-
-let id = 0;
-function createData(poop, calories, fat, carbs, protein) {
-  id += 1;
-  return { id, poop, calories, fat, carbs, protein };
-}
-
-const rows = [];
-
-const csvData = (props) => {
-  const data = props.csv.data;
-  for (let i = 0; i < data.length; i += 1) {
-    rows.push();
-  }
-};
-
-for (let i = 0; i < 100; i += 1) {
-  const randomSelection = data[Math.floor(Math.random() * data.length)];
-  rows.push(createData(...randomSelection));
-}
-
-function PublicationTable() {
+function PublicationTable(props) {
+  const rows = props.publication;
+  //console.log("gjgjgjg", rows.length);
   return (
-    <Paper style={{ height: 400, width: "80%", margin: "50px auto" }}>
+    <Paper style={{ height: 500, width: "80%", margin: "50px auto" }}>
       <WrappedVirtualizedTable
         rowCount={rows.length}
         rowGetter={({ index }) => rows[index]}
-        onRowClick={(event) => console.log(event)}
+        onRowClick={(event) => {
+          props.history.push(`publications/${event.rowData.id}`);
+        }}
         columns={[
           {
             width: 200,
             flexGrow: 1.0,
             label: "Title",
-            dataKey: "poop",
+            dataKey: "title",
           },
           {
-            width: 120,
+            width: 200,
             label: "Subtitle",
-            dataKey: "calories",
+            dataKey: "subtitle",
             numeric: true,
           },
           {
-            width: 120,
+            width: 180,
             label: "Author",
-            dataKey: "fat",
+            dataKey: "author1",
             numeric: true,
           },
           {
-            width: 120,
-            label: "NONE",
-            dataKey: "carbs",
-            numeric: true,
-          },
-          {
-            width: 120,
-            label: "NONE",
-            dataKey: "protein",
+            width: 180,
+            label: "Last Searched",
+            dataKey: "last_searched",
             numeric: true,
           },
         ]}
@@ -248,7 +231,8 @@ function PublicationTable() {
     </Paper>
   );
 }
+
 const mapStateToProps = (state) => ({
-  csv: state.csvReducer,
+  publication: state.publication,
 });
-export default connect(mapStateToProps)(PublicationTable);
+export default withRouter(connect(mapStateToProps)(PublicationTable));
