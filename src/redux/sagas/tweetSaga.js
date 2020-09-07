@@ -8,7 +8,7 @@ function* getTweets(action) {
     for (let i=0; i<action.payload.length; i++){
       if (action.payload[i].include){
         //hit Twitter Recent Search API with publication title, replacing certian characters
-        const response = yield axios.get('/tweets/twitter/' + action.payload[i].title.replace(/["&]/g,''))
+        const response = yield axios.get('/tweets/twitter/' + action.payload[i].title.replace(/["&;]/g,''))
         // send the response(tweet id) and the publication object from database to the save saga
         yield put({
           type: "SAVE_TWEETS",
