@@ -27,7 +27,9 @@ router.get('/twitter/:title', rejectUnauthenticated, (req, res) => {
 
 router.get('/database', (req, res) => {
   console.log('getting all tweets from database')
-  const queryText = `SELECT * FROM tweet`
+  const queryText = `
+  SELECT * FROM tweet
+  JOIN publication ON tweet.publication_id = publication.id`
   pool.query(queryText)
       .then(response => {
           res.send(response.rows);
