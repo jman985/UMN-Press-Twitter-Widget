@@ -45,8 +45,22 @@ function* saveTweets(action){
     yield console.log(action.payload);
     for (let tweet of tweets) {
 
-      if(tweet.possibly_sensitive===false){  //filter out sensitive content
-             
+
+      function onlyRetweets(){
+        if(tweet.referenced_tweets){
+            for(let j=0;j<tweet.referenced_tweets;j++){
+                if(tweet.referenced_tweets[j]==='quoted'||tweet.referenced_tweets[j]==='replied_to'){
+                  return true;
+                }
+            }
+      }else{
+        return false;
+      }
+    }
+
+      if(tweet.possibly_sensitive===false&&!onlyRetweets()){  //filter out sensitive content
+        console.log('this is referenced tweets type',tweet.referenced_tweets[0].type);
+        
         const tweetId = tweet.id;
         const publicationId = action.payload.publicationId;
         console.log("sending these to tweet save route:", {
