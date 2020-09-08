@@ -35,7 +35,6 @@ const styles = (theme) => ({
   },
   toggleCell: {
     justifyContent: "center",
-    backgroundColor: "",
   },
   noClick: {
     cursor: "initial",
