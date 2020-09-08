@@ -25,7 +25,7 @@ router.get('/twitter/:title', rejectUnauthenticated, (req, res) => {
 })
 
 
-router.get('/database', (req, res) => {
+router.get('/database', rejectUnauthenticated, (req, res) => {
   console.log('getting all tweets from database')
   const queryText = `
   SELECT tweet.*, publication.title, publication.author1 FROM tweet
@@ -41,7 +41,7 @@ router.get('/database', (req, res) => {
 
 
 
-router.post('/database', (req, res) => {
+router.post('/database', rejectUnauthenticated, (req, res) => {
     console.log('preparing insert query:', req.body)
     const queryText = `INSERT INTO tweet (tweet_id, publication_id)
     VALUES ($1, $2)`
@@ -55,7 +55,7 @@ router.post('/database', (req, res) => {
 });
 
 // sets approved value of tweets in tweet table to true
-router.put('/database/approve', (req, res) => {
+router.put('/database/approve', rejectUnauthenticated, (req, res) => {
   console.log('Approving tweet id #', req.body.id)
   const queryText = `
   UPDATE tweet
@@ -74,7 +74,7 @@ router.put('/database/approve', (req, res) => {
 })
 
 // sets approved value of tweets in tweet table to false
-router.put('/database/reject', (req, res) => {
+router.put('/database/reject', rejectUnauthenticated, (req, res) => {
   console.log('Rejecting tweet #', req.body.id)
   const queryText = `
   UPDATE tweet
