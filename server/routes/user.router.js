@@ -40,4 +40,32 @@ router.post('/logout', (req, res) => {
   res.sendStatus(200);
 });
 
+
+
+router.put('/rate', (req, res) => {
+  let userId = req.body.userId
+  const queryText = `
+  UPDATE "user"
+  SET rate_limit = $1, rate_limit_remaining = $2, rate_limit_refresh = $3
+  WHERE id = $4;
+  `
+  const values = [
+    req.body.rateLimit, 
+    req.body.rateLimitRemaining, 
+    req.body.rateLimitReset,
+    req.body.userId
+  ]
+  console.log(req.body)
+  pool.query(queryText, values)
+  .then( (response) => {
+      console.log( 'Successfully updated rate info');
+      // res.send(response.rows);
+  })
+  .catch( (err) => {
+      console.log('An error occured while updating rate info:', err);
+      res.sendStatus(500);
+  })
+});
+
+
 module.exports = router;

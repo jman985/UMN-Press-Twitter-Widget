@@ -6,7 +6,10 @@
 CREATE TABLE "user" (
     "id" SERIAL PRIMARY KEY,
     "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
+    "password" VARCHAR (1000) NOT NULL,
+    "rate_limit" INT,
+    "rate_limit_remaining" INT DEFAULT 450,
+    "rate_limit_refresh" INT
 );
 CREATE TABLE "publication" (
     "id" SERIAL PRIMARY KEY,

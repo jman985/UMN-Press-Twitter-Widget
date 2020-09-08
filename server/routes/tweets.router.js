@@ -16,7 +16,9 @@ router.get('/twitter/:title', rejectUnauthenticated, (req, res) => {
     })
         .then((response)=>{
             // console.log('sending back:', response.data.data);
-            res.send(response.data.data);
+            res.send({body: response.data.data, header: response.headers});
+            // console.log({data: response.data.data, header:response.headers})
+            // console.log(response.headers)
         })
         .catch((error)=>{
             console.log('error with Twitter GET', error);
