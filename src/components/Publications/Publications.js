@@ -4,15 +4,18 @@ import InclusionToggle from './InclusionToggle'
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
+
+import InclusionToggle from "./InclusionToggle";
+import PublicationTable from "../PublicationTable/PublicationTable";
+
 class Publications extends Component {
 
   componentDidMount = () => {
       this.props.dispatch({type: 'FETCH_PUBLICATIONS'})
   }
-
+  
   handleClick = () => {
       this.props.dispatch({type: 'FETCH_TWEETS', payload: this.props.publication, userId: this.props.user.id});
-      this.props.dispatch({type: 'UPDATE_TIMESTAMP'});
       this.props.dispatch({ type: "FETCH_USER" });
   }
 
@@ -55,39 +58,17 @@ class Publications extends Component {
         <button onClick={this.handleClick}>
             Search
         </button>
-        <table>
-          <thead>
-              <tr>
-                <th>Title</th>
-                <th>Subtitle</th>
-                <th>Author</th>
-                <th>Include/Exclude</th>
-              </tr>
-          </thead>
-          <tbody>
-            {this.props.publication.map((book, index) => (
-              <tr key={index}>
-                <td className="book-select" onClick={()=>{this.props.history.push(`publications/${book.id}`)}}>{book.title}</td>
-                <td>{book.subtitle}</td>
-                <td>{book.author1}</td>
-                <td><InclusionToggle publicationId={book.id} include={book.include}/></td>
-              </tr>
-              )
-            )}
-          </tbody>
-        </table>
+            <PublicationTable />
+
       </>
     )
   } 
-
 }
 
-
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   errors: state.errors,
   publication: state.publication,
   user: state.user,
 });
-
 
 export default connect(mapStateToProps)(Publications);
