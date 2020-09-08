@@ -215,6 +215,7 @@ function PublicationTable(props) {
         rowCount={rows.length}
         rowGetter={({ index }) => rows[index]}
         onRowClick={(event) => {
+          console.log("click", event);
           props.history.push(`publications/${event.rowData.id}`);
         }}
         columns={[
