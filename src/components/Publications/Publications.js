@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import InclusionToggle from './InclusionToggle'
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-
-
 import InclusionToggle from "./InclusionToggle";
 import PublicationTable from "../PublicationTable/PublicationTable";
 
