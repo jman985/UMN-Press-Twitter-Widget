@@ -7,7 +7,13 @@ function* getTweets(action) {
     yield console.log(action.payload);
     for (let i=0; i<action.payload.length; i++){
       if (action.payload[i].include){
-        const response = yield axios.get('/tweets/twitter/' + action.payload[i].title)
+        //hit Twitter Recent Search API with publication title, replace problem characters with "*" aka the "wild card" character
+        //then normalize to replace å/a,ö/o, etc.
+        // console.log('this is the API query', action.payload[i].title.replace(/["&;#^%[\|{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''));
+        // let str= "['&;#^%[\|/{}]";
+        // console.log('this is the normalize test', str.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''));
+
+        const response = yield axios.get('/tweets/twitter/' + action.payload[i].title.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''))
         // send the response(tweet id) and the publication object from database to the save saga
         yield put({
           type: "SAVE_TWEETS",
@@ -42,17 +48,36 @@ function* saveTweets(action){
   try {
     const tweets = action.payload.tweetArray;
     yield console.log(action.payload);
+
     for (let tweet of tweets) {
-      const tweetId = tweet.id;
-      const publicationId = action.payload.publicationId;
-      console.log("sending these to tweet save route:", {
-        tweetId: tweetId,
-        publicationId: publicationId,
-      });
-      yield axios.post("/tweets/database", {
-        tweetId: tweet.id,
-        publicationId: action.payload.publicationId,
-      });
+      function onlyRetweets(){  //check if tweet is only retweets
+        // console.log('this is tweet id', tweet.id);
+        // console.log('this is referenced tweets', tweet.referenced_tweets);
+        if(tweet.hasOwnProperty('referenced_tweets')){
+            for(let j=0;j<tweet.referenced_tweets.length;j++){
+              // console.log('this is the ref tweets type',tweet.referenced_tweets[j].type);
+                if(tweet.referenced_tweets[j].type==='quoted'||tweet.referenced_tweets[j].type==='replied_to'){
+                  return false;
+                }
+            }
+            return true;
+          }else{
+            return false;
+        }
+      }//end onlyRetweets
+
+      if(tweet.possibly_sensitive===false&&!onlyRetweets()){  //filter out sensitive tweets and retweets
+        const tweetId = tweet.id;
+        const publicationId = action.payload.publicationId;
+        console.log("sending these to tweet save route:", {
+          tweetId: tweetId,
+          publicationId: publicationId,
+        });
+        yield axios.post("/tweets/database", {
+          tweetId: tweet.id,
+          publicationId: action.payload.publicationId,
+        });
+      }
     }
   } catch (error) {
     console.log("error with tweet save route", error);
