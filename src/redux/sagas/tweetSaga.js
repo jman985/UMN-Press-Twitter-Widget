@@ -83,10 +83,10 @@ function* saveTweets(action){
     if (tweets !== undefined){
        // take each tweet id from the publicaiton search and save to database with associated publication id
       for (let tweet of tweets) {
+        const tweetId = tweet.id;
+        const publicationId = action.payload.publicationId;
         //filter out sensitive tweets and retweets
         if(tweet.possibly_sensitive===false&&!onlyRetweets(tweet)){ 
-          const tweetId = tweet.id;
-          const publicationId = action.payload.publicationId;
           console.log("sending these to tweet save route:", {
             tweetId: tweetId,
             publicationId: publicationId,
@@ -95,11 +95,11 @@ function* saveTweets(action){
             tweetId: tweetId,
             publicationId: publicationId,
           });
-        // update the last_searched timestamp of each publication
-        yield axios.put('/publications/timestamp/' + publicationId )
         }
       }
     }
+    // update the last_searched timestamp of each publication
+    yield axios.put('/publications/timestamp/' + action.payload.publicationId )
   } catch (error) {
     console.log("error with tweet save route", error);
   }
