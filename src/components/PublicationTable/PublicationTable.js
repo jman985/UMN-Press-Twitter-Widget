@@ -7,6 +7,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Paper from "@material-ui/core/Paper";
 import { AutoSizer, Column, SortDirection, Table } from "react-virtualized";
+import InclusionToggle from "../PublicationItem/InclusionToggle";
 //Column, SortDirection, Table are regualr Componets from react-virtualized...///AutoSizer is a Higher Order Component HOC which takes a reg Component and
 //spits out a new one.
 
@@ -35,9 +36,6 @@ const styles = (theme) => ({
   noClick: {
     cursor: "initial",
   },
-  poop: {
-    fontFamily: "monospace",
-  },
 });
 
 class MuiVirtualizedTable extends React.PureComponent {
@@ -52,7 +50,7 @@ class MuiVirtualizedTable extends React.PureComponent {
   cellRenderer = ({ cellData, columnIndex = null }) => {
     //console.log("in cellRender", cellData);
     const { columns, classes, rowHeight, onRowClick } = this.props;
-    //console.log("POOOOOPPPSSSS", onRowClick);
+    //console.log("POOOOOPPPSSSS", this.props);
     return (
       <TableCell
         component="div"
@@ -129,17 +127,34 @@ class MuiVirtualizedTable extends React.PureComponent {
           >
             {columns.map(
               (
-                { cellContentRenderer = null, className, dataKey, ...other },
+                {
+                  cellContentRenderer = null,
+                  className,
+                  dataKey,
+                  poop,
+                  ...other
+                },
                 index
               ) => {
                 let renderer;
-                if (cellContentRenderer != null) {
+                if (
+                  cellContentRenderer == null &&
+                  columns[4].label == "Include/Exclude" &&
+                  dataKey == null
+                ) {
+                  console.log("WORKING!!!!!");
+                  renderer = () =>
+                    this.cellRenderer({
+                      cellData: <InclusionToggle />,
+                    });
+                } else if (cellContentRenderer != null) {
                   renderer = (cellRendererProps) =>
                     this.cellRenderer({
                       cellData: cellContentRenderer(cellRendererProps),
                       columnIndex: index,
                     });
                 } else {
+                  console.log("regular");
                   renderer = this.cellRenderer;
                 }
 
@@ -192,6 +207,7 @@ const WrappedVirtualizedTable = withStyles(styles)(MuiVirtualizedTable);
 
 function PublicationTable(props) {
   const rows = props.publication;
+  //const rows = props.csv;
   //console.log("gjgjgjg", rows.length);
   return (
     <Paper style={{ height: 500, width: "80%", margin: "50px auto" }}>
@@ -226,6 +242,12 @@ function PublicationTable(props) {
             dataKey: "last_searched",
             numeric: true,
           },
+          {
+            width: 180,
+            label: "Include/Exclude",
+            dataKey: null,
+            // numeric: true,
+          },
         ]}
       />
     </Paper>
@@ -234,5 +256,6 @@ function PublicationTable(props) {
 
 const mapStateToProps = (state) => ({
   publication: state.publication,
+  csv: state.csvReducer.data,
 });
 export default withRouter(connect(mapStateToProps)(PublicationTable));
