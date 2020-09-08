@@ -59,7 +59,7 @@ router.put('/rate', (req, res) => {
   pool.query(queryText, values)
   .then( (response) => {
       console.log( 'Successfully updated rate info');
-      // res.send(response.rows);
+      res.sendStatus(200);
   })
   .catch( (err) => {
       console.log('An error occured while updating rate info:', err);
