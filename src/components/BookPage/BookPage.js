@@ -38,7 +38,7 @@ const styles = theme => ({
   }
     })
 
-
+    
 class BookPage extends Component {
 
 
@@ -49,7 +49,7 @@ class BookPage extends Component {
         this.props.dispatch({type: 'FETCH_BOOK_DATA', payload: this.props.match.params.publication_id});
 
       }
-
+      
     // scriptLoaded() {
     //   window.A.sort();
     // }
