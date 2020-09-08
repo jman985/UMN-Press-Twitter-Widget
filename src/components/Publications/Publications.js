@@ -6,6 +6,10 @@ import Typography from '@material-ui/core/Typography';
 
 class Publications extends Component {
 
+  componentDidMount = () => {
+      this.props.dispatch({type: 'FETCH_PUBLICATIONS'})
+  }
+
   handleClick = () => {
       this.props.dispatch({type: 'FETCH_TWEETS', payload: this.props.publication, userId: this.props.user.id});
       this.props.dispatch({type: 'UPDATE_TIMESTAMP'});

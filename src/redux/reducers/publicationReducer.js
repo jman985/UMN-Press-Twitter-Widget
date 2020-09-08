@@ -1,4 +1,4 @@
-const publicationReducer = (state = [1], action) => {
+const publicationReducer = (state = [], action) => {
   switch (action.type) {
     case 'SET_PUBLICATIONS':
       return action.payload;

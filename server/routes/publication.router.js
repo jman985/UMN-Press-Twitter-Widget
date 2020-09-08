@@ -6,7 +6,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 /**
  * GET route template
  */
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
   console.log('Getting Publications')
   const queryText = `
   SELECT * FROM publication
@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
 
 
 
-router.put('/', (req, res) => {
+router.put('/', rejectUnauthenticated, (req, res) => {
   console.log('Toggling inclusion state of publication #', req.body.id)
   const queryText = `
   UPDATE publication
