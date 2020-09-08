@@ -74,7 +74,8 @@ router.post("/csv", async (req, res) => {
     //   }
     // }
     await connection.query("BEGIN");
-    const queryText = `INSERT INTO "publication" ("title", "author1", "subtitle") VALUES ($1, $2, $3);`;
+    const queryText = `INSERT INTO "publication" ("title", "author1", "subtitle") 
+    VALUES ($1, $2, $3);`;
 
     for (book of csvData) {
       await connection.query(queryText, [

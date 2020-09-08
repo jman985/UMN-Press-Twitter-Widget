@@ -7,7 +7,7 @@ const token = process.env.BEARER_TOKEN;
 
 // GET from Twitter API
 router.get('/twitter/:title', rejectUnauthenticated, (req, res) => {
-    // console.log('=====>> router get', req.params.title);
+    console.log('=====>> router get', req.params.title);
     // console.log('preparing to hit server with a request to the Twitter API');
     axios.get(`https://api.twitter.com/2/tweets/search/recent?query="${req.params.title}"&max_results=10`, {
         headers: {
@@ -43,9 +43,8 @@ router.get('/database', (req, res) => {
 
 router.post('/database', (req, res) => {
     console.log('preparing insert query:', req.body)
-    const queryText = `INSERT INTO tweet (tweet_id, publication_id)
-    VALUES ($1, $2)`
-    pool.query(queryText, [req.body.tweetId, req.body.publicationId])
+    const queryText = `INSERT INTO "tweet" ("publication_id","tweet_id") SELECT $1,$2;`
+    pool.query(queryText, [req.body.publicationId, req.body.tweetId])
         .then(response => {
             res.sendStatus(200);
         }).catch(error=>{
