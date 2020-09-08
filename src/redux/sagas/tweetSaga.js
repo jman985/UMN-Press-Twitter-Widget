@@ -50,11 +50,9 @@ function* saveTweets(action){
       function onlyRetweets(){  //check if tweet is only retweets
         // console.log('this is tweet id', tweet.id);
         // console.log('this is referenced tweets', tweet.referenced_tweets);
-        
         if(tweet.hasOwnProperty('referenced_tweets')){
             for(let j=0;j<tweet.referenced_tweets.length;j++){
               // console.log('this is the ref tweets type',tweet.referenced_tweets[j].type);
-              
                 if(tweet.referenced_tweets[j].type==='quoted'||tweet.referenced_tweets[j].type==='replied_to'){
                   return false;
                 }
@@ -66,7 +64,6 @@ function* saveTweets(action){
       }//end onlyRetweets
 
       if(tweet.possibly_sensitive===false&&!onlyRetweets()){  //filter out sensitive tweets and retweets
-        
         const tweetId = tweet.id;
         const publicationId = action.payload.publicationId;
         console.log("sending these to tweet save route:", {
