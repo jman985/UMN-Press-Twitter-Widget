@@ -8,6 +8,8 @@ function* getTweets(action) {
     for (let i=0; i<action.payload.length; i++){
       if (action.payload[i].include){
         //hit Twitter Recent Search API with publication title, replacing certain characters
+        console.log('this is the API query', action.payload[i].title.replace(/["&;#^[\|{}]/g,'*').replace(/]/g,'*'));
+        
         const response = yield axios.get('/tweets/twitter/' + action.payload[i].title.replace(/["&;#^[\|{}]/g,'*').replace(/]/g,'*'))
         // send the response(tweet id) and the publication object from database to the save saga
         yield put({
@@ -46,9 +48,14 @@ function* saveTweets(action){
 
     for (let tweet of tweets) {
       function onlyRetweets(){  //check if tweet is only retweets
-        if(tweet.referenced_tweets){
-            for(let j=0;j<tweet.referenced_tweets;j++){
-                if(tweet.referenced_tweets[j]==='quoted'||tweet.referenced_tweets[j]==='replied_to'){
+        // console.log('this is tweet id', tweet.id);
+        // console.log('this is referenced tweets', tweet.referenced_tweets);
+        
+        if(tweet.hasOwnProperty('referenced_tweets')){
+            for(let j=0;j<tweet.referenced_tweets.length;j++){
+              // console.log('this is the ref tweets type',tweet.referenced_tweets[j].type);
+              
+                if(tweet.referenced_tweets[j].type==='quoted'||tweet.referenced_tweets[j].type==='replied_to'){
                   return false;
                 }
             }
