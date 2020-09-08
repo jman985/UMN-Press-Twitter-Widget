@@ -9,7 +9,6 @@ const token = process.env.BEARER_TOKEN;
  */
 router.get( '/:publication_id', ( req, res )=>{
     console.log( 'in router /api/tweets GET', req.params );
-    /// - query: SELECT * FROM "eventlist" - ///
     pool.query( `SELECT "tweet_id" FROM "tweet" WHERE "publication_id"=$1;`,[req.params.publication_id])
     .then( ( result )=>{
         // success
