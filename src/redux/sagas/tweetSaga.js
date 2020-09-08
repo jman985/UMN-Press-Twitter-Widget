@@ -7,10 +7,13 @@ function* getTweets(action) {
     yield console.log(action.payload);
     for (let i=0; i<action.payload.length; i++){
       if (action.payload[i].include){
-        //hit Twitter Recent Search API with publication title, replacing certain characters
-        console.log('this is the API query', action.payload[i].title.replace(/["&;#^[\|{}]/g,'*').replace(/]/g,'*'));
-        
-        const response = yield axios.get('/tweets/twitter/' + action.payload[i].title.replace(/["&;#^[\|{}]/g,'*').replace(/]/g,'*'))
+        //hit Twitter Recent Search API with publication title, replace problem characters with "*" aka the "wild card" character
+        //then normalize to replace å/a,ö/o, etc.
+        // console.log('this is the API query', action.payload[i].title.replace(/["&;#^%[\|{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''));
+        let str= "['&;#^%[\|/{}]";
+        console.log('this is the normalize test', str.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''));
+
+        const response = yield axios.get('/tweets/twitter/' + action.payload[i].title.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''))
         // send the response(tweet id) and the publication object from database to the save saga
         yield put({
           type: "SAVE_TWEETS",
