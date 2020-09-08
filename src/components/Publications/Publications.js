@@ -16,28 +16,8 @@ class Publications extends Component {
     if (this.props.publication.map === undefined) return null;
     return (
       <>
-        {/* <table>
-          <thead>
-              <tr>
-                <th>Title</th>
-                <th>Subtitle</th>
-                <th>Author</th>
-                <th>Include/Exclude</th>
-              </tr>
-          </thead>
-          <tbody>
-            {this.props.publication.map((book, index) => (
-              <tr key={index}>
-                <td className="book-select" onClick={()=>{this.props.history.push(`publications/${book.id}`)}}>{book.title}</td>
-                <td>{book.subtitle}</td>
-                <td>{book.author1}</td>
-                <td><InclusionToggle publicationId={book.id} include={book.include}/></td>
-              </tr>
-              )
-            )}
-          </tbody>
-        </table> */}
         <PublicationTable />
+
         <button onClick={this.handleClick}>Search</button>
       </>
     );
