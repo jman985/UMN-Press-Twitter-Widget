@@ -33,6 +33,10 @@ const styles = (theme) => ({
   tableCell: {
     flex: 1,
   },
+  toggleCell: {
+    justifyContent: "center",
+    backgroundColor: "",
+  },
   noClick: {
     cursor: "initial",
   },
@@ -47,16 +51,21 @@ class MuiVirtualizedTable extends React.PureComponent {
     });
   };
 
-  cellRenderer = ({ cellData, columnIndex = null }) => {
+  cellRenderer = ({ cellData, columnIndex = null, toggleStyle }) => {
     //console.log("in cellRender", cellData);
     const { columns, classes, rowHeight, onRowClick } = this.props;
     //console.log("POOOOOPPPSSSS", this.props);
     return (
       <TableCell
         component="div"
-        className={classNames(classes.tableCell, classes.flexContainer, {
-          [classes.noClick]: onRowClick == null,
-        })}
+        className={classNames(
+          classes.tableCell,
+          classes.flexContainer,
+          {
+            [classes.noClick]: onRowClick == null,
+          },
+          toggleStyle
+        )}
         variant="body"
         style={{ height: rowHeight }}
         align={
@@ -146,6 +155,7 @@ class MuiVirtualizedTable extends React.PureComponent {
                   renderer = () =>
                     this.cellRenderer({
                       cellData: <InclusionToggle />,
+                      toggleStyle: classes.toggleCell,
                     });
                 } else if (cellContentRenderer != null) {
                   renderer = (cellRendererProps) =>
