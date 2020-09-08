@@ -4,6 +4,11 @@ import InclusionToggle from "./InclusionToggle";
 import PublicationTable from "../PublicationTable/PublicationTable";
 
 class Publications extends Component {
+
+  componentDidMount = () => {
+      this.props.dispatch({type: 'FETCH_PUBLICATIONS'})
+  }
+  
   handleClick = () => {
     this.props.dispatch({
       type: "FETCH_TWEETS",
