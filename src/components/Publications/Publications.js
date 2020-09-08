@@ -5,6 +5,10 @@ import InclusionToggle from './InclusionToggle'
 
 class Publications extends Component {
 
+  componentDidMount = () => {
+      this.props.dispatch({type: 'FETCH_PUBLICATIONS'})
+  }
+
   handleClick = () => {
       this.props.dispatch({type: 'FETCH_TWEETS', payload: this.props.publication});
       this.props.dispatch({type: 'UPDATE_TIMESTAMP'});
