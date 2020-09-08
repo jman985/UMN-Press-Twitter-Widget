@@ -43,23 +43,22 @@ function* saveTweets(action){
   try {
     const tweets = action.payload.tweetArray;
     yield console.log(action.payload);
+
     for (let tweet of tweets) {
-
-
-      function onlyRetweets(){
+      function onlyRetweets(){  //check if tweet is only retweets
         if(tweet.referenced_tweets){
             for(let j=0;j<tweet.referenced_tweets;j++){
                 if(tweet.referenced_tweets[j]==='quoted'||tweet.referenced_tweets[j]==='replied_to'){
-                  return true;
+                  return false;
                 }
             }
-      }else{
-        return false;
-      }
-    }
+            return true;
+          }else{
+            return false;
+        }
+      }//end onlyRetweets
 
-      if(tweet.possibly_sensitive===false&&!onlyRetweets()){  //filter out sensitive content
-        console.log('this is referenced tweets type',tweet.referenced_tweets[0].type);
+      if(tweet.possibly_sensitive===false&&!onlyRetweets()){  //filter out sensitive tweets and retweets
         
         const tweetId = tweet.id;
         const publicationId = action.payload.publicationId;
