@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
   ORDER BY title ASC`
   pool.query(queryText)
   .then( (response) => {
-      console.log( 'Successfully got publication data', response.rows);
+      console.log( 'Successfully got publication data');
       res.send(response.rows);
     })
     .catch((err) => {

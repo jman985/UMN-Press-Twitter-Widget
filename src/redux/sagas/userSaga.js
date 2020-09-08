@@ -24,8 +24,20 @@ function* fetchUser() {
   }
 }
 
+// posts Tweets to Tweet table 
+function* saveRate(action){
+  try {
+    yield axios.put('/api/user/rate', action.payload)
+    console.log('saving rate data:',action)
+
+  } catch (error) {
+    console.log("error saving rate to user table", error);
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  yield takeLatest('SAVE_RATE_DATA', saveRate);
 }
 
 export default userSaga;

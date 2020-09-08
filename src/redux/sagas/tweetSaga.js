@@ -6,17 +6,33 @@ function* getTweets(action) {
   try {
     yield console.log(action.payload);
     for (let i=0; i<action.payload.length; i++){
+      // check if the publication has include value of true
       if (action.payload[i].include){
         const response = yield axios.get('/tweets/twitter/' + action.payload[i].title)
         // send the response(tweet id) and the publication object from database to the save saga
+        // console.log('this is title', action.payload[i].title)
+        // console.log('this is response.data.body', response.data.body)
+        // console.log('this is response.data.header', response.data.header)
+        // save the tweet ids to the tweet table of the database
         yield put({
           type: "SAVE_TWEETS",
           payload: {
-            tweetArray: response.data,
+            tweetArray: response.data.body,
             publicationId: action.payload[i].id,
           },
         });
-        console.log("sending this to save tweet saga:", response.data);
+        // save the API rate info to the user table of the database
+        yield put({
+          type: "SAVE_RATE_DATA",
+          payload: {
+            rateLimit: response.data.header['x-rate-limit-limit'],
+            rateLimitRemaining: response.data.header['x-rate-limit-remaining'],
+            rateLimitReset: response.data.header['x-rate-limit-reset'],
+            userId: action.userId
+          }
+        });
+        // console.log(response)
+        console.log("sending this to save tweet saga:", response.data.data);
       }
     }
   } catch (error) {
@@ -40,19 +56,23 @@ function* getDbTweets(action){
 // posts Tweets to Tweet table 
 function* saveTweets(action){
   try {
-    const tweets = action.payload.tweetArray;
+    let tweets = action.payload.tweetArray;
     yield console.log(action.payload);
-    for (let tweet of tweets) {
-      const tweetId = tweet.id;
-      const publicationId = action.payload.publicationId;
-      console.log("sending these to tweet save route:", {
-        tweetId: tweetId,
-        publicationId: publicationId,
-      });
-      yield axios.post("/tweets/database", {
-        tweetId: tweet.id,
-        publicationId: action.payload.publicationId,
-      });
+    // filter undefined results (no results from search)
+    if (tweets !== undefined){
+      // take each tweet id from the publicaiton search and save to database with associated publication id
+      for (let tweet of tweets) {
+        const tweetId = tweet.id;
+        const publicationId = action.payload.publicationId;
+        console.log("sending these to tweet save route:", {
+          tweetId: tweetId,
+          publicationId: publicationId,
+        });
+        yield axios.post("/tweets/database", {
+          tweetId: tweetId,
+          publicationId: publicationId,
+        });
+      }
     }
   } catch (error) {
     console.log("error with tweet save route", error);
