@@ -42,7 +42,9 @@ function* getTweets(action) {
         });
         // console.log(response)
         console.log("sending this to save tweet saga:", response.data.data);
-      }
+        // update the last_searched timestamp of each publication
+        yield axios.put('/publications/timestamp/' + action.payload[i].id )
+      }    
       // update the user redux store with the new rate data
       yield put({ type: "FETCH_USER" });
       // update the publication redx store with new last_searched times
@@ -108,8 +110,6 @@ function* saveTweets(action){
         }
       }
     }
-    // update the last_searched timestamp of each publication
-    yield axios.put('/publications/timestamp/' + action.payload.publicationId )
   } catch (error) {
     console.log("error with tweet save route", error);
   }
