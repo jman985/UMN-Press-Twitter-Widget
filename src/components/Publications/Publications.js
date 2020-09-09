@@ -19,23 +19,19 @@ class Publications extends Component {
     let lastSearchedAll
 
     if (this.props.publication.length !== 0 && this.props.publication !== undefined){
-      console.log("PROPS.PUBLICATION EQUALS:", this.props.publication)
       let notNull = this.props.publication.filter(x => x.last_searched !== null)
       lastSearchedAll =  notNull.reduce((a, b) => (a.last_searched > b.last_searched ? a : b)).last_searched;
     }
     if (typeof lastSearchedAll === 'string'){
-      readableTime = lastSearchedAll.slice(0,10) + ' ' + lastSearchedAll.slice(12, -5)
+      readableTime = lastSearchedAll.slice(0,10) + ' ' + lastSearchedAll.slice(11, -5)
     }
     return readableTime;
   }
 
-
+  
   render() {
     if (this.props.publication.map === undefined) return null;
     if (this.props.publication === []) return null;
-
-
-
 
     return(
       <>
@@ -56,7 +52,27 @@ class Publications extends Component {
         <button onClick={this.handleClick}>
             Search
         </button>
-        <PublicationTable />
+        <table>
+          <thead>
+              <tr>
+                <th>Title</th>
+                <th>Subtitle</th>
+                <th>Author</th>
+                <th>Include/Exclude</th>
+              </tr>
+          </thead>
+          <tbody>
+            {this.props.publication.map((book, index) => (
+              <tr key={index}>
+                <td className="book-select" onClick={()=>{this.props.history.push(`publications/${book.id}`)}}>{book.title}</td>
+                <td>{book.subtitle}</td>
+                <td>{book.author1}</td>
+                <td><InclusionToggle publicationId={book.id} include={book.include}/></td>
+              </tr>
+              )
+            )}
+          </tbody>
+        </table>
       </>
     )
   } 
