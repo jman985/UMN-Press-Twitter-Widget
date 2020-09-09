@@ -4,11 +4,12 @@ import InclusionToggle from './InclusionToggle'
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import PublicationTable from '../PublicationTable/PublicationTable'
+import TextField from '@material-ui/core/TextField';
 
 class Publications extends Component {
 
 
-  handleClick = () => {
+  handleClick = (limit) => {
       this.props.dispatch({type: 'FETCH_TWEETS', payload: this.props.publication, userId: this.props.user.id});
   }
 
@@ -47,26 +48,38 @@ class Publications extends Component {
 
     return(
       <>
-        <Paper style={{maxWidth:'40%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
-          <Typography variant='h6'>
-            Total Publications Uploaded: <Typography variant='body1' component="span">{this.props.publication.length}</Typography>
-          </Typography>
-          <Typography variant='h6'>
-            Last Search Date: 
-            <Typography variant='body1' component="span">
-              {' '}{this.determineLastSearch()}
+        <div class='topBox' style={{display:'flex'}}>
+          <Paper style={{maxWidth:'40%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
+            <Typography variant='h6'>
+              Total Publications Uploaded: <Typography variant='body1' component="span">{this.props.publication.length}</Typography>
             </Typography>
-          </Typography>
-          <Typography variant='h6'>
-            Searches Remaining: <Typography variant='body1' component="span">{this.props.user.rate_limit_remaining}</Typography>
-          </Typography>
-          <Typography variant='h6'>
-            Searches Refresh at: <Typography variant='body1' component="span">{this.parseRefreshTime()}</Typography>
-          </Typography>
-        </Paper>
-        <button onClick={this.handleClick}>
-            Search
-        </button>
+            <Typography variant='h6'>
+              Last Search Date: 
+              <Typography variant='body1' component="span">
+                {' '}{this.determineLastSearch()}
+              </Typography>
+            </Typography>
+            <Typography variant='h6'>
+              Searches Remaining: <Typography variant='body1' component="span">{this.props.user.rate_limit_remaining}</Typography>
+            </Typography>
+            <Typography variant='h6'>
+              Searches Refresh at: <Typography variant='body1' component="span">{this.parseRefreshTime()}</Typography>
+            </Typography>
+          </Paper>
+          <Paper style={{maxWidth:'40%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
+            <TextField
+              id="outlined-name"
+              label="Search Amount"
+              // value={this.state.name}
+              // onChange={}
+              margin="normal"
+              variant="outlined"
+            />
+            <button onClick={this.handleClick}>
+              Search
+            </button>
+          </Paper>
+          </div>
         <PublicationTable />
       </>
     )
