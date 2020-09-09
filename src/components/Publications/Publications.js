@@ -15,8 +15,8 @@ class Publications extends Component {
 
   determineLastSearch = () => {
     // this section checks for the most recent publiction "last_searched" time and puts into readable format
-    let readableTime = 0
-    let lastSearchedAll
+    let readableTime = '';
+    let lastSearchedAll;
 
     if (this.props.publication.length !== 0 && this.props.publication !== undefined){
       let notNull = this.props.publication.filter(x => x.last_searched !== null)
@@ -26,11 +26,9 @@ class Publications extends Component {
       // readableTime = lastSearchedAll.slice(0,10) + ' ' + lastSearchedAll.slice(11, -5)
       // readableTime = new Date(lastSearchedAll)
       let sqlDate = new Date(lastSearchedAll)
-      let month = (sqlDate.getMonth()+1).toString()
-      let day = sqlDate.getDate().toString()
-      let year = sqlDate.getFullYear().toString()
+      let date = sqlDate.toLocaleDateString()
       let time = sqlDate.toLocaleTimeString()
-      readableTime = month + '/' + day + '/' + year + ' at ' + time
+      readableTime = date + ' at ' + time
     }
     return readableTime;
   }//end determineLastSearch
