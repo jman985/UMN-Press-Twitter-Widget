@@ -14,7 +14,7 @@ class Publications extends Component {
 
 
   determineLastSearch = () => {
-    // this section checks for the most recent publiction "last_searched" time and puts into readable format
+    // this section checks for the most recent publication "last_searched" time and puts into readable format
     let readableTime = '';
     let lastSearchedAll;
 
