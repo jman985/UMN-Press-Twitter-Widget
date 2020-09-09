@@ -17,7 +17,7 @@ import { spacing } from "@material-ui/system";
 import IconButton from '@material-ui/core/IconButton';
 import FastForwardIcon from '@material-ui/icons/FastForward';
 import FastRewindIcon from '@material-ui/icons/FastRewind';
-
+import './PublicationTable2.css';
 
 const styles = (theme) => ({
   root: {
@@ -25,6 +25,11 @@ const styles = (theme) => ({
     //marginLeft: theme.spacing.unit * 3,
     margin: "100px auto",
     overflowX: "auto",
+    paddingTop:'0px',
+    paddingBottom:'0px !important',
+  },
+  'MuiTableCell-root': {
+
   },
   table: {
     minWidth: 700,
@@ -83,7 +88,7 @@ class PublicationTable2 extends Component {
             <IconButton onClick={()=>this.handlePageChange('forward')}><FastForwardIcon/></IconButton>
             <Table className={classes.table}>
               <TableHead>
-                <TableRow>
+                <TableRow className={classes.rowwww}>
                   <CustomTableCell>Title</CustomTableCell>
                   <CustomTableCell>Subtitle</CustomTableCell>
                   <CustomTableCell>Author</CustomTableCell>
