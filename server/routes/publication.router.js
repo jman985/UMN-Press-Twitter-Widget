@@ -74,9 +74,10 @@ router.post("/csv", async (req, res) => {
     //   }
     // }
     await connection.query("BEGIN");
+
     const queryText = `INSERT INTO "publication" ("title", "author1", "subtitle") 
-    SELECT $1, $2, $3`
-    //WHERE NOT EXISTS (SELECT * FROM "publication" WHERE "title" = $1 AND "author1" = $2 AND "subtitle" = $3);`;
+    SELECT CAST($1 AS VARCHAR(1000)) AS "title", CAST($2 AS VARCHAR(1000)) AS "author1", CAST($3 AS VARCHAR(1000)) AS "subtitle"
+     WHERE NOT EXISTS (SELECT * FROM "publication" WHERE "title" = $1 AND "author1" = $2 AND "subtitle" = $3);`;
 
     for (book of csvData) {
       await connection.query(queryText, [
