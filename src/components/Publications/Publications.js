@@ -71,7 +71,7 @@ class Publications extends Component {
   }//end parseRefreshTime
   
   handleLimitChange = (event) => {
-      this.setState({searchLimit: event.target.value})
+    this.setState({searchLimit: event.target.value})
   }
 
   render() {
@@ -80,7 +80,6 @@ class Publications extends Component {
 
     return(
       <>
-        {JSON.stringify(this.sortPublicationsForSearch())}
         <div class='topBox' style={{display:'flex'}}>
           <Paper style={{maxWidth:'40%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
             <Typography variant='h6'>
@@ -100,9 +99,11 @@ class Publications extends Component {
             </Typography>
           </Paper>
           <Paper style={{maxWidth:'40%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3',dispaly:'flex',flexDirection:'column'}}>
+            <Typography variant='h6'>Batch Publication Search</Typography>
             <TextField
               id="outlined-name"
-              label="# of Searches"
+              label="# of Searches to Run"
+              defaultValue="400"
               value={this.state.searchAmount}
               onChange={this.handleLimitChange}
               margin="normal"
