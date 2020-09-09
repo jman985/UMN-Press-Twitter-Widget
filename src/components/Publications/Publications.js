@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import InclusionToggle from './InclusionToggle'
@@ -6,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import PublicationTable from '../PublicationTable/PublicationTable'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-
+import PublicationTable2 from "../PublicationTable2/PublicationTable2";
 
 class Publications extends Component {
   
@@ -22,6 +23,8 @@ class Publications extends Component {
       limit: this.state.searchLimit
     });
   }
+
+
 
 
   // returns a sorted publication array based on the 'last_searched' timecodes
@@ -114,11 +117,10 @@ class Publications extends Component {
             </Button>
           </Paper>
           </div>
-        <PublicationTable />
+        <PublicationTable2 />
       </>
     )
   } 
-
 }
 
 

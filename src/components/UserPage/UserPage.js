@@ -12,6 +12,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import { spacing } from "@material-ui/system";
+import PublicationTable from "../PublicationTable/PublicationTable";
 
 const styles = (theme) => ({
   root: {
@@ -35,7 +36,6 @@ const styles = (theme) => ({
 });
 
 class UserPage extends Component {
-
   acceptCsv = () => {
     this.props.dispatch({
       type: "SEND_CSV_TO_DB",
@@ -69,46 +69,24 @@ class UserPage extends Component {
 
         {this.props.csv.loaded ? (
           <>
-            <div></div>
-            <Paper className={classes.root}>
-              <label htmlFor="outlined-button-file">
-                <Button
-                  onClick={this.acceptCsv}
-                  variant="outlined"
-                  component="span"
-                  className={classes.Btn}
-                >
-                  Accept
-                </Button>
-                <Button
-                  variant="outlined"
-                  component="span"
-                  className={classes.Btn}
-                >
-                  Reject
-                </Button>
-              </label>
-              <Table className={classes.table}>
-                <TableHead>
-                  <TableRow>
-                    <CustomTableCell>Title</CustomTableCell>
-                    <CustomTableCell>Subtitle</CustomTableCell>
-                    <CustomTableCell>Author</CustomTableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {this.props.csv.data.map((book) => (
-                    <TableRow className={classes.row} key={book.data.id}>
-                      <TableCell className={classes.titleLink} align="left">
-                        {book.data.title}
-                      </TableCell>
-                      <TableCell align="left">{book.data.subtitle}</TableCell>
-                      <TableCell align="left">{book.data.author}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </Paper>
+            <label htmlFor="outlined-button-file">
+              <Button
+                onClick={this.acceptCsv}
+                variant="outlined"
+                component="span"
+                className={classes.Btn}
+              >
+                Accept
+              </Button>
+              <Button
+                variant="outlined"
+                component="span"
+                className={classes.Btn}
+              >
+                Reject
+              </Button>
+            </label>
+            <PublicationTable />
           </>
         ) : null}
       </div>
