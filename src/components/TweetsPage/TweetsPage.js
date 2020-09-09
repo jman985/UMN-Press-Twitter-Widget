@@ -84,7 +84,7 @@ class TweetsPage extends Component {
       this.setState({ key4: Math.max(this.state.key1,this.state.key2,this.state.key3,this.state.key4,this.state.key5,this.state.key6)+1});
     } else if (slot === 4){
       this.setState({ key5: Math.max(this.state.key1,this.state.key2,this.state.key3,this.state.key4,this.state.key5,this.state.key6)+1});
-    } else if (slot === 3){
+    } else if (slot === 5){
       this.setState({ key6: Math.max(this.state.key1,this.state.key2,this.state.key3,this.state.key4,this.state.key5,this.state.key6)+1});
     }
     ;
