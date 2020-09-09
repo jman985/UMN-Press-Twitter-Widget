@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import InclusionToggle from './InclusionToggle'
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import PublicationTable from '../PublicationTable/PublicationTable'
 
 class Publications extends Component {
 
