@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import StarIcon from '@material-ui/icons/Star';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import {withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -39,11 +39,11 @@ class ToggleButtons extends React.Component {
             <ToggleButtonGroup value={this.state.include} exclusive >
               {this.state.include ? 
               <ToggleButton className={classes.toggleContainer} selected={true} value={false} onClick={this.handleInclusionToggle}>
-                <StarIcon/>
+                <CheckBoxIcon/>
               </ToggleButton>
               :
               <ToggleButton className={classes.toggleContainer} selected={false} value={true} onClick={this.handleInclusionToggle}>
-                <StarBorderIcon />
+                <CheckBoxOutlineBlankIcon />
               </ToggleButton>}
             </ToggleButtonGroup>
         </>
