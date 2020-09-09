@@ -5,7 +5,13 @@ import axios from "axios";
 function* getTweets(action) {
   try {
     yield console.log(action.payload);
-    for (let i=0; i<action.payload.length; i++){
+    let searchAmount = action.limit 
+    // if the user has set the search limit to be greater than the total amount of publications
+    // change the search limit to match the total amount of publications
+    if (action.limit > action.payload.length) {
+      searchAmount = action.payload.length
+    }
+    for (let i=0; i<searchAmount; i++){
       // check if the publication has include value of true
       if (action.payload[i].include){
         //hit Twitter Recent Search API with publication title, replace problem characters with "*" aka the "wild card" character
@@ -37,6 +43,10 @@ function* getTweets(action) {
         // console.log(response)
         console.log("sending this to save tweet saga:", response.data.data);
       }
+      // update the user redux store with the new rate data
+      yield put({ type: "FETCH_USER" });
+      // update the publication redx store with new last_searched times
+      yield put({ type: 'FETCH_PUBLICATIONS'})
     }
   } catch (error) {
     console.log("error with getting tweets", error);
@@ -56,6 +66,24 @@ function* getDbTweets(action){
 }
 
 
+function onlyRetweets(tweet){  //check if tweet is only retweets
+  // console.log('this is tweet id', tweet.id);
+  // console.log('this is referenced tweets', tweet.referenced_tweets);
+  if(tweet.hasOwnProperty('referenced_tweets')){
+      for(let j=0;j<tweet.referenced_tweets.length;j++){
+        // console.log('this is the ref tweets type',tweet.referenced_tweets[j].type);
+          if(tweet.referenced_tweets[j].type==='quoted'||tweet.referenced_tweets[j].type==='replied_to'){
+            return false;
+          }
+      }
+      return true;
+    }else{
+      return false;
+  }
+}//end onlyRetweets
+
+
+
 // posts Tweets to Tweet table 
 function* saveTweets(action){
   try {
@@ -65,26 +93,10 @@ function* saveTweets(action){
     if (tweets !== undefined){
        // take each tweet id from the publicaiton search and save to database with associated publication id
       for (let tweet of tweets) {
-        function onlyRetweets(){  //check if tweet is only retweets
-          // console.log('this is tweet id', tweet.id);
-          // console.log('this is referenced tweets', tweet.referenced_tweets);
-          if(tweet.hasOwnProperty('referenced_tweets')){
-              for(let j=0;j<tweet.referenced_tweets.length;j++){
-                // console.log('this is the ref tweets type',tweet.referenced_tweets[j].type);
-                  if(tweet.referenced_tweets[j].type==='quoted'||tweet.referenced_tweets[j].type==='replied_to'){
-                    return false;
-                  }
-              }
-              return true;
-            }else{
-              return false;
-          }
-        }//end onlyRetweets
-
-        if(tweet.possibly_sensitive===false&&!onlyRetweets()){  //filter out sensitive tweets and retweets
-
-          const tweetId = tweet.id;
-          const publicationId = action.payload.publicationId;
+        const tweetId = tweet.id;
+        const publicationId = action.payload.publicationId;
+        //filter out sensitive tweets and retweets
+        if(tweet.possibly_sensitive===false&&!onlyRetweets(tweet)){ 
           console.log("sending these to tweet save route:", {
             tweetId: tweetId,
             publicationId: publicationId,
@@ -96,10 +108,13 @@ function* saveTweets(action){
         }
       }
     }
+    // update the last_searched timestamp of each publication
+    yield axios.put('/publications/timestamp/' + action.payload.publicationId )
   } catch (error) {
     console.log("error with tweet save route", error);
   }
 }
+
 
 function* approveTweet(action){
   try {

@@ -44,10 +44,10 @@ router.put('/', rejectUnauthenticated, (req, res) => {
 
 //update timestamp 
 
-router.put('/timestamp', rejectUnauthenticated, (req, res) => {
+router.put('/timestamp/:id', rejectUnauthenticated, (req, res) => {
   console.log('update last_searched timestamp');
     pool.query(`UPDATE "publication" 
-    SET "last_searched" = CURRENT_TIMESTAMP WHERE "publication"."include" = TRUE;`)
+    SET "last_searched" = CURRENT_TIMESTAMP WHERE id = ${req.params.id};`)
     // pool.query(queryText, queryInput)
     .then(() => res.sendStatus(201))
     .catch((error) => {res.sendStatus(500);
