@@ -47,7 +47,7 @@ router.post('/database', rejectUnauthenticated, (req, res) => {
     console.log('preparing insert query:', req.body)
     
     const queryText = `INSERT INTO "tweet" ("publication_id", "tweet_id")
-    SELECT $1 AS "publication_id", CAST($2 AS VARCHAR) AS "tweet_id" 
+    SELECT $1 AS "publication_id", CAST($2 AS VARCHAR(100)) AS "tweet_id" 
     WHERE NOT EXISTS (SELECT * FROM tweet WHERE publication_id = $1 AND tweet_id = $2);`
 
     pool.query(queryText, [req.body.publicationId,req.body.tweetId])
