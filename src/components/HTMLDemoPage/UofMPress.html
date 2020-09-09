@@ -1,0 +1,1579 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en" dir="ltr" xml:lang="en">
+<head>
+	<script type="text/javascript">//<!--
+(window.NREUM||(NREUM={})).loader_config={licenseKey:"8e0794b107",applicationID:"126663724"};window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var i=n[t]={exports:{}};e[t][0].call(i.exports,function(n){var i=e[t][1][n];return r(i||n)},i,i.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<t.length;i++)r(t[i]);return r}({1:[function(e,n,t){function r(){}function i(e,n,t){return function(){return o(e,[u.now()].concat(c(arguments)),n?null:this,t),n?void 0:this}}var o=e("handle"),a=e(5),c=e(6),f=e("ee").get("tracer"),u=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var d=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],p="api-",l=p+"ixn-";a(d,function(e,n){s[n]=i(p+n,!0,"api")}),s.addPageAction=i(p+"addPageAction",!0),s.setCurrentRouteName=i(p+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,i="function"==typeof n;return o(l+"tracer",[u.now(),e,t],r),function(){if(f.emit((i?"":"no-")+"fn-start",[u.now(),r,i],t),i)try{return n.apply(this,arguments)}catch(e){throw f.emit("fn-err",[arguments,this,e],t),e}finally{f.emit("fn-end",[u.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=i(l+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),o("err",[e,u.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){var t=e.getEntries();t.forEach(function(e){"first-paint"===e.name?d("timing",["fp",Math.floor(e.startTime)]):"first-contentful-paint"===e.name&&d("timing",["fcp",Math.floor(e.startTime)])})}function i(e,n){var t=e.getEntries();t.length>0&&d("lcp",[t[t.length-1]])}function o(e){e.getEntries().forEach(function(e){e.hadRecentInput||d("cls",[e])})}function a(e){if(e instanceof m&&!g){var n=Math.round(e.timeStamp),t={type:e.type};n<=p.now()?t.fid=p.now()-n:n>p.offset&&n<=Date.now()?(n-=p.offset,t.fid=p.now()-n):n=p.now(),g=!0,d("timing",["fi",n,t])}}function c(e){d("pageHide",[p.now(),e])}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var f,u,s,d=e("handle"),p=e("loader"),l=e(4),m=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){f=new PerformanceObserver(r);try{f.observe({entryTypes:["paint"]})}catch(v){}u=new PerformanceObserver(i);try{u.observe({entryTypes:["largest-contentful-paint"]})}catch(v){}s=new PerformanceObserver(o);try{s.observe({type:"layout-shift",buffered:!0})}catch(v){}}if("addEventListener"in document){var g=!1,y=["click","keydown","mousedown","pointerdown","touchstart"];y.forEach(function(e){document.addEventListener(e,a,!1)})}l(c)}},{}],3:[function(e,n,t){function r(e,n){if(!i)return!1;if(e!==i)return!1;if(!n)return!0;if(!o)return!1;for(var t=o.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var c=navigator.userAgent,f=c.match(a);f&&c.indexOf("Chrome")===-1&&c.indexOf("Chromium")===-1&&(i="Safari",o=f[1])}n.exports={agent:i,version:o,match:r}},{}],4:[function(e,n,t){function r(e){function n(){e(a&&document[a]?document[a]:document[i]?"hidden":"visible")}"addEventListener"in document&&o&&document.addEventListener(o,n,!1)}n.exports=r;var i,o,a;"undefined"!=typeof document.hidden?(i="hidden",o="visibilitychange",a="visibilityState"):"undefined"!=typeof document.msHidden?(i="msHidden",o="msvisibilitychange"):"undefined"!=typeof document.webkitHidden&&(i="webkitHidden",o="webkitvisibilitychange",a="webkitVisibilityState")},{}],5:[function(e,n,t){function r(e,n){var t=[],r="",o=0;for(r in e)i.call(e,r)&&(t[o]=n(r,e[r]),o+=1);return t}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],6:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,i=t-n||0,o=Array(i<0?0:i);++r<i;)o[r]=e[n+r];return o}n.exports=r},{}],7:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function i(e){function n(e){return e&&e instanceof r?e:e?f(e,c,o):o()}function t(t,r,i,o){if(!p.aborted||o){e&&e(t,r,i);for(var a=n(i),c=v(t),f=c.length,u=0;u<f;u++)c[u].apply(a,r);var d=s[w[t]];return d&&d.push([b,t,r,a]),a}}function l(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return d[e]=d[e]||i(t)}function y(e,n){u(e,function(e,t){n=n||"feature",w[t]=n,n in s||(s[n]=[])})}var h={},w={},b={on:l,addEventListener:l,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:y,abort:a,aborted:!1};return b}function o(){return new r}function a(){(s.api||s.feature)&&(p.aborted=!0,s=p.backlog={})}var c="nr@context",f=e("gos"),u=e(5),s={},d={},p=n.exports=i();p.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(i.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return e[n]=r,r}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){i.buffer([e],r),i.emit(e,n,t)}var i=e("ee").get("handle");n.exports=r,r.ee=i},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,o,function(){return i++})}var i=1,o="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!x++){var e=E.info=NREUM.info,n=l.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();u(w,function(n,t){e[n]||(e[n]=t)});var t=a();f("mark",["onload",t+E.offset],null,"api"),f("timing",["load",t]);var r=l.createElement("script");r.src="https://"+e.agent,n.parentNode.insertBefore(r,n)}}function i(){"complete"===l.readyState&&o()}function o(){f("mark",["domContent",a()+E.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(c=Math.max((new Date).getTime(),c))-E.offset}var c=(new Date).getTime(),f=e("handle"),u=e(5),s=e("ee"),d=e(3),p=window,l=p.document,m="addEventListener",v="attachEvent",g=p.XMLHttpRequest,y=g&&g.prototype;NREUM.o={ST:setTimeout,SI:p.setImmediate,CT:clearTimeout,XHR:g,REQ:p.Request,EV:p.Event,PR:p.Promise,MO:p.MutationObserver};var h=""+location,w={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1177.min.js"},b=g&&y&&y[m]&&!/CriOS/.test(navigator.userAgent),E=n.exports={offset:c,now:a,origin:h,features:{},xhrWrappable:b,userAgent:d};e(1),e(2),l[m]?(l[m]("DOMContentLoaded",o,!1),p[m]("load",r,!1)):(l[v]("onreadystatechange",i),p[v]("onload",r)),f("mark",["firstbyte",c],null,"api");var x=0,O=e(7)},{}],"wrap-function":[function(e,n,t){function r(e){return!(e&&e instanceof Function&&e.apply&&!e[a])}var i=e("ee"),o=e(6),a="nr@original",c=Object.prototype.hasOwnProperty,f=!1;n.exports=function(e,n){function t(e,n,t,i){function nrWrapper(){var r,a,c,f;try{a=this,r=o(arguments),c="function"==typeof t?t(r,a):t||{}}catch(u){p([u,"",[r,a,i],c])}s(n+"start",[r,a,i],c);try{return f=e.apply(a,r)}catch(d){throw s(n+"err",[r,a,d],c),d}finally{s(n+"end",[r,a,f],c)}}return r(e)?e:(n||(n=""),nrWrapper[a]=e,d(e,nrWrapper),nrWrapper)}function u(e,n,i,o){i||(i="");var a,c,f,u="-"===i.charAt(0);for(f=0;f<n.length;f++)c=n[f],a=e[c],r(a)||(e[c]=t(a,u?c+i:i,o,c))}function s(t,r,i){if(!f||n){var o=f;f=!0;try{e.emit(t,r,i,n)}catch(a){p([a,t,r,i])}f=o}}function d(e,n){if(Object.defineProperty&&Object.keys)try{var t=Object.keys(e);return t.forEach(function(t){Object.defineProperty(n,t,{get:function(){return e[t]},set:function(n){return e[t]=n,n}})}),n}catch(r){p([r])}for(var i in e)c.call(e,i)&&(n[i]=e[i]);return n}function p(n){try{e.emit("internal-error",n)}catch(t){}}return e||(e=i),t.inPlace=u,t.flag=a,t}},{}]},{},["loader"]);
+//--></script><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="shortcut icon" href="/++theme++ump.theme/_images/favicon.png" type="image/x-icon" />
+	
+	<link type="text/css" rel="stylesheet" media="all" href="./style.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="./mobile.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="./plone5fixes.css" />
+	<script type="text/javascript" src="/++theme++ump.theme/js/jquery.cycle.min.js"></script>
+	<script src="https://use.typekit.net/kti4sek.js"></script>
+	<script>try{Typekit.load({ async: true });}catch(e){}</script>
+<title>Dubai, the City as Corporation — University of Minnesota Press</title><meta name="DC.description" content=" &#13;The politics of space and culture in Dubai in the first decade of the twenty-first century&#13; " /><meta name="description" content=" &#13;The politics of space and culture in Dubai in the first decade of the twenty-first century&#13; " /><meta name="DC.format" content="text/plain" /><meta name="DC.type" content="Book" /><meta name="keywords" content="Colonialism, Social Justice, Africa, Immigration, Capitalism, Lefebvre, Global South, Middle East, Transnational, Public space, 2016 Back to School Sale, Neoliberalism, Tourism, Islam" /><meta name="DC.date.modified" content="2016-09-03T22:44:59-05:00" /><meta name="DC.subject" content="Colonialism, Social Justice, Africa, Immigration, Capitalism, Lefebvre, Global South, Middle East, Transnational, Public space, 2016 Back to School Sale, Neoliberalism, Tourism, Islam" /><meta name="DC.date.created" content="2011-04-25T19:18:23-05:00" /><meta name="DC.language" content="en" /><meta content="summary" name="twitter:card" /><meta content="University of Minnesota Press" property="og:site_name" /><meta content="Dubai, the City as Corporation" property="og:title" /><meta content="website" property="og:type" /><meta content=" &#13;The politics of space and culture in Dubai in the first decade of the twenty-first century&#13; " property="og:description" /><meta content="https://www.upress.umn.edu/book-division/books/dubai-the-city-as-corporation" property="og:url" /><meta content="https://www.upress.umn.edu/logo.png" property="og:image" /><meta content="image/png" property="og:image:type" /><meta property="og:title" content="Dubai, the City as Corporation" /><meta property="og:url" content="https://www.upress.umn.edu/book-division/books/dubai-the-city-as-corporation" /><meta property="og:image" content="https://www.upress.umn.edu/book-division/books/dubai-the-city-as-corporation/image_large" /><meta property="og:site_name" content="University of Minnesota Press" /><meta property="og:description" content=" &#13;The politics of space and culture in Dubai in the first decade of the twenty-first century&#13; " /><script type="text/javascript">PORTAL_URL = 'https://www.upress.umn.edu';</script><script type="text/javascript" src="https://www.upress.umn.edu/++plone++production/++unique++2020-01-24T10:17:06.181013/default.js" data-bundle="production"></script><script type="text/javascript" src="https://www.upress.umn.edu/++plone++static/++unique++2020-01-09%2023%3A33%3A20.258926/plone-compiled.min.js" data-bundle="plone"></script><script type="text/javascript" src="https://www.upress.umn.edu/++plone++static/++unique++2020-01-10%2000%3A30%3A03.761631/plone-legacy-compiled.js" data-bundle="plone-legacy"></script><script type="text/javascript" src="https://www.upress.umn.edu/collective.js.jqueryui.custom.min.js?version=None" data-bundle="jqueryui"></script><script type="text/javascript" src="https://www.upress.umn.edu/++resource++jazkarta.shop/shop-compiled.js?version=None" data-bundle="jazkarta-shop"></script><script type="text/javascript" src="https://www.upress.umn.edu/++resource++ump.contenttypes/ump-contenttypes-compiled.js?version=2020-07-02%2011%3A15%3A03.366805" data-bundle="ump-contenttypes"></script><script type="text/javascript" src="https://www.upress.umn.edu/++plone++static/++unique++2020-01-10%2000%3A30%3A11.502939/faceted-jquery-compiled.js" data-bundle="faceted-jquery"></script><script type="text/javascript" src="https://www.upress.umn.edu/++plone++static/++unique++2020-01-10%2000%3A31%3A05.901358/faceted-view.min.js" data-bundle="faceted-view"></script><link rel="canonical" href="https://www.upress.umn.edu/book-division/books/dubai-the-city-as-corporation" /><link rel="shortcut icon" type="image/x-icon" href="https://www.upress.umn.edu/favicon.ico" /><link rel="apple-touch-icon" href="https://www.upress.umn.edu/touch_icon.png" /><script type="text/javascript">
+        jQuery(function($){
+            if (typeof($.datepicker) != "undefined"){
+              $.datepicker.setDefaults(
+                jQuery.extend($.datepicker.regional[''],
+                {dateFormat: 'mm/dd/yy'}));
+            }
+        });
+        </script><link rel="search" href="https://www.upress.umn.edu/@@search" title="Search this site" /><link rel="stylesheet" type="text/css" href="https://www.upress.umn.edu/++plone++production/++unique++2020-01-24T10:17:06.181013/default.css" data-bundle="production" /><link rel="stylesheet" type="text/css" href="https://www.upress.umn.edu/++plone++static/++unique++2020-01-09%2023%3A33%3A20.258926/plone-compiled.css" data-bundle="plone" /><link rel="stylesheet" type="text/css" href="https://www.upress.umn.edu/++plone++static/++unique++2020-01-10%2000%3A30%3A03.761631/plone-legacy-compiled.css" data-bundle="plone-legacy" /><link rel="stylesheet" type="text/css" href="https://www.upress.umn.edu/collective.js.jqueryui.custom.min.css?version=None" data-bundle="jqueryui" /><link rel="stylesheet" type="text/css" href="https://www.upress.umn.edu/++resource++jazkarta.shop/shop-compiled.css?version=None" data-bundle="jazkarta-shop" /><link rel="stylesheet" type="text/css" href="https://www.upress.umn.edu/++plone++static/++unique++2020-01-10%2000%3A30%3A11.502939/faceted-jquery-compiled.css" data-bundle="faceted-jquery" /><link rel="stylesheet" type="text/css" href="https://www.upress.umn.edu/++plone++static/++unique++2020-01-10%2000%3A31%3A05.901358/faceted-view.min.css" data-bundle="faceted-view" /><meta name="generator" content="Plone - http://plone.com" /></head>
+<body class="frame frontend icons-off portaltype-book section-book-division site-Plone subsection-books subsection-books-dubai-the-city-as-corporation template-base_view thumbs-on userrole-anonymous viewpermission-view" id="visual-portal-wrapper" dir="ltr" data-i18ncatalogurl="https://www.upress.umn.edu/plonejsi18n" data-view-url="https://www.upress.umn.edu/book-division/books/dubai-the-city-as-corporation" data-pat-plone-modal="{&quot;actionOptions&quot;: {&quot;displayInModal&quot;: false}}" data-pat-relateditems="{&quot;basePath&quot;: &quot;&quot;, &quot;contextPath&quot;: null}" data-portal-url="https://www.upress.umn.edu" data-pat-pickadate="{&quot;date&quot;: {&quot;selectYears&quot;: 200}, &quot;time&quot;: {&quot;interval&quot;: 15}}" data-base-url="https://www.upress.umn.edu/book-division/books/dubai-the-city-as-corporation"><div class="body_wrapper">
+
+<div class="wrapper">
+	<div id="sidebar-wrapper">
+	<div id="sidebar">
+		<h1 id="logo"><a href="https://www.upress.umn.edu" title="University of Minnesota Press">University of Minnesota Press</a></h1>
+		<div class="block nav">
+      
+        
+<div class="portletWrapper" id="portletwrapper-706c6f6e652e6c656674636f6c756d6e0a636f6e746578740a2f506c6f6e650a636f6d696e672d736f6f6e" data-portlethash="706c6f6e652e6c656674636f6c756d6e0a636f6e746578740a2f506c6f6e650a636f6d696e672d736f6f6e"><div class="portletStaticText portlet-static-coming-soon"><p><a href="https://www.upress.umn.edu/book-division/collections/forthcoming-from-ump" class="internal-link" id="forthcoming-titles">Coming soon</a></p></div>
+
+
+</div>
+
+<div class="portletWrapper" id="portletwrapper-706c6f6e652e6c656674636f6c756d6e0a636f6e746578740a2f506c6f6e650a6e617669676174696f6e" data-portlethash="706c6f6e652e6c656674636f6c756d6e0a636f6e746578740a2f506c6f6e650a6e617669676174696f6e">
+<aside class="portlet portletNavigationTree" role="navigation">
+
+    <header class="portletHeader">
+        <a href="https://www.upress.umn.edu/disciplines" class="tile">Disciplines</a>
+    </header>
+
+    <nav class="portletContent lastItem">
+        <ul class="navTree navTreeLevel0">
+            
+            
+
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-american-studies">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/american-studies" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            American Studies
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-anthropology">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/anthropology" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Anthropology
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-architecture_and_design">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/architecture_and_design" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Architecture and Design
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-art_performance">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/art_performance" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Art and Performance
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-cultural_criticism">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/cultural_criticism" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Cultural Criticism
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-economics_business">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/economics_business" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Economics and Business
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-education_law">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/education_law" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Education and Law
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-environment">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/environment" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Environment
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-film_media">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/film_media" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Film and Media
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-geography">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/geography" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Geography
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-history">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/history" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            History
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-literature">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/literature" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Literature
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-minnesota-the-upper-midwest">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/minnesota-the-upper-midwest" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Minnesota and the Upper Midwest
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-native-american-and-indigenous-studies">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/native-american-and-indigenous-studies" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Native American and Indigenous Studies
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-political_science">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/political_science" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Political Science
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-psychology">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/psychology" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Psychology
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-sociology">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/sociology" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Sociology
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-theory_philosophy">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/theory_philosophy" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Theory and Philosophy
+        </a>
+        
+
+    
+</li>
+
+
+
+
+        </ul>
+    </nav>
+</aside>
+
+
+</div>
+
+
+      
+    </div>
+	</div><!-- /sidebar -->
+	</div>
+	<div id="main">
+		<div id="header">
+			<div id="secondary_nav">
+				<ul>
+						
+						
+									
+				<li id="portaltab-index_html">
+                  <a href="https://www.upress.umn.edu" title="">Home</a>
+              </li><li id="portaltab-current-catalogs">
+                  <a href="https://www.upress.umn.edu/current-catalogs" title="Download PDFs and search through various subject catalogs from University of Minnesota Press. Most catalogs feature 30% off of all new trade, regional, and scholarly titles (please check expiration date before ordering).">Current Catalogs</a>
+              </li><li id="portaltab-blog">
+                  <a href="http://www.uminnpressblog.com/" title="">Blog</a>
+              </li></ul>
+			</div><!-- /secondary_nav -->
+
+			<div id="cart_nav">
+				<ul>
+					<li class="first"><a href="https://cdcshoppingcart.uchicago.edu/Cart2/Cart?PRESS=Minnesota" class="view-cart">View Cart</a></li>
+					<li class="last"><a href="https://cdcshoppingcart.uchicago.edu/Cart2/Login?PRESS=Minnesota" class="checkout">Checkout</a></li>
+				</ul>
+			</div><!-- /secondary_nav -->			
+			
+			<div id="primary_nav">
+				<ul>
+					
+					
+					
+					
+					
+					
+					
+				<li id="portaltab-about-us">
+                  <a href="https://www.upress.umn.edu/about-us" title="About the University of Minnesota Press, including our history, current editorial program, community and organizational partners, and staff. ">About the Press</a>
+              </li><li id="portaltab-explore">
+                  <a href="https://www.upress.umn.edu/explore" title="Search the University of Minnesota Press's wide-ranging catalog by combining your interest area selects among primary disciplines, secondary disciplines, and customized tags.">Explore Books</a>
+              </li><li id="portaltab-press">
+                  <a href="https://www.upress.umn.edu/press" title="Learn about University of Minnesota Press upcoming author events, book awards, book reviews, Press news, key publicity and media contacts, presskits, and how to sign up for media alerts.">News &amp; Events</a>
+              </li><li id="portaltab-information">
+                  <a href="https://www.upress.umn.edu/information" title="Find current information about University of Minnesota Press author guidelines, desk and exam copies, permission requests, sales representatives, e-books for libraries, media requests, job openings. ">Information</a>
+              </li><li id="portaltab-book-division" class="selected">
+                  <a href="https://www.upress.umn.edu/book-division" title="">Book Division</a>
+              </li><li id="portaltab-test-division">
+                  <a href="https://www.upress.umn.edu/test-division" title="Minnesota Multiphasic Personality Inventory-2 (MMPI-2) and Restructured Form (MMPI-2-RF), Multidimensional Personality Questionnaire (MPQ), Schedule for Nonadaptive and Adaptive Personality-2 (SNAP-2), MMPI Workshops and Annual Symposium, MTDDA (Minnesota Test for Differential Diagnosis of Aphasia)">Test Division</a>
+              </li><li id="portaltab-journal-division">
+                  <a href="https://www.upress.umn.edu/journal-division" title="">Journal Division</a>
+              </li></ul>
+			</div>
+			
+			<a class="trigger-mobile">Menu</a>
+			<div id="mobile-nav">
+				<div id="primary_nav_mobile" class="primary_nav">
+					<ul>
+						<li id="portaltab-about-us-mobile" class="plain">
+                  <a href="https://www.upress.umn.edu/about-us" title="About the University of Minnesota Press, including our history, current editorial program, community and organizational partners, and staff. ">About the Press</a>
+              </li>
+						<li id="portaltab-explore-mobile" class="plain">
+                  <a href="https://www.upress.umn.edu/explore" title="Search the University of Minnesota Press's wide-ranging catalog by combining your interest area selects among primary disciplines, secondary disciplines, and customized tags.">Explore Books</a>
+              </li>
+						<li id="portaltab-press-mobile" class="plain">
+                  <a href="https://www.upress.umn.edu/press" title="Learn about University of Minnesota Press upcoming author events, book awards, book reviews, Press news, key publicity and media contacts, presskits, and how to sign up for media alerts.">News &amp; Events</a>
+              </li>
+						<li id="portaltab-information-mobile" class="plain">
+                  <a href="https://www.upress.umn.edu/information" title="Find current information about University of Minnesota Press author guidelines, desk and exam copies, permission requests, sales representatives, e-books for libraries, media requests, job openings. ">Information</a>
+              </li>
+						<li id="portaltab-book-division-mobile" class="plain">
+                  <a href="https://www.upress.umn.edu/book-division" title="">Book Division</a>
+              </li>
+						<li id="portaltab-test-division-mobile" class="plain">
+                  <a href="https://www.upress.umn.edu/test-division" title="Minnesota Multiphasic Personality Inventory-2 (MMPI-2) and Restructured Form (MMPI-2-RF), Multidimensional Personality Questionnaire (MPQ), Schedule for Nonadaptive and Adaptive Personality-2 (SNAP-2), MMPI Workshops and Annual Symposium, MTDDA (Minnesota Test for Differential Diagnosis of Aphasia)">Test Division</a>
+              </li>
+						<li id="portaltab-journal-division" class="plain">
+                  <a href="https://www.upress.umn.edu/journal-division" title="">Journal Division</a>
+              </li>
+					</ul>
+				</div>
+				<div id="secondary_nav_mobile" class="secondary_nav">
+					<ul>
+						<li id="portaltab-index_html-mobile" class="selected">
+                  <a href="https://www.upress.umn.edu" title="">Home</a>
+              </li>
+						<li id="portaltab-current-catalogs-mobile" class="plain">
+                  <a href="https://www.upress.umn.edu/current-catalogs" title="Download PDFs and search through various subject catalogs from University of Minnesota Press. Most catalogs feature 30% off of all new trade, regional, and scholarly titles (please check expiration date before ordering).">Current Catalogs</a>
+              </li>
+						<li id="portaltab-blog-mobile" class="plain">
+                  <a href="http://www.uminnpressblog.com/" title="">Blog</a>
+              </li>
+					</ul>
+				</div><!-- /secondary_nav -->
+				<div id="cart_nav_mobile" class="cart_nav">
+					<ul>
+						<li class="first"><a href="https://cdcshoppingcart.uchicago.edu/Cart2/Cart?PRESS=Minnesota" class="view-cart">View Cart</a></li>
+						<li class="last"><a href="https://cdcshoppingcart.uchicago.edu/Cart2/Login?PRESS=Minnesota" class="checkout">Checkout</a></li>
+					</ul>
+					<dl class="actionMenu deactivated"></dl>
+				</div><!-- /cart_nav -->
+			</div>
+
+			<div id="search"><div id="portal-searchbox">
+
+    <form id="searchGadget_form" action="https://www.upress.umn.edu/@@search" role="search" data-pat-livesearch="ajaxUrl:https://www.upress.umn.edu/@@ajax-search" class="pat-livesearch">
+
+        <div class="LSBox">
+        <label class="hiddenStructure" for="searchGadget">Search Site</label>
+             
+        <div class="searchSection">
+            <input id="searchbox_currentfolder_only" class="noborder" type="checkbox" name="path" value="/Plone/book-division/books/dubai-the-city-as-corporation" />
+            <label for="searchbox_currentfolder_only" style="cursor: pointer">only in current section</label>
+        </div>
+             
+        <input name="SearchableText" type="text" size="18" id="searchGadget" title="Search Site" placeholder="Search Site" class="searchField" />
+
+        <input class="searchButton" type="submit" value="Search" />
+
+         </div>
+    </form>
+
+    <div id="portal-advanced-search" class="hiddenStructure">
+        <a href="https://www.upress.umn.edu/@@search">Advanced Search…</a>
+    </div>
+
+</div></div><!-- /search -->
+			
+			<div id="breadcrumbs"><nav id="portal-breadcrumbs" class="plone-breadcrumb">
+  <div class="container">
+    <span id="breadcrumbs-you-are-here" class="hiddenStructure">You are here:</span>
+    <ol aria-labelledby="breadcrumbs-you-are-here">
+      <li id="breadcrumbs-home">
+        <a href="https://www.upress.umn.edu">Home</a>
+      </li>
+      <li id="breadcrumbs-1">
+        
+          <a href="https://www.upress.umn.edu/book-division">Book Division</a>
+          
+        
+      </li>
+      <li id="breadcrumbs-2">
+        
+          <a href="https://www.upress.umn.edu/book-division/books">Books</a>
+          
+        
+      </li>
+      <li id="breadcrumbs-3">
+        
+          
+          <span id="breadcrumbs-current">Dubai, the City as Corporation</span>
+        
+      </li>
+    </ol>
+  </div>
+</nav></div><!-- /breadcrumbs -->
+		</div><!-- /header -->
+		<div id="viewlet-above-content">
+
+<div class="contentwellportlets row" id="portlets-above">
+  
+  
+    <div class="cell AbovePortletManager6 width-full position-0 num-portlets-1">
+
+
+<div id="portletwrapper-436f6e74656e7457656c6c506f72746c6574732e41626f7665506f72746c65744d616e61676572360a636f6e746578740a2f506c6f6e650a6164642d74686973" class="portletWrapper kssattr-portlethash-436f6e74656e7457656c6c506f72746c6574732e41626f7665506f72746c65744d616e61676572360a636f6e746578740a2f506c6f6e650a6164642d74686973"><div class="portletStaticText portlet-static-add-this"><div class="share">
+<h2>Share</h2>
+
+<div class="addthis_toolbox addthis_default_style "><a class="addthis_button_email"></a> <a class="addthis_button_print"></a> <a class="addthis_button_twitter"></a> <a class="addthis_button_facebook"></a> <a class="addthis_counter addthis_bubble_style"></a></div>
+<script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4dc2c6f51ba7f0e8" type="text/javascript"></script>
+
+<script type="text/javascript">var addthis_config = {services_compact: 'email, print, facebok, twitter'};</script>
+</div>
+</div>
+
+
+</div>
+
+</div> 
+  
+  
+</div>
+
+
+</div><div id="content" class="full">
+
+          
+                        <h1>Dubai, the City as Corporation</h1> 
+                        <h2></h2>
+                        <div class="details"> 
+                                <div class="pub"><strong>2011</strong></div> •
+                                <div class="author">
+                                  <span>Author:</span>
+                                  <div class="Contributors"><p>Ahmed Kanna</p></div>
+                                </div>
+                        </div><!-- .details -->
+ 
+                        <div id="slide_holder"> 
+                                <div id="overview" class="slide">
+                                  <a class="pat-plone-modal" data-pat-plone-modal="image: true; title: Cover image;" href="https://www.upress.umn.edu/book-division/books/dubai-the-city-as-corporation/image">
+                                    <img src="https://www.upress.umn.edu/book-division/books/dubai-the-city-as-corporation/image_mini" alt="Dubai, the City as Corporation" title="Dubai, the City as Corporation" height="300" width="194" />
+                                  </a>
+                                  
+                                  <div class="defaultCopy webCopy">
+                                    <div class="handle"><p>&#13;The politics of space and culture in Dubai in the first decade of the twenty-first century&#13;</p></div> 
+                                    <!-- description --> 
+                                    <p>&#13;<em>Dubai, the City as Corporation</em> reveals the role of cultural and political forces in shaping the image and reality of Dubai. Ahmed Kanna offers an instructive picture of how different factions have participated in the creation and marketing of Dubai, providing an unparalleled account of how the built environment shapes and is shaped by globalization and neoliberalism in a diverse, multinational city.&#13;</p>
+                                    <!-- /description --> 
+                                    <!-- blurb --> 
+                                    <div class="blurb"> 
+                                      <div class="review-text"><p>&#13;<em>Dubai, the City as Corporation</em> is a thoughtful, in-depth treatment on Dubai and its recent explosive economic growth, grounded in the urban studies/spatial theory of Henri Lefebvre. Engaging and persuasive, it knits together anthropology and urban design, giving a balanced assessment of Dubai’s reinvention as a city, a global commerce center, and an experiment in urban planning.&#13;</p></div>
+                                      <div class="review-source">—<p>&#13;Timothy Luke, Virginia Tech&#13;</p></div>
+                                    </div>
+                                    <!-- /blurb -->
+                                  </div>
+                                </div>
+                                <!-- /overview.slide --> 
+ 
+                                <div id="details" class="slide"> 
+                                        <!-- /full details content --> 
+                                        <div id="details-image">
+                                          <div id="details-image-box" class="image-box">
+                                            <img src="https://www.upress.umn.edu/book-division/books/dubai-the-city-as-corporation/image_cover_medium" alt="Dubai, the City as Corporation" title="Dubai, the City as Corporation" height="210" width="136" />
+                                          </div>
+                                          <div id="details-tags">
+                                            <h3>Tags</h3>
+                                            <p>
+                                            <span>
+                                              <a href="https://www.upress.umn.edu/explore/#c5=Economics and Business">Economics and Business</a><span>,</span>
+                                            </span>
+                                            <span>
+                                              <a href="https://www.upress.umn.edu/explore/#c5=Anthropology">Anthropology</a><span>,</span>
+                                            </span>
+                                            <span>
+                                              <a href="https://www.upress.umn.edu/explore/#c5=Architecture and Design">Architecture and Design</a><span>,</span>
+                                            </span>
+                                            <span>
+                                              <a href="https://www.upress.umn.edu/explore/#c5=Cultural Criticism">Cultural Criticism</a><span>,</span>
+                                            </span>
+                                            <span>
+                                              <a href="https://www.upress.umn.edu/explore/#c5=Political Science">Political Science</a><span>,</span>
+                                            </span>
+                                            <span>
+                                              <a href="https://www.upress.umn.edu/explore/#c5=Sociology">Sociology</a><span>,</span>
+                                            </span>
+                                            <span>
+                                              <a href="https://www.upress.umn.edu/explore/#c2=Colonialism">Colonialism</a><span>,</span>
+                                            </span>
+                                            <span>
+                                              <a href="https://www.upress.umn.edu/explore/#c2=Social Justice">Social Justice</a><span>,</span>
+                                            </span>
+                                            <span>
+                                              <a href="https://www.upress.umn.edu/explore/#c2=Africa">Africa</a><span>,</span>
+                                            </span>
+                                            <span>
+                                              <a href="https://www.upress.umn.edu/explore/#c2=Immigration">Immigration</a><span>,</span>
+                                            </span>
+                                            <span>
+                                              <a href="https://www.upress.umn.edu/explore/#c2=Capitalism">Capitalism</a><span>,</span>
+                                            </span>
+                                            <span>
+                                              <a href="https://www.upress.umn.edu/explore/#c2=Lefebvre">Lefebvre</a><span>,</span>
+                                            </span>
+                                            <span>
+                                              <a href="https://www.upress.umn.edu/explore/#c2=Global South">Global South</a><span>,</span>
+                                            </span>
+                                            <span>
+                                              <a href="https://www.upress.umn.edu/explore/#c2=Middle East">Middle East</a><span>,</span>
+                                            </span>
+                                            <span>
+                                              <a href="https://www.upress.umn.edu/explore/#c2=Transnational">Transnational</a><span>,</span>
+                                            </span>
+                                            <span>
+                                              <a href="https://www.upress.umn.edu/explore/#c2=Public space">Public space</a><span>,</span>
+                                            </span>
+                                            <span>
+                                              <a href="https://www.upress.umn.edu/explore/#c2=2016 Back to School Sale">2016 Back to School Sale</a><span>,</span>
+                                            </span>
+                                            <span>
+                                              <a href="https://www.upress.umn.edu/explore/#c2=Neoliberalism">Neoliberalism</a><span>,</span>
+                                            </span>
+                                            <span>
+                                              <a href="https://www.upress.umn.edu/explore/#c2=Tourism">Tourism</a><span>,</span>
+                                            </span>
+                                            <span>
+                                              <a href="https://www.upress.umn.edu/explore/#c2=Islam">Islam</a>
+                                            </span>
+                                            </p>
+                                          </div>
+                                        </div>
+                                        <div id="details-description"><p>&#13;Somewhere in the course of the late twentieth century, Dubai became more than itself. The city was, suddenly, a postmodern urban spectacle rising from the desert—precisely the glittering global consumer utopia imagined by Dubai’s rulers and merchant elite. In <em>Dubai, the City as Corporation, </em>Ahmed Kanna looks behind this seductive vision to reveal the role of cultural and political forces in shaping both the image and the reality of Dubai. </p>&#13;<p>Exposing local struggles over power and meaning in the making and representation of Dubai, Kanna examines the core questions of what gets built and for whom. His work, unique in its view of the interconnectedness of cultural identity, the built environment, and politics, offers an instructive picture of how different factions—from local and non-Arab residents and expatriate South Asians to the cultural and economic elites of the city—have all participated in the creation and marketing of Dubai.</p>&#13;<p>The result is an unparalleled account of the ways in which the built environment shapes and is shaped by the experience of globalization and neoliberalism in a diverse, multinational city. &#13;<br />&#13;</p></div>
+                                        
+                                        <div id="details-footer">
+                                             <p>&#13;$25.00 paper ISBN 978-0-8166-5631-8&#13;<br />$75.00 cloth ISBN 978-0-8166-5630-1&#13;<br />288 pages, 17 b&amp;w photos, 5 1/2 x 8 1/2, 2011&#13;</p>
+                                             
+                                        </div>
+                                          
+                                </div> 
+                                
+                                <div id="author" class="slide"> 
+                                        <div id="author-image-box" class="image-box">
+                                          <img src="https://www.upress.umn.edu/book-division/books/dubai-the-city-as-corporation/image_cover_medium" alt="Dubai, the City as Corporation" title="Dubai, the City as Corporation" height="210" width="136" />
+                                        </div>
+                                        <!-- /author biography content -->
+                                        <div class="author-bio"><p>&#13;Ahmed Kanna is assistant professor of anthropology and international studies at the University of the Pacific.&#13;</p></div>
+                                </div>
+ 
+                                <div id="reviews" class="slide"> 
+                                  <div id="reviews-image-box" class="image-box">
+                                    <img src="https://www.upress.umn.edu/book-division/books/dubai-the-city-as-corporation/image_cover_medium" alt="Dubai, the City as Corporation" title="Dubai, the City as Corporation" height="210" width="136" />
+                                  </div>
+                                  <!-- /.review --> 
+                                  <div class="review">
+                                    <div class="review-text"><p>&#13;<em>Dubai, the City as Corporation</em> is a thoughtful, in-depth treatment on Dubai and its recent explosive economic growth, grounded in the urban studies/spatial theory of Henri Lefebvre. Engaging and persuasive, it knits together anthropology and urban design, giving a balanced assessment of Dubai’s reinvention as a city, a global commerce center, and an experiment in urban planning.&#13;</p></div>
+                                    <div class="review-source">—<p>&#13;Timothy Luke, Virginia Tech&#13;</p></div> 
+                                  </div>
+                                  <div class="review">
+                                    <div class="review-text"><p>&#13;<em>Dubai: The City as Corporation</em> is a welcome and refreshing study of the nuanced and overlapping ideologies that made Dubai the global city that it is today, and how Dubai’s diverse residents engage with the city and its transformations.&#13;</p></div>
+                                    <div class="review-source">—<p>&#13;<em>The Middle East Journal</em>&#13;</p></div> 
+                                  </div>
+                                  <div class="review">
+                                    <div class="review-text"><p>&#13;Kanna’s book offers a critical examination of the state structures of domination in Dubai, a subject clearly in need of attentive scholarly investigation. His analysis successfully demonstrates how the cultural, political and economic practices of the ruling ethnic group are constitutive in reproducing the unequal city-state.&#13;</p></div>
+                                    <div class="review-source">—<p>&#13;<em>Reviews in Cultural Theory</em>&#13;</p></div> 
+                                  </div>
+                                  <div class="review">
+                                    <div class="review-text"><p>&#13;The book sets a perfect example for combining anthropology with urban studies.&#13;</p></div>
+                                    <div class="review-source">—<p>&#13;<em>Urban Studies</em>&#13;</p></div> 
+                                  </div>
+                                  <div class="review">
+                                    <div class="review-text"><p>&#13;Kanna’s book provides numerous insights not only for our readings of cities in the Arab/Persian Gulf, but also more generally about global city theory and the ways in which it can be approached through the hybrid lens of space.&#13;</p></div>
+                                    <div class="review-source">—<p>&#13;<em>International Journal of Urban and Regional Research</em>&#13;</p></div> 
+                                  </div><!-- /.review --> 
+                                </div> 
+ 
+                                <div id="toc" class="slide"> 
+                                  <div id="toc-image-box" class="image-box">
+                                    <img src="https://www.upress.umn.edu/book-division/books/dubai-the-city-as-corporation/image_cover_medium" alt="Dubai, the City as Corporation" title="Dubai, the City as Corporation" height="210" width="136" />
+                                  </div>
+                                  <!-- /table of contents --> 
+                                  <div class="toc">
+                                    <p>&#13;Preface&#13;<br />Note on Transliteration&#13;<br />Introduction: Dubai Contexts and Contestations&#13;<br />1. State, Citizen, and Foreigner in Dubai&#13;<br />2. “Going South” with the Starchitects: Urbanist Ideology in the Emirati City&#13;<br />3. The Vanished Village: Nostalgic and Nationalist Critiques of the New Dubai&#13;<br />4. The City-Corporation: Young Professionals and the Limits of the Neoliberal Response&#13;<br />5. Indian Dubai: The Identity Politics of South Asian Immigrants&#13;<br />Conclusion: Politicizing Dubai Space&#13;<br />Acknowledgments&#13;<br />Notes&#13;<br />Bibliography&#13;<br />Index&#13;<br />&#13;</p>
+                                  </div><!-- toc --> 
+                                </div> 
+
+
+                                <div id="tweets" class="slide"> 
+                                  <!-- /Tweets --> 
+                                  <div class="toc">
+                                    <p>Tweets Here?</p>
+                                  </div><!-- toc --> 
+                                </div> 
+ 
+                                 
+                                
+                        </div><!-- /slide_holder -->
+                        <div id="purchase">
+                          <h3>Purchase</h3>
+                          <div id="details-product-list">
+                            
+                              <div class="add-to-cart-link">
+                                <a href="https://cdcshoppingcart.uchicago.edu/Cart2/Cart.aspx?ISBN=9780816656301&amp;PRESS=minnesota">
+                                <h3>Library Cloth</h3>
+                                <!--<p tal:content="string:ISBN 9780816656301"></p>-->
+                                <p>$75.00</p>
+                                </a>
+                              </div>
+                              <div class="add-to-cart-button">
+                                <a href="https://cdcshoppingcart.uchicago.edu/Cart2/Cart.aspx?ISBN=9780816656301&amp;PRESS=minnesota">
+                                <h3>Library Cloth</h3>
+                                <!--<p tal:content="string:ISBN 9780816656301"></p>-->
+                                <p>$75.00</p>
+                                </a>
+                              </div>
+                            
+                              <div class="add-to-cart-link">
+                                <a href="https://cdcshoppingcart.uchicago.edu/Cart2/Cart.aspx?ISBN=9780816656318&amp;PRESS=minnesota">
+                                <h3>Paperback</h3>
+                                <!--<p tal:content="string:ISBN 9780816656318"></p>-->
+                                <p>$25.00</p>
+                                </a>
+                              </div>
+                              <div class="add-to-cart-button">
+                                <a href="https://cdcshoppingcart.uchicago.edu/Cart2/Cart.aspx?ISBN=9780816656318&amp;PRESS=minnesota">
+                                <h3>Paperback</h3>
+                                <!--<p tal:content="string:ISBN 9780816656318"></p>-->
+                                <p>$25.00</p>
+                                </a>
+                              </div>
+                            
+                              
+                              
+                            
+                              
+                              
+                            
+                              
+                              
+                            
+                          </div>
+                          <a id="ebooks-link" class="pat-plone-modal" href="https://www.upress.umn.edu/information/buy-ebooks" data-pat-plone-modal="title: About E-books;">About E-books</a>
+
+                          
+                        </div>
+
+ 
+                        <div id="slide_nav"> 
+                                <h3>About This Book</h3> 
+                                <ul> 
+                                        <li><a href="#" class="active">Overview</a></li> 
+                                        <li><a href="#">Full Details</a></li> 
+                                        <li><a href="#">Author Bio</a></li> 
+                                        <li><a href="#">Reviews</a></li> 
+                                        <li><a href="#">Table of Contents</a></li> 
+                                        <li><a href="#">Tweets</a></li> 
+                                         
+                                </ul> 
+                        </div> 
+ 
+                        <div id="related_pubs"> 
+                                <h3>Related Publications</h3> 
+                                <!-- /five related publications --> 
+                                <div>
+                                  
+                                    <a class="CoverImage" href="https://www.upress.umn.edu/book-division/books/the-durable-slum">
+                                      <img src="https://www.upress.umn.edu/book-division/books/the-durable-slum/@@images/577145f9-2940-42f3-a63b-7a7c14a83878.jpeg" alt="The Durable Slum: Dharavi and the Right to Stay Put in Globalizing Mumbai" title="The Durable Slum: Dharavi and the Right to Stay Put in Globalizing Mumbai" height="145" width="94" />
+          
+                                    </a>
+                                    <a class="itemTitle" href="https://www.upress.umn.edu/book-division/books/the-durable-slum">The Durable Slum</a>
+                                    <span class="subTitle">Dharavi and the Right to Stay Put in Globalizing Mumbai</span>
+                                    <span class="description"> &#13;How Dharavi, Mumbai’s megaslum, has escaped eradication for decades&#13; </span>
+
+                                  
+                                </div>
+                                <div>
+                                  
+                                    <a class="CoverImage" href="https://www.upress.umn.edu/book-division/books/jakarta-drawing-the-city-near">
+                                      <img src="https://www.upress.umn.edu/book-division/books/jakarta-drawing-the-city-near/@@images/1bd9f167-b8ac-4442-8ebc-abf952be0fdb.jpeg" alt="Jakarta, Drawing the City Near" title="Jakarta, Drawing the City Near" height="145" width="94" />
+          
+                                    </a>
+                                    <a class="itemTitle" href="https://www.upress.umn.edu/book-division/books/jakarta-drawing-the-city-near">Jakarta, Drawing the City Near</a>
+                                    
+                                    <span class="description"> &#13;Explores urban change between the superblock and the slum in contemporary Jakarta, Indonesia &#13; </span>
+
+                                  
+                                </div>
+                                <div>
+                                  
+                                    <a class="CoverImage" href="https://www.upress.umn.edu/book-division/books/security-in-the-bubble">
+                                      <img src="https://www.upress.umn.edu/book-division/books/security-in-the-bubble/@@images/489675f5-04c6-4099-8d92-683e6b18d355.jpeg" alt="Security in the Bubble: Navigating Crime in Urban South Africa" title="Security in the Bubble: Navigating Crime in Urban South Africa" height="145" width="94" />
+          
+                                    </a>
+                                    <a class="itemTitle" href="https://www.upress.umn.edu/book-division/books/security-in-the-bubble">Security in the Bubble</a>
+                                    <span class="subTitle">Navigating Crime in Urban South Africa</span>
+                                    <span class="description"> &#13;Can high-crime cities become safer by changing perceptions of space?&#13; </span>
+
+                                  
+                                </div>
+                                <div>
+                                  
+                                    <a class="CoverImage" href="https://www.upress.umn.edu/book-division/books/landscape-of-discontent">
+                                      <img src="https://www.upress.umn.edu/book-division/books/landscape-of-discontent/@@images/6b76fe23-b823-4960-9dc6-e1001bd0f1db.jpeg" alt="Landscape of Discontent: Urban Sustainability in Immigrant Paris" title="Landscape of Discontent: Urban Sustainability in Immigrant Paris" height="145" width="93" />
+          
+                                    </a>
+                                    <a class="itemTitle" href="https://www.upress.umn.edu/book-division/books/landscape-of-discontent">Landscape of Discontent</a>
+                                    <span class="subTitle">Urban Sustainability in Immigrant Paris</span>
+                                    <span class="description"> &#13;Understanding the interplay of urban green politics and neighborhood activism&#13; </span>
+
+                                  
+                                </div>
+                                <div>
+                                  
+                                    <a class="CoverImage" href="https://www.upress.umn.edu/book-division/books/postcolonial-dublin">
+                                      <img src="https://www.upress.umn.edu/book-division/books/postcolonial-dublin/@@images/e141a21f-17ac-4ce9-89a3-c7efc38b1098.jpeg" alt="Postcolonial Dublin: Imperial Legacies and the Built Environment" title="Postcolonial Dublin: Imperial Legacies and the Built Environment" height="145" width="94" />
+          
+                                    </a>
+                                    <a class="itemTitle" href="https://www.upress.umn.edu/book-division/books/postcolonial-dublin">Postcolonial Dublin</a>
+                                    <span class="subTitle">Imperial Legacies and the Built Environment</span>
+                                    <span class="description"> &#13;A groundbreaking examination of how history and politics can change the face of a city&#13; </span>
+
+                                  
+                                </div>
+                                <div>
+                                  
+                                    <a class="CoverImage" href="https://www.upress.umn.edu/book-division/books/america-town">
+                                      <img src="https://www.upress.umn.edu/book-division/books/america-town/@@images/14872cba-4eff-45a7-a1de-5326627e053f.jpeg" alt="America Town: Building the Outposts of Empire" title="America Town: Building the Outposts of Empire" height="145" width="94" />
+          
+                                    </a>
+                                    <a class="itemTitle" href="https://www.upress.umn.edu/book-division/books/america-town">America Town</a>
+                                    <span class="subTitle">Building the Outposts of Empire</span>
+                                    <span class="description"> &#13;How the United States has exported the suburban way of life through the design of its military bases&#13; </span>
+
+                                  
+                                </div>
+                                <div>
+                                  
+                                    <a class="CoverImage" href="https://www.upress.umn.edu/book-division/books/imagined-museums">
+                                      <img src="https://www.upress.umn.edu/book-division/books/imagined-museums/@@images/fb12ffb3-97aa-4a10-8326-e502ece716fa.jpeg" alt="Imagined Museums: Art and Modernity in Postcolonial Morocco" title="Imagined Museums: Art and Modernity in Postcolonial Morocco" height="145" width="94" />
+          
+                                    </a>
+                                    <a class="itemTitle" href="https://www.upress.umn.edu/book-division/books/imagined-museums">Imagined Museums</a>
+                                    <span class="subTitle">Art and Modernity in Postcolonial Morocco</span>
+                                    <span class="description"> &#13;What happens when national museums fall apart?&#13; </span>
+
+                                  
+                                </div>
+                                <div>
+                                  
+                                    <a class="CoverImage" href="https://www.upress.umn.edu/book-division/books/in-and-out-of-morocco">
+                                      <img src="https://www.upress.umn.edu/book-division/books/in-and-out-of-morocco/@@images/91b59d7a-04d4-4280-96f9-9975758671d5.jpeg" alt="In and Out of Morocco: Smuggling and Migration in a Frontier Boomtown" title="In and Out of Morocco: Smuggling and Migration in a Frontier Boomtown" height="145" width="96" />
+          
+                                    </a>
+                                    <a class="itemTitle" href="https://www.upress.umn.edu/book-division/books/in-and-out-of-morocco">In and Out of Morocco</a>
+                                    <span class="subTitle">Smuggling and Migration in a Frontier Boomtown</span>
+                                    <span class="description"> &#13;A revealing inquiry into how global culture is lived locally.&#13; </span>
+
+                                  
+                                </div>
+                                <div>
+                                  
+                                    <a class="CoverImage" href="https://www.upress.umn.edu/book-division/books/shanghai-rising">
+                                      <img src="https://www.upress.umn.edu/book-division/books/shanghai-rising/@@images/966a178c-bd3a-4a37-b617-c05eac631391.jpeg" alt="Shanghai Rising: State Power and Local Transformations in a Global Megacity" title="Shanghai Rising: State Power and Local Transformations in a Global Megacity" height="145" width="95" />
+          
+                                    </a>
+                                    <a class="itemTitle" href="https://www.upress.umn.edu/book-division/books/shanghai-rising">Shanghai Rising</a>
+                                    <span class="subTitle">State Power and Local Transformations in a Global Megacity</span>
+                                    <span class="description"> &#13;Analyzing a Chinese city’s dazzling rise to global megacity status&#13; </span>
+
+                                  
+                                </div>
+                                <div>
+                                  
+                                    <a class="CoverImage" href="https://www.upress.umn.edu/book-division/books/suburban-beijing">
+                                      <img src="https://www.upress.umn.edu/book-division/books/suburban-beijing/@@images/26f5cf25-deea-4af5-8ce9-20938cf9b30a.jpeg" alt="Suburban Beijing: Housing and Consumption in Contemporary China" title="Suburban Beijing: Housing and Consumption in Contemporary China" height="145" width="95" />
+          
+                                    </a>
+                                    <a class="itemTitle" href="https://www.upress.umn.edu/book-division/books/suburban-beijing">Suburban Beijing</a>
+                                    <span class="subTitle">Housing and Consumption in Contemporary China</span>
+                                    <span class="description"> &#13;Understanding the effects of market liberalization through life in a modern Chinese suburb&#13; </span>
+
+                                  
+                                </div>
+                                <div>
+                                  
+                                    <a class="CoverImage" href="https://www.upress.umn.edu/book-division/books/landscapes-of-urban-memory">
+                                      <img src="https://www.upress.umn.edu/book-division/books/landscapes-of-urban-memory/@@images/4e4a1428-58b3-45f2-9c80-74c6a4843bdf.jpeg" alt="Landscapes of Urban Memory: The Sacred and the Civic in India’s High-Tech City" title="Landscapes of Urban Memory: The Sacred and the Civic in India’s High-Tech City" height="145" width="94" />
+          
+                                    </a>
+                                    <a class="itemTitle" href="https://www.upress.umn.edu/book-division/books/landscapes-of-urban-memory">Landscapes of Urban Memory</a>
+                                    <span class="subTitle">The Sacred and the Civic in India’s High-Tech City</span>
+                                    <span class="description"> &#13;A rich analysis of religion, civic life, and global transformation in India.&#13; </span>
+
+                                  
+                                </div>
+                                <div>
+                                  
+                                    <a class="CoverImage" href="https://www.upress.umn.edu/book-division/books/making-lahore-modern">
+                                      <img src="https://www.upress.umn.edu/book-division/books/making-lahore-modern/@@images/27d715ab-3716-4167-9e00-e9cc3a68c063.jpeg" alt="Making Lahore Modern: Constructing and Imagining a Colonial City" title="Making Lahore Modern: Constructing and Imagining a Colonial City" height="142" width="100" />
+          
+                                    </a>
+                                    <a class="itemTitle" href="https://www.upress.umn.edu/book-division/books/making-lahore-modern">Making Lahore Modern</a>
+                                    <span class="subTitle">Constructing and Imagining a Colonial City</span>
+                                    <span class="description"> &#13;Establishes Lahore as a key site for understanding modernity as a global phenomenon&#13; </span>
+
+                                  
+                                </div>
+                                <div>
+                                  
+                                    <a class="CoverImage" href="https://www.upress.umn.edu/book-division/books/saigonas-edge">
+                                      <img src="https://www.upress.umn.edu/book-division/books/saigonas-edge/@@images/2ccae12f-de6a-4fad-bfb4-c8381ca71286.jpeg" alt="Saigon’s Edge: On the Margins of Ho Chi Minh City" title="Saigon’s Edge: On the Margins of Ho Chi Minh City" height="145" width="94" />
+          
+                                    </a>
+                                    <a class="itemTitle" href="https://www.upress.umn.edu/book-division/books/saigonas-edge">Saigon’s Edge</a>
+                                    <span class="subTitle">On the Margins of Ho Chi Minh City</span>
+                                    <span class="description"> &#13;Exploring the places where the rural and urban intersect, where many of the world’s people live&#13; </span>
+
+                                  
+                                </div>
+                                <div>
+                                  
+                                    <a class="CoverImage" href="https://www.upress.umn.edu/book-division/books/city-requiem-calcutta">
+                                      <img src="https://www.upress.umn.edu/book-division/books/city-requiem-calcutta/@@images/378c330b-974d-4323-87d8-97ba968fe990.jpeg" alt="City Requiem, Calcutta: Gender and the Politics of Poverty" title="City Requiem, Calcutta: Gender and the Politics of Poverty" height="145" width="95" />
+          
+                                    </a>
+                                    <a class="itemTitle" href="https://www.upress.umn.edu/book-division/books/city-requiem-calcutta">City Requiem, Calcutta</a>
+                                    <span class="subTitle">Gender and the Politics of Poverty</span>
+                                    <span class="description"> &#13;Uses Calcutta as a site for the exploration of persistent structures of deprivation and want.&#13; </span>
+
+                                  
+                                </div>
+                        </div> 
+                        
+                        <div id="related_news"> 
+                                <h3>Related News &amp; Events</h3> 
+                                
+                                
+                                
+                                
+                        </div>
+
+        <div class="contentwellportlets row" id="portlets-below">
+  
+  
+  
+</div></div><!-- /content -->
+		<!-- /right -->
+
+	</div><!-- /main -->
+</div><!-- /.wrapper -->
+
+<div class="mobile block nav">
+      
+        
+<div class="portletWrapper" id="portletwrapper-706c6f6e652e6c656674636f6c756d6e0a636f6e746578740a2f506c6f6e650a636f6d696e672d736f6f6e" data-portlethash="706c6f6e652e6c656674636f6c756d6e0a636f6e746578740a2f506c6f6e650a636f6d696e672d736f6f6e"><div class="portletStaticText portlet-static-coming-soon"><p><a href="https://www.upress.umn.edu/book-division/collections/forthcoming-from-ump" class="internal-link" id="forthcoming-titles">Coming soon</a></p></div>
+
+
+</div>
+
+<div class="portletWrapper" id="portletwrapper-706c6f6e652e6c656674636f6c756d6e0a636f6e746578740a2f506c6f6e650a6e617669676174696f6e" data-portlethash="706c6f6e652e6c656674636f6c756d6e0a636f6e746578740a2f506c6f6e650a6e617669676174696f6e">
+<aside class="portlet portletNavigationTree" role="navigation">
+
+    <header class="portletHeader">
+        <a href="https://www.upress.umn.edu/disciplines" class="tile">Disciplines</a>
+    </header>
+
+    <nav class="portletContent lastItem">
+        <ul class="navTree navTreeLevel0">
+            
+            
+
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-american-studies">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/american-studies" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            American Studies
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-anthropology">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/anthropology" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Anthropology
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-architecture_and_design">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/architecture_and_design" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Architecture and Design
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-art_performance">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/art_performance" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Art and Performance
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-cultural_criticism">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/cultural_criticism" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Cultural Criticism
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-economics_business">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/economics_business" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Economics and Business
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-education_law">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/education_law" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Education and Law
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-environment">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/environment" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Environment
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-film_media">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/film_media" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Film and Media
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-geography">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/geography" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Geography
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-history">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/history" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            History
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-literature">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/literature" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Literature
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-minnesota-the-upper-midwest">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/minnesota-the-upper-midwest" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Minnesota and the Upper Midwest
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-native-american-and-indigenous-studies">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/native-american-and-indigenous-studies" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Native American and Indigenous Studies
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-political_science">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/political_science" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Political Science
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-psychology">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/psychology" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Psychology
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-sociology">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/sociology" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Sociology
+        </a>
+        
+
+    
+</li>
+
+<li class="navTreeItem visualNoMarker navTreeFolderish section-theory_philosophy">
+
+    
+
+        <a href="https://www.upress.umn.edu/disciplines/theory_philosophy" title="" class="state-published navTreeFolderish contenttype-topic">
+
+             
+
+               <!-- THIS BREAKS with
+                  Module plone.namedfile.scaling, line 523, in tag
+                  Module plone.app.imaging.scaling, line 230, in tag
+                TypeError: 'NoneType' object has no attribute '__getitem__'
+            -->
+
+
+
+            Theory and Philosophy
+        </a>
+        
+
+    
+</li>
+
+
+
+
+        </ul>
+    </nav>
+</aside>
+
+
+</div>
+
+
+      
+    </div>
+<div id="footer">
+<div class="wrapper">
+	<p>© <span id="copyright-years">2011-2016</span> University of Minnesota Press | <a href="http://www.privacy.umn.edu/">Privacy Policy</a> | The University of Minnesota is an equal opportunity educator and employer.</p>
+</div><!-- /.wrapper -->
+</div><!-- /footer -->
+<!--  initialize the slideshow when the DOM is ready --> 
+<script type="text/javascript"> 
+		$(document).ready(function() {
+			var viewwidth = $(window).width();
+			if(viewwidth > 767){
+			    $('#slide_holder').cycle({
+				    fx:     'scrollHorz', 
+				    speed:   700, 
+				    timeout: 0, 
+					pager:  '#slide_nav ul',
+					
+				    pagerAnchorBuilder: function(idx, slide) { 
+				        // return selector string for existing anchor 
+				        return '#slide_nav ul li:eq(' + idx + ') a'; 
+				    } 
+				});
+			}
+		});
+</script> 
+<script type="text/javascript" src="/++theme++ump.theme/js/ump.js"></script>
+
+<!-- google analytics and other JS tracking code goes here --><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-24662383-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</div><script type="text/javascript">//<!--
+window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","queueTime":0,"licenseKey":"8e0794b107","agent":"","transactionName":"Y1VRMhAFCxBSVEENWFofaQkSAVdMUVhaDxlERA==","applicationID":"126663724","errorBeacon":"bam.nr-data.net","applicationTime":887}
+//--></script></body>
+</html>

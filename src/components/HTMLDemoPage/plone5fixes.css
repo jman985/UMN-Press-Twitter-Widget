@@ -1,0 +1,7 @@
+/* Fix issue in plone toolbar where in cases of large amount of items, 
+   some are invisible offscreen (top or bottom) 
+*/
+
+#plone-contentmenu-factories.active > ul {
+	margin-top: 0 !important; 
+}
