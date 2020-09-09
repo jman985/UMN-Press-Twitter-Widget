@@ -83,7 +83,7 @@ class Publications extends Component {
 
     return(
       <>
-        <div class='topBox' style={{display:'flex'}}>
+        <div className='topBox' style={{display:'flex'}}>
           <Paper style={{maxWidth:'40%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
             <Typography variant='h6'>
               Total Publications Uploaded: <Typography variant='body1' component="span">{this.props.publication.length}</Typography>
