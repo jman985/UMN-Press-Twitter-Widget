@@ -5,7 +5,13 @@ import axios from "axios";
 function* getTweets(action) {
   try {
     yield console.log(action.payload);
-    for (let i=0; i<action.payload.length; i++){
+    let searchAmount = action.limit 
+    // if the user has set the search limit to be greater than the total amount of publications
+    // change the search limit to match the total amount of publications
+    if (action.limit > action.payload.length) {
+      searchAmount = action.payload.length
+    }
+    for (let i=0; i<searchAmount; i++){
       // check if the publication has include value of true
       if (action.payload[i].include){
         //hit Twitter Recent Search API with publication title, replace problem characters with "*" aka the "wild card" character
@@ -39,6 +45,8 @@ function* getTweets(action) {
       }
       // update the user redux store with the new rate data
       yield put({ type: "FETCH_USER" });
+      // update the publication redx store with new last_searched times
+      yield put({ type: 'FETCH_PUBLICATIONS'})
     }
   } catch (error) {
     console.log("error with getting tweets", error);

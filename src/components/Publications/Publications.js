@@ -5,13 +5,41 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import PublicationTable from '../PublicationTable/PublicationTable'
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
 
 class Publications extends Component {
-
-
-  handleClick = (limit) => {
-      this.props.dispatch({type: 'FETCH_TWEETS', payload: this.props.publication, userId: this.props.user.id});
+  
+  state = {
+    searchLimit: 400
   }
+
+  handleClick = () => {
+    this.props.dispatch({
+      type: 'FETCH_TWEETS', 
+      payload: this.sortPublicationsForSearch(),
+      userId: this.props.user.id, 
+      limit: this.state.searchLimit
+    });
+  }
+
+
+  // returns a sorted publication array based on the 'last_searched' timecodes
+  sortPublicationsForSearch = () => {
+    // filter publications with null 'last_searched' values into new array
+    let nullOnly = this.props.publication.filter(x => x.last_searched === null)
+    // filter publications with timecode 'last_searched' values into new array
+    let notNull = this.props.publication.filter(x => x.last_searched !== null)
+    let sortedArray = notNull
+
+    // sort the array with last_searched timecodes in ascending order
+    sortedArray.sort((a, b) => parseFloat(((new Date(a.last_searched)).getTime())) - parseFloat(((new Date(b.last_searched)).getTime())));
+    // append the array with timecodes to the end of the array with null last_searched values
+    // so that publications that have never been searched before are checked first
+    sortedArray = nullOnly.concat(sortedArray)
+
+    return sortedArray;
+  }//end sortPublicationsForSearch
 
 
   determineLastSearch = () => {
@@ -42,12 +70,17 @@ class Publications extends Component {
     return time;
   }//end parseRefreshTime
   
+  handleLimitChange = (event) => {
+      this.setState({searchLimit: event.target.value})
+  }
+
   render() {
     if (this.props.publication.map === undefined) return null;
     if (this.props.publication === []) return null;
 
     return(
       <>
+        {JSON.stringify(this.sortPublicationsForSearch())}
         <div class='topBox' style={{display:'flex'}}>
           <Paper style={{maxWidth:'40%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
             <Typography variant='h6'>
@@ -66,18 +99,18 @@ class Publications extends Component {
               Searches Refresh at: <Typography variant='body1' component="span">{this.parseRefreshTime()}</Typography>
             </Typography>
           </Paper>
-          <Paper style={{maxWidth:'40%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
+          <Paper style={{maxWidth:'40%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3',dispaly:'flex',flexDirection:'column'}}>
             <TextField
               id="outlined-name"
-              label="Search Amount"
-              // value={this.state.name}
-              // onChange={}
+              label="# of Searches"
+              value={this.state.searchAmount}
+              onChange={this.handleLimitChange}
               margin="normal"
               variant="outlined"
             />
-            <button onClick={this.handleClick}>
+            <Button style={{display:'flex'}} variant="contained" color="primary" onClick={this.handleClick}>
               Search
-            </button>
+            </Button>
           </Paper>
           </div>
         <PublicationTable />
