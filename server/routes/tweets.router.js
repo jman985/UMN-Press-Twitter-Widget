@@ -42,12 +42,15 @@ router.get('/database', rejectUnauthenticated, (req, res) => {
 });
 
 
-
+//POST only unique tweet ids into the database
 router.post('/database', rejectUnauthenticated, (req, res) => {
     console.log('preparing insert query:', req.body)
-    const queryText = `INSERT INTO tweet (tweet_id, publication_id)
-    VALUES ($1, $2)`
-    pool.query(queryText, [req.body.tweetId, req.body.publicationId])
+    
+    const queryText = `INSERT INTO "tweet" ("publication_id", "tweet_id")
+    SELECT $1 AS "publication_id", CAST($2 AS VARCHAR) AS "tweet_id" 
+    WHERE NOT EXISTS (SELECT * FROM tweet WHERE publication_id = $1 AND tweet_id = $2);`
+
+    pool.query(queryText, [req.body.publicationId,req.body.tweetId])
         .then(response => {
             res.sendStatus(200);
         }).catch(error=>{
@@ -55,6 +58,7 @@ router.post('/database', rejectUnauthenticated, (req, res) => {
             res.sendStatus(500);
         })
 });
+
 
 // sets approved value of tweets in tweet table to true
 router.put('/database/approve', rejectUnauthenticated, (req, res) => {
