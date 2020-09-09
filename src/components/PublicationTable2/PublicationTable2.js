@@ -14,6 +14,10 @@ import Paper from "@material-ui/core/Paper";
 import InclusionToggle from "../Publications/InclusionToggle";
 import Button from "@material-ui/core/Button";
 import { spacing } from "@material-ui/system";
+import IconButton from '@material-ui/core/IconButton';
+import FastForwardIcon from '@material-ui/icons/FastForward';
+import FastRewindIcon from '@material-ui/icons/FastRewind';
+
 
 const styles = (theme) => ({
   root: {
@@ -45,6 +49,21 @@ const styles = (theme) => ({
 });
 
 class PublicationTable2 extends Component {
+
+  state = {
+    pageStart: 0
+  }
+
+  handlePageChange = (direction) => {
+    console.log('triggered page, direction is ', direction)
+    if (direction === 'forward') {
+      this.setState({pageStart: this.state.pageStart + 100})
+    }
+    else if (direction === 'backward' && this.state.pageStart > 0) {
+      this.setState({pageStart: this.state.pageStart - 100})
+    }
+  }
+
   render() {
     const { classes } = this.props;
     const CustomTableCell = withStyles((theme) => ({
@@ -60,6 +79,8 @@ class PublicationTable2 extends Component {
       <>
         {this.props.publication ? (
           <Paper className={classes.root}>
+            <IconButton onClick={()=>this.handlePageChange('backward')}><FastRewindIcon/></IconButton>
+            <IconButton onClick={()=>this.handlePageChange('forward')}><FastForwardIcon/></IconButton>
             <Table className={classes.table}>
               <TableHead>
                 <TableRow>
@@ -72,7 +93,7 @@ class PublicationTable2 extends Component {
               </TableHead>
 
               <TableBody>
-                {this.props.publication.map((book) => (
+                {this.props.publication.slice(this.state.pageStart,this.state.pageStart+100).map((book) => (
                   <TableRow className={classes.row} key={book.id}>
                     <TableCell
                       className={classes.title}
@@ -99,6 +120,8 @@ class PublicationTable2 extends Component {
                 ))}
               </TableBody>
             </Table>
+            <IconButton onClick={()=>this.handlePageChange('backward')}><FastRewindIcon/></IconButton>
+            <IconButton onClick={()=>this.handlePageChange('forward')}><FastForwardIcon/></IconButton>
           </Paper>
         ) : null}
       </>
