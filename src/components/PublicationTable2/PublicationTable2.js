@@ -59,6 +59,15 @@ class PublicationTable2 extends Component {
     pageStart: 0
   }
 
+  determineLastSearch = (sqlDate) => {
+   
+      let readableTime = new Date(sqlDate)
+      let date = readableTime.toLocaleDateString()
+      let time = readableTime.toLocaleTimeString()
+       
+    return date + ' at ' + time;
+  }//end determineLastSearch
+
   handlePageChange = (direction) => {
     console.log('triggered page, direction is ', direction)
     if (direction === 'forward') {
@@ -113,7 +122,7 @@ class PublicationTable2 extends Component {
                     <TableCell align="left">
                       {book.last_searched == null
                         ? "No searches yet"
-                        : book.last_searched}
+                        : this.determineLastSearch(book.last_searched)}
                     </TableCell>
                     <TableCell>
                       <InclusionToggle
