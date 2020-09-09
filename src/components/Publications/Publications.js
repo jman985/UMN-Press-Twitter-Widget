@@ -35,6 +35,11 @@ class Publications extends Component {
     return readableTime;
   }//end determineLastSearch
 
+  parseRefreshTime = () => {
+    let sqlDate = new Date(this.props.user.rate_limit_refresh * 1000) 
+    let time = (sqlDate).toLocaleTimeString();
+    return time;
+  }//end parseRefreshTime
   
   render() {
     if (this.props.publication.map === undefined) return null;
@@ -54,6 +59,9 @@ class Publications extends Component {
           </Typography>
           <Typography variant='h6'>
             Searches Remaining: <Typography variant='body1' component="span">{this.props.user.rate_limit_remaining}</Typography>
+          </Typography>
+          <Typography variant='h6'>
+            Searches Refresh at: <Typography variant='body1' component="span">{this.parseRefreshTime()}</Typography>
           </Typography>
         </Paper>
         <button onClick={this.handleClick}>
