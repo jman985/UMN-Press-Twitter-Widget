@@ -9,7 +9,7 @@ const token = process.env.BEARER_TOKEN;
 router.get('/twitter/:title', rejectUnauthenticated, (req, res) => {
     console.log('=====>> router get', req.params.title);
     // console.log('preparing to hit server with a request to the Twitter API');
-    axios.get(`https://api.twitter.com/2/tweets/search/recent?query="${req.params.title}"&max_results=10`, {
+    axios.get(`https://api.twitter.com/2/tweets/search/recent?query="${req.params.title}"&max_results=30`, {
         headers: {
         'Authorization': `Bearer ${token}`
         }
@@ -47,14 +47,15 @@ router.post('/database', async (req, res) => {
     const publicationId = req.body.publicationId;
     const tweetId = req.body.tweetId;
 
-  
     // We need to use the same connection for all queries...
     const connection = await pool.connect()
       
     // Using basic JavaScript try/catch/finally 
     try {
       await connection.query('BEGIN');
-      const sqlText = `INSERT INTO "tweet" ("publication_id", "tweet_id") VALUES ($1, $2)`;
+      const sqlText = `INSERT INTO "tweet" ("publication_id", "tweet_id")
+      SELECT $1 AS "publication_id", CAST($2 AS VARCHAR) AS "tweet_id" 
+      WHERE NOT EXISTS (SELECT * FROM tweet WHERE publication_id = $1 AND tweet_id = $2);`;
       // Use - amount & from account for withdraw
       await connection.query( sqlText, [publicationId, tweetId]);
            

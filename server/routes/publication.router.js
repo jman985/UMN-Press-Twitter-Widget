@@ -75,7 +75,8 @@ router.post("/csv", async (req, res) => {
     // }
     await connection.query("BEGIN");
     const queryText = `INSERT INTO "publication" ("title", "author1", "subtitle") 
-    VALUES ($1, $2, $3);`;
+    SELECT $1, $2, $3`
+    //WHERE NOT EXISTS (SELECT * FROM "publication" WHERE "title" = $1 AND "author1" = $2 AND "subtitle" = $3);`;
 
     for (book of csvData) {
       await connection.query(queryText, [
@@ -85,9 +86,12 @@ router.post("/csv", async (req, res) => {
       ]);
     }
     await connection.query("COMMIT");
+    res.sendStatus(200); 
+
   } catch (error) {
     await connection.query("ROLLBACK");
-    throw error;
+    console.log(`Tweet input Error - Rolling back`, error);
+    res.sendStatus(500);
   } finally {
     connection.release();
   }
