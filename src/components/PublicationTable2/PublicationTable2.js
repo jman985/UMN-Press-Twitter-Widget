@@ -30,11 +30,13 @@ const styles = (theme) => ({
       // backgroundColor: theme.palette.background.default,
       backgroundColor: "#f5f2ef",
     },
-    title: {
-      "&:hover": {
-        // backgroundColor: theme.palette.grey[200],
-        fontSize: "50px",
-      },
+  },
+  title: {
+    color: "black",
+    "&:hover": {
+      //backgroundColor: theme.palette.grey[200],
+      color: "#a39d9d",
+      cursor: "pointer",
     },
   },
   Btn: {
