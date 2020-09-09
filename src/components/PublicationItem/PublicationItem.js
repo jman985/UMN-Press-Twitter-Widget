@@ -144,6 +144,8 @@ class PublicationItem extends Component {
             </select>
             <InclusionToggle publicationId={this.props.match.params.id} include={this.props.publication[index].include}/>
           </div>
+          <button>Prev</button>
+          <button>Next</button>
 
           <div className={classes.root} style={{display: "flex",flexWrap: "wrap",justifyContent:'center'}}>
             <div key={this.state.status+1} style={{display:'flex'}}>
