@@ -13,8 +13,8 @@ CREATE TABLE "user" (
 );
 CREATE TABLE "publication" (
     "id" SERIAL PRIMARY KEY,
-    "title" VARCHAR (1000) UNIQUE NOT NULL,
-    "subtitle" VARCHAR (1000) NOT NULL,
+    "title" VARCHAR (1000),
+    "subtitle" VARCHAR (1000),
     "author1" VARCHAR (1000),
     "author2" VARCHAR (1000),
     "author3" VARCHAR (1000),
