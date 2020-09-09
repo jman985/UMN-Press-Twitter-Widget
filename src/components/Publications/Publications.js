@@ -20,7 +20,9 @@ class Publications extends Component {
 
     if (this.props.publication.length !== 0 && this.props.publication !== undefined){
       let notNull = this.props.publication.filter(x => x.last_searched !== null)
-      lastSearchedAll =  notNull.reduce((a, b) => (a.last_searched > b.last_searched ? a : b)).last_searched;
+      if (notNull.length > 0){
+        lastSearchedAll =  notNull.reduce((a, b) => (a.last_searched > b.last_searched ? a : b)).last_searched;
+      }
     }
     if (typeof lastSearchedAll === 'string'){
       readableTime = lastSearchedAll.slice(0,10) + ' ' + lastSearchedAll.slice(11, -5)
