@@ -26,6 +26,7 @@ class ToggleButtons extends React.Component {
   };
 
   handleInclusionToggle = (event, include) => {
+    console.log("TOGGLE", this.props.publicationId);
     event.stopPropagation();
     this.setState({ include });
     this.props.dispatch({
