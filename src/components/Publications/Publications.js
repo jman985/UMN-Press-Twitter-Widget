@@ -23,7 +23,14 @@ class Publications extends Component {
       lastSearchedAll =  notNull.reduce((a, b) => (a.last_searched > b.last_searched ? a : b)).last_searched;
     }
     if (typeof lastSearchedAll === 'string'){
-      readableTime = lastSearchedAll.slice(0,10) + ' ' + lastSearchedAll.slice(11, -5)
+      // readableTime = lastSearchedAll.slice(0,10) + ' ' + lastSearchedAll.slice(11, -5)
+      // readableTime = new Date(lastSearchedAll)
+      let sqlDate = new Date(lastSearchedAll)
+      let month = (sqlDate.getMonth()+1).toString()
+      let day = sqlDate.getDate().toString()
+      let year = sqlDate.getFullYear().toString()
+      let time = sqlDate.toLocaleTimeString()
+      readableTime = month + '/' + day + '/' + year + ' at ' + time
     }
     return readableTime;
   }
