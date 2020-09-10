@@ -50,6 +50,11 @@ class PublicationItem extends Component {
     state = {
         status: 'UNDECIDED',
         tweetsArray: [1,2,3],
+        lastSearchedTime: 0,
+        allTweetCount: 0,
+        undecidedTweetCount: 0,
+        approvedTweetCount: 0,
+        rejectedTweetCount: 0,
         key1: 0,
         key2: 1,
         key3: 2,
@@ -57,21 +62,52 @@ class PublicationItem extends Component {
 
     componentDidMount(){
       this.props.dispatch({type: 'FETCH_DATABASE_TWEETS'});
+      this.props.dispatch({type: 'FETCH_PUBLICATIONS'});
     }
 
       // this is needed to get the database tweets into this.state.tweetsArray
     componentDidUpdate(prevProps) {
-      if (prevProps.dbTweets !== this.props.dbTweets){
+      if (prevProps.dbTweets !== this.props.dbTweets || prevProps.publication !== this.props.publication){
         let pubId = Number(this.props.match.params.id);
         let allTweets = this.props.dbTweets
   
-        let undecidedTweets = allTweets.filter(function (filteredTweets) {
-          return filteredTweets.approved === null});
-        undecidedTweets = undecidedTweets.filter(function (filteredTweets) {
+
+        // sort tweets with same publication id from all tweets
+        let relatedTweets = allTweets.filter(function (filteredTweets) {
           return Number(filteredTweets.publication_id) === pubId});
+
+        // sort undecided tweets
+        let relatedTweetsUndecided = relatedTweets.filter(function (filteredTweets) {
+          return filteredTweets.approved === null});
+        // sort approved tweets
+        let relatedTweetsApproved = relatedTweets.filter(function (filteredTweets) {
+          return filteredTweets.approved === true});
+        // sort rejected tweets
+        let relatedTweetsRejected = relatedTweets.filter(function (filteredTweets) {
+          return filteredTweets.approved === false});
+
+        // get the last_searched time from publications
+        let lastSearched = this.props.publication.filter(function (book) {
+          return book.id === pubId})
+
+        let sqlDate = 0
+        if (lastSearched[0] !== undefined) {
+          sqlDate = new Date(lastSearched[0].last_searched)
+        }
+        let date = sqlDate.toLocaleDateString()
+        let time = sqlDate.toLocaleTimeString()
+        let readableTime = date + ' at ' + time
+        console.log('lastSearched is ', readableTime)
+
+          // get an inital count of all the tweet categories and set the undecided tweets to be the tweetsArray
         if (this.state.status === "UNDECIDED") {
           this.setState({
-            tweetsArray: undecidedTweets
+            tweetsArray: relatedTweetsUndecided,
+            undecidedTweetCount: relatedTweetsUndecided.length,
+            approvedTweetCount: relatedTweetsApproved.length,
+            rejectedTweetCount: relatedTweetsRejected.length,
+            allTweetCount: relatedTweetsUndecided.length + relatedTweetsApproved.length + relatedTweetsRejected.length,
+            lastSearchedTime: readableTime
           });
         }
       }
@@ -82,8 +118,30 @@ class PublicationItem extends Component {
       // send the approve/reject based on which button was pressed
       if (approved){
         this.props.dispatch({type:'APPROVE_TWEET', payload: tweetId});
+        if (this.state.status === "UNDECIDED") {
+          this.setState({
+            approvedTweetCount: this.state.approvedTweetCount + 1,
+            undecidedTweetCount: this.state.undecidedTweetCount - 1
+          })
+        } else if (this.state.status === "REJECTED") {
+          this.setState({
+            approvedTweetCount: this.state.approvedTweetCount + 1,
+            rejectedTweetCount: this.state.rejectedTweetCount - 1
+          })
+        }
       } else {
         this.props.dispatch({type:'REJECT_TWEET', payload: tweetId});
+        if (this.state.status === "UNDECIDED") {
+          this.setState({
+            rejectedTweetCount: this.state.rejectedTweetCount + 1,
+            undecidedTweetCount: this.state.undecidedTweetCount - 1
+          })
+        } else if (this.state.status === "APPROVED") {
+          this.setState({
+            rejectedTweetCount: this.state.rejectedTweetCount + 1,
+            approvedTweetCount: this.state.approvedTweetCount - 1,
+          })
+        }
       }
   
       // check to see which slot was changed and update the corresponding key with the next index in the array of tweets
@@ -111,13 +169,13 @@ class PublicationItem extends Component {
         if(status === "UNDECIDED"){
             console.log('got undecided')
 
-            let undecidedTweets = allTweets.filter(function (filteredTweets) {
-              return filteredTweets.approved === null});
-            undecidedTweets = undecidedTweets.filter(function (filteredTweets) {
+            let relatedTweets = allTweets.filter(function (filteredTweets) {
               return Number(filteredTweets.publication_id) === pubId});
+            let relatedTweetsUndecided = relatedTweets.filter(function (filteredTweets) {
+              return filteredTweets.approved === null});
             
               this.setState({
-                tweetsArray: undecidedTweets,
+                tweetsArray: relatedTweetsUndecided,
                 key1: 0,
                 key2: 1,
                 key3: 2,
@@ -126,13 +184,13 @@ class PublicationItem extends Component {
           } else if (status === "APPROVED") {
             console.log('got approved')
 
-            let approvedTweets = allTweets.filter(function (filteredTweets) {
-              return filteredTweets.approved === true});
-            approvedTweets = approvedTweets.filter(function (filteredTweets) {
+            let relatedTweets = allTweets.filter(function (filteredTweets) {
               return Number(filteredTweets.publication_id) === pubId});
+            let relatedTweetsApproved = relatedTweets.filter(function (filteredTweets) {
+              return filteredTweets.approved === true});
 
             this.setState({
-              tweetsArray: approvedTweets,
+              tweetsArray: relatedTweetsApproved,
               key1: 0,
               key2: 1,
               key3: 2,
@@ -141,20 +199,22 @@ class PublicationItem extends Component {
           } else if (status === "REJECTED") {
             console.log('got rejected')
 
-            let rejectedTweets = allTweets.filter(function (filteredTweets) {
-              return filteredTweets.approved === false});
-            rejectedTweets = rejectedTweets.filter(function (filteredTweets) {
+            let relatedTweets = allTweets.filter(function (filteredTweets) {
               return Number(filteredTweets.publication_id) === pubId});
+            let relatedTweetsRejected = relatedTweets.filter(function (filteredTweets) {
+              return filteredTweets.approved === false});
 
             this.setState({
-              tweetsArray: rejectedTweets,
+              tweetsArray: relatedTweetsRejected,
               key1: 0,
               key2: 1,
               key3: 2,
             })
+
         } else {
             return null;    
         }
+
       this.setState({
         status: status
       })
@@ -175,66 +235,63 @@ class PublicationItem extends Component {
 
       return (
         <>
-          {JSON.stringify(this.state.tweetsArray)}
-          {JSON.stringify(this.state.status)}
-          {JSON.stringify(this.state.approvedTweets)}
+          {/* {JSON.stringify(this.state.tweetsArray)} */}
+
           <h1 style={{margin:'20px'}}>{this.props.publication[index].title}, {this.props.publication[index].author1} </h1>
           <div className="content" style={{display:'flex',margin:'20px'}}>
-          <Paper style={{maxWidth:'40%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
-            <Typography variant='h6'>
-              Total Tweets: 
-              <Typography variant='body1' component="span">
-                {' '}date
+          
+            <Paper style={{maxWidth:'40%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
+              <Typography variant='h6'>
+                Total Tweets: 
+                <Typography variant='body1' component="span">
+                  {' '}{this.state.allTweetCount}
+                </Typography>
               </Typography>
-            </Typography>
-            <Typography variant='h6'>
-              Approved Tweets: 
-              <Typography variant='body1' component="span">
-                {' '}date
+              <Typography variant='h6'>
+                Approved Tweets: 
+                <Typography variant='body1' component="span">
+                  {' '}{this.state.approvedTweetCount}
+                </Typography>
               </Typography>
-            </Typography>
-            <Typography variant='h6'>
-              Rejected Tweets: 
-              <Typography variant='body1' component="span">
-                {' '}date
+              <Typography variant='h6'>
+                Rejected Tweets: 
+                <Typography variant='body1' component="span">
+                  {' '}{this.state.rejectedTweetCount}
+                </Typography>
               </Typography>
-            </Typography>
-            <Typography variant='h6'>
-              Undecided Tweets: 
-              <Typography variant='body1' component="span">
-                {' '}date
+              <Typography variant='h6'>
+                Undecided Tweets: 
+                <Typography variant='body1' component="span">
+                  {' '}{this.state.undecidedTweetCount}
+                </Typography>
               </Typography>
-            </Typography>
-            <FormControl className={classes.formControl}>
-              <Select
-                onChange={this.handleSelect}
-                defaultValue='UNDECIDED'
-                id="status-select"
-              >
-                <MenuItem value='UNDECIDED'>Undecided</MenuItem>
-                <MenuItem value='APPROVED'>Approved</MenuItem>
-                <MenuItem value='REJECTED'>Rejected</MenuItem>
-              </Select>
-              <FormHelperText>Select Tweet Category</FormHelperText>
-            </FormControl>
-            {/* <select id="status-select" onChange={this.handleSelect}>
-              <option value="NULL">Undecided</option>
-              <option value="TRUE">Approved</option>
-              <option value="FALSE">Rejected</option>
-            </select> */}
-          </Paper>
-          <Paper style={{maxWidth:'40%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
-            <Typography variant='h6'>
-              Last Search Date: 
-              <Typography variant='body1' component="span">
-                {' '}date
+              <FormControl className={classes.formControl}>
+                <Select
+                  onChange={this.handleSelect}
+                  defaultValue='UNDECIDED'
+                  id="status-select"
+                >
+                  <MenuItem value='UNDECIDED'>Undecided</MenuItem>
+                  <MenuItem value='APPROVED'>Approved</MenuItem>
+                  <MenuItem value='REJECTED'>Rejected</MenuItem>
+                </Select>
+                <FormHelperText>Select Tweet Category</FormHelperText>
+              </FormControl>
+            </Paper>
+            
+            
+            <Paper style={{maxWidth:'40%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
+              <Typography variant='h6'>
+                Last Search Date: 
+                <Typography variant='body1' component="span">
+                  {' '}{this.state.lastSearchedTime}
+                </Typography>
               </Typography>
-            </Typography>
-            <Typography variant='h6'>
-              Searches Remaining: <Typography variant='body1' component="span">{this.props.user.rate_limit_remaining}</Typography>
-            </Typography>
-            <InclusionToggle publicationId={this.props.match.params.id} include={this.props.publication[index].include}/>
-          </Paper>
+              <Typography variant='h6'>
+                Searches Remaining: <Typography variant='body1' component="span">{this.props.user.rate_limit_remaining}</Typography>
+              </Typography>
+              <InclusionToggle publicationId={this.props.match.params.id} include={this.props.publication[index].include}/>
+            </Paper>
           </div>
             
 
