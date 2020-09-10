@@ -12,6 +12,13 @@ import Typography from '@material-ui/core/Typography';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import Input from '@material-ui/core/Input';
 
 const styles = theme => ({
   root: {
@@ -41,7 +48,7 @@ const styles = theme => ({
 class PublicationItem extends Component {
 
     state = {
-        status: null,
+        status: 'UNDECIDED',
         tweetsArray: [1,2,3],
         key1: 0,
         key2: 1,
@@ -49,40 +56,27 @@ class PublicationItem extends Component {
     }
 
     componentDidMount(){
-        this.props.dispatch({type: 'FETCH_DATABASE_TWEETS'});
-        console.log(this.props.match.params.id);
-        console.log('MOUNTED')
-        let status = this.state.status;
-        let filteredArray = this.props.dbTweets.filter(function (filteredTweets) {
-          return filteredTweets.approved === status});
-
-        let pubId = Number(this.props.match.params.id);
-        let finalArray = filteredArray.filter(function (filteredTweets) {
-          return Number(filteredTweets.publication_id) === pubId});
-
-        this.setState({tweetsArray: finalArray});
+      this.props.dispatch({type: 'FETCH_DATABASE_TWEETS'});
     }
 
       // this is needed to get the database tweets into this.state.tweetsArray
-    componentDidUpdate(prevProps, prevState) {
-      if (prevProps.dbTweets !== this.props.dbTweets || prevState.status !== this.state.status){
-        console.log('componentDidUpdate has triggered')
-        let status = this.state.status;
-        let filteredArray = this.props.dbTweets.filter(function (filteredTweets) {
-          return filteredTweets.approved === status});
-
+    componentDidUpdate(prevProps) {
+      if (prevProps.dbTweets !== this.props.dbTweets){
         let pubId = Number(this.props.match.params.id);
-        let finalArray = filteredArray.filter(function (filteredTweets) {
+        let allTweets = this.props.dbTweets
+  
+        let undecidedTweets = allTweets.filter(function (filteredTweets) {
+          return filteredTweets.approved === null});
+        undecidedTweets = undecidedTweets.filter(function (filteredTweets) {
           return Number(filteredTweets.publication_id) === pubId});
-
-        // console.log('these are the tweets that match the status', filteredArray)
-        // console.log('these are the tweets that match the status and pub_id', finalArray)
-        // console.log('this should be the status:', status)
-        // console.log('this should be the match id:', pubId)
-
-        this.setState({tweetsArray: finalArray});
+        if (this.state.status === "UNDECIDED") {
+          this.setState({
+            tweetsArray: undecidedTweets
+          });
+        }
       }
     } 
+
 
     handleApprove = (tweetId, slot, approved) => {
       // send the approve/reject based on which button was pressed
@@ -100,26 +94,73 @@ class PublicationItem extends Component {
       } else if (slot === 2){
         this.setState({ key3: Math.max(this.state.key1,this.state.key2,this.state.key3)+1});
       }
-      ;
+      this.props.dispatch({type:'FETCH_DATABASE_TWEETS'})
     }
 
-    handleSelect = () => {
+
+    handleSelect = (event) => {
+      let pubId = Number(this.props.match.params.id);
+      let allTweets = this.props.dbTweets
         // assign select drop-down menu from DOM to variable 'status'
-        this.props.dispatch({type: 'FETCH_DATABASE_TWEETS'});
-        const status = document.getElementById("status-select");
-        console.log('status changed:', this.state.status)
+        const status = event.target.value;
+        console.log('status changed:', event.target.value)
         // conditional to check value from select drop-down menu
-        if(status.value === "TRUE"){
-            this.setState({status: true})
-        } else if (status.value === "FALSE") {
-            this.setState({status: false})
-        } else if (status.value === "NULL") {
-            this.setState({status: null})
+        console.log('UNDECIDED IS:', this.state.undecidedTweets)
+        console.log('APPROVED IS:', this.state.approvedTweets)
+
+        if(status === "UNDECIDED"){
+            console.log('got undecided')
+
+            let undecidedTweets = allTweets.filter(function (filteredTweets) {
+              return filteredTweets.approved === null});
+            undecidedTweets = undecidedTweets.filter(function (filteredTweets) {
+              return Number(filteredTweets.publication_id) === pubId});
+            
+              this.setState({
+                tweetsArray: undecidedTweets,
+                key1: 0,
+                key2: 1,
+                key3: 2,
+              })
+
+          } else if (status === "APPROVED") {
+            console.log('got approved')
+
+            let approvedTweets = allTweets.filter(function (filteredTweets) {
+              return filteredTweets.approved === true});
+            approvedTweets = approvedTweets.filter(function (filteredTweets) {
+              return Number(filteredTweets.publication_id) === pubId});
+
+            this.setState({
+              tweetsArray: approvedTweets,
+              key1: 0,
+              key2: 1,
+              key3: 2,
+            })
+
+          } else if (status === "REJECTED") {
+            console.log('got rejected')
+
+            let rejectedTweets = allTweets.filter(function (filteredTweets) {
+              return filteredTweets.approved === false});
+            rejectedTweets = rejectedTweets.filter(function (filteredTweets) {
+              return Number(filteredTweets.publication_id) === pubId});
+
+            this.setState({
+              tweetsArray: rejectedTweets,
+              key1: 0,
+              key2: 1,
+              key3: 2,
+            })
         } else {
             return null;    
         }
+      this.setState({
+        status: status
+      })
     }
     
+
     render() {
       const { classes } = this.props;
       // prevents init reducer from throwing TypeError when calling 'findIndex'
@@ -134,16 +175,70 @@ class PublicationItem extends Component {
 
       return (
         <>
-          {/* {JSON.stringify(this.state.tweetsArray)} */}
-          <div className="content">
-            <h1>{this.props.publication[index].title}, {this.props.publication[index].author1} </h1>
-            <select id="status-select" onChange={this.handleSelect}>
+          {JSON.stringify(this.state.tweetsArray)}
+          {JSON.stringify(this.state.status)}
+          {JSON.stringify(this.state.approvedTweets)}
+          <h1 style={{margin:'20px'}}>{this.props.publication[index].title}, {this.props.publication[index].author1} </h1>
+          <div className="content" style={{display:'flex',margin:'20px'}}>
+          <Paper style={{maxWidth:'40%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
+            <Typography variant='h6'>
+              Total Tweets: 
+              <Typography variant='body1' component="span">
+                {' '}date
+              </Typography>
+            </Typography>
+            <Typography variant='h6'>
+              Approved Tweets: 
+              <Typography variant='body1' component="span">
+                {' '}date
+              </Typography>
+            </Typography>
+            <Typography variant='h6'>
+              Rejected Tweets: 
+              <Typography variant='body1' component="span">
+                {' '}date
+              </Typography>
+            </Typography>
+            <Typography variant='h6'>
+              Undecided Tweets: 
+              <Typography variant='body1' component="span">
+                {' '}date
+              </Typography>
+            </Typography>
+            <FormControl className={classes.formControl}>
+              <Select
+                onChange={this.handleSelect}
+                defaultValue='UNDECIDED'
+                id="status-select"
+              >
+                <MenuItem value='UNDECIDED'>Undecided</MenuItem>
+                <MenuItem value='APPROVED'>Approved</MenuItem>
+                <MenuItem value='REJECTED'>Rejected</MenuItem>
+              </Select>
+              <FormHelperText>Select Tweet Category</FormHelperText>
+            </FormControl>
+            {/* <select id="status-select" onChange={this.handleSelect}>
               <option value="NULL">Undecided</option>
               <option value="TRUE">Approved</option>
               <option value="FALSE">Rejected</option>
-            </select>
+            </select> */}
+          </Paper>
+          <Paper style={{maxWidth:'40%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
+            <Typography variant='h6'>
+              Last Search Date: 
+              <Typography variant='body1' component="span">
+                {' '}date
+              </Typography>
+            </Typography>
+            <Typography variant='h6'>
+              Searches Remaining: <Typography variant='body1' component="span">{this.props.user.rate_limit_remaining}</Typography>
+            </Typography>
             <InclusionToggle publicationId={this.props.match.params.id} include={this.props.publication[index].include}/>
+          </Paper>
           </div>
+            
+
+
           <button>Prev</button>
           <button>Next</button>
 
@@ -228,6 +323,7 @@ const mapStateToProps = (state) => ({
   errors: state.errors,
   publication: state.publication,
   dbTweets: state.dbTweets,
+  user: state.user,
 });
 
 export default connect(mapStateToProps)(withStyles(styles)(PublicationItem));
