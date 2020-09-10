@@ -7,7 +7,7 @@ import { TwitterTimelineEmbed, TwitterShareButton, TwitterFollowButton, TwitterH
 // import './mobile.css'
 import './plone5fixes.css'
 import './style.css'
-
+import './viewsource.css'
 
 class BookPageMock extends Component {
 
@@ -277,66 +277,69 @@ How sampling remade hip-hop over forty years, from pioneering superstar Grandmas
                       <a href="https://www.upress.umn.edu/journal-division" title>Journal Division</a>
                     </li></ul>
                 </div>
-                <a className="trigger-mobile">Menu</a>
+                {/* <a className="trigger-mobile">Menu</a> */}
                 <div id="mobile-nav">
                   <div id="primary_nav_mobile" className="primary_nav">
                     <ul>
                       <li id="portaltab-about-us-mobile" className="plain">
-                        <a href="https://www.upress.umn.edu/about-us" title="About the University of Minnesota Press, including our history, current editorial program, community and organizational partners, and staff. ">About the Press</a>
+                        {/* <a href="https://www.upress.umn.edu/about-us" title="About the University of Minnesota Press, including our history, current editorial program, community and organizational partners, and staff. ">About the Press</a> */}
                       </li>
                       <li id="portaltab-explore-mobile" className="plain">
-                        <a href="https://www.upress.umn.edu/explore" title="Search the University of Minnesota Press's wide-ranging catalog by combining your interest area selects among primary disciplines, secondary disciplines, and customized tags.">Explore Books</a>
+                        {/* <a href="https://www.upress.umn.edu/explore" title="Search the University of Minnesota Press's wide-ranging catalog by combining your interest area selects among primary disciplines, secondary disciplines, and customized tags.">Explore Books</a> */}
                       </li>
                       <li id="portaltab-press-mobile" className="plain">
-                        <a href="https://www.upress.umn.edu/press" title="Learn about University of Minnesota Press upcoming author events, book awards, book reviews, Press news, key publicity and media contacts, presskits, and how to sign up for media alerts.">News &amp; Events</a>
+                        {/* <a href="https://www.upress.umn.edu/press" title="Learn about University of Minnesota Press upcoming author events, book awards, book reviews, Press news, key publicity and media contacts, presskits, and how to sign up for media alerts.">News &amp; Events</a> */}
                       </li>
                       <li id="portaltab-information-mobile" className="plain">
-                        <a href="https://www.upress.umn.edu/information" title="Find current information about University of Minnesota Press author guidelines, desk and exam copies, permission requests, sales representatives, e-books for libraries, media requests, job openings. ">Information</a>
+                        {/* <a href="https://www.upress.umn.edu/information" title="Find current information about University of Minnesota Press author guidelines, desk and exam copies, permission requests, sales representatives, e-books for libraries, media requests, job openings. ">Information</a> */}
                       </li>
                       <li id="portaltab-book-division-mobile" className="plain">
-                        <a href="https://www.upress.umn.edu/book-division" title>Book Division</a>
+                        {/* <a href="https://www.upress.umn.edu/book-division" title>Book Division</a> */}
                       </li>
                       <li id="portaltab-test-division-mobile" className="plain">
-                        <a href="https://www.upress.umn.edu/test-division" title="Minnesota Multiphasic Personality Inventory-2 (MMPI-2) and Restructured Form (MMPI-2-RF), Multidimensional Personality Questionnaire (MPQ), Schedule for Nonadaptive and Adaptive Personality-2 (SNAP-2), MMPI Workshops and Annual Symposium, MTDDA (Minnesota Test for Differential Diagnosis of Aphasia)">Test Division</a>
+                        {/* <a href="https://www.upress.umn.edu/test-division" title="Minnesota Multiphasic Personality Inventory-2 (MMPI-2) and Restructured Form (MMPI-2-RF), Multidimensional Personality Questionnaire (MPQ), Schedule for Nonadaptive and Adaptive Personality-2 (SNAP-2), MMPI Workshops and Annual Symposium, MTDDA (Minnesota Test for Differential Diagnosis of Aphasia)">Test Division</a> */}
                       </li>
                       <li id="portaltab-journal-division" className="plain">
-                        <a href="https://www.upress.umn.edu/journal-division" title>Journal Division</a>
+                        {/* <a href="https://www.upress.umn.edu/journal-division" title>Journal Division</a> */}
                       </li>
                     </ul>
                   </div>
                   <div id="secondary_nav_mobile" className="secondary_nav">
                     <ul>
                       <li id="portaltab-index_html-mobile" className="selected">
-                        <a href="https://www.upress.umn.edu" title>Home</a>
+                        {/* <a href="https://www.upress.umn.edu" title>Home</a> */}
                       </li>
                       <li id="portaltab-current-catalogs-mobile" className="plain">
-                        <a href="https://www.upress.umn.edu/current-catalogs" title="Download PDFs and search through various subject catalogs from University of Minnesota Press. Most catalogs feature 30% off of all new trade, regional, and scholarly titles (please check expiration date before ordering).">Current Catalogs</a>
+                        {/* <a href="https://www.upress.umn.edu/current-catalogs" title="Download PDFs and search through various subject catalogs from University of Minnesota Press. Most catalogs feature 30% off of all new trade, regional, and scholarly titles (please check expiration date before ordering).">Current Catalogs</a> */}
                       </li>
                       <li id="portaltab-blog-mobile" className="plain">
-                        <a href="http://www.uminnpressblog.com/" title>Blog</a>
+                        {/* <a href="http://www.uminnpressblog.com/" title>Blog</a> */}
                       </li>
                     </ul>
                   </div>{/* /secondary_nav */}
                   <div id="cart_nav_mobile" className="cart_nav">
                     <ul>
-                      <li className="first"><a href="https://cdcshoppingcart.uchicago.edu/Cart2/Cart?PRESS=Minnesota" className="view-cart">View Cart</a></li>
-                      <li className="last"><a href="https://cdcshoppingcart.uchicago.edu/Cart2/Login?PRESS=Minnesota" className="checkout">Checkout</a></li>
+                      {/* <li className="first"><a href="https://cdcshoppingcart.uchicago.edu/Cart2/Cart?PRESS=Minnesota" className="view-cart">View Cart</a></li> */}
+                      {/* <li className="last"><a href="https://cdcshoppingcart.uchicago.edu/Cart2/Login?PRESS=Minnesota" className="checkout">Checkout</a></li> */}
                     </ul>
                     <dl className="actionMenu deactivated" />
                   </div>{/* /cart_nav */}
                 </div>
-                <div id="search"><div id="portal-searchbox">
-                    <form id="searchGadget_form" action="https://www.upress.umn.edu/@@search" role="search" data-pat-livesearch="ajaxUrl:https://www.upress.umn.edu/@@ajax-search" className="pat-livesearch">
-                      <div className="LSBox">
+                <div id="search">
+                  <div id="portal-searchbox">
+                    {/* <form id="searchGadget_form" action="https://www.upress.umn.edu/@@search" role="search" data-pat-livesearch="ajaxUrl:https://www.upress.umn.edu/@@ajax-search" > */}
+                        
                         <label className="hiddenStructure" htmlFor="searchGadget">Search Site</label>
+                        
                         <div className="searchSection">
                           <input id="searchbox_currentfolder_only" className="noborder" type="checkbox" name="path" defaultValue="/Plone/book-division/books/bring-that-beat-back" />
                           <label htmlFor="searchbox_currentfolder_only" style={{cursor: 'pointer'}}>only in current section</label>
                         </div>
+
                         <input name="SearchableText" type="text" size={18} id="searchGadget" title="Search Site" placeholder="Search Site" className="searchField" />
                         <input className="searchButton" type="submit" defaultValue="Search" />
-                      </div>
-                    </form>
+
+                    {/* </form> */}
                     <div id="portal-advanced-search" className="hiddenStructure">
                       <a href="https://www.upress.umn.edu/@@search">Advanced Search…</a>
                     </div>
@@ -373,25 +376,26 @@ How sampling remade hip-hop over forty years, from pioneering superstar Grandmas
                   </div> 
                 </div>
               </div><div id="content" className="full">
-                <h1>Bring That Beat Back</h1> 
-                <h2>How Sampling Built Hip-Hop</h2>
+                <h1>{this.props.bookData.title}</h1> 
+                <h2>{this.props.bookData.subtitle}</h2>
                 <div className="details"> 
                   <div className="pub"><strong>2020</strong></div> •
                   <div className="author">
                     <span>Author:</span>
-                    <div className="Contributors"><p>Nate Patrin</p></div>
+                    <div className="Contributors"><p>{this.props.bookData.author1}</p></div>
                   </div>
                 </div>{/* .details */}
                 <div id="slide_holder"> 
                   <div id="overview" className="slide">
-                    <a className="pat-plone-modal" data-pat-plone-modal="image: true; title: Cover image;" href="https://www.upress.umn.edu/book-division/books/bring-that-beat-back/image">
-                      <img src="https://www.upress.umn.edu/book-division/books/bring-that-beat-back/image_mini" alt="Bring That Beat Back" title="Bring That Beat Back" height={300} width={198} />
+                    <a className="pat-plone-modal" data-pat-plone-modal="image: true; title: Cover image;" href={'https://www.upress.umn.edu/book-division/books/'+this.props.bookData.urlTitle+'/image'}>
+                      <img src={'https://www.upress.umn.edu/book-division/books/'+this.props.bookData.urlTitle+'/image'} alt={this.props.bookData.title}  height={300} width={198} />
                     </a>
-                    <div className="customCopy webCopy"><h3><a href="https://open.spotify.com/playlist/7yPaB5Qjm4VYpT0bR5FVaL?si=hnVnHqGTTf-cEdK1vsh5zQ">SPOTIFY PLAYLIST: BRING THAT BEAT BACK</a></h3>
+                    <div className="customCopy webCopy">
+                      {/* <h3><a href="https://open.spotify.com/playlist/7yPaB5Qjm4VYpT0bR5FVaL?si=hnVnHqGTTf-cEdK1vsh5zQ">SPOTIFY PLAYLIST: BRING THAT BEAT BACK</a></h3> */}
                       <p><strong /></p>
-                      <p><strong>How sampling remade hip-hop over forty years, from pioneering superstar Grandmaster Flash through crate-digging preservationist and innovator Madlib</strong></p>
+                      <p><strong>{this.props.bookData.subtitle} is forty years, from pioneering superstar Grandmaster Flash through crate-digging preservationist and innovator Madlib</strong></p>
                       <p><span><em /></span></p>
-                      <p><span><em>Bring That Beat Back</em> traces the development of the transformative pop-cultural practice of sampling, from its origins in the turntable-manning, record-spinning hip-hop DJs of 1970s New York through forty years of musical innovation and reinvention. Nate Patrin tells the story of how sampling built hip-hop through the lens of four pivotal artists: Grandmaster Flash, Prince Paul, Dr. Dre, and Madlib.<br /><br /></span></p>
+                      <p><span><em>{this.props.bookData.title}</em> traces the development of the transformative pop-cultural practice of sampling, from its origins in the turntable-manning, record-spinning hip-hop DJs of 1970s New York through forty years of musical innovation and reinvention. Nate Patrin tells the story of how sampling built hip-hop through the lens of four pivotal artists: Grandmaster Flash, Prince Paul, Dr. Dre, and Madlib.<br /><br /></span></p>
                       <p className="p1 callout">"The rise of digital sampling is one of the most important musical development of the late twentieth century. Nate Patrin’s <i>Bring That Beat Back</i> is a rollicking, wide-ranging, and immensely readable history of sample-based music-making: its origins, its golden ages, and its enormous role in shaping modern popular music. This book is a must-read for hip-hop obsessives and casual listeners alike."<br /><strong>—Jack Hamilton</strong>, author of <i>Just around Midnight: Rock and Roll and the Racial Imagination</i></p></div>
                   </div>
                   {/* /overview.slide */} 
@@ -399,7 +403,7 @@ How sampling remade hip-hop over forty years, from pioneering superstar Grandmas
                     {/* /full details content */} 
                     <div id="details-image">
                       <div id="details-image-box" className="image-box">
-                        <img src="https://www.upress.umn.edu/book-division/books/bring-that-beat-back/image_cover_medium" alt="Bring That Beat Back" title="Bring That Beat Back" height={210} width={139} />
+                        <img src={'https://www.upress.umn.edu/book-division/books/'+this.props.bookData.urlTitle+'/image_mini'} alt={this.props.bookData.title} title={this.props.bookData.title} height={210} width={139} />
                       </div>
                       <div id="details-tags">
                         <h3>Tags</h3>
@@ -431,7 +435,7 @@ How sampling remade hip-hop over forty years, from pioneering superstar Grandmas
                   </div> 
                   <div id="author" className="slide"> 
                     <div id="author-image-box" className="image-box">
-                      <img src="https://www.upress.umn.edu/book-division/books/bring-that-beat-back/image_cover_medium" alt="Bring That Beat Back" title="Bring That Beat Back" height={210} width={139} />
+                      <img src={'https://www.upress.umn.edu/book-division/books/' + this.props.bookData.urlTitle +'/image_cover_medium'} alt="Bring That Beat Back" title="Bring That Beat Back" height={210} width={139} />
                     </div>
                     {/* /author biography content */}
                     <div className="author-bio"><p>
@@ -440,12 +444,12 @@ Nate Patrin is a longtime music critic whose writing has appeared in dozens of p
                   </div>
                   <div id="reviews" className="slide"> 
                     <div id="reviews-image-box" className="image-box">
-                      <img src="https://www.upress.umn.edu/book-division/books/bring-that-beat-back/image_cover_medium" alt="Bring That Beat Back" title="Bring That Beat Back" height={210} width={139} />
+                      <img src={'https://www.upress.umn.edu/book-division/books/' + this.props.bookData.urlTitle +'/image_cover_medium'} alt={this.props.bookData.title} title={this.props.bookData.title} height={210} width={139} />
                     </div>
                     {/* /.review */} 
                     <div className="review">
-                      <div className="review-text"><p>
-The rise of digital sampling is one of the most important musical development of the late twentieth century. Nate Patrin’s <em>Bring That Beat Back</em> is a rollicking, wide-ranging, and immensely readable history of sample-based music-making: its origins, its golden ages, and its enormous role in shaping modern popular music. This book is a must-read for hip-hop obsessives and casual listeners alike.
+                      <div ><p>
+The rise of {this.props.bookData.title} is one of the most important musical development of the late twentieth century. {this.props.bookData.author1} <em>{this.props.bookData.title}</em> is a rollicking, wide-ranging, and immensely readable history of sample-based music-making: its origins, its golden ages, and its enormous role in shaping modern popular music. This book is a must-read for hip-hop obsessives and casual listeners alike.
 </p></div>
                       <div className="review-source">—<p>
 Jack Hamilton, author of <em>Just around Midnight: Rock and Roll and the Racial Imagination</em>
@@ -595,7 +599,7 @@ Contents</p><p>
                     <li><a href="#">Author Bio</a></li> 
                     <li><a href="#">Reviews</a></li> 
                     <li><a href="#">Table of Contents</a></li> 
-                    <li><a href="#">Beyond the Book</a></li> 
+                    <li><a href="#">Twitter</a></li> 
                   </ul> 
                 </div> 
                 <div id="related_pubs"> 

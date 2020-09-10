@@ -284,7 +284,7 @@ hr {margin:0px 28px; }
 .wrapper #main #header #search form ol li label {color:#fff; display:block; float:left; font-size:14.4px; font-weight:normal; padding-right:5px; }
 .wrapper #main #header #search form ol li a {bottom:10px; color:#fff; display:block; font-size:13.2px; position:absolute; right:9px; text-transform:lowercase; }
 .wrapper #main #header #search form ol li a:hover {text-decoration:underline; }
-.wrapper #main #header #search form input#searchGadget {color:#646360; font-size:13.2px; width:150px; position: relative; top: -36px;}
+.wrapper #main #header #search form input#searchGadget { font-size:13.2px; width:150px; position: relative; top: -45px;}
 .wrapper #main #header #search form input.searchButton {background:url('./_images/search-go.gif') top left no-repeat; border:none; bottom:0px; color:#b76c0d; cursor:pointer; display:block; font-size:1px; height:20px; position:absolute; right:0px; text-align:left; text-indent:-10000px; width:28px; }
 .wrapper #main #header #search form input.searchButton:hover {background-position:0px -20px; }
 .wrapper #main #header #search form .searchSection {padding-top:9px; position: relative; top: 15px;}
@@ -830,7 +830,7 @@ div.listingBar a, nav.pagination a {
 .wrapper #main #content #purchase a#ebooks-link {background:url('./_images/about-ebooks.gif') top left no-repeat; clear:both; color:#676460; display:block; font-size:13.2px; font-weight:bold; height:27px; line-height:32.4px; margin:15px 10px; padding-left:40px;  width:115px; }
 
 .wrapper #main #content #slide_nav {background-color:#c3c0bd; border-bottom:7px solid #7b2e00; clear:both; display:block; height:44px; width:830px; }
-/* .wrapper #main #content #slide_nav h3 {background:url('./_images/label-about-book.gif') top left no-repeat; display:block; float:left; height:44px; margin:0px; padding:0px; text-indent:-10000px; width:102px; } */
+.wrapper #main #content #slide_nav h3 {background:url('./_images/label-about-book.gif') top left no-repeat; display:block; float:left; height:44px; margin:0px; padding:0px; text-indent:-10000px; width:102px; }
 /* .portaltype-series .wrapper #main #content #slide_nav h3 {background:url('./_images/label-about-series.gif') top left no-repeat; } */
 .wrapper #main #content #slide_nav ul,
 .wrapper #main #content #slide_nav ul li {list-style-type:none; list-style-image:none; margin:0px; padding:0px; }
