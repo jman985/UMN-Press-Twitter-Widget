@@ -118,7 +118,6 @@ class PublicationItem extends Component {
       let pubId = Number(this.props.match.params.id);
       let thisPublication = this.props.publication.filter(function (book) {
         return book.id === pubId})
-      console.log('in search tweets')
       this.props.dispatch({
         type: 'FETCH_TWEETS', 
         payload: thisPublication,
