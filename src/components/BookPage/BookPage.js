@@ -14,7 +14,7 @@ import Tab from '@material-ui/core/Tab';
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
-import BookPageMock from '../HTMLDemoPage/BookPageMock';
+import BookPageMock from '../BookPageMock/BookPageMock';
 // import './BookPage.css'
 
 const styles = theme => ({

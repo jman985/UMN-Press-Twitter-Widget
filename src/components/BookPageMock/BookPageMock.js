@@ -9,6 +9,8 @@ import './plone5fixes.css'
 import './style.css'
 import './viewsource.css'
 
+
+
 class BookPageMock extends Component {
 
   componentDidMount () {
@@ -17,6 +19,13 @@ class BookPageMock extends Component {
     this.props.dispatch({type: 'FETCH_TWEET_IDS', payload: this.props.match.params.publication_id});
     this.props.dispatch({type: 'FETCH_BOOK_DATA', payload: this.props.match.params.publication_id});
 
+  }
+
+  reverseAuthor = (name) =>{
+
+    console.log(name);
+    
+    return name
   }
     
   render () {
@@ -36,9 +45,9 @@ How sampling remade hip-hop over forty years, from pioneering superstar Grandmas
 How sampling remade hip-hop over forty years, from pioneering superstar Grandmaster Flash through crate-digging preservationist and innovator Madlib
  " /><meta name="DC.format" content="text/plain" /><meta name="DC.type" content="Book" /><meta name="keywords" content="2020 Humanities and Arts catalog, 2020 Spring, 2020 Sociology catalog" /><meta name="DC.date.modified" content="2020-07-13T10:26:25-05:00" /><meta name="DC.subject" content="2020 Humanities and Arts catalog, 2020 Spring, 2020 Sociology catalog" /><meta name="DC.date.created" content="2019-11-04T12:48:11-05:00" /><meta name="DC.language" content="en" /><meta content="summary" name="twitter:card" /><meta content="University of Minnesota Press" property="og:site_name" /><meta content="Bring That Beat Back" property="og:title" /><meta content="website" property="og:type" /><meta content=" 
 How sampling remade hip-hop over forty years, from pioneering superstar Grandmaster Flash through crate-digging preservationist and innovator Madlib
- " property="og:description" /><meta content="https://www.upress.umn.edu/book-division/books/bring-that-beat-back" property="og:url" /><meta content="https://www.upress.umn.edu/logo.png" property="og:image" /><meta content="image/png" property="og:image:type" /><meta property="og:title" content="Bring That Beat Back" /><meta property="og:url" content="https://www.upress.umn.edu/book-division/books/bring-that-beat-back" /><meta property="og:image" content="https://www.upress.umn.edu/book-division/books/bring-that-beat-back/image_large" /><meta property="og:site_name" content="University of Minnesota Press" /><meta property="og:description" content=" 
+ " property="og:description" /><meta content={'https://www.upress.umn.edu/book-division/books/' + this.props.bookData.urlTitle} property="og:url" /><meta content="https://www.upress.umn.edu/logo.png" property="og:image" /><meta content="image/png" property="og:image:type" /><meta property="og:title" content={this.props.bookData.title} /><meta property="og:url" content={"https://www.upress.umn.edu/book-division/books/"+this.props.bookData.urlTitle} /><meta property="og:image" content="https://www.upress.umn.edu/book-division/books/bring-that-beat-back/image_large" /><meta property="og:site_name" content="University of Minnesota Press" /><meta property="og:description" content=" 
 How sampling remade hip-hop over forty years, from pioneering superstar Grandmaster Flash through crate-digging preservationist and innovator Madlib
- " /><link rel="canonical" href="https://www.upress.umn.edu/book-division/books/bring-that-beat-back" /><link rel="shortcut icon" type="image/x-icon" href="https://www.upress.umn.edu/favicon.ico" /><link rel="apple-touch-icon" href="https://www.upress.umn.edu/touch_icon.png" /><link rel="search" href="https://www.upress.umn.edu/@@search" title="Search this site" /><link rel="stylesheet" type="text/css" href="https://www.upress.umn.edu/++plone++production/++unique++2020-01-24T10:17:06.181013/default.css" data-bundle="production" /><link rel="stylesheet" type="text/css" href="https://www.upress.umn.edu/++plone++static/++unique++2020-01-09%2023%3A33%3A20.258926/plone-compiled.css" data-bundle="plone" /><link rel="stylesheet" type="text/css" href="https://www.upress.umn.edu/++plone++static/++unique++2020-01-10%2000%3A30%3A03.761631/plone-legacy-compiled.css" data-bundle="plone-legacy" /><link rel="stylesheet" type="text/css" href="https://www.upress.umn.edu/collective.js.jqueryui.custom.min.css?version=None" data-bundle="jqueryui" /><link rel="stylesheet" type="text/css" href="https://www.upress.umn.edu/++resource++jazkarta.shop/shop-compiled.css?version=None" data-bundle="jazkarta-shop" /><link rel="stylesheet" type="text/css" href="https://www.upress.umn.edu/++plone++static/++unique++2020-01-10%2000%3A30%3A11.502939/faceted-jquery-compiled.css" data-bundle="faceted-jquery" /><link rel="stylesheet" type="text/css" href="https://www.upress.umn.edu/++plone++static/++unique++2020-01-10%2000%3A31%3A05.901358/faceted-view.min.css" data-bundle="faceted-view" /><meta name="generator" content="Plone - http://plone.com" />
+ " /><link rel="canonical" href={'https://www.upress.umn.edu/book-division/books/'+ this.props.bookData.urlTitle} /><link rel="shortcut icon" type="image/x-icon" href="https://www.upress.umn.edu/favicon.ico" /><link rel="apple-touch-icon" href="https://www.upress.umn.edu/touch_icon.png" /><link rel="search" href="https://www.upress.umn.edu/@@search" title="Search this site" /><link rel="stylesheet" type="text/css" href="https://www.upress.umn.edu/++plone++production/++unique++2020-01-24T10:17:06.181013/default.css" data-bundle="production" /><link rel="stylesheet" type="text/css" href="https://www.upress.umn.edu/++plone++static/++unique++2020-01-09%2023%3A33%3A20.258926/plone-compiled.css" data-bundle="plone" /><link rel="stylesheet" type="text/css" href="https://www.upress.umn.edu/++plone++static/++unique++2020-01-10%2000%3A30%3A03.761631/plone-legacy-compiled.css" data-bundle="plone-legacy" /><link rel="stylesheet" type="text/css" href="https://www.upress.umn.edu/collective.js.jqueryui.custom.min.css?version=None" data-bundle="jqueryui" /><link rel="stylesheet" type="text/css" href="https://www.upress.umn.edu/++resource++jazkarta.shop/shop-compiled.css?version=None" data-bundle="jazkarta-shop" /><link rel="stylesheet" type="text/css" href="https://www.upress.umn.edu/++plone++static/++unique++2020-01-10%2000%3A30%3A11.502939/faceted-jquery-compiled.css" data-bundle="faceted-jquery" /><link rel="stylesheet" type="text/css" href="https://www.upress.umn.edu/++plone++static/++unique++2020-01-10%2000%3A31%3A05.901358/faceted-view.min.css" data-bundle="faceted-view" /><meta name="generator" content="Plone - http://plone.com" />
         <div className="body_wrapper">
           <div className="wrapper">
             <div id="sidebar-wrapper">
@@ -358,7 +367,7 @@ How sampling remade hip-hop over forty years, from pioneering superstar Grandmas
                           <a href="https://www.upress.umn.edu/book-division/books">Books</a>
                         </li>
                         <li id="breadcrumbs-3">
-                          <span id="breadcrumbs-current">Bring That Beat Back</span>
+                          <span id="breadcrumbs-current">{this.props.bookData.title}</span>
                         </li>
                       </ol>
                     </div>
@@ -376,13 +385,17 @@ How sampling remade hip-hop over forty years, from pioneering superstar Grandmas
                   </div> 
                 </div>
               </div><div id="content" className="full">
-                <h1>{this.props.bookData.title}</h1> 
-                <h2>{this.props.bookData.subtitle}</h2>
+                <h1>{this.props.bookData.title}</h1>
+
+                {this.props.bookData.subtitle ? 
+                <h2>{this.props.bookData.subtitle}</h2>:
+                            ''   }
+
                 <div className="details"> 
-                  <div className="pub"><strong>2020</strong></div> •
+                  <div className="pub"><strong>2020</strong></div> • &nbsp;
                   <div className="author">
                     <span>Author:</span>
-                    <div className="Contributors"><p>{this.props.bookData.author1}</p></div>
+                    <div className="Contributors"><p>{this.props.bookData.authorName}</p></div>
                   </div>
                 </div>{/* .details */}
                 <div id="slide_holder"> 
@@ -393,10 +406,26 @@ How sampling remade hip-hop over forty years, from pioneering superstar Grandmas
                     <div className="customCopy webCopy">
                       {/* <h3><a href="https://open.spotify.com/playlist/7yPaB5Qjm4VYpT0bR5FVaL?si=hnVnHqGTTf-cEdK1vsh5zQ">SPOTIFY PLAYLIST: BRING THAT BEAT BACK</a></h3> */}
                       <p><strong /></p>
-                      <p><strong>{this.props.bookData.subtitle} is forty years, from pioneering superstar Grandmaster Flash through crate-digging preservationist and innovator Madlib</strong></p>
+                      <p><strong><em>{this.props.bookData.title}</em> 
+                      {this.props.bookData.subtitle ? <em>: {this.props.bookData.subtitle}</em> 
+                      : ''}is forty years, from pioneering through crate-digging preservationist and innovation.</strong></p>
                       <p><span><em /></span></p>
-                      <p><span><em>{this.props.bookData.title}</em> traces the development of the transformative pop-cultural practice of sampling, from its origins in the turntable-manning, record-spinning hip-hop DJs of 1970s New York through forty years of musical innovation and reinvention. Nate Patrin tells the story of how sampling built hip-hop through the lens of four pivotal artists: Grandmaster Flash, Prince Paul, Dr. Dre, and Madlib.<br /><br /></span></p>
-                      <p className="p1 callout">"The rise of digital sampling is one of the most important musical development of the late twentieth century. Nate Patrin’s <i>Bring That Beat Back</i> is a rollicking, wide-ranging, and immensely readable history of sample-based music-making: its origins, its golden ages, and its enormous role in shaping modern popular music. This book is a must-read for hip-hop obsessives and casual listeners alike."<br /><strong>—Jack Hamilton</strong>, author of <i>Just around Midnight: Rock and Roll and the Racial Imagination</i></p></div>
+                      <p><span><em>{this.props.bookData.title}</em> traces the development of the transformative pop-cultural practice of sampling, 
+                      from its origins in the turntable-manning, record-spinning hip-hop DJs of 1970s New York through forty years of musical innovation and reinvention. 
+                      {this.props.bookData.authorName} tells the story of how sampling built hip-hop through the lens of four pivotal artists: Grandmaster Flash, Prince Paul, Dr. Dre, and Madlib.<br /><br /></span></p>
+                      
+                      <br></br>
+                      <br></br>
+                      <br></br>
+
+                      {/* <p className="p1 callout">"The rise of digital sampling is one of the most important musical development of the late twentieth century. 
+                      Nate Patrin’s <i>{this.props.bookData.title}</i> is a rollicking, wide-ranging, and immensely readable history of sample-based music-making: 
+                      its origins, its golden ages, and its enormous role in shaping modern popular music. 
+                      This book is a must-read for hip-hop obsessives and casual listeners alike."
+                      
+                      <br /><strong>—Jack Hamilton</strong>, author of <i>Just around Midnight: Rock and Roll and the Racial Imagination</i></p> */}
+                      
+                      </div>
                   </div>
                   {/* /overview.slide */} 
                   <div id="details" className="slide"> 
@@ -482,7 +511,7 @@ Jeff Weiss, founder and editor of POW (Passion of the Weiss)
                   </div> 
                   <div id="toc" className="slide"> 
                     <div id="toc-image-box" className="image-box">
-                      <img src="https://www.upress.umn.edu/book-division/books/bring-that-beat-back/image_cover_medium" alt="Bring That Beat Back" title="Bring That Beat Back" height={210} width={139} />
+                      <img src={'https://www.upress.umn.edu/book-division/books/'+this.props.bookData.urlTitle+ '/image_cover_medium'} alt={this.props.bookData.title} title={this.props.bookData.title} height={210} width={139} />
                     </div>
                     {/* /table of contents */} 
                     <div className="toc">
@@ -561,11 +590,11 @@ Contents</p><p>
                   </div> 
                   <div id="materials" className="slide">
                     <div id="materials-image-box" className="image-box">
-                      <img src="https://www.upress.umn.edu/book-division/books/bring-that-beat-back/image_cover_medium" alt="Bring That Beat Back" title="Bring That Beat Back" height={210} width={139} />
+                      <img src={"https://www.upress.umn.edu/book-division/books/" + this.props.bookData.urlTitle + "/image_cover_medium"} alt={this.props.bookData.title} title={this.props.bookData.title} height={210} width={139} />
                     </div>
-                    <div id="materials-text"><h3><a href="https://open.spotify.com/playlist/7yPaB5Qjm4VYpT0bR5FVaL?si=hnVnHqGTTf-cEdK1vsh5zQ">SPOTIFY PLAYLIST: BRING THAT BEAT BACK</a></h3></div>
-                    {/* /related materials */} 
-                  </div> 
+                    <div id="materials-text"></div>
+                      <p>tweets</p>                  
+                    </div> 
                 </div>{/* /slide_holder */}
                 <div id="purchase">
                   <h3>Purchase</h3>
@@ -599,7 +628,7 @@ Contents</p><p>
                     <li><a href="#">Author Bio</a></li> 
                     <li><a href="#">Reviews</a></li> 
                     <li><a href="#">Table of Contents</a></li> 
-                    <li><a href="#">Twitter</a></li> 
+                    <li><a href="">Twitter</a></li> 
                   </ul> 
                 </div> 
                 <div id="related_pubs"> 

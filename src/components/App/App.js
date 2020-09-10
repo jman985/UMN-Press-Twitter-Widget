@@ -22,7 +22,7 @@ import TweetsPage from "../TweetsPage/TweetsPage";
 
 import "./App.css";
 import BookPage from "../../components/BookPage/BookPage";
-import BookPageMock from "../HTMLDemoPage/BookPageMock";
+import BookPageMock from "../BookPageMock/BookPageMock";
 
 class App extends Component {
   componentDidMount() {
