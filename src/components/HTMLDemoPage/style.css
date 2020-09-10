@@ -70,7 +70,7 @@ div.body_wrapper {background:url('./_images/bg-body5.jpg') center -1px no-repeat
 /* option 7 - standard */
 
 /* body {background:url('./_images/bg-header7.gif') top left repeat-x transparent; } */
-div.body_wrapper {background:url('./_images/bg-body7.jpg') center -1px no-repeat transparent; -webkit-background-size:1798px 1300px; }
+div.body_wrapper {background:url('./_images/bg-body.jpg') center -1px no-repeat transparent; -webkit-background-size:1798px 1300px; }
 /* #footer {background:url('./_images/bg-footer7.jpg') bottom center no-repeat #bd6423;  } */
 body.mce-content-body {background: none;}
 

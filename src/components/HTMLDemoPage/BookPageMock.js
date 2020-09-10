@@ -44,7 +44,7 @@ How sampling remade hip-hop over forty years, from pioneering superstar Grandmas
             <div id="sidebar-wrapper">
               <div id="sidebar">
                 <h1 id="logo"><a href="https://www.upress.umn.edu" title="University of Minnesota Press">University of Minnesota Press</a></h1>
-                <div className="block nav">
+                <div className="block_nav">
                   <div className="portletWrapper" id="portletwrapper-706c6f6e652e6c656674636f6c756d6e0a636f6e746578740a2f506c6f6e650a636f6d696e672d736f6f6e" data-portlethash="706c6f6e652e6c656674636f6c756d6e0a636f6e746578740a2f506c6f6e650a636f6d696e672d736f6f6e"><div className="portletStaticText portlet-static-coming-soon"><p><a href="https://www.upress.umn.edu/book-division/collections/forthcoming-from-ump" className="internal-link" id="forthcoming-titles">Coming soon</a></p></div>
                   </div>
                   <div className="portletWrapper" id="portletwrapper-706c6f6e652e6c656674636f6c756d6e0a636f6e746578740a2f506c6f6e650a6e617669676174696f6e" data-portlethash="706c6f6e652e6c656674636f6c756d6e0a636f6e746578740a2f506c6f6e650a6e617669676174696f6e">
