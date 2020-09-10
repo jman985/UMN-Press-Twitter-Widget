@@ -8,14 +8,13 @@ import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import {withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const styles = theme => ({
+const styles = (theme) => ({
   toggleContainer: {
-    height: 56,
-    width: 56,
-    padding: `${theme.spacing.unit*2}px ${theme.spacing.unit * 3}px`,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
+    height: 32,
+    width: 32,
+    padding: '5px',
+    display: "flex",
+    alignItems: "center",
     margin: `auto`,
   },
 });
