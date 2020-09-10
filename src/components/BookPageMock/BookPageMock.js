@@ -3,13 +3,44 @@ import ReactDOM from "react-dom";
 import { HashRouter as Router, Route, Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { withRouter } from "react-router";
+import { withStyles } from '@material-ui/styles';
 import { TwitterTimelineEmbed, TwitterShareButton, TwitterFollowButton, TwitterHashtagButton, TwitterMentionButton, TwitterTweetEmbed, TwitterMomentShare, TwitterDMButton, TwitterVideoEmbed, TwitterOnAirButton } from 'react-twitter-embed';
+import Typography from '@material-ui/core/Typography';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import Button from '@material-ui/core/Button';
+import CardContent from '@material-ui/core/CardContent';
+import Card from '@material-ui/core/Card';
+import PropTypes from 'prop-types';
+
 // import './mobile.css'
 import './plone5fixes.css'
 import './style.css'
 import './viewsource.css'
 
-
+const styles = theme => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
+    backgroundColor: theme.palette.background.paper,
+  },
+  card: {
+    minWidth: 275,
+    margin: '15px'
+  },
+  gridList: {
+    width: 500,
+    height: 450,
+  },
+  icon: {
+    color: 'rgba(255, 255, 255, 0.54)',
+  },
+  title: {
+    fontSize: 14,
+  },
+});
 
 class BookPageMock extends Component {
 
@@ -29,6 +60,7 @@ class BookPageMock extends Component {
   }
     
   render () {
+    const { classes } = this.props;
 
     return(
       <>
@@ -594,7 +626,8 @@ Contents</p><p>
                       <img src={"https://www.upress.umn.edu/book-division/books/" + this.props.bookData.urlTitle + "/image_cover_medium"} alt={this.props.bookData.title} title={this.props.bookData.title} height={210} width={139} />
                     </div>
                     <div id="materials-text"></div>
-                      <p>tweets</p>                  
+                      <p>tweets</p> 
+                                       
                     </div> 
                 </div>{/* /slide_holder */}
                 <div id="purchase">
@@ -616,9 +649,25 @@ Contents</p><p>
                     </div>
                   </div>
                   <a id="ebooks-link" className="pat-plone-modal" href="https://www.upress.umn.edu/information/buy-ebooks" data-pat-plone-modal="title: About E-books;">About E-books</a>
-                  <iframe srcdoc='<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Bring The Beat Back: How Sampling Built Hip-Hop author <a href="https://twitter.com/natepatrin?ref_src=twsrc%5Etfw">@natepatrin</a> compiles Adidas In The Pit/Punk Meets Hip-Hop Playlist <a href="https://t.co/XJVaAa6RVh">https://t.co/XJVaAa6RVh</a> <a href="https://t.co/brNraum1M7">pic.twitter.com/brNraum1M7</a></p>&mdash; Matt Horowitz (@SharpCheddar856) <a href="https://twitter.com/SharpCheddar856/status/1299014643143368704?ref_src=twsrc%5Etfw">August 27, 2020</a></blockquote> 
+                  
+                  
+                  
+          <Card style={{width:'255px',height:'300px',backgroundColor:'#f3f3f3'}}>
+            <CardContent style={{display:"flex", flexDirection:'column',justifyContent:'space-between',height:'100%'}}>
+              <CardActionArea >
+              </CardActionArea>
+                <div style={{maxHeight:"300px", overflow:"auto"}}>
+                <TwitterTweetEmbed tweetId={'1303767134099705856'}
+                      options={{width: 250}}/>
+                </div> 
+            </CardContent>   
+          </Card>
+
+                  {/* <iframe srcdoc='<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Bring The Beat Back: How Sampling Built Hip-Hop author <a href="https://twitter.com/natepatrin?ref_src=twsrc%5Etfw">@natepatrin</a> compiles Adidas In The Pit/Punk Meets Hip-Hop Playlist <a href="https://t.co/XJVaAa6RVh">https://t.co/XJVaAa6RVh</a> <a href="https://t.co/brNraum1M7">pic.twitter.com/brNraum1M7</a></p>&mdash; Matt Horowitz (@SharpCheddar856) <a href="https://twitter.com/SharpCheddar856/status/1299014643143368704?ref_src=twsrc%5Etfw">August 27, 2020</a></blockquote> 
                   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script><blockquote class="twitter-tweet"><p lang="en" dir="ltr">&#39;The Unseen,&#39; the debut album from <a href="https://twitter.com/madlib?ref_src=twsrc%5Etfw">@madlib</a>&#39;s rap alter ego Quasimoto, turns 20 this weekend. In an excerpt from his new book &#39;Bring That Beat Back: How Sampling Built Hip-Hop,&#39; <a href="https://twitter.com/natepatrin?ref_src=twsrc%5Etfw">@natepatrin</a> revisits the landmark LP: <a href="https://t.co/bYrCZ7fLv2">https://t.co/bYrCZ7fLv2</a> <a href="https://t.co/Whqlun1KQe">pic.twitter.com/Whqlun1KQe</a></p>&mdash; Stereogum (@stereogum) <a href="https://twitter.com/stereogum/status/1271101162268299265?ref_src=twsrc%5Etfw">June 11, 2020</a></blockquote> 
                   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>' title="widget" height="330px" width="255px" />
+                 */}
+                
                 </div>
             
                 <div id="slide_nav"> 
@@ -629,7 +678,9 @@ Contents</p><p>
                     <li><a href="#">Author Bio</a></li> 
                     <li><a href="#">Reviews</a></li> 
                     <li><a href="#">Table of Contents</a></li> 
-                    <li><a href="">Twitter</a></li> 
+                    <li><a href="#">Beyond the Book</a></li>
+                    {/* <li><a href="">Twitter</a></li>  */}
+
                   </ul> 
                 </div> 
                 <div id="related_pubs"> 
@@ -642,8 +693,8 @@ Contents</p><p>
                     <a className="itemTitle" href="https://www.upress.umn.edu/book-division/books/got-to-be-something-here">Got to Be Something Here</a>
                     <span className="subTitle">The Rise of the Minneapolis Sound</span>
                     <span className="description"> 
-The story, from start to superstardom, of the musicians who shaped the Minneapolis Sound
- </span>
+                    The story, from start to superstardom, of the musicians who shaped the Minneapolis Sound
+                  </span>
                   </div>
                   <div>
                     <a className="CoverImage" href="https://www.upress.umn.edu/book-division/books/murray-talks-music">
@@ -965,7 +1016,9 @@ Rediscover the astute and passionate music writings of the pioneering rock criti
     </>
     )}}
 
-    
+    BookPageMock.propTypes = {
+      classes: PropTypes.object.isRequired,
+    };
     const mapStateToProps = state => ({
       selectTweetID: state.selectTweetID,
       bookData: state.bookData

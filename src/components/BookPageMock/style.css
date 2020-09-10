@@ -70,7 +70,7 @@ div.body_wrapper {background:url('./_images/bg-body5.jpg') center -1px no-repeat
 /* option 7 - standard */
 
 /* body {background:url('./_images/bg-header7.gif') top left repeat-x transparent; } */
-div.body_wrapper {background:url('./_images/bg-body.jpg') center -1px no-repeat transparent; -webkit-background-size:1798px 1300px; }
+div.body_wrapper {background:url('./_images/bg-body.jpg') center -1px no-repeat transparent; -webkit-background-size:1875px 1300px; }
 /* #footer {background:url('./_images/bg-footer7.jpg') bottom center no-repeat #bd6423;  } */
 body.mce-content-body {background: none;}
 
@@ -158,7 +158,7 @@ body#plonebrowser div#footer {
 /*universal elements*/
 a {outline:none; }
 .hidden {display:none; }
-.wrapper {display:block; margin:0px auto; width:985px; overflow: hidden;}
+.wrapper {display:block; margin:0px auto; width:1025px; overflow: hidden;}
 .wrapper #main {display: block; float: left; width: 830px;}
 .CoverImage img {border:1px solid #ddd; max-width: 93%; height: auto; object-fit: contain;}
 hr {margin:0px 28px; }
