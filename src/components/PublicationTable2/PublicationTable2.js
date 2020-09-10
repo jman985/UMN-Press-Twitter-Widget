@@ -86,7 +86,7 @@ class PublicationTable2 extends Component {
     
     let relatedTweets = this.props.dbTweets.filter(function (filteredTweets) {
       return Number(filteredTweets.publication_id) === Number(bookId)});
-    console.log('in tweet count', relatedTweets.length)
+    // console.log('in tweet count', relatedTweets.length)
     return relatedTweets.length;
   }
 
