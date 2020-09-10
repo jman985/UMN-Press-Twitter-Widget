@@ -213,6 +213,24 @@ class PublicationItem extends Component {
       })
     }
     
+    seekPages = (input) => {
+        // event.preventDefault();
+        if (input === 'next'){
+            this.setState({
+                key1: this.state.key1 + 3,
+                key2: this.state.key2 + 3,
+                key3: this.state.key3 + 3,
+            })
+        } else if (input === 'prev'){
+            this.setState({
+                key1: this.state.key1 - 3,
+                key2: this.state.key2 - 3,
+                key3: this.state.key3 - 3,
+            })
+    
+        }
+        console.log('slots:', this.state);
+    }
 
     render() {
       const { classes } = this.props;
@@ -228,7 +246,7 @@ class PublicationItem extends Component {
 
       return (
         <>
-          {/* {JSON.stringify(this.state.tweetsArray)} */}
+          {JSON.stringify(this.state.tweetsArray)}
 
           <h1 style={{margin:'20px'}}>{this.props.publication[index].title}, {this.props.publication[index].author1} </h1>
           <div className="content" style={{display:'flex',margin:'20px'}}>
@@ -288,9 +306,10 @@ class PublicationItem extends Component {
           </div>
             
 
-
-          <button>Prev</button>
-          <button>Next</button>
+          <div>
+            <button onClick={()=>this.seekPages('prev')}>Prev</button>
+            <button onClick={()=>this.seekPages('next')}>Next</button>
+          </div>
 
           <div className={classes.root} style={{display: "flex",flexWrap: "wrap",justifyContent:'center'}}>
             <div key={this.state.status+1} style={{display:'flex'}}>
