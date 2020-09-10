@@ -59,6 +59,10 @@ class PublicationTable2 extends Component {
     pageStart: 0
   }
 
+  componentDidMount(){
+    this.props.dispatch({type: 'FETCH_DATABASE_TWEETS'})
+  }
+
   determineLastSearch = (sqlDate) => {
    
       let readableTime = new Date(sqlDate)
@@ -76,6 +80,14 @@ class PublicationTable2 extends Component {
     else if (direction === 'backward' && this.state.pageStart > 0) {
       this.setState({pageStart: this.state.pageStart - 100})
     }
+  }
+
+  tweetCount = (bookId) =>{
+    
+    let relatedTweets = this.props.dbTweets.filter(function (filteredTweets) {
+      return Number(filteredTweets.publication_id) === Number(bookId)});
+    console.log('in tweet count', relatedTweets.length)
+    return relatedTweets.length;
   }
 
   render() {
@@ -102,6 +114,7 @@ class PublicationTable2 extends Component {
                   <CustomTableCell>Subtitle</CustomTableCell>
                   <CustomTableCell>Author</CustomTableCell>
                   <CustomTableCell>Last Searched</CustomTableCell>
+                  <CustomTableCell>Tweets</CustomTableCell>
                   <CustomTableCell>Include/Exclude</CustomTableCell>
                 </TableRow>
               </TableHead>
@@ -123,6 +136,11 @@ class PublicationTable2 extends Component {
                       {book.last_searched == null
                         ? "No searches yet"
                         : this.determineLastSearch(book.last_searched)}
+                    </TableCell>
+                    <TableCell align="left">
+                      {this.tweetCount(book.id) === 0
+                        ? 'No Tweets Found'
+                        : this.tweetCount(book.id)}
                     </TableCell>
                     <TableCell>
                       <InclusionToggle
@@ -147,6 +165,7 @@ class PublicationTable2 extends Component {
 const mapStateToProps = (state) => ({
   user: state.user,
   publication: state.publication,
+  dbTweets: state.dbTweets
 });
 
 // this allows us to use <App /> in index.js

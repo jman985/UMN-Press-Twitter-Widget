@@ -108,6 +108,7 @@ function* saveTweets(action){
             publicationId: publicationId,
           });
         }
+        yield put({ type:'FETCH_DATABASE_TWEETS'});
       }
     }
   } catch (error) {
