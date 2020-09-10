@@ -246,7 +246,7 @@ class PublicationItem extends Component {
 
       return (
         <>
-          {JSON.stringify(this.state.tweetsArray)}
+          {/* {JSON.stringify(this.state.tweetsArray)} */}
 
           <h1 style={{margin:'20px'}}>{this.props.publication[index].title}, {this.props.publication[index].author1} </h1>
           <div className="content" style={{display:'flex',margin:'20px'}}>
