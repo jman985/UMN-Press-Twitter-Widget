@@ -308,7 +308,7 @@ class PublicationItem extends Component {
 
           <div>
             <button onClick={()=>this.seekPages('next')}>Next</button>
-            {this.state.key1 === Number(0) ? '' : <button onClick={()=>this.seekPages('prev')}>Prev</button> }
+            {this.state.key1 === Number(0) ? '' : <button onClick={()=>this.seekPages('prev')}>Prev</button>}
           </div>
 
           <div className={classes.root} style={{display: "flex",flexWrap: "wrap",justifyContent:'center'}}>
