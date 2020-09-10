@@ -10,12 +10,11 @@ import { connect } from "react-redux";
 
 const styles = (theme) => ({
   toggleContainer: {
-    height: 56,
-    width: 56,
-    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px`,
+    height: 32,
+    width: 32,
+    padding: '5px',
     display: "flex",
     alignItems: "center",
-    justifyContent: "flex-right",
     margin: `auto`,
   },
 });

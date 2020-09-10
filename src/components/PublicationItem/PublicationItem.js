@@ -91,12 +91,13 @@ class PublicationItem extends Component {
           return book.id === pubId})
 
         let sqlDate = 0
+        let readableTime = 0
         if (lastSearched[0] !== undefined) {
           sqlDate = new Date(lastSearched[0].last_searched)
+          let date = sqlDate.toLocaleDateString()
+          let time = sqlDate.toLocaleTimeString()
+          readableTime = date + ' at ' + time
         }
-        let date = sqlDate.toLocaleDateString()
-        let time = sqlDate.toLocaleTimeString()
-        let readableTime = date + ' at ' + time
 
           // get an inital count of all the tweet categories and set the undecided tweets to be the tweetsArray
         if (this.state.status === "UNDECIDED") {
@@ -111,6 +112,19 @@ class PublicationItem extends Component {
         }
       }
     } 
+
+    searchTweets = () => {
+      //filter this publication from all of them
+      let pubId = Number(this.props.match.params.id);
+      let thisPublication = this.props.publication.filter(function (book) {
+        return book.id === pubId})
+      this.props.dispatch({
+        type: 'FETCH_TWEETS', 
+        payload: thisPublication,
+        userId: this.props.user.id, 
+        limit: 1
+      });
+    }
 
 
     handleApprove = (tweetId, slot, approved) => {
@@ -283,7 +297,12 @@ class PublicationItem extends Component {
               <Typography variant='h6'>
                 Searches Remaining: <Typography variant='body1' component="span">{this.props.user.rate_limit_remaining}</Typography>
               </Typography>
-              <InclusionToggle publicationId={this.props.match.params.id} include={this.props.publication[index].include}/>
+              <Typography variant='h6'>
+                Include in Batch Searches: <InclusionToggle publicationId={this.props.match.params.id} include={this.props.publication[index].include}/>
+              </Typography>            
+              <Button style={{display:'flex'}} variant="contained" color="primary" onClick={this.searchTweets}>
+                Search
+              </Button>
             </Paper>
           </div>
             
