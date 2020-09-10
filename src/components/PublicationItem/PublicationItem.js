@@ -97,7 +97,6 @@ class PublicationItem extends Component {
         let date = sqlDate.toLocaleDateString()
         let time = sqlDate.toLocaleTimeString()
         let readableTime = date + ' at ' + time
-        console.log('lastSearched is ', readableTime)
 
           // get an inital count of all the tweet categories and set the undecided tweets to be the tweetsArray
         if (this.state.status === "UNDECIDED") {
@@ -161,13 +160,9 @@ class PublicationItem extends Component {
       let allTweets = this.props.dbTweets
         // assign select drop-down menu from DOM to variable 'status'
         const status = event.target.value;
-        console.log('status changed:', event.target.value)
-        // conditional to check value from select drop-down menu
-        console.log('UNDECIDED IS:', this.state.undecidedTweets)
-        console.log('APPROVED IS:', this.state.approvedTweets)
 
+        // conditional to check value from select drop-down menu
         if(status === "UNDECIDED"){
-            console.log('got undecided')
 
             let relatedTweets = allTweets.filter(function (filteredTweets) {
               return Number(filteredTweets.publication_id) === pubId});
@@ -182,7 +177,6 @@ class PublicationItem extends Component {
               })
 
           } else if (status === "APPROVED") {
-            console.log('got approved')
 
             let relatedTweets = allTweets.filter(function (filteredTweets) {
               return Number(filteredTweets.publication_id) === pubId});
@@ -197,7 +191,6 @@ class PublicationItem extends Component {
             })
 
           } else if (status === "REJECTED") {
-            console.log('got rejected')
 
             let relatedTweets = allTweets.filter(function (filteredTweets) {
               return Number(filteredTweets.publication_id) === pubId});
