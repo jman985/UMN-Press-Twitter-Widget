@@ -376,8 +376,9 @@ How sampling remade hip-hop over forty years, from pioneering superstar Grandmas
               <div id="viewlet-above-content">
                 <div className="contentwellportlets row" id="portlets-above">
                   <div className="cell AbovePortletManager6 width-full position-0 num-portlets-1">
-                    <div id="portletwrapper-436f6e74656e7457656c6c506f72746c6574732e41626f7665506f72746c65744d616e61676572360a636f6e746578740a2f506c6f6e650a6164642d74686973" className="portletWrapper kssattr-portlethash-436f6e74656e7457656c6c506f72746c6574732e41626f7665506f72746c65744d616e61676572360a636f6e746578740a2f506c6f6e650a6164642d74686973"><div className="portletStaticText portlet-static-add-this"><div className="share">
-                          <h2>Share</h2>
+                    <div id="portletwrapper-436f6e74656e7457656c6c506f72746c6574732e41626f7665506f72746c65744d616e61676572360a636f6e746578740a2f506c6f6e650a6164642d74686973" className="portletWrapper kssattr-portlethash-436f6e74656e7457656c6c506f72746c6574732e41626f7665506f72746c65744d616e61676572360a636f6e746578740a2f506c6f6e650a6164642d74686973">
+                      <div className="portletStaticText portlet-static-add-this">
+                        <div className="share">
                           <div className="addthis_toolbox addthis_default_style "><a className="addthis_button_email" /> <a className="addthis_button_print" /> <a className="addthis_button_twitter" /> <a className="addthis_button_facebook" /> <a className="addthis_counter addthis_bubble_style" /></div>
                         </div>
                       </div>
@@ -408,7 +409,7 @@ How sampling remade hip-hop over forty years, from pioneering superstar Grandmas
                       <p><strong /></p>
                       <p><strong><em>{this.props.bookData.title}</em> 
                       {this.props.bookData.subtitle ? <em>: {this.props.bookData.subtitle}</em> 
-                      : ''}is forty years, from pioneering through crate-digging preservationist and innovation.</strong></p>
+                      : ''} is forty years, from pioneering through crate-digging preservationist and innovation.</strong></p>
                       <p><span><em /></span></p>
                       <p><span><em>{this.props.bookData.title}</em> traces the development of the transformative pop-cultural practice of sampling, 
                       from its origins in the turntable-manning, record-spinning hip-hop DJs of 1970s New York through forty years of musical innovation and reinvention. 
@@ -617,7 +618,7 @@ Contents</p><p>
                   <a id="ebooks-link" className="pat-plone-modal" href="https://www.upress.umn.edu/information/buy-ebooks" data-pat-plone-modal="title: About E-books;">About E-books</a>
                   <iframe srcdoc='<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Bring The Beat Back: How Sampling Built Hip-Hop author <a href="https://twitter.com/natepatrin?ref_src=twsrc%5Etfw">@natepatrin</a> compiles Adidas In The Pit/Punk Meets Hip-Hop Playlist <a href="https://t.co/XJVaAa6RVh">https://t.co/XJVaAa6RVh</a> <a href="https://t.co/brNraum1M7">pic.twitter.com/brNraum1M7</a></p>&mdash; Matt Horowitz (@SharpCheddar856) <a href="https://twitter.com/SharpCheddar856/status/1299014643143368704?ref_src=twsrc%5Etfw">August 27, 2020</a></blockquote> 
                   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script><blockquote class="twitter-tweet"><p lang="en" dir="ltr">&#39;The Unseen,&#39; the debut album from <a href="https://twitter.com/madlib?ref_src=twsrc%5Etfw">@madlib</a>&#39;s rap alter ego Quasimoto, turns 20 this weekend. In an excerpt from his new book &#39;Bring That Beat Back: How Sampling Built Hip-Hop,&#39; <a href="https://twitter.com/natepatrin?ref_src=twsrc%5Etfw">@natepatrin</a> revisits the landmark LP: <a href="https://t.co/bYrCZ7fLv2">https://t.co/bYrCZ7fLv2</a> <a href="https://t.co/Whqlun1KQe">pic.twitter.com/Whqlun1KQe</a></p>&mdash; Stereogum (@stereogum) <a href="https://twitter.com/stereogum/status/1271101162268299265?ref_src=twsrc%5Etfw">June 11, 2020</a></blockquote> 
-                  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>' title="widget" height="310px" width="174px" />
+                  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>' title="widget" height="330px" width="255px" />
                 </div>
             
                 <div id="slide_nav"> 

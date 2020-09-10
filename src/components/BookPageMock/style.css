@@ -417,7 +417,7 @@ div.listingBar a, nav.pagination a {
 }
 
 /* content share */
-.wrapper #main .share {display:block; width:176px; text-align:right; padding-top: 20px; float: right; }
+.wrapper #main .share {display:block; width:255px; text-align:right; padding-top: 20px; float: right; }
 .wrapper #main .share h2 {color:#61615b; display:block; float:left; font-size:14.4px; font-weight:normal; line-height:19.2px; margin:0px 10px 0px 0px; padding:2px 0px 0px; text-transform:uppercase; }
 .wrapper #main .share ul,
 .wrapper #main .share ul li {list-style-type:none; margin:0px; padding:0px; }
@@ -441,8 +441,8 @@ div.listingBar a, nav.pagination a {
 
 
 /* right column default styles */
-.wrapper #main #right {display:block; float:right; padding-top:22px; position:relative; width:176px; }
-.wrapper #main #right .block {display:block; margin-bottom:17px;  width:176px; }
+.wrapper #main #right {display:block; float:right; padding-top:22px; position:relative; width:255px; }
+.wrapper #main #right .block {display:block; margin-bottom:17px;  width:255px; }
 
 .wrapper #main #right .portlet {background-color:#f3f3f3; color:#1b1a1a; font-size:13.2px; font-weight:normal; line-height:19.2px; margin:0px 0px 15px; padding:0px 0px 10px; }
 .wrapper #main #right .portlet .portletHeader {background-color:#dee2dc; color:#7b2e00; font-size:14px; font-weight:bold; line-height:22.8px; margin:0px 0px 5px;  padding:12px 10px; text-transform:uppercase;}
@@ -773,15 +773,15 @@ div.listingBar a, nav.pagination a {
 .section-test-division .wrapper #content #faceted-results:before {display: block; padding-top: 18px; content: ""; }
 
 /* book page */
-.wrapper #main #content.full {width:830px; }
-.wrapper #main #content .details {display:block; font-size:16.8px; line-height:18px; margin:0px 0px 22px 25px; width:615px; }
+.wrapper #main #content.full {width:950px; }
+.wrapper #main #content .details {display:block; font-size:16.8px; line-height:18px; margin:0px 0px 22px 25px; widows: 400px; }
 .wrapper #main #content .details div {display:inline; }
 .wrapper #main #content .details .Contributors p  {display:inline; margin: 0; padding: 0; font-weight: bold;}
-.wrapper #main #content #slide_holder {border-top:1px solid #c2c2c2; display:block; float:left; height:352px; margin:0px 0px 0px 25px; overflow:auto; position:relative; width:629px;}
-.portaltype-series .wrapper #main #content #slide_holder {width:805px; }
+.wrapper #main #content #slide_holder {border-top:1px solid #c2c2c2; display:block; float:left; height:352px; margin:0px 0px 0px 25px; overflow:auto; position:relative; width:550px;}
+.portaltype-series .wrapper #main #content #slide_holder {width:629px; }
 .wrapper #main #content #slide_holder img {border:1px solid #ddd; }
 .wrapper #main #content #slide_holder .slide h3 {margin: 0; padding: 0;}
-.wrapper #main #content #slide_holder .slide {display:block; height:328px; overflow:auto; padding:12px; padding-left:0px; width:616px; }
+.wrapper #main #content #slide_holder .slide {display:block; height:328px; overflow:auto; padding:12px; padding-left:0px; width:540px; }
 .portaltype-series .wrapper #main #content #slide_holder .slide {width:780px; }
 .wrapper #main #content #slide_holder .slide p {margin:0px; line-height:20.4px; }
 .wrapper #main #content #slide_holder .slide #details-footer p {clear:both; font-size:13.2px; line-height:21.6px; padding:20px; background-color:#efefef; }
@@ -816,8 +816,8 @@ div.listingBar a, nav.pagination a {
 .wrapper #main #content #slide_holder #materials.slide h3 {color:#5f584d; font-size:16.8px; font-weight:normal; text-transform:uppercase; }
 
 
-.wrapper #main #content #purchase {background-color:#f3f3f3; display:block; float:right; height:432px; margin-top:-80px; width:176px; }
-.wrapper #main #content #purchase h3 {background:url('./_images/header-purchase.gif') top left no-repeat; height:43px; margin:0px; padding:0px; text-indent:-10000px; width:176px; }
+.wrapper #main #content #purchase {background-color:#f3f3f3; display:block; float:left; height:455px; margin-top:-100px; width:255px; }
+.wrapper #main #content #purchase h3 {background:url('./_images/header-purchase.gif') top left no-repeat; height:43px; margin:0px; padding:0px; text-indent:-10000px; width:255px; }
 .wrapper #main #content #purchase #details-product-list h3 {background:transparent; clear:left; color:#1b1a1a; float:left; font-size:12px; height:auto; line-height:18px; padding:10px; padding-right:0px; text-indent:0px; text-transform:none; width:62px; }
 .wrapper #main #content #purchase #details-product-list p {background:url('./_images/buy-now.gif') 65px 10px no-repeat; text-align:right; float:right; line-height:18px; margin:0px; padding:10px; padding-right:48px; width:46px; font-size: 14.4px; }
 .wrapper #main #content #purchase #details-product-list .add-to-cart-button {display:none; }
@@ -1015,7 +1015,7 @@ div.overlay {
 .wrapper #main #content hr {clear:both; }
 
 /* test div portlets */
-.wrapper #main #right .portlet.portlet-static-workshop-faculty {background-color:#9eb6c8; color:#1b1a1a; font-size:13.2px; font-weight:normal; line-height:19.2px; margin:0px 0px 15px; padding:0px 0px 10px; width:176px; }
+.wrapper #main #right .portlet.portlet-static-workshop-faculty {background-color:#9eb6c8; color:#1b1a1a; font-size:13.2px; font-weight:normal; line-height:19.2px; margin:0px 0px 15px; padding:0px 0px 10px; width:255px; }
 .wrapper #main #right .portlet.portlet-static-workshop-faculty .portletHeader {background-color:#9eb6c8; color:#fff; font-size:15.6px; font-weight:normal; line-height:22.8px; margin:0px 0px 5px;  padding:12px 10px 0px; text-transform:uppercase; }
 .wrapper #main #right .portlet.portlet-static-workshop-faculty .portletHeader a {color:#fff; font-size:21.6px; font-weight:bold; line-height:24px; }
 .wrapper #main #right .portlet.portlet-static-workshop-faculty .portletItem {clear:both; padding-bottom:10px; }
