@@ -27,6 +27,7 @@ class App extends Component {
   componentDidMount() {
     this.props.dispatch({ type: "FETCH_USER" });
     this.props.dispatch({ type: "FETCH_PUBLICATIONS" });
+    this.props.dispatch({type: 'FETCH_DATABASE_TWEETS'});
   }
 
   render() {

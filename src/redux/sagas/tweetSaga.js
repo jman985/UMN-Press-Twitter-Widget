@@ -122,14 +122,16 @@ function* approveTweet(action){
   } catch (error) {
       console.log('error with approving tweet', error);
   }
+  yield put({ type:'FETCH_DATABASE_TWEETS'});
 }
 
 function* rejectTweet(action){
   try {
     const response = yield axios.put('/tweets/database/reject', {id: action.payload})
   } catch (error) {
-      console.log('error with rejecting tweet', error);
+    console.log('error with rejecting tweet', error);
   }
+  yield put({ type:'FETCH_DATABASE_TWEETS'});
 }
 
 function* tweetSaga() {  
