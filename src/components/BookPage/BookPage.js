@@ -71,8 +71,7 @@ class BookPage extends Component {
         <h4> by {this.props.bookData.author1}</h4>
         </div>
 
-        {/* <BookPageMock/> */}
-        
+ 
       <AppBar position="static">
         <Tabs  aria-label="book page tabs">
           <Tab label="Overview"  />
