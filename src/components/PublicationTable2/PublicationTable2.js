@@ -94,6 +94,12 @@ class PublicationTable2 extends Component {
     this.props.dispatch({type: 'CHANGE_SEARCH_TYPE', payload: {id: bookId, searchType: searchType}})
   }
 
+  // checks the search type of each book so the select menus can reflect their current value
+  getSearchType = (bookId) => {
+    let book = this.props.publication.filter(function (book) {
+      return book.id === bookId})
+    return book[0].search_type
+  }
 
   render() {
     const { classes } = this.props;
@@ -156,7 +162,7 @@ class PublicationTable2 extends Component {
                     <TableCell align="left">
                       <FormControl className={classes.formControl}>
                         <Select
-                          defaultValue={'T'}
+                          defaultValue={()=>this.getSearchType(book.id)}
                           onChange={(event)=>this.handleSearchTypeChange(book.id, event.target.value)}
                         >
                           <MenuItem value="">
