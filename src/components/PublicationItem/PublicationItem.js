@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
+import { HashRouter as Router, Route, Link } from "react-router-dom";
 import { TwitterTweetEmbed } from 'react-twitter-embed';
 import PropTypes from 'prop-types';
 import InclusionToggle from './InclusionToggle'
@@ -19,6 +20,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Input from '@material-ui/core/Input';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 
 const styles = theme => ({
   root: {
@@ -168,7 +170,7 @@ class PublicationItem extends Component {
       this.props.dispatch({type:'FETCH_DATABASE_TWEETS'})
     }
 
-
+    
     handleSelect = (event) => {
       let pubId = Number(this.props.match.params.id);
       let allTweets = this.props.dbTweets
@@ -262,7 +264,12 @@ class PublicationItem extends Component {
         <>
           {/* {JSON.stringify(this.state.tweetsArray)} */}
 
-          <Typography variant='h3' style={{margin:'20px'}}>{this.props.publication[index].title}, {this.props.publication[index].author1} </Typography>
+
+          <h1 style={{margin:'20px'}}>
+              <span style={{textDecorationLine:'underline'}}>{this.props.publication[index].title}</span>
+              <span> by {this.props.publication[index].author1}</span>
+          </h1>
+
           <div className="content" style={{display:'flex',margin:'20px'}}>
           
             <Paper style={{maxWidth:'40%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
@@ -322,8 +329,11 @@ class PublicationItem extends Component {
                 Search
               </Button>
             </Paper>
+
+            <Button style={{height: '30px',marginTop: '100px',marginLeft: '50%'}} variant="outlined" color="primary" href={'http://localhost:3000/#/books/'+this.props.match.params.id} target="_blank">
+              View Book Page &nbsp;<PlayArrowIcon/></Button >
+
           </div>
-            
 
           <div>
             <button onClick={()=>this.seekPages('next')}>Next</button>
