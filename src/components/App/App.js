@@ -21,7 +21,8 @@ import PublicationItem from "../PublicationItem/PublicationItem";
 import TweetsPage from "../TweetsPage/TweetsPage";
 
 import "./App.css";
-import BookPage from "../BookPage/BookPage";
+// import BookPage from "../../components/BookPage/BookPage";
+import BookPageMock from "../BookPageMock/BookPageMock";
 
 class App extends Component {
   componentDidMount() {
@@ -41,7 +42,7 @@ class App extends Component {
             <Redirect exact from="/" to="/publications" />
             {/* Visiting localhost:3000/about will show the about page.
             This is a route anyone can see, no login necessary */}
-            <Route exact path="/books/:publication_id" component={BookPage} />
+            <Route exact path="/books/:publication_id" component={BookPageMock} />
             <Route exact path="/about" component={AboutPage} />
             <Route exact path="/publications" component={Publications} />
             <Route exact path="/publications/:id" component={PublicationItem} />

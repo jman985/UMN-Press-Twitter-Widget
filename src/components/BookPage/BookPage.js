@@ -14,6 +14,7 @@ import Tab from '@material-ui/core/Tab';
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
+import BookPageMock from '../BookPageMock/BookPageMock';
 // import './BookPage.css'
 
 const styles = theme => ({
@@ -60,7 +61,6 @@ class BookPage extends Component {
 
         <>
     <Box className={classes.BoxContainer}>
-
       <div className="content">
         <div className ={classes.Book}>
         <img src = "https://upload.wikimedia.org/wikipedia/en/thumb/e/ed/University_of_Minnesota_Press_logo.svg/200px-University_of_Minnesota_Press_logo.svg.png"/>
@@ -71,7 +71,7 @@ class BookPage extends Component {
         <h4> by {this.props.bookData.author1}</h4>
         </div>
 
-      
+ 
       <AppBar position="static">
         <Tabs  aria-label="book page tabs">
           <Tab label="Overview"  />
