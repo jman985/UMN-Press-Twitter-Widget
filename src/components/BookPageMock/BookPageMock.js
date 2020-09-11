@@ -64,8 +64,7 @@ class BookPageMock extends Component {
 
     return(
       <>
-      <TwitterTweetEmbed tweetId={1303449831998971904}
-          options={{width: 220, height:550}}/>
+     
       <div>
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -1023,6 +1022,7 @@ Rediscover the astute and passionate music writings of the pioneering rock criti
     BookPageMock.propTypes = {
       classes: PropTypes.object.isRequired,
     };
+
     const mapStateToProps = state => ({
       selectTweetID: state.selectTweetID,
       bookData: state.bookData
