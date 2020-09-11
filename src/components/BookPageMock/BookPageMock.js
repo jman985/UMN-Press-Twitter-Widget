@@ -652,16 +652,20 @@ Contents</p><p>
                   
                   
                   
-          <Card style={{width:'255px',height:'300px',backgroundColor:'#f3f3f3'}}>
+          {/* <Card style={{width:'255px',height:'300px',backgroundColor:'#f3f3f3'}}>
             <CardContent style={{display:"flex", flexDirection:'column',justifyContent:'space-between',height:'100%'}}>
               <CardActionArea >
-              </CardActionArea>
-                <div style={{maxHeight:"300px", overflow:"auto"}}>
-                <TwitterTweetEmbed tweetId={'1303767134099705856'}
-                      options={{width: 250}}/>
+              </CardActionArea> */}
+                <div style={{maxHeight:"330px", overflow:"auto"}}>
+
+                {this.props.selectTweetID.map( tweetID =>
+        
+                  <TwitterTweetEmbed key = {tweetID.tweet_id} tweetId={tweetID.tweet_id}
+                  options={{width: 220}}/>)}
+                
                 </div> 
-            </CardContent>   
-          </Card>
+            {/* </CardContent>   
+          </Card> */}
 
                   {/* <iframe srcdoc='<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Bring The Beat Back: How Sampling Built Hip-Hop author <a href="https://twitter.com/natepatrin?ref_src=twsrc%5Etfw">@natepatrin</a> compiles Adidas In The Pit/Punk Meets Hip-Hop Playlist <a href="https://t.co/XJVaAa6RVh">https://t.co/XJVaAa6RVh</a> <a href="https://t.co/brNraum1M7">pic.twitter.com/brNraum1M7</a></p>&mdash; Matt Horowitz (@SharpCheddar856) <a href="https://twitter.com/SharpCheddar856/status/1299014643143368704?ref_src=twsrc%5Etfw">August 27, 2020</a></blockquote> 
                   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script><blockquote class="twitter-tweet"><p lang="en" dir="ltr">&#39;The Unseen,&#39; the debut album from <a href="https://twitter.com/madlib?ref_src=twsrc%5Etfw">@madlib</a>&#39;s rap alter ego Quasimoto, turns 20 this weekend. In an excerpt from his new book &#39;Bring That Beat Back: How Sampling Built Hip-Hop,&#39; <a href="https://twitter.com/natepatrin?ref_src=twsrc%5Etfw">@natepatrin</a> revisits the landmark LP: <a href="https://t.co/bYrCZ7fLv2">https://t.co/bYrCZ7fLv2</a> <a href="https://t.co/Whqlun1KQe">pic.twitter.com/Whqlun1KQe</a></p>&mdash; Stereogum (@stereogum) <a href="https://twitter.com/stereogum/status/1271101162268299265?ref_src=twsrc%5Etfw">June 11, 2020</a></blockquote> 
