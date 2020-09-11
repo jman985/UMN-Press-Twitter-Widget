@@ -262,7 +262,7 @@ class PublicationItem extends Component {
         <>
           {/* {JSON.stringify(this.state.tweetsArray)} */}
 
-          <h1 style={{margin:'20px'}}>{this.props.publication[index].title}, {this.props.publication[index].author1} </h1>
+          <Typography variant='h3' style={{margin:'20px'}}>{this.props.publication[index].title}, {this.props.publication[index].author1} </Typography>
           <div className="content" style={{display:'flex',margin:'20px'}}>
           
             <Paper style={{maxWidth:'40%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>

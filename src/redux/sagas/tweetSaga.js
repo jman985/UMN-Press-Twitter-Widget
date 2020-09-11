@@ -19,8 +19,22 @@ function* getTweets(action) {
         // console.log('this is the API query', action.payload[i].title.replace(/["&;#^%[\|{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''));
         // let str= "['&;#^%[\|/{}]";
         // console.log('this is the normalize test', str.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''));
-
-        const response = yield axios.get('/tweets/twitter/' + action.payload[i].title.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''))
+        let response = 0
+        switch(action.payload[i].search_type) {
+          // Exact Match Title
+          case 'T':
+            response = yield axios.get('/tweets/twitter/' + `"${action.payload[i].title.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, '')}"`)
+          break;
+          // Exact Title & Exact Author
+          case 'TaA':
+            let authorArr = action.payload[i].author1.split(',')
+            let author = ''
+            if (authorArr.length > 1){
+              author = authorArr[1].substring(1) + ' ' + authorArr[0]
+            } else {author = action.payload[i].author1}
+            response = yield axios.get('/tweets/twitter/' + `"${action.payload[i].title.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, '')}" "${author.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, '')}"`)
+          break;
+        }
         // send the response(tweet id) and the publication object from database to the save saga
         // save the tweet ids to the tweet table of the database
         yield put({
