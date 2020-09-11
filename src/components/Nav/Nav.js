@@ -6,7 +6,7 @@ import "./Nav.css";
 
 const Nav = (props) => (
   <div className="nav" style={{display:"flex",flexDirection:"column"}}>
-    <Link to="/home">
+    <Link className="link-bar" to="/home">
       <h2 className="nav-title">University of MN Twitter Admin</h2>
     </Link>
     <div className="nav-right" style={{display:"flex",width:"100%",justifyContent: "space-around"}}>

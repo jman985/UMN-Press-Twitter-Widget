@@ -18,6 +18,10 @@ import IconButton from '@material-ui/core/IconButton';
 import FastForwardIcon from '@material-ui/icons/FastForward';
 import FastRewindIcon from '@material-ui/icons/FastRewind';
 import './PublicationTable2.css';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 const styles = (theme) => ({
   root: {
@@ -27,9 +31,6 @@ const styles = (theme) => ({
     overflowX: "auto",
     paddingTop:'0px',
     paddingBottom:'0px !important',
-  },
-  'MuiTableCell-root': {
-
   },
   table: {
     minWidth: 700,
@@ -83,11 +84,21 @@ class PublicationTable2 extends Component {
   }
 
   tweetCount = (bookId) =>{
-    
     let relatedTweets = this.props.dbTweets.filter(function (filteredTweets) {
       return Number(filteredTweets.publication_id) === Number(bookId)});
     // console.log('in tweet count', relatedTweets.length)
     return relatedTweets.length;
+  }
+
+  handleSearchTypeChange = (bookId, searchType) => {
+    this.props.dispatch({type: 'CHANGE_SEARCH_TYPE', payload: {id: bookId, searchType: searchType}})
+  }
+
+  // checks the search type of each book so the select menus can reflect their current value
+  getSearchType = (bookId) => {
+    let book = this.props.publication.filter(function (book) {
+      return book.id === bookId})
+    return book[0].search_type
   }
 
   render() {
@@ -109,12 +120,13 @@ class PublicationTable2 extends Component {
             <IconButton onClick={()=>this.handlePageChange('forward')}><FastForwardIcon/></IconButton>
             <Table className={classes.table}>
               <TableHead>
-                <TableRow className={classes.rowwww}>
+                <TableRow className={classes.row}>
                   <CustomTableCell>Title</CustomTableCell>
                   <CustomTableCell>Subtitle</CustomTableCell>
                   <CustomTableCell>Author</CustomTableCell>
                   <CustomTableCell>Last Searched</CustomTableCell>
                   <CustomTableCell>Tweets</CustomTableCell>
+                  <CustomTableCell>Search Type</CustomTableCell>
                   <CustomTableCell>Include/Exclude</CustomTableCell>
                 </TableRow>
               </TableHead>
@@ -130,24 +142,50 @@ class PublicationTable2 extends Component {
                     >
                       {book.title}
                     </TableCell>
+                   
                     <TableCell align="left">{book.subtitle}</TableCell>
+                    
                     <TableCell align="left">{book.author1}</TableCell>
+                    
                     <TableCell align="left">
                       {book.last_searched == null
-                        ? "No searches yet"
+                        ? "Never"
                         : this.determineLastSearch(book.last_searched)}
                     </TableCell>
+                    
                     <TableCell align="left">
                       {this.tweetCount(book.id) === 0
-                        ? 'No Tweets Found'
+                        ? 'None'
                         : this.tweetCount(book.id)}
                     </TableCell>
+                    
+                    <TableCell align="left">
+                      <FormControl className={classes.formControl}>
+                        <Select
+                          defaultValue={()=>this.getSearchType(book.id)}
+                          onChange={(event)=>this.handleSearchTypeChange(book.id, event.target.value)}
+                        >
+                          <MenuItem value="">
+                            <em>None</em>
+                          </MenuItem>
+                          <MenuItem value={'T'}>Title</MenuItem>
+                          <MenuItem value={'TaA'}>Title AND Author</MenuItem>
+                          <MenuItem value={'TaS'}>Title AND Subtitle</MenuItem>
+                          <MenuItem value={'ToS'}>Title OR Subtitle</MenuItem>
+                          <MenuItem value={'S'}>Subtitle</MenuItem>
+                          <MenuItem value={'SaA'}>Subtitle AND Author</MenuItem>
+                          <MenuItem value={'TaAoS'}>Title AND Author OR Subtitle</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </TableCell>
+                    
                     <TableCell>
                       <InclusionToggle
                         publicationId={book.id}
                         include={book.include}
                       />
                     </TableCell>
+
                   </TableRow>
                 ))}
               </TableBody>

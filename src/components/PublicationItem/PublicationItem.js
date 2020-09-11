@@ -264,6 +264,7 @@ class PublicationItem extends Component {
         <>
           {/* {JSON.stringify(this.state.tweetsArray)} */}
 
+
           <h1 style={{margin:'20px'}}>
               <span style={{textDecorationLine:'underline'}}>{this.props.publication[index].title}</span>
               <span> by {this.props.publication[index].author1}</span>

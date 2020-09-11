@@ -7,7 +7,7 @@ function* toggleInclusion(action){
         yield axios.put('/publications', {id: action.payload});
         yield put({type: 'FETCH_PUBLICATIONS'});
     } catch (error) {
-        console.log('error with bookmark add saga:', error);
+        console.log('error with updating publication inclusion value:', error);
     }
 }
 

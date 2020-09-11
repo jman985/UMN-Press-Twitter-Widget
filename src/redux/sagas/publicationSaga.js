@@ -23,9 +23,21 @@ function* updateTimestamp(action){
   }
 }
 
+// updates publication search_type
+function* changeSearchType(action){
+  try {
+      yield axios.put('/publications/searchtype', {id: action.payload.id, searchType: action.payload.searchType});
+      yield put({type: 'FETCH_PUBLICATIONS'});
+  } catch (error) {
+      console.log('error with bookmark add saga:', error);
+  }
+}
+
+
 function* publicationSaga() {
   yield takeLatest('FETCH_PUBLICATIONS', getPublications);
   yield takeLatest('UPDATE_TIMESTAMP', updateTimestamp);
+  yield takeLatest('CHANGE_SEARCH_TYPE', changeSearchType)
 
 }
 
