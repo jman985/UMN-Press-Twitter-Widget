@@ -23,7 +23,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 
-
+// updates the inclusion value of a publication
 router.put('/', rejectUnauthenticated, (req, res) => {
   console.log('Toggling inclusion state of publication #', req.body.id)
   const queryText = `
@@ -42,8 +42,29 @@ router.put('/', rejectUnauthenticated, (req, res) => {
   })
 })
 
-//update timestamp 
 
+// updates the search_type value of a publication
+router.put('/searchtype', rejectUnauthenticated, (req, res) => {
+  console.log('Changing Searchtype of publication #', req.body.id)
+  const queryText = `
+  UPDATE publication
+  SET search_type = $1
+  WHERE id = $2
+  `
+  const values = [req.body.searchType, req.body.id]
+  pool.query(queryText, values)
+  .then( (response) => {
+      console.log( 'Successfully changed Searchtype');
+      res.send(response.rows);
+  })
+  .catch( (err) => {
+      console.log('An error occured while toggling inclusion state:', err);
+      res.sendStatus(500);
+  })
+})
+
+
+//update timestamp 
 router.put('/timestamp/:id', rejectUnauthenticated, (req, res) => {
   console.log('update last_searched timestamp');
     pool.query(`UPDATE "publication" 

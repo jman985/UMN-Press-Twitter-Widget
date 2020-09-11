@@ -91,7 +91,6 @@ class PublicationTable2 extends Component {
   }
 
   handleSearchTypeChange = (bookId, searchType) => {
-    console.log('searchtypechange', bookId, searchType)
     this.props.dispatch({type: 'CHANGE_SEARCH_TYPE', payload: {id: bookId, searchType: searchType}})
   }
 
