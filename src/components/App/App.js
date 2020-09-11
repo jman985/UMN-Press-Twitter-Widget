@@ -21,7 +21,7 @@ import PublicationItem from "../PublicationItem/PublicationItem";
 import TweetsPage from "../TweetsPage/TweetsPage";
 
 import "./App.css";
-import BookPage from "../../components/BookPage/BookPage";
+// import BookPage from "../../components/BookPage/BookPage";
 import BookPageMock from "../BookPageMock/BookPageMock";
 
 class App extends Component {
