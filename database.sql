@@ -21,7 +21,8 @@ CREATE TABLE "publication" (
     "author4" VARCHAR (1000),
     -- last_searched defaults null so we can see that this publication has not been searched yet
     "last_searched" TIMESTAMP DEFAULT NULL, 
-    "include" BOOLEAN DEFAULT TRUE
+    "include" BOOLEAN DEFAULT TRUE,
+    "search_type" VARCHAR (10) DEFAULT 'T'
 );
 CREATE TABLE "tweet" (
     "id" SERIAL PRIMARY KEY,
