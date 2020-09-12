@@ -8,6 +8,7 @@ import PublicationTable from '../PublicationTable/PublicationTable'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import PublicationTable2 from "../PublicationTable2/PublicationTable2";
+import { NavigateBeforeSharp } from '@material-ui/icons';
 
 class Publications extends Component {
   
@@ -24,9 +25,7 @@ class Publications extends Component {
     });
   }
 
-
-
-
+  
   // returns a sorted publication array based on the 'last_searched' timecodes
   sortPublicationsForSearch = () => {
     // filter publications with null 'last_searched' values into new array
@@ -57,8 +56,7 @@ class Publications extends Component {
       }
     }
     if (typeof lastSearchedAll === 'string'){
-      // readableTime = lastSearchedAll.slice(0,10) + ' ' + lastSearchedAll.slice(11, -5)
-      // readableTime = new Date(lastSearchedAll)
+     
       let sqlDate = new Date(lastSearchedAll)
       let date = sqlDate.toLocaleDateString()
       let time = sqlDate.toLocaleTimeString()
@@ -67,10 +65,19 @@ class Publications extends Component {
     return readableTime;
   }//end determineLastSearch
 
+  determineRateLimit = (apiRate)=>{
+  //checks to determine remaining searches in 15-min window
+    if(this.props.user.rate_limit_refresh * 1000 < new Date().getTime() ){
+      return 450;
+    }else{
+      return apiRate;
+    }
+  }//end determineRateLimit
+
   parseRefreshTime = () => {
-    let sqlDate = new Date(this.props.user.rate_limit_refresh * 1000) 
-    let time = (sqlDate).toLocaleTimeString();
-    return time;
+    let sqlDate = new Date(this.props.user.rate_limit_refresh * 1000)
+    let refreshTime = (sqlDate).toLocaleTimeString();
+    return refreshTime;
   }//end parseRefreshTime
   
   handleLimitChange = (event) => {
@@ -95,11 +102,13 @@ class Publications extends Component {
               </Typography>
             </Typography>
             <Typography variant='h6'>
-              Searches Remaining: <Typography variant='body1' component="span">{this.props.user.rate_limit_remaining}</Typography>
+              Searches Remaining: <Typography variant='body1' component="span">{this.determineRateLimit(this.props.user.rate_limit_remaining)}</Typography>
             </Typography>
-            <Typography variant='h6'>
-              Searches Refresh at: <Typography variant='body1' component="span">{this.parseRefreshTime()}</Typography>
-            </Typography>
+            {this.props.user.rate_limit_refresh * 1000 > new Date().getTime() ?
+                <Typography variant='h6'>
+                  Searches Refresh at: <Typography variant='body1' component="span">{this.parseRefreshTime()}</Typography>
+                </Typography>
+            : <p></p>}
           </Paper>
           <Paper style={{maxWidth:'40%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3',dispaly:'flex',flexDirection:'column'}}>
             <Typography variant='h6'>Batch Publication Search</Typography>
@@ -107,7 +116,7 @@ class Publications extends Component {
               id="outlined-name"
               label="# of Searches to Run"
               defaultValue="400"
-              value={this.state.searchAmount}
+              value={this.state.searchLimit}
               onChange={this.handleLimitChange}
               margin="normal"
               variant="outlined"
