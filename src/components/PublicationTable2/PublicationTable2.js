@@ -165,9 +165,6 @@ class PublicationTable2 extends Component {
                           defaultValue={()=>this.getSearchType(book.id)}
                           onChange={(event)=>this.handleSearchTypeChange(book.id, event.target.value)}
                         >
-                          <MenuItem value="">
-                            <em>None</em>
-                          </MenuItem>
                           <MenuItem value={'T'}>Title</MenuItem>
                           <MenuItem value={'TaA'}>Title AND Author</MenuItem>
                           <MenuItem value={'TaS'}>Title AND Subtitle</MenuItem>
