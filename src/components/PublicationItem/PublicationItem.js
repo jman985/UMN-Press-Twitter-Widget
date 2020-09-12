@@ -65,55 +65,63 @@ class PublicationItem extends Component {
     componentDidMount(){
       this.props.dispatch({type: 'FETCH_DATABASE_TWEETS'});
       this.props.dispatch({type: 'FETCH_PUBLICATIONS'});
+      this.filterTweets();
     }
 
-      // this is needed to get the database tweets into this.state.tweetsArray
+     
     componentDidUpdate(prevProps) {
       if (prevProps.dbTweets !== this.props.dbTweets || prevProps.publication !== this.props.publication){
-        let pubId = Number(this.props.match.params.id);
-        let allTweets = this.props.dbTweets
-  
-
-        // sort tweets with same publication id from all tweets
-        let relatedTweets = allTweets.filter(function (filteredTweets) {
-          return Number(filteredTweets.publication_id) === pubId});
-
-        // sort undecided tweets
-        let relatedTweetsUndecided = relatedTweets.filter(function (filteredTweets) {
-          return filteredTweets.approved === null});
-        // sort approved tweets
-        let relatedTweetsApproved = relatedTweets.filter(function (filteredTweets) {
-          return filteredTweets.approved === true});
-        // sort rejected tweets
-        let relatedTweetsRejected = relatedTweets.filter(function (filteredTweets) {
-          return filteredTweets.approved === false});
-
-        // get the last_searched time from publications
-        let lastSearched = this.props.publication.filter(function (book) {
-          return book.id === pubId})
-
-        let sqlDate = 0
-        let readableTime = 0
-        if (lastSearched[0] !== undefined) {
-          sqlDate = new Date(lastSearched[0].last_searched)
-          let date = sqlDate.toLocaleDateString()
-          let time = sqlDate.toLocaleTimeString()
-          readableTime = date + ' at ' + time
-        }
-
-          // get an inital count of all the tweet categories and set the undecided tweets to be the tweetsArray
-        if (this.state.status === "UNDECIDED") {
-          this.setState({
-            tweetsArray: relatedTweetsUndecided,
-            undecidedTweetCount: relatedTweetsUndecided.length,
-            approvedTweetCount: relatedTweetsApproved.length,
-            rejectedTweetCount: relatedTweetsRejected.length,
-            allTweetCount: relatedTweetsUndecided.length + relatedTweetsApproved.length + relatedTweetsRejected.length,
-            lastSearchedTime: readableTime
-          });
-        }
+        this.filterTweets();
       }
     } 
+
+    // filterTweets looks at all the tweets in the database and separates the ones
+    // for this publication. It then counts how many are approved/rejected/undecided
+    // and places the undecided ones in the state.tweetsArray for viewing on initial load.
+    filterTweets = () => {
+      let pubId = Number(this.props.match.params.id);
+      let allTweets = this.props.dbTweets
+
+
+      // sort tweets with same publication id from all tweets
+      let relatedTweets = allTweets.filter(function (filteredTweets) {
+        return Number(filteredTweets.publication_id) === pubId});
+
+      // sort undecided tweets
+      let relatedTweetsUndecided = relatedTweets.filter(function (filteredTweets) {
+        return filteredTweets.approved === null});
+      // sort approved tweets
+      let relatedTweetsApproved = relatedTweets.filter(function (filteredTweets) {
+        return filteredTweets.approved === true});
+      // sort rejected tweets
+      let relatedTweetsRejected = relatedTweets.filter(function (filteredTweets) {
+        return filteredTweets.approved === false});
+
+      // get the last_searched time from publications
+      let lastSearched = this.props.publication.filter(function (book) {
+        return book.id === pubId})
+
+      let sqlDate = 0
+      let readableTime = 0
+      if (lastSearched[0] !== undefined) {
+        sqlDate = new Date(lastSearched[0].last_searched)
+        let date = sqlDate.toLocaleDateString()
+        let time = sqlDate.toLocaleTimeString()
+        readableTime = date + ' at ' + time
+      }
+
+        // get an inital count of all the tweet categories and set the undecided tweets to be the tweetsArray
+      if (this.state.status === "UNDECIDED") {
+        this.setState({
+          tweetsArray: relatedTweetsUndecided,
+          undecidedTweetCount: relatedTweetsUndecided.length,
+          approvedTweetCount: relatedTweetsApproved.length,
+          rejectedTweetCount: relatedTweetsRejected.length,
+          allTweetCount: relatedTweetsUndecided.length + relatedTweetsApproved.length + relatedTweetsRejected.length,
+          lastSearchedTime: readableTime
+        });
+      }
+    }// end filter tweets
 
     searchTweets = () => {
       //filter this publication from all of them
@@ -258,11 +266,13 @@ class PublicationItem extends Component {
       const index = this.props.publication.findIndex(i=>i.id === id);
       // prevents TypeError on load from referencing an index item of the init reducer
       if (this.props.publication[index] === undefined) return null;
-
+      
 
       return (
         <>
-          {/* {JSON.stringify(this.state.tweetsArray)} */}
+          {JSON.stringify(this.state.key1)}
+          {JSON.stringify(this.state.key2)}
+          {JSON.stringify(this.state.key3)}
 
 
           <h1 style={{margin:'20px'}}>
