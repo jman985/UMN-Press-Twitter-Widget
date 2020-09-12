@@ -58,7 +58,26 @@ router.put('/searchtype', rejectUnauthenticated, (req, res) => {
       res.send(response.rows);
   })
   .catch( (err) => {
-      console.log('An error occured while toggling inclusion state:', err);
+      console.log('An error occured while trying to change search type:', err);
+      res.sendStatus(500);
+  })
+})
+
+// updates the search_type value of all publications
+router.put('/searchtypeall', rejectUnauthenticated, (req, res) => {
+  console.log('Changing Searchtype of all publications to ', req.body.searchType)
+  const queryText = `
+  UPDATE publication
+  SET search_type = $1
+  `
+  const values = [req.body.searchType]
+  pool.query(queryText, values)
+  .then( (response) => {
+      console.log( 'Successfully changed all Searchtypes');
+      res.send(response.rows);
+  })
+  .catch( (err) => {
+      console.log('An error occured while changing all search types:', err);
       res.sendStatus(500);
   })
 })

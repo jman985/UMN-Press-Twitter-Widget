@@ -18,7 +18,6 @@ import IconButton from '@material-ui/core/IconButton';
 import FastForwardIcon from '@material-ui/icons/FastForward';
 import FastRewindIcon from '@material-ui/icons/FastRewind';
 import './PublicationTable2.css';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -57,12 +56,16 @@ const styles = (theme) => ({
 class PublicationTable2 extends Component {
 
   state = {
-    pageStart: 0
+    pageStart: 0,
+    update: 0
   }
 
-  componentDidMount(){
-    this.props.dispatch({type: 'FETCH_DATABASE_TWEETS'})
+  componentDidUpdate(prevProps){
+    if (this.props.publication !== prevProps.publication){
+      this.setState({update: this.state.update + 1})
+    }
   }
+
 
   determineLastSearch = (sqlDate) => {
    
@@ -114,7 +117,6 @@ class PublicationTable2 extends Component {
     }))(TableCell);
     return (
       <>
-        {this.props.publication ? (
           <Paper className={classes.root}>
             <IconButton onClick={()=>this.handlePageChange('backward')}><FastRewindIcon/></IconButton>
             <IconButton onClick={()=>this.handlePageChange('forward')}><FastForwardIcon/></IconButton>
@@ -131,7 +133,7 @@ class PublicationTable2 extends Component {
                 </TableRow>
               </TableHead>
 
-              <TableBody>
+              <TableBody key={this.state.update}>
                 {this.props.publication.slice(this.state.pageStart,this.state.pageStart+100).map((book) => (
                   <TableRow className={classes.row} key={book.id}>
                     <TableCell
@@ -160,8 +162,9 @@ class PublicationTable2 extends Component {
                     </TableCell>
                     
                     <TableCell align="left">
-                      <FormControl className={classes.formControl}>
+                      <FormControl >
                         <Select
+                          className='select'
                           defaultValue={()=>this.getSearchType(book.id)}
                           onChange={(event)=>this.handleSearchTypeChange(book.id, event.target.value)}
                         >
@@ -190,7 +193,6 @@ class PublicationTable2 extends Component {
             <IconButton onClick={()=>this.handlePageChange('backward')}><FastRewindIcon/></IconButton>
             <IconButton onClick={()=>this.handlePageChange('forward')}><FastForwardIcon/></IconButton>
           </Paper>
-        ) : null}
       </>
     );
   }

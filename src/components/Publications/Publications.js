@@ -8,12 +8,23 @@ import PublicationTable from '../PublicationTable/PublicationTable'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import PublicationTable2 from "../PublicationTable2/PublicationTable2";
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import Box from '@material-ui/core/Box';
 import { NavigateBeforeSharp } from '@material-ui/icons';
+
 
 class Publications extends Component {
   
   state = {
-    searchLimit: 400
+    searchLimit: 400,
+  }
+
+  componentDidMount(){
+    this.props.dispatch({type: 'FETCH_PUBLICATIONS'})
+    this.props.dispatch({type: 'FETCH_DATABASE_TWEETS'})
   }
 
   handleClick = () => {
@@ -25,7 +36,7 @@ class Publications extends Component {
     });
   }
 
-  
+
   // returns a sorted publication array based on the 'last_searched' timecodes
   sortPublicationsForSearch = () => {
     // filter publications with null 'last_searched' values into new array
@@ -84,13 +95,18 @@ class Publications extends Component {
     this.setState({searchLimit: event.target.value})
   }
 
+  handleSearchTypeChange = (searchType) => {
+    this.props.dispatch({type:'CHANGE_ALL_SEARCH_TYPES', payload: searchType})
+  }
+
+
   render() {
     if (this.props.publication.map === undefined) return null;
     if (this.props.publication === []) return null;
 
     return(
       <>
-        <div className='topBox' style={{display:'flex'}}>
+        <Box className='topBox' display='flex' justifyContent='center'>
           <Paper style={{maxWidth:'40%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
             <Typography variant='h6'>
               Total Publications Uploaded: <Typography variant='body1' component="span">{this.props.publication.length}</Typography>
@@ -125,8 +141,29 @@ class Publications extends Component {
               Search
             </Button>
           </Paper>
-          </div>
-        <PublicationTable2 />
+            <Paper style={{width:'30%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3',dispaly:'flex',flexDirection:'column'}}>
+              <FormControl style={{width:'90%'}}>
+              <InputLabel>Select to Change all Search Types</InputLabel>
+                <Select
+                  defaultValue={""}
+                  onChange={(event)=>this.handleSearchTypeChange(event.target.value)}
+                >
+                  <MenuItem value="">
+                    <em>Cancel</em>
+                  </MenuItem>
+                  <MenuItem value={'T'}>Title</MenuItem>
+                  <MenuItem value={'TaA'}>Title AND Author</MenuItem>
+                  <MenuItem value={'TaS'}>Title AND Subtitle</MenuItem>
+                  <MenuItem value={'ToS'}>Title OR Subtitle</MenuItem>
+                  <MenuItem value={'S'}>Subtitle</MenuItem>
+                  <MenuItem value={'SaA'}>Subtitle AND Author</MenuItem>
+                  <MenuItem value={'TaAoS'}>Title AND Author OR Subtitle</MenuItem>
+                </Select>
+              </FormControl>
+            </Paper>
+          </Box>
+        <PublicationTable2 key={this.props.publication}/>
+
       </>
     )
   } 
