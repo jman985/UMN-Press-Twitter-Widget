@@ -367,7 +367,7 @@ class PublicationItem extends Component {
               </Button>
             </Paper>
             <Box display='flex' alignItems='center'>
-              <Button style={{height: '30px'}} variant="contained" color="primary" href={'http://localhost:3000/#/books/'+this.props.match.params.id} target="_blank">
+              <Button variant="contained" color="primary" href={'http://localhost:3000/#/books/'+this.props.match.params.id} target="_blank">
                 View Book Page &nbsp;<PlayArrowIcon/>
               </Button >
             </Box>
