@@ -9,7 +9,7 @@ function* getPublications(action){
     yield put({ type: 'SET_PUBLICATIONS', payload: response.data});
     console.log('putting this in the publications reducer:', response.data)
   } catch (error) {
-      console.log('error with getting publications', error);
+      console.log('error with setting publications to reducer', error);
   }
 }
 
@@ -19,7 +19,7 @@ function* updateTimestamp(action){
       yield axios.put('/publications/timestamp');
       yield put({ type: 'FETCH_PUBLICATIONS'});
   }  catch (error) {
-      console.log('Error with memory update:', error);
+      console.log('Error fetching publications:', error);
   }
 }
 
@@ -29,7 +29,17 @@ function* changeSearchType(action){
       yield axios.put('/publications/searchtype', {id: action.payload.id, searchType: action.payload.searchType});
       yield put({type: 'FETCH_PUBLICATIONS'});
   } catch (error) {
-      console.log('error with bookmark add saga:', error);
+      console.log('error with search type change:', error);
+  }
+}
+
+function* changeAllSearchType(action){
+  try {
+      yield axios.put('/publications/searchtypeall', {searchType: action.payload});
+      yield put({type: 'FETCH_PUBLICATIONS'});
+
+  } catch (error) {
+      console.log('error changing all search types:', error);
   }
 }
 
@@ -38,7 +48,7 @@ function* publicationSaga() {
   yield takeLatest('FETCH_PUBLICATIONS', getPublications);
   yield takeLatest('UPDATE_TIMESTAMP', updateTimestamp);
   yield takeLatest('CHANGE_SEARCH_TYPE', changeSearchType)
-
+  yield takeLatest('CHANGE_ALL_SEARCH_TYPES', changeAllSearchType)
 }
 
 export default publicationSaga;

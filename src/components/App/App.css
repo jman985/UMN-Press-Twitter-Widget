@@ -1,10 +1,18 @@
+html {
+  height: 100vh;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
+    background-color: #dadada;
+    min-height: 100%;
 }
-
+.PublicationItem-root-31 {
+  background-color: #dadada
+}
 .alert {
-    background-color: #ff4545;
+    background-color: #bb7878;
     margin: 50px;
 }
 
