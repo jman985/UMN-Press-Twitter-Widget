@@ -270,11 +270,7 @@ class PublicationItem extends Component {
 
       return (
         <>
-          {JSON.stringify(this.state.key1)}
-          {JSON.stringify(this.state.key2)}
-          {JSON.stringify(this.state.key3)}
-
-
+          {/* {JSON.stringify(this.state.key1)} */}
           <h1 style={{margin:'20px'}}>
               <span style={{textDecorationLine:'underline'}}>{this.props.publication[index].title}</span>
               <span> by {this.props.publication[index].author1}</span>
