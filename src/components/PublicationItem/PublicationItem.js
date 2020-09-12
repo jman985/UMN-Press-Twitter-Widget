@@ -21,6 +21,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Input from '@material-ui/core/Input';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import Box from '@material-ui/core/Box';
 
 const styles = theme => ({
   root: {
@@ -234,7 +235,21 @@ class PublicationItem extends Component {
       this.setState({
         status: status
       })
-    }
+    }// end handleSelect
+
+    
+  handleSearchTypeChange = (bookId, searchType) => {
+    this.props.dispatch({type: 'CHANGE_SEARCH_TYPE', payload: {id: bookId, searchType: searchType}})
+  }
+
+
+  // checks the search type of each book so the select menus can reflect their current value
+  getSearchType = () => {
+    let pubId = this.props.match.params.id;
+    let book = this.props.publication.filter(function (book) {
+      return book.id === Number(pubId)})
+    return book[0].search_type
+  }
     
     seekPages = (input) => {
         // event.preventDefault();
@@ -270,14 +285,14 @@ class PublicationItem extends Component {
       return (
         <>
           {/* {JSON.stringify(this.state.key1)} */}
-          <h1 style={{margin:'20px'}}>
+          <Typography variant='h4' style={{margin:'20px'}}>
               <span style={{textDecorationLine:'underline'}}>{this.props.publication[index].title}</span>
               <span> by {this.props.publication[index].author1}</span>
-          </h1>
+          </Typography>
 
-          <div className="content" style={{display:'flex',margin:'20px'}}>
+          <Box display="flex" justifyContent="center" style={{margin:'20px'}}>
           
-            <Paper style={{maxWidth:'40%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
+            <Paper style={{minWidth:'30%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
               <Typography variant='h6'>
                 Total Tweets: 
                 <Typography variant='body1' component="span">
@@ -317,7 +332,7 @@ class PublicationItem extends Component {
             </Paper>
             
             
-            <Paper style={{maxWidth:'40%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
+            <Paper style={{minWidth:'30%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
               <Typography variant='h6'>
                 Last Search Date: 
                 <Typography variant='body1' component="span">
@@ -329,16 +344,33 @@ class PublicationItem extends Component {
               </Typography>
               <Typography variant='h6'>
                 Include in Batch Searches: <InclusionToggle publicationId={this.props.match.params.id} include={this.props.publication[index].include}/>
-              </Typography>            
+              </Typography>
+              <Typography variant='h6'>Search by:
+              <FormControl className={classes.formControl}>
+                <Select
+                  defaultValue={this.getSearchType}
+                  onChange={(event)=>this.handleSearchTypeChange(this.props.match.params.id, event.target.value)}
+                >
+                  <MenuItem value={'T'}>Title</MenuItem>
+                  <MenuItem value={'TaA'}>Title AND Author</MenuItem>
+                  <MenuItem value={'TaS'}>Title AND Subtitle</MenuItem>
+                  <MenuItem value={'ToS'}>Title OR Subtitle</MenuItem>
+                  <MenuItem value={'S'}>Subtitle</MenuItem>
+                  <MenuItem value={'SaA'}>Subtitle AND Author</MenuItem>
+                  <MenuItem value={'TaAoS'}>Title AND Author OR Subtitle</MenuItem>
+                </Select>
+              </FormControl>      
+              </Typography>      
               <Button style={{display:'flex'}} variant="contained" color="primary" onClick={this.searchTweets}>
                 Search
               </Button>
             </Paper>
-
-            <Button style={{height: '30px',marginTop: '100px',marginLeft: '50%'}} variant="outlined" color="primary" href={'http://localhost:3000/#/books/'+this.props.match.params.id} target="_blank">
-              View Book Page &nbsp;<PlayArrowIcon/></Button >
-
-          </div>
+            <Box display='flex' alignItems='center'>
+              <Button variant="contained" color="primary" href={'http://localhost:3000/#/books/'+this.props.match.params.id} target="_blank">
+                View Book Page &nbsp;<PlayArrowIcon/>
+              </Button >
+            </Box>
+          </Box>
 
           <div>
             <button onClick={()=>this.seekPages('next')}>Next</button>
@@ -361,7 +393,7 @@ class PublicationItem extends Component {
                     </div>
                   <CardActions style={{display:"flex", justifyContent: "space-around",marginBottom:'25px'}}>
                     <Button variant="outlined" color="primary" onClick={()=>this.handleApprove(this.state.tweetsArray[this.state.key1].id,0,true)}>Approve</Button>
-                    <Button variant="outlined" color="primary" onClick={()=>this.handleApprove(this.state.tweetsArray[this.state.key1].id,0,false)}>Reject</Button>
+                    <Button variant="outlined" color="secondary" onClick={()=>this.handleApprove(this.state.tweetsArray[this.state.key1].id,0,false)}>Reject</Button>
                   </CardActions>
                 </CardContent>   
               </Card>
@@ -383,7 +415,7 @@ class PublicationItem extends Component {
                     </div>
                   <CardActions style={{display:"flex", justifyContent: "space-around",marginBottom:'25px'}}>
                     <Button variant="outlined" color="primary" onClick={()=>this.handleApprove(this.state.tweetsArray[this.state.key2].id,1,true)}>Approve</Button>
-                    <Button variant="outlined" color="primary" onClick={()=>this.handleApprove(this.state.tweetsArray[this.state.key2].id,1,false)}>Reject</Button>
+                    <Button variant="outlined" color="secondary" onClick={()=>this.handleApprove(this.state.tweetsArray[this.state.key2].id,1,false)}>Reject</Button>
                   </CardActions>
                 </CardContent>   
               </Card>
@@ -405,7 +437,7 @@ class PublicationItem extends Component {
                     </div>
                   <CardActions style={{display:"flex", justifyContent: "space-around",marginBottom:'25px'}}>
                     <Button variant="outlined" color="primary" onClick={()=>this.handleApprove(this.state.tweetsArray[this.state.key3].id,2,true)}>Approve</Button>
-                    <Button variant="outlined" color="primary" onClick={()=>this.handleApprove(this.state.tweetsArray[this.state.key3].id,2,false)}>Reject</Button>
+                    <Button variant="outlined" color="secondary" onClick={()=>this.handleApprove(this.state.tweetsArray[this.state.key3].id,2,false)}>Reject</Button>
                   </CardActions>
                 </CardContent>   
               </Card>
