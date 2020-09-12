@@ -20,20 +20,41 @@ function* getTweets(action) {
         // let str= "['&;#^%[\|/{}]";
         // console.log('this is the normalize test', str.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''));
         let response = 0
+        let title = encodeURIComponent(action.payload[i].title.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''));
+        let authorArr = action.payload[i].author1.split(',')
+        let author = ''
+        if (authorArr.length > 1){
+          author = encodeURIComponent(authorArr[0].replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''))
+        } else {author = encodeURIComponent(action.payload[i].author1.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''))}
+        let subtitle = encodeURIComponent(action.payload[i].subtitle.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''));
         switch(action.payload[i].search_type) {
           // Exact Match Title
           case 'T':
-            response = yield axios.get('/tweets/twitter/' + `"${action.payload[i].title.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, '')}"`)
+            response = yield axios.get('/tweets/twitter/' + `"${title}"`);
           break;
-          // Exact Title & Exact Author
+          // Exact Title AND Exact Author Last Name
           case 'TaA':
-            let authorArr = action.payload[i].author1.split(',')
-            let author = ''
-            if (authorArr.length > 1){
-              author = authorArr[1].substring(1) + ' ' + authorArr[0]
-            } else {author = action.payload[i].author1}
-            response = yield axios.get('/tweets/twitter/' + `"${action.payload[i].title.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, '')}" "${author.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, '')}"`)
+            response = yield axios.get('/tweets/twitter/' + `"${title}" "${author}"`);
           break;
+          // Exact Title AND Exact Subtitle
+          case 'TaS':
+            response = yield axios.get('/tweets/twitter/' + `"${title}" "${subtitle}"`);
+          break;
+          // Exact Title OR Exact Subtitle  
+          case 'ToS':
+            response = yield axios.get('/tweets/twitter/' + `"${title}" OR "${subtitle}"`);
+          break;
+          // Exact Subtitle
+          case 'S':
+            response = yield axios.get('/tweets/twitter/' + `"${subtitle}"`);
+          break;
+          // Exact Subtitle AND Exact Author Last Name
+          case 'SaA':
+            response = yield axios.get('/tweets/twitter/' + `"${subtitle}" "${author}"`);
+          break;
+          // Exact Title AND Author Last Name OR Subtitle
+          case 'TaAoS':
+            response = yield axios.get('/tweets/twitter/' + `"${title}" "${author}" OR "${subtitle}"`);
         }
         // send the response(tweet id) and the publication object from database to the save saga
         // save the tweet ids to the tweet table of the database
