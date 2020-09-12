@@ -394,7 +394,7 @@ class PublicationItem extends Component {
                     </div>
                   <CardActions style={{display:"flex", justifyContent: "space-around",marginBottom:'25px'}}>
                     <Button variant="outlined" color="primary" onClick={()=>this.handleApprove(this.state.tweetsArray[this.state.key1].id,0,true)}>Approve</Button>
-                    <Button variant="outlined" color="primary" onClick={()=>this.handleApprove(this.state.tweetsArray[this.state.key1].id,0,false)}>Reject</Button>
+                    <Button variant="outlined" color="secondary" onClick={()=>this.handleApprove(this.state.tweetsArray[this.state.key1].id,0,false)}>Reject</Button>
                   </CardActions>
                 </CardContent>   
               </Card>
@@ -416,7 +416,7 @@ class PublicationItem extends Component {
                     </div>
                   <CardActions style={{display:"flex", justifyContent: "space-around",marginBottom:'25px'}}>
                     <Button variant="outlined" color="primary" onClick={()=>this.handleApprove(this.state.tweetsArray[this.state.key2].id,1,true)}>Approve</Button>
-                    <Button variant="outlined" color="primary" onClick={()=>this.handleApprove(this.state.tweetsArray[this.state.key2].id,1,false)}>Reject</Button>
+                    <Button variant="outlined" color="secondary" onClick={()=>this.handleApprove(this.state.tweetsArray[this.state.key2].id,1,false)}>Reject</Button>
                   </CardActions>
                 </CardContent>   
               </Card>
@@ -438,7 +438,7 @@ class PublicationItem extends Component {
                     </div>
                   <CardActions style={{display:"flex", justifyContent: "space-around",marginBottom:'25px'}}>
                     <Button variant="outlined" color="primary" onClick={()=>this.handleApprove(this.state.tweetsArray[this.state.key3].id,2,true)}>Approve</Button>
-                    <Button variant="outlined" color="primary" onClick={()=>this.handleApprove(this.state.tweetsArray[this.state.key3].id,2,false)}>Reject</Button>
+                    <Button variant="outlined" color="secondary" onClick={()=>this.handleApprove(this.state.tweetsArray[this.state.key3].id,2,false)}>Reject</Button>
                   </CardActions>
                 </CardContent>   
               </Card>
