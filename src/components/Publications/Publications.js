@@ -132,7 +132,6 @@ class Publications extends Component {
               id="outlined-name"
               label="# of Searches to Run"
               defaultValue="400"
-              value={this.state.searchLimit}
               onChange={this.handleLimitChange}
               margin="normal"
               variant="outlined"
