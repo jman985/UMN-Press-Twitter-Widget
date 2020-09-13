@@ -6,11 +6,11 @@ import "./Nav.css";
 
 const Nav = (props) => (
   <div className="nav" style={{display:"flex",flexDirection:"column"}}>
-    <Link className="link-bar" to="/home">
+    <Link className="link-bar" to="/publications">
       <h2 className="nav-title">University of MN Twitter Admin</h2>
     </Link>
     <div className="nav-right" style={{display:"flex",width:"100%",justifyContent: "space-around"}}>
-      <Link className="nav-link" to="/home" style={{width:"100%",borderRight:'2px solid black'}}>
+      <Link className="nav-link" to="/upload" style={{width:"100%",borderRight:'2px solid black'}}>
         {/* Show this link if they are logged in or not,
         but call this link 'Home' if they are logged in,
         and call this link 'Login / Register' if they are not */}
