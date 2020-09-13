@@ -29,8 +29,8 @@ function* fetchBookData(action){
   }
 }
 
-function* getTweetIDSaga() {
+function* getBookDataSaga() {
   yield takeLatest('FETCH_BOOK_DATA', fetchBookData);
 }
   
-export default getTweetIDSaga;
+export default getBookDataSaga;
