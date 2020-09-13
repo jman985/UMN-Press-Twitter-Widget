@@ -4,6 +4,7 @@ import axios from "axios";
 
 function* getTweets(action) {
   try {
+    yield put({ type: 'TOGGLE_LOADING'})
     yield console.log(action.payload);
     let searchAmount = action.limit 
     // if the user has set the search limit to be greater than the total amount of publications
@@ -85,6 +86,7 @@ function* getTweets(action) {
       // update the publication redx store with new last_searched times
       yield put({ type: 'FETCH_PUBLICATIONS'})
     }
+    yield put({ type: 'TOGGLE_LOADING'})
   } catch (error) {
     console.log("error with getting tweets", error);
   }

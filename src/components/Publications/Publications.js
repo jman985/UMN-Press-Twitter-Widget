@@ -14,17 +14,24 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import Box from '@material-ui/core/Box';
 import { NavigateBeforeSharp } from '@material-ui/icons';
-
+import LoadingScreen from 'react-loading-screen';
 
 class Publications extends Component {
   
   state = {
     searchLimit: 400,
+    loading: false
   }
 
   componentDidMount(){
     this.props.dispatch({type: 'FETCH_PUBLICATIONS'})
     this.props.dispatch({type: 'FETCH_DATABASE_TWEETS'})
+  }
+
+  componentDidUpdate(prevProps){
+    if (this.props.loading !== prevProps.loading){
+      this.setState({loading: this.props.loading})   
+    }
   }
 
   handleClick = () => {
@@ -106,6 +113,14 @@ class Publications extends Component {
 
     return(
       <>
+      <LoadingScreen
+          loading={this.state.loading}
+          bgColor='#f1f1f1AA'
+          spinnerColor='#9ee5f8'
+          textColor='#676767'
+
+          text={this.props.dbTweets.length + 'Here an introduction sentence (Optional)'}
+      >
         <Box className='topBox' display='flex' justifyContent='center'>
           <Paper style={{maxWidth:'40%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
             <Typography variant='h6'>
@@ -162,7 +177,7 @@ class Publications extends Component {
             </Paper>
           </Box>
         <PublicationTable2 key={this.props.publication}/>
-
+        </LoadingScreen>
       </>
     )
   } 
@@ -173,6 +188,8 @@ const mapStateToProps = state => ({
   errors: state.errors,
   publication: state.publication,
   user: state.user,
+  loading: state.loading,
+  dbTweets: state.dbTweets
 });
 
 
