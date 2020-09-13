@@ -15,7 +15,7 @@ import PropTypes from 'prop-types';
 
 // import './mobile.css'
 import './plone5fixes.css'
-import './style.css'
+import './style2.css'
 import './viewsource.css'
 
 const styles = theme => ({
@@ -60,7 +60,7 @@ class BookPageMock extends Component {
   }
     
   render () {
-    // const { classes } = this.props;
+    const { classes } = this.props;
 
     return(
       <>
@@ -1019,9 +1019,9 @@ Rediscover the astute and passionate music writings of the pioneering rock criti
     </>
     )}}
 
-    // BookPageMock.propTypes = {
-    //   classes: PropTypes.object.isRequired,
-    // };
+    BookPageMock.propTypes = {
+      classes: PropTypes.object.isRequired,
+    };
 
     const mapStateToProps = state => ({
       selectTweetID: state.selectTweetID,

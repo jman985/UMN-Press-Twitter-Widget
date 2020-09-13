@@ -270,12 +270,12 @@ class PublicationItem extends Component {
         console.log('slots:', this.state);
     }
 
-    determineRateLimit = (apiRate)=>{
+    determineRateLimit = ()=>{
       //checks to determine remaining searches in 15-min window
         if(this.props.user.rate_limit_refresh * 1000 < new Date().getTime() ){
-          return 450;
+          return this.props.user.rate_limit;
         }else{
-          return apiRate;
+          return this.props.user.rate_limit_remaining;
         }
       }//end determineRateLimit
 
@@ -349,7 +349,7 @@ class PublicationItem extends Component {
                 </Typography>
               </Typography>
               <Typography variant='h6'>
-                Searches Remaining: <Typography variant='body1' component="span">{this.determineRateLimit(this.props.user.rate_limit_remaining)}</Typography>
+                Searches Remaining: <Typography variant='body1' component="span">{this.determineRateLimit()}</Typography>
               </Typography>
               <Typography variant='h6'>
                 Include in Batch Searches: <InclusionToggle publicationId={this.props.match.params.id} include={this.props.publication[index].include}/>
