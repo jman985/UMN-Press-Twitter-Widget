@@ -89,7 +89,7 @@ class Publications extends Component {
   determineRateLimit = (apiRate)=>{
   //checks to determine remaining searches in 15-min window
     if(this.props.user.rate_limit_refresh * 1000 < new Date().getTime() ){
-      return 450;
+      return this.props.user.rate_limit;
     }else{
       return apiRate;
     }
