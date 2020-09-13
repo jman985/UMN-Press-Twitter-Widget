@@ -14,12 +14,13 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import Box from '@material-ui/core/Box';
 import { NavigateBeforeSharp } from '@material-ui/icons';
-
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 class Publications extends Component {
   
   state = {
     searchLimit: 400,
+    newTweets: 0
   }
 
   componentDidMount(){
@@ -27,7 +28,16 @@ class Publications extends Component {
     this.props.dispatch({type: 'FETCH_DATABASE_TWEETS'})
   }
 
+  componentDidUpdate(prevProps){
+    if (this.props.dbTweets.length !== prevProps.dbTweets.length){
+      this.props.dispatch({type: 'ADD_NEW_TWEET_COUNT'})
+    }
+  }
+
   handleClick = () => {
+    this.setState({
+      newTweets: 0
+    })
     this.props.dispatch({
       type: 'FETCH_TWEETS', 
       payload: this.sortPublicationsForSearch(),
@@ -106,6 +116,7 @@ class Publications extends Component {
 
     return(
       <>
+
         <Box className='topBox' display='flex' justifyContent='center'>
           <Paper style={{maxWidth:'40%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
             <Typography variant='h6'>
@@ -126,6 +137,7 @@ class Publications extends Component {
                 </Typography>
             : <p></p>}
           </Paper>
+          {!this.props.loading.loading ? 
           <Paper style={{maxWidth:'40%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3',dispaly:'flex',flexDirection:'column'}}>
             <Typography variant='h6'>Batch Publication Search</Typography>
             <TextField
@@ -140,6 +152,14 @@ class Publications extends Component {
               Search
             </Button>
           </Paper>
+            : 
+            <Paper style={{maxWidth:'40%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3',dispaly:'flex',flexDirection:'column'}}>
+              <Typography variant='h6'>Searching for Tweets</Typography>
+              <Typography variant='h6'>Searching {this.props.loading.count} of {this.props.loading.limit} Publications</Typography>
+              <Typography variant='h6'>Found {this.props.loading.newTweets} Tweets</Typography>
+              <LinearProgress variant="determinate" value={(this.props.loading.count / this.props.loading.limit)*100} />
+            </Paper>
+            }
             <Paper style={{width:'30%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3',dispaly:'flex',flexDirection:'column'}}>
               <FormControl style={{width:'90%'}}>
               <InputLabel>Select to Change all Search Types</InputLabel>
@@ -162,7 +182,6 @@ class Publications extends Component {
             </Paper>
           </Box>
         <PublicationTable2 key={this.props.publication}/>
-
       </>
     )
   } 
@@ -173,6 +192,8 @@ const mapStateToProps = state => ({
   errors: state.errors,
   publication: state.publication,
   user: state.user,
+  loading: state.loading,
+  dbTweets: state.dbTweets
 });
 
 

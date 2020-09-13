@@ -4,6 +4,7 @@ import axios from "axios";
 
 function* getTweets(action) {
   try {
+    yield put({ type: 'START_LOADING', payload: action.limit})
     yield console.log(action.payload);
     let searchAmount = action.limit 
     // if the user has set the search limit to be greater than the total amount of publications
@@ -12,6 +13,7 @@ function* getTweets(action) {
       searchAmount = action.payload.length
     }
     for (let i=0; i<searchAmount; i++){
+      yield put({ type: 'INCREASE_SEARCH_COUNT'})
       // check if the publication has include value of true
       if (action.payload[i].include){
         //hit Twitter Recent Search API with publication title, replace problem characters with "*" aka the "wild card" character
@@ -85,6 +87,7 @@ function* getTweets(action) {
       // update the publication redx store with new last_searched times
       yield put({ type: 'FETCH_PUBLICATIONS'})
     }
+    yield put({ type: 'RESET_LOADING'})
   } catch (error) {
     console.log("error with getting tweets", error);
   }
