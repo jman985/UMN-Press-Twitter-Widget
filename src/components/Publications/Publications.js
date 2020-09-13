@@ -38,6 +38,7 @@ class Publications extends Component {
     this.setState({
       newTweets: 0
     })
+    console.log('this is the searchLimit', this.state.searchLimit)
     this.props.dispatch({
       type: 'FETCH_TWEETS', 
       payload: this.sortPublicationsForSearch(),
@@ -86,12 +87,12 @@ class Publications extends Component {
     return readableTime;
   }//end determineLastSearch
 
-  determineRateLimit = (apiRate)=>{
+  determineRateLimit = ()=>{
   //checks to determine remaining searches in 15-min window
     if(this.props.user.rate_limit_refresh * 1000 < new Date().getTime() ){
-      return 450;
+      return this.props.user.rate_limit;
     }else{
-      return apiRate;
+      return this.props.user.rate_limit_remaining;
     }
   }//end determineRateLimit
 
@@ -129,7 +130,7 @@ class Publications extends Component {
               </Typography>
             </Typography>
             <Typography variant='h6'>
-              Searches Remaining: <Typography variant='body1' component="span">{this.determineRateLimit(this.props.user.rate_limit_remaining)}</Typography>
+              Searches Remaining: <Typography variant='body1' component="span">{this.determineRateLimit()}</Typography>
             </Typography>
             {this.props.user.rate_limit_refresh * 1000 > new Date().getTime() ?
                 <Typography variant='h6'>
