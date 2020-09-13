@@ -270,6 +270,15 @@ class PublicationItem extends Component {
         console.log('slots:', this.state);
     }
 
+    determineRateLimit = (apiRate)=>{
+      //checks to determine remaining searches in 15-min window
+        if(this.props.user.rate_limit_refresh * 1000 < new Date().getTime() ){
+          return 450;
+        }else{
+          return apiRate;
+        }
+      }//end determineRateLimit
+
     render() {
       const { classes } = this.props;
       // prevents init reducer from throwing TypeError when calling 'findIndex'
@@ -340,7 +349,7 @@ class PublicationItem extends Component {
                 </Typography>
               </Typography>
               <Typography variant='h6'>
-                Searches Remaining: <Typography variant='body1' component="span">{this.props.user.rate_limit_remaining}</Typography>
+                Searches Remaining: <Typography variant='body1' component="span">{this.determineRateLimit(this.props.user.rate_limit_remaining)}</Typography>
               </Typography>
               <Typography variant='h6'>
                 Include in Batch Searches: <InclusionToggle publicationId={this.props.match.params.id} include={this.props.publication[index].include}/>
