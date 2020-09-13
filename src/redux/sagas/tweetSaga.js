@@ -60,23 +60,27 @@ function* getTweets(action) {
         }
         // send the response(tweet id) and the publication object from database to the save saga
         // save the tweet ids to the tweet table of the database
-        yield put({
-          type: "SAVE_TWEETS",
-          payload: {
-            tweetArray: response.data.body,
-            publicationId: action.payload[i].id,
-          },
-        });
-        // save the API rate info to the user table of the database
-        yield put({
-          type: "SAVE_RATE_DATA",
-          payload: {
-            rateLimit: response.data.header['x-rate-limit-limit'],
-            rateLimitRemaining: response.data.header['x-rate-limit-remaining'],
-            rateLimitReset: response.data.header['x-rate-limit-reset'],
-            userId: action.userId
-          }
-        });
+        if (response.data.body !== undefined){
+          yield put({
+            type: "SAVE_TWEETS",
+            payload: {
+              tweetArray: response.data.body,
+              publicationId: action.payload[i].id,
+            },
+          });
+        }
+        // save the API rate info to the user table of the database on the last repitition
+        if (i === searchAmount-1){
+          yield put({
+            type: "SAVE_RATE_DATA",
+            payload: {
+              rateLimit: response.data.header['x-rate-limit-limit'],
+              rateLimitRemaining: response.data.header['x-rate-limit-remaining'],
+              rateLimitReset: response.data.header['x-rate-limit-reset'],
+              userId: action.userId
+            }
+          });
+        }
         // console.log(response)
         console.log("sending this to save tweet saga:", response.data.data);
         // update the last_searched timestamp of each publication
