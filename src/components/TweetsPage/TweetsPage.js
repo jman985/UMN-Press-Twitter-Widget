@@ -46,6 +46,7 @@ class TweetsPage extends Component {
     key4: 3,
     key5: 4,
     key6: 5,
+    tweetsLoaded: false
   }
 
   componentDidMount() {
@@ -54,12 +55,12 @@ class TweetsPage extends Component {
 
   // this is needed to get the database tweets into this.state.tweetsArray
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.dbTweets !== this.props.dbTweets){
+    if (prevProps.dbTweets !== this.props.dbTweets && this.state.tweetsLoaded === false){
       // this portion filters all database tweets into an "undecided" array with only tweets
       // that have approved value of null
       let undecided = this.props.dbTweets.filter(function (filteredTweets) {
       return filteredTweets.approved === null});
-      this.setState({tweetsArray: undecided}); 
+      this.setState({tweetsArray: undecided, tweetsLoaded: true}); 
     }
   }
 
