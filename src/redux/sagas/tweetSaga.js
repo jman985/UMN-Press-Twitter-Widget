@@ -137,12 +137,12 @@ function* saveTweets(action){
     yield console.log(action.payload);
   // filter undefined results (no results from search)
     if (tweets !== undefined){
-       // take each tweet id from the publicaiton search and save to database with associated publication id
+       // take each tweet id from the publication search and save to database with associated publication id
       for (let tweet of tweets) {
         const tweetId = tweet.id;
         const publicationId = action.payload.publicationId;
         //filter out sensitive tweets and retweets
-        if(tweet.possibly_sensitive===false&&!onlyRetweets(tweet)){ 
+        if(tweet.possibly_sensitive === false && !onlyRetweets(tweet)){ 
           console.log("sending these to tweet save route:", {
             tweetId: tweetId,
             publicationId: publicationId,
