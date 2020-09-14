@@ -381,14 +381,16 @@ class PublicationItem extends Component {
             <Box display='flex' alignItems='center'>
               <Button variant="contained" color="primary" href={'http://localhost:3000/#/books/'+this.props.match.params.id} target="_blank">
                 View Book Page &nbsp;<PlayArrowIcon/>
-              </Button >
+              </Button>
             </Box>
           </Box>
 
-          <div>
-            <button onClick={()=>this.seekPages('next')}>Next</button>
-            {this.state.key1 === Number(0) ? '' : <button onClick={()=>this.seekPages('prev')}>Prev</button>}
-          </div>
+          <Box display='flex' justifyContent='center'>
+            <Box style={{padding:'10px'}}>
+              <Button color="primary" variant="contained" onClick={()=>this.seekPages('next')}>Next</Button>
+            </Box>
+            {this.state.key1 === Number(0) ? '' : <Box style={{padding:'10px'}}><Button color="primary" variant="contained" onClick={()=>this.seekPages('prev')}>Prev</Button></Box>}
+          </Box>
 
           <div className={classes.root} style={{display: "flex",flexWrap: "wrap",justifyContent:'center'}}>
             <div key={this.state.status+1} style={{display:'flex'}}>
