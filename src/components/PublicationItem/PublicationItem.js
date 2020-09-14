@@ -60,6 +60,8 @@ class PublicationItem extends Component {
         key1: 0,
         key2: 1,
         key3: 2,
+        tweetsLoaded: false
+
     }
 
     componentDidMount(){
@@ -70,8 +72,10 @@ class PublicationItem extends Component {
 
      
     componentDidUpdate(prevProps) {
-      if (prevProps.dbTweets !== this.props.dbTweets || prevProps.publication !== this.props.publication){
+      if ((prevProps.dbTweets !== this.props.dbTweets && this.state.tweetsLoaded === false )|| prevProps.publication !== this.props.publication){
         this.filterTweets();
+        this.setState({tweetsLoaded: true}); 
+
       }
     } 
 
