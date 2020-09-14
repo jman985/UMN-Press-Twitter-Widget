@@ -157,7 +157,6 @@ router.put('/all', rejectUnauthenticated, (req, res) => {
 })
 
 
-
 module.exports = router;
 
 // switch (book) {
