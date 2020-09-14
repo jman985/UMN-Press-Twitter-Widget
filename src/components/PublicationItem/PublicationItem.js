@@ -391,12 +391,10 @@ class PublicationItem extends Component {
             {this.state.tweetsArray[this.state.key1] ?
               <Card className={classes.card} variant="outlined" style={{width:'450px',height:'600px',backgroundColor:'#f3f3f3'}}>
                 <CardContent style={{display:"flex", flexDirection:'column',justifyContent:'space-between',height:'100%'}}>
-                  <CardActionArea onClick={()=>{this.props.history.push(`publications/${this.state.tweetsArray[this.state.key1].publication_id}`)}}>
                     <Typography gutterBottom variant="h6">
                       Title: {this.state.tweetsArray[this.state.key1].title} <br />
                       Author: {this.state.tweetsArray[this.state.key1].author1}
                     </Typography>
-                  </CardActionArea>
                     <div style={{maxHeight:"500px", overflow:"auto"}}>
                       <TwitterTweetEmbed key={this.state.key1} tweetId={this.state.tweetsArray[this.state.key1].tweet_id}/>      
                     </div>
@@ -413,12 +411,10 @@ class PublicationItem extends Component {
             {this.state.tweetsArray[this.state.key2] ?
               <Card className={classes.card} variant="outlined" style={{width:'450px',height:'600px',backgroundColor:'#f3f3f3'}}>
                 <CardContent style={{display:"flex", flexDirection:'column',justifyContent:'space-between',height:'100%'}}>
-                  <CardActionArea onClick={()=>{this.props.history.push(`publications/${this.state.tweetsArray[this.state.key2].publication_id}`)}}>
                     <Typography gutterBottom variant="h6">
                       Title: {this.state.tweetsArray[this.state.key2].title} <br />
                       Author: {this.state.tweetsArray[this.state.key2].author1}
                     </Typography>
-                  </CardActionArea>
                     <div style={{maxHeight:"500px", overflow:"auto"}}>
                       <TwitterTweetEmbed key={this.state.key2} tweetId={this.state.tweetsArray[this.state.key2].tweet_id}/>      
                     </div>
@@ -435,12 +431,10 @@ class PublicationItem extends Component {
             {this.state.tweetsArray[this.state.key3] ?
               <Card className={classes.card} variant="outlined" style={{width:'450px',height:'600px',backgroundColor:'#f3f3f3'}}>
                 <CardContent style={{display:"flex", flexDirection:'column',justifyContent:'space-between',height:'100%'}}>
-                  <CardActionArea onClick={()=>{this.props.history.push(`publications/${this.state.tweetsArray[this.state.key3].publication_id}`)}}>
                     <Typography gutterBottom variant="h6">
                       Title: {this.state.tweetsArray[this.state.key3].title} <br />
                       Author: {this.state.tweetsArray[this.state.key3].author1}
                     </Typography>
-                  </CardActionArea>
                     <div style={{maxHeight:"500px", overflow:"auto"}}>
                       <TwitterTweetEmbed key={this.state.key3} tweetId={this.state.tweetsArray[this.state.key3].tweet_id}/>      
                     </div>
