@@ -31,7 +31,7 @@ cron.schedule('0 0,20,40 1,2 * * *', () => {
     notNull.sort((a, b) => parseFloat(((new Date(a.last_searched)).getTime())) - parseFloat(((new Date(b.last_searched)).getTime())));
     publications = nullOnly.concat(notNull)
 
-    // create a query for each publication (up to limit) and search 
+    // interate through 450 of the publications, create queries for each, and send to Twitter search API
     for (let i=0;i<450;i++){
 
       // replace special characters from titles/authors so twitter is happy
