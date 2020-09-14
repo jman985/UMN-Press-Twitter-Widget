@@ -1,8 +1,7 @@
 
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import InclusionToggle from './InclusionToggle';
-import ToggleAll from './InclusionToggleAll';
+import InclusionToggle from './InclusionToggle'
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import PublicationTable from '../PublicationTable/PublicationTable'
@@ -181,10 +180,6 @@ class Publications extends Component {
                   <MenuItem value={'TaAoS'}>Title AND Author OR Subtitle</MenuItem>
                 </Select>
               </FormControl>
-              <Box style={{paddingTop:'40px',margin:'10px'}}>
-                <ToggleAll/>
-                  Toggle 'Include/Exclude' for all Publications
-              </Box>
             </Paper>
           </Box>
         <PublicationTable2 key={this.props.publication}/>
