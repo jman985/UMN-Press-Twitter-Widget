@@ -137,6 +137,27 @@ router.post("/csv", async (req, res) => {
   }
 });
 
+
+
+router.put('/all', rejectUnauthenticated, (req, res) => {
+  console.log('Toggling inclusion state of all publications')
+  const queryText = `
+  UPDATE publication
+  SET include = $1
+  `
+  pool.query(queryText, [req.body.include])
+  .then( (response) => {
+      console.log( 'Successfully toggled inclusion state');
+      res.send(response.rows);
+  })
+  .catch( (err) => {
+      console.log('An error occured while toggling inclusion state:', err);
+      res.sendStatus(500);
+  })
+})
+
+
+
 module.exports = router;
 
 // switch (book) {
