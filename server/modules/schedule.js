@@ -10,8 +10,7 @@ var cron = require('node-cron');
 
 let publications = [];
 
-cron.schedule('0,15,30,45 * * * * *', () => {
-  console.log('running a task every minute');
+cron.schedule('0 0,20,40 1,2 * * *', () => {
 
   // GET all publications from database and save to publications array
   console.log('Getting Publications');
@@ -33,19 +32,19 @@ cron.schedule('0,15,30,45 * * * * *', () => {
     publications = nullOnly.concat(notNull)
 
     // create a query for each publication (up to limit) and search 
-    for (let i=0;i<1;i++){
+    for (let i=0;i<450;i++){
 
       // replace special characters from titles/authors so twitter is happy
-      let title = publications[i].title.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, '');
+      let title = publications[i].title.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, '');
       let author = '';
       let subtitle = title;
       if (publications[i].subtitle.length > 0){
-        subtitle = publications[i].subtitle.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, '');
+        subtitle = publications[i].subtitle.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, '');
       }
       let authorArr = publications[i].author1.split(',');
       if (authorArr.length > 1){
-        author = authorArr[0].replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, '');
-      } else {author = publications[i].author1.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, '')};
+        author = authorArr[0].replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, '');
+      } else {author = publications[i].author1.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, '')};
 
       // check the search type and build the corresponding query for twitter
       let twitterQuery = '';
@@ -77,21 +76,49 @@ cron.schedule('0,15,30,45 * * * * *', () => {
         // Exact Title AND Author Last Name OR Subtitle
         case 'TaAoS':
           twitterQuery = `"${title}" "${author}" OR "${subtitle}"`;
+        break;
       }
 
       //send the query to Twitter
       console.log('searching Twitter for: ',twitterQuery)
-      axios.get(`https://api.twitter.com/2/tweets/search/recent?query="${twitterQuery}"&max_results=10&tweet.fields=possibly_sensitive,referenced_tweets`, {
+      axios.get(`https://api.twitter.com/2/tweets/search/recent?query=${twitterQuery}&max_results=10&tweet.fields=possibly_sensitive,referenced_tweets`, {
         headers: {'Authorization': `Bearer ${token}`}
       })
       .then((response)=>{
-          console.log({body: response.data.data, header: response.headers});
-          if (response.data.body !== undefined){
+        console.log({body: response.data.data, header: response.headers});
+
+
+        // iterate through each tweet and save their ids to the database
+        let tweets = response.data.data;
+        if (tweets !== undefined){
+          for (let tweet of tweets) {
+            const tweetId = tweet.id;
+            const publicationId = publications[i].id
+            //filter out sensitive tweets and retweets
+            if(tweet.possibly_sensitive === false && !onlyRetweets(tweet)){
+
+              // save any search results from twitter to the database
+              const saveTweetQuery = `
+              INSERT INTO "tweet" ("publication_id", "tweet_id")
+              SELECT $1 AS "publication_id", CAST($2 AS VARCHAR(100)) AS "tweet_id" 
+              WHERE NOT EXISTS (SELECT * FROM tweet WHERE publication_id = $1 AND tweet_id = $2);`
             
+              pool.query(saveTweetQuery, [publicationId, tweetId])
+              .then(() => console.log('Saved Tweet: ', tweetId))
+              .catch((error) => {console.log('error updating timestamp: ', error)
+              });
+            }
           }
+        }
 
-
-
+        //update the publication last_searched value to current time
+        pool.query(`
+        UPDATE "publication" 
+        SET "last_searched" = CURRENT_TIMESTAMP 
+        WHERE id = ${publications[i].id};`)
+        .then(() => console.log('Updated Timestamp'))
+        .catch((error) => {console.log('error updating timestamp: ', error);
+        });
 
 
       })
@@ -104,6 +131,23 @@ cron.schedule('0,15,30,45 * * * * *', () => {
     console.log("An error occured while getting publications:", err);
   });
 });
+
+
+
+//checks if tweet is a retweet
+function onlyRetweets(tweet){  
+  if(tweet.hasOwnProperty('referenced_tweets')){
+      for(let j=0;j<tweet.referenced_tweets.length;j++){
+          if(tweet.referenced_tweets[j].type==='quoted'||tweet.referenced_tweets[j].type==='replied_to'){
+            return false;
+          }
+      }
+      return true;
+    }else{
+      return false;
+  }
+}//end onlyRetweets
+
 
 const schedule = console.log('SCHEDULE HI')
 

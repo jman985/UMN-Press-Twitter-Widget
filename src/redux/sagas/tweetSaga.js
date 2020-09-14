@@ -22,17 +22,17 @@ function* getTweets(action) {
         // let str= "['&;#^%[\|/{}]";
         // console.log('this is the normalize test', str.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''));
         let response = 0
-        let title = encodeURIComponent(action.payload[i].title.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''));
+        let title = encodeURIComponent(action.payload[i].title.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''));
         let author = ''
         // subtitle is initially declared as the title for cases in which there is no subtitle
         let subtitle = title
         if (action.payload[i].subtitle.length > 0){
-          subtitle = encodeURIComponent(action.payload[i].subtitle.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''));
+          subtitle = encodeURIComponent(action.payload[i].subtitle.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''));
         }
         let authorArr = action.payload[i].author1.split(',')
         if (authorArr.length > 1){
-          author = encodeURIComponent(authorArr[0].replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''))
-        } else {author = encodeURIComponent(action.payload[i].author1.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''))}
+          author = encodeURIComponent(authorArr[0].replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''))
+        } else {author = encodeURIComponent(action.payload[i].author1.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''))}
         switch(action.payload[i].search_type) {
           // Exact Match Title
           case 'T':
@@ -61,6 +61,7 @@ function* getTweets(action) {
           // Exact Title AND Author Last Name OR Subtitle
           case 'TaAoS':
             response = yield axios.get('/tweets/twitter/' + `"${title}" "${author}" OR "${subtitle}"`);
+          break;
         }
         // send the response(tweet id) and the publication object from database to the save saga
         // save the tweet ids to the tweet table of the database
@@ -139,12 +140,12 @@ function* saveTweets(action){
     yield console.log(action.payload);
   // filter undefined results (no results from search)
     if (tweets !== undefined){
-       // take each tweet id from the publicaiton search and save to database with associated publication id
+       // take each tweet id from the publication search and save to database with associated publication id
       for (let tweet of tweets) {
         const tweetId = tweet.id;
         const publicationId = action.payload.publicationId;
         //filter out sensitive tweets and retweets
-        if(tweet.possibly_sensitive===false&&!onlyRetweets(tweet)){ 
+        if(tweet.possibly_sensitive === false && !onlyRetweets(tweet)){ 
           console.log("sending these to tweet save route:", {
             tweetId: tweetId,
             publicationId: publicationId,
