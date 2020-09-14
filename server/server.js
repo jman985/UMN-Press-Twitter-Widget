@@ -5,6 +5,8 @@ const app = express();
 const bodyParser = require("body-parser");
 const sessionMiddleware = require("./modules/session-middleware");
 
+const schedule = require("./modules/schedule")
+
 const passport = require("./strategies/user.strategy");
 
 // Route includes
@@ -42,3 +44,5 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
 });
+
+
