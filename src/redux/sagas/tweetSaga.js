@@ -14,83 +14,81 @@ function* getTweets(action) {
     }
     for (let i=0; i<searchAmount; i++){
       yield put({ type: 'INCREASE_SEARCH_COUNT'})
-      // check if the publication has include value of true
-      if (action.payload[i].include){
-        //hit Twitter Recent Search API with publication title, replace problem characters with "*" aka the "wild card" character
-        //then normalize to replace å/a,ö/o, etc.
-        // console.log('this is the API query', action.payload[i].title.replace(/["&;#^%[\|{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''));
-        // let str= "['&;#^%[\|/{}]";
-        // console.log('this is the normalize test', str.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''));
-        let response = 0
-        let title = encodeURIComponent(action.payload[i].title.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''));
-        let author = ''
-        // subtitle is initially declared as the title for cases in which there is no subtitle
-        let subtitle = title
-        if (action.payload[i].subtitle.length > 0){
-          subtitle = encodeURIComponent(action.payload[i].subtitle.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''));
-        }
-        let authorArr = action.payload[i].author1.split(',')
-        if (authorArr.length > 1){
-          author = encodeURIComponent(authorArr[0].replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''))
-        } else {author = encodeURIComponent(action.payload[i].author1.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''))}
-        switch(action.payload[i].search_type) {
-          // Exact Match Title
-          case 'T':
-            response = yield axios.get('/tweets/twitter/' + `"${title}"`);
-          break;
-          // Exact Title AND Exact Author Last Name
-          case 'TaA':
-            response = yield axios.get('/tweets/twitter/' + `"${title}" "${author}"`);
-          break;
-          // Exact Title AND Exact Subtitle
-          case 'TaS':
-            response = yield axios.get('/tweets/twitter/' + `"${title}" "${subtitle}"`);
-          break;
-          // Exact Title OR Exact Subtitle  
-          case 'ToS':
-            response = yield axios.get('/tweets/twitter/' + `"${title}" OR "${subtitle}"`);
-          break;
-          // Exact Subtitle
-          case 'S':
-            response = yield axios.get('/tweets/twitter/' + `"${subtitle}"`);
-          break;
-          // Exact Subtitle AND Exact Author Last Name
-          case 'SaA':
-            response = yield axios.get('/tweets/twitter/' + `"${subtitle}" "${author}"`);
-          break;
-          // Exact Title AND Author Last Name OR Subtitle
-          case 'TaAoS':
-            response = yield axios.get('/tweets/twitter/' + `"${title}" "${author}" OR "${subtitle}"`);
-          break;
-        }
-        // send the response(tweet id) and the publication object from database to the save saga
-        // save the tweet ids to the tweet table of the database
-        if (response.data.body !== undefined){
-          yield put({
-            type: "SAVE_TWEETS",
-            payload: {
-              tweetArray: response.data.body,
-              publicationId: action.payload[i].id,
-            },
-          });
-        }
-        // save the API rate info to the user table of the database on the last repitition
-        if (i === searchAmount-1){
-          yield put({
-            type: "SAVE_RATE_DATA",
-            payload: {
-              rateLimit: response.data.header['x-rate-limit-limit'],
-              rateLimitRemaining: response.data.header['x-rate-limit-remaining'],
-              rateLimitReset: response.data.header['x-rate-limit-reset'],
-              userId: action.userId
-            }
-          });
-        }
-        // console.log(response)
-        console.log("sending this to save tweet saga:", response.data.data);
-        // update the last_searched timestamp of each publication
-        yield axios.put('/publications/timestamp/' + action.payload[i].id )
-      }    
+      //hit Twitter Recent Search API with publication title, replace problem characters with "*" aka the "wild card" character
+      //then normalize to replace å/a,ö/o, etc.
+      // console.log('this is the API query', action.payload[i].title.replace(/["&;#^%[\|{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''));
+      // let str= "['&;#^%[\|/{}]";
+      // console.log('this is the normalize test', str.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''));
+      let response = 0
+      let title = encodeURIComponent(action.payload[i].title.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''));
+      let author = ''
+      // subtitle is initially declared as the title for cases in which there is no subtitle
+      let subtitle = title
+      if (action.payload[i].subtitle.length > 0){
+        subtitle = encodeURIComponent(action.payload[i].subtitle.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''));
+      }
+      let authorArr = action.payload[i].author1.split(',')
+      if (authorArr.length > 1){
+        author = encodeURIComponent(authorArr[0].replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''))
+      } else {author = encodeURIComponent(action.payload[i].author1.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''))}
+      switch(action.payload[i].search_type) {
+        // Exact Match Title
+        case 'T':
+          response = yield axios.get('/tweets/twitter/' + `"${title}"`);
+        break;
+        // Exact Title AND Exact Author Last Name
+        case 'TaA':
+          response = yield axios.get('/tweets/twitter/' + `"${title}" "${author}"`);
+        break;
+        // Exact Title AND Exact Subtitle
+        case 'TaS':
+          response = yield axios.get('/tweets/twitter/' + `"${title}" "${subtitle}"`);
+        break;
+        // Exact Title OR Exact Subtitle  
+        case 'ToS':
+          response = yield axios.get('/tweets/twitter/' + `"${title}" OR "${subtitle}"`);
+        break;
+        // Exact Subtitle
+        case 'S':
+          response = yield axios.get('/tweets/twitter/' + `"${subtitle}"`);
+        break;
+        // Exact Subtitle AND Exact Author Last Name
+        case 'SaA':
+          response = yield axios.get('/tweets/twitter/' + `"${subtitle}" "${author}"`);
+        break;
+        // Exact Title AND Author Last Name OR Subtitle
+        case 'TaAoS':
+          response = yield axios.get('/tweets/twitter/' + `"${title}" "${author}" OR "${subtitle}"`);
+        break;
+      }
+      // send the response(tweet id) and the publication object from database to the save saga
+      // save the tweet ids to the tweet table of the database
+      if (response.data.body !== undefined){
+        yield put({
+          type: "SAVE_TWEETS",
+          payload: {
+            tweetArray: response.data.body,
+            publicationId: action.payload[i].id,
+          },
+        });
+      }
+      // save the API rate info to the user table of the database on the last repitition
+      if (i === searchAmount-1){
+        yield put({
+          type: "SAVE_RATE_DATA",
+          payload: {
+            rateLimit: response.data.header['x-rate-limit-limit'],
+            rateLimitRemaining: response.data.header['x-rate-limit-remaining'],
+            rateLimitReset: response.data.header['x-rate-limit-reset'],
+            userId: action.userId
+          }
+        });
+      }
+      // console.log(response)
+      console.log("sending this to save tweet saga:", response.data.data);
+      // update the last_searched timestamp of each publication
+      yield axios.put('/publications/timestamp/' + action.payload[i].id )
+    
       // update the user redux store with the new rate data
       yield put({ type: "FETCH_USER" });
       // update the publication redx store with new last_searched times

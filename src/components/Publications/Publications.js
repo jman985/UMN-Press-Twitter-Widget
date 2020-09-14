@@ -50,10 +50,11 @@ class Publications extends Component {
 
   // returns a sorted publication array based on the 'last_searched' timecodes
   sortPublicationsForSearch = () => {
+    let included = this.props.publciation.filter(x => x.include === true)
     // filter publications with null 'last_searched' values into new array
-    let nullOnly = this.props.publication.filter(x => x.last_searched === null)
+    let nullOnly = included.filter(x => x.last_searched === null)
     // filter publications with timecode 'last_searched' values into new array
-    let notNull = this.props.publication.filter(x => x.last_searched !== null)
+    let notNull = included.filter(x => x.last_searched !== null)
     let sortedArray = notNull
 
     // sort the array with last_searched timecodes in ascending order
