@@ -381,6 +381,11 @@ class PublicationItem extends Component {
             </Box>
           </Box>
 
+          <div>
+            <button onClick={()=>this.seekPages('next')}>Next</button>
+            {this.state.key1 === Number(0) ? '' : <button onClick={()=>this.seekPages('prev')}>Prev</button>}
+          </div>
+
           <div className={classes.root} style={{display: "flex",flexWrap: "wrap",justifyContent:'center'}}>
             <div key={this.state.status+1} style={{display:'flex'}}>
             {this.state.tweetsArray[this.state.key1] ?
@@ -449,15 +454,6 @@ class PublicationItem extends Component {
             </div>
           </div>
 
-          <Box display='flex' justifyContent='center'>
-            <Box display="flex" alignItems="left" style={{margin:'20px'}}>
-              <Button style={{display:'flex'}} variant="contained" color="primary" onClick={()=>this.seekPages('next')}>Next</Button>
-            </Box>
-            <Box display="flex" justifyContent="right" style={{margin:'20px'}}>
-              {this.state.key1 === Number(0) ? '' : 
-                <Button style={{display:'flex'}} variant="contained" color="primary" onClick={()=>this.seekPages('prev')}>Prev</Button>}
-            </Box>
-          </Box>
           </>
       )
   }
