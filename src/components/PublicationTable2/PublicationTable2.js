@@ -26,7 +26,7 @@ const styles = (theme) => ({
   root: {
     width: "80%",
     //marginLeft: theme.spacing.unit * 3,
-    margin: "100px auto",
+    margin: "40px auto",
     overflowX: "auto",
     paddingTop:'0px',
     paddingBottom:'0px !important',

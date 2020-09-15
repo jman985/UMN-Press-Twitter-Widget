@@ -75,7 +75,7 @@ class LoginPage extends Component {
                               [event.target.name]: event.target.value,
                             })
                           }
-                          size="normal"
+                          size="medium"
                           required
                           autoFocus
                         />
