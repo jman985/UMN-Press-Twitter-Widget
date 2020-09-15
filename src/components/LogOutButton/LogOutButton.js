@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Typography from '@material-ui/core/Typography';
 
 const LogOutButton = props => (
   <button 
@@ -10,7 +11,7 @@ const LogOutButton = props => (
     style={{width:"100%",borderRight:'2px solid black'}}
     onClick={() => props.dispatch({ type: 'LOGOUT' })}
   >
-    Log Out
+    <Typography variant='h5'>Log Out</Typography>
   </button>
 );
 

@@ -5,6 +5,9 @@ import { withStyles } from "@material-ui/core/styles";
 import TableCell from "@material-ui/core/TableCell";
 import Button from "@material-ui/core/Button";
 import PublicationTable from "../PublicationTable/PublicationTable";
+import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
 
 const styles = (theme) => ({
   root: {
@@ -48,20 +51,20 @@ class UserPage extends Component {
       },
     }))(TableCell);
     return (
-      <div>
-        <div style={{ marginLeft: "30px", marginTop: "25px" }}>
-          <h2
+      <Box textAlign="center" display='flex' flexDirection='column' alignItems="center">
+        <Paper display='flex' justifyContent="center" style={{maxWidth:'50%', minWidth: '30%', padding: "30px", marginTop: "25px" }}>
+          <Typography variant='h5'
             style={{ display: "inline-block", fontWeight: "100" }}
-            id="welcome"
-          >
-            Welcome, {this.props.user.username}! Upload a Csv file.
-          </h2>
+            id="welcome">
+            Welcome, {this.props.user.username}! 
+          </Typography>
+          <Typography variant='h6'>
+              Upload a CSV File
+          </Typography>
           <CSVReader />
-        </div>
-
         {this.props.csv.loaded ? (
           <>
-            <label htmlFor="outlined-button-file">
+            
               <Button
                 onClick={this.acceptCsv}
                 variant="outlined"
@@ -77,11 +80,17 @@ class UserPage extends Component {
               >
                 Reject
               </Button>
-            </label>
-            <PublicationTable />
+
+            
           </>
         ) : null}
-      </div>
+        </Paper>
+
+        {this.props.csv.loaded ? 
+        <PublicationTable />
+        : null}
+
+      </Box>
     );
   }
 }

@@ -114,7 +114,7 @@ class TweetsPage extends Component {
           <Card className={classes.card} variant="outlined" style={{width:'450px',height:'600px',backgroundColor:'#f3f3f3'}}>
             <CardContent style={{display:"flex", flexDirection:'column',justifyContent:'space-between',height:'100%'}}>
               <CardActionArea onClick={()=>{this.props.history.push(`publications/${this.state.tweetsArray[this.state.key1].publication_id}`)}}>
-                <Typography gutterBottom variant="h6">
+                <Typography gutterBottom variant="h6" style={{color:'#626262'}}>
                   Title: {this.state.tweetsArray[this.state.key1].title} <br />
                   Author: {this.state.tweetsArray[this.state.key1].author1}
                 </Typography>
@@ -134,7 +134,7 @@ class TweetsPage extends Component {
           <Card className={classes.card} variant="outlined" style={{width:'450px',height:'600px',backgroundColor:'#f3f3f3'}}>
             <CardContent style={{display:"flex", flexDirection:'column',justifyContent:'space-between',height:'100%'}}>
               <CardActionArea onClick={()=>{this.props.history.push(`publications/${this.state.tweetsArray[this.state.key2].publication_id}`)}}>
-                <Typography gutterBottom variant="h6">
+                <Typography gutterBottom variant="h6" style={{color:'#626262'}}>
                   Title: {this.state.tweetsArray[this.state.key2].title} <br />
                   Author: {this.state.tweetsArray[this.state.key2].author1}
                 </Typography>
@@ -154,7 +154,7 @@ class TweetsPage extends Component {
           <Card className={classes.card} variant="outlined" style={{width:'450px',height:'600px',backgroundColor:'#f3f3f3'}}>
             <CardContent style={{display:"flex", flexDirection:'column',justifyContent:'space-between',height:'100%'}}>
               <CardActionArea onClick={()=>{this.props.history.push(`publications/${this.state.tweetsArray[this.state.key3].publication_id}`)}}>
-                <Typography gutterBottom variant="h6">
+                <Typography gutterBottom variant="h6" style={{color:'#626262'}}>
                   Title: {this.state.tweetsArray[this.state.key3].title} <br />
                   Author: {this.state.tweetsArray[this.state.key3].author1}
                 </Typography>
@@ -174,7 +174,7 @@ class TweetsPage extends Component {
           <Card className={classes.card} variant="outlined" style={{width:'450px',height:'600px',backgroundColor:'#f3f3f3'}}>
             <CardContent style={{display:"flex", flexDirection:'column',justifyContent:'space-between',height:'100%'}}>
               <CardActionArea onClick={()=>{this.props.history.push(`publications/${this.state.tweetsArray[this.state.key4].publication_id}`)}}>
-                <Typography gutterBottom variant="h6">
+                <Typography gutterBottom variant="h6" style={{color:'#626262'}}>
                   Title: {this.state.tweetsArray[this.state.key4].title} <br />
                   Author: {this.state.tweetsArray[this.state.key4].author1}
                 </Typography>
@@ -194,7 +194,7 @@ class TweetsPage extends Component {
           <Card className={classes.card} variant="outlined" style={{width:'450px',height:'600px',backgroundColor:'#f3f3f3'}}>
             <CardContent style={{display:"flex", flexDirection:'column',justifyContent:'space-between',height:'100%'}}>
               <CardActionArea onClick={()=>{this.props.history.push(`publications/${this.state.tweetsArray[this.state.key5].publication_id}`)}}>
-                <Typography gutterBottom variant="h6">
+                <Typography gutterBottom variant="h6" style={{color:'#626262'}}>
                   Title: {this.state.tweetsArray[this.state.key5].title} <br />
                   Author: {this.state.tweetsArray[this.state.key5].author1}
                 </Typography>
@@ -214,7 +214,7 @@ class TweetsPage extends Component {
           <Card className={classes.card} variant="outlined" style={{width:'450px',height:'600px',backgroundColor:'#f3f3f3'}}>
             <CardContent style={{display:"flex", flexDirection:'column',justifyContent:'space-between',height:'100%'}}>
               <CardActionArea onClick={()=>{this.props.history.push(`publications/${this.state.tweetsArray[this.state.key6].publication_id}`)}}>
-                <Typography gutterBottom variant="h6">
+                <Typography gutterBottom variant="h6" style={{color:'#626262'}}>
                   Title: {this.state.tweetsArray[this.state.key6].title} <br />
                   Author: {this.state.tweetsArray[this.state.key6].author1}
                 </Typography>

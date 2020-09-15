@@ -121,70 +121,74 @@ class Publications extends Component {
       <>
 
         <Box className='topBox' display='flex' justifyContent='center'>
-          <Paper style={{maxWidth:'40%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
-            <Typography variant='h6'>
-              Total Publications Uploaded: <Typography variant='body1' component="span">{this.props.publication.length}</Typography>
+          <Paper style={{width:'28%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
+            <Typography variant='h6' style={{color:'#626262'}}>
+              Total Publications Uploaded: <Typography variant='h6' component="span" style={{color:'#000'}}>{this.props.publication.length}</Typography>
             </Typography>
-            <Typography variant='h6'>
+            <Typography  variant='h6' style={{color:'#626262'}}>
               Last Search Date: 
-              <Typography variant='body1' component="span">
+              <Typography style={{color:'#000'}} variant='h6' component="span">
                 {' '}{this.determineLastSearch()}
               </Typography>
             </Typography>
-            <Typography variant='h6'>
-              Searches Remaining: <Typography variant='body1' component="span">{this.determineRateLimit()}</Typography>
+            <Typography variant='h6' style={{color:'#626262'}}>
+              Searches Remaining: <Typography style={{color:'#000'}} variant='h6' component="span">{this.determineRateLimit()}</Typography>
             </Typography>
             {this.props.user.rate_limit_refresh * 1000 > new Date().getTime() ?
-                <Typography variant='h6'>
-                  Searches Refresh at: <Typography variant='body1' component="span">{this.parseRefreshTime()}</Typography>
+                <Typography variant='h6' style={{color:'#626262'}}>
+                  Searches Refresh at: <Typography style={{color:'#000'}} variant='h6' component="span">{this.parseRefreshTime()}</Typography>
                 </Typography>
             : <p></p>}
           </Paper>
           {!this.props.loading.loading ? 
-          <Paper style={{maxWidth:'40%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3',dispaly:'flex',flexDirection:'column'}}>
-            <Typography variant='h6'>Batch Publication Search</Typography>
+          <Paper style={{width:'18%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3',dispaly:'flex',flexDirection:'column'}}>
+            <Typography variant='h6' style={{marginBottom: '10px'}}>Batch Publication Search</Typography>
             <TextField
+              inputProps={{style: {fontSize: 20, padding: 8,}}}
               id="outlined-name"
               label="# of Searches to Run"
               defaultValue="400"
               onChange={this.handleLimitChange}
-              margin="normal"
               variant="outlined"
             />
-            <Button style={{display:'flex'}} variant="contained" color="primary" onClick={this.handleClick}>
+            <Button style={{display:'flex',marginTop:'10px'}} variant="contained" color="primary" onClick={this.handleClick}>
               Search
             </Button>
           </Paper>
             : 
-            <Paper style={{maxWidth:'40%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3',dispaly:'flex',flexDirection:'column'}}>
+            <Paper style={{width:'18%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3',dispaly:'flex',flexDirection:'column'}}>
               <Typography variant='h6'>Searching for Tweets</Typography>
               <Typography variant='h6'>Searching {this.props.loading.count} of {this.props.loading.limit} Publications</Typography>
               <Typography variant='h6'>Found {this.props.loading.newTweets} Tweets</Typography>
               <LinearProgress variant="determinate" value={(this.props.loading.count / this.props.loading.limit)*100} />
             </Paper>
             }
-            <Paper style={{width:'30%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3',dispaly:'flex',flexDirection:'column'}}>
-              <FormControl style={{width:'90%'}}>
-              <InputLabel>Select to Change all Search Types</InputLabel>
-                <Select
-                  defaultValue={""}
-                  onChange={(event)=>this.handleSearchTypeChange(event.target.value)}
-                >
-                  <MenuItem value="">
-                    <em>Cancel</em>
-                  </MenuItem>
-                  <MenuItem value={'T'}>Title</MenuItem>
-                  <MenuItem value={'TaA'}>Title AND Author</MenuItem>
-                  <MenuItem value={'TaS'}>Title AND Subtitle</MenuItem>
-                  <MenuItem value={'ToS'}>Title OR Subtitle</MenuItem>
-                  <MenuItem value={'S'}>Subtitle</MenuItem>
-                  <MenuItem value={'SaA'}>Subtitle AND Author</MenuItem>
-                  <MenuItem value={'TaAoS'}>Title AND Author OR Subtitle</MenuItem>
-                </Select>
-              </FormControl>
-              <Box style={{paddingTop:'40px',margin:'10px'}}>
-                <ToggleAll/>
-                  Toggle 'Include/Exclude' for all Publications
+            <Paper style={{width:'28%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
+              <Box display='flex' flexDirection='column'>
+                <FormControl display='flex' style={{width:'90%',marginBottom:'10px'}}>
+                <InputLabel display='flex'>Select to Change all Search Types</InputLabel>
+                  <Select
+                    defaultValue={""}
+                    onChange={(event)=>this.handleSearchTypeChange(event.target.value)}
+                  >
+                    <MenuItem value="">
+                      <em>Cancel</em>
+                    </MenuItem>
+                    <MenuItem value={'T'}>Title</MenuItem>
+                    <MenuItem value={'TaA'}>Title AND Author</MenuItem>
+                    <MenuItem value={'TaS'}>Title AND Subtitle</MenuItem>
+                    <MenuItem value={'ToS'}>Title OR Subtitle</MenuItem>
+                    <MenuItem value={'S'}>Subtitle</MenuItem>
+                    <MenuItem value={'SaA'}>Subtitle AND Author</MenuItem>
+                    <MenuItem value={'TaAoS'}>Title AND Author OR Subtitle</MenuItem>
+                  </Select>
+                </FormControl>
+                  <Box display='flex' flexDirection='row' alignItems='center'>
+                    <ToggleAll/>
+                  <Typography alignItems='center' variant='h6' style={{margin:'10px',color:'#626262'}}>
+                      Toggle 'Include/Exclude' for all Publications
+                  </Typography>
+                </Box>
               </Box>
             </Paper>
           </Box>
