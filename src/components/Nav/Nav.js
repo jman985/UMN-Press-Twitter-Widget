@@ -3,39 +3,39 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import LogOutButton from "../LogOutButton/LogOutButton";
 import "./Nav.css";
+import Typography from '@material-ui/core/Typography';
+
 
 const Nav = (props) => (
   <div className="nav" style={{display:"flex",flexDirection:"column"}}>
     <Link className="link-bar" to="/publications">
-      <h2 className="nav-title">University of MN Twitter Admin</h2>
+      <Typography variant='h4' className="nav-title">University of MN Twitter Admin</Typography>
     </Link>
     <div className="nav-right" style={{display:"flex",width:"100%",justifyContent: "space-around"}}>
       <Link className="nav-link" to="/upload" style={{width:"100%",borderRight:'2px solid black'}}>
         {/* Show this link if they are logged in or not,
-        but call this link 'Home' if they are logged in,
+        but call this link 'Upload Csv' if they are logged in,
         and call this link 'Login / Register' if they are not */}
-        {props.user.id ? "Upload Csv" : "Login / Register"}
+        {props.user.id ? 
+          <Typography variant='h5'>Upload Csv</Typography>
+          : 
+          <Typography variant='h5'>Login / Register</Typography>
+        }
       </Link>
       {/* Show the link to the info page and the logout button if the user is logged in */}
       {props.user.id && (
         <>
-          <Link className="nav-link" to="/info" style={{width:"100%",borderRight:'2px solid black'}}>
-            Info Page
-          </Link>
           <Link className="nav-link" to="/publications" style={{width:"100%",borderRight:'2px solid black'}}>
-            Publications
+          <Typography variant='h5'>Publications</Typography>
           </Link>
           <Link className="nav-link" to="/tweets" style={{width:"100%",borderRight:'2px solid black'}}>
-            Tweets
+          <Typography variant='h5'>Tweets</Typography>
           </Link>
 
           <LogOutButton className="nav-link" />
         </>
       )}
-      {/* Always show this link since the about page is not protected */}
-      <Link className="nav-link" to="/about" style={{width:"100%"}}>
-        About
-      </Link>
+
     </div>
   </div>
 );
