@@ -297,83 +297,89 @@ class PublicationItem extends Component {
 
       return(
         <>
-          <Typography variant='h4' style={{margin:'20px'}}>
+          <Box display='flex' flexDirection='column' textAlign='center' justifyContent='center'>
+            <Typography variant='h4' style={{marginTop:'20px'}}>
               <span style={{textDecorationLine:'underline'}}>{this.props.publication[index].title}</span>
+            </Typography>
+            <Typography variant='h6' style={{margin:'0px'}}>
               <span> by {this.props.publication[index].author1}</span>
-          </Typography>
+            </Typography>
+          </Box>
 
           <Box display="flex" justifyContent="center" style={{margin:'20px'}}>
           
-            <Paper style={{minWidth:'30%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
-              <Typography variant='h6'>
-                Last Search Date: 
-                <Typography variant='h6' component="span">
+            <Paper style={{width:'28%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
+              <Typography variant='h6' style={{color:'#626262'}}>
+                Last Searched: 
+                <Typography variant='h6' component="span" style={{color:'#000'}}>
                   {' '}{this.state.lastSearchedTime}
                 </Typography>
               </Typography>
-              {/* <Typography variant='h6'>
-                Searches Remaining: <Typography variant='h6' component="span">{this.determineRateLimit()}</Typography>
+              {/* <Typography variant='h6' style={{color:'#626262'}}>
+                Searches Remaining: <Typography variant='h6' component="span" style={{color:'#000'}}>{this.determineRateLimit()}</Typography>
                 </Typography> */}
-              <Typography variant='h6'>
-                Include in Batch Searches: <InclusionToggle publicationId={this.props.match.params.id} include={this.props.publication[index].include}/>
-              </Typography>
-              <Typography variant='h6'>Search by:
-              <FormControl className={classes.formControl}>
-                <Select
-                  defaultValue={this.getSearchType}
-                  onChange={(event)=>this.handleSearchTypeChange(this.props.match.params.id, event.target.value)}
-                >
-                  <MenuItem value={'T'}>Title</MenuItem>
-                  <MenuItem value={'TaA'}>Title AND Author</MenuItem>
-                  <MenuItem value={'TaS'}>Title AND Subtitle</MenuItem>
-                  <MenuItem value={'ToS'}>Title OR Subtitle</MenuItem>
-                  <MenuItem value={'S'}>Subtitle</MenuItem>
-                  <MenuItem value={'SaA'}>Subtitle AND Author</MenuItem>
-                  <MenuItem value={'TaAoS'}>Title AND Author OR Subtitle</MenuItem>
-                </Select>
-              </FormControl>      
-              </Typography>      
-              <Button style={{display:'flex'}} variant="contained" color="primary" onClick={this.searchTweets}>
+              <Box display='flex'>
+                <Typography variant='h6' style={{color:'#626262', marginRight:'10px'}}>
+                  Include in Batch Searches:
+                </Typography>
+                <InclusionToggle publicationId={this.props.match.params.id} include={this.props.publication[index].include}/>
+              </Box>
+              <Box display='flex'>
+                <Typography variant='h6' style={{marginRight:'10px', color:'#626262'}}>Search by:</Typography>  
+                <FormControl className={classes.formControl}>
+                  <Select
+                    defaultValue={this.getSearchType}
+                    onChange={(event)=>this.handleSearchTypeChange(this.props.match.params.id, event.target.value)}
+                  >
+                    <MenuItem value={'T'}>Title</MenuItem>
+                    <MenuItem value={'TaA'}>Title AND Author</MenuItem>
+                    <MenuItem value={'TaS'}>Title AND Subtitle</MenuItem>
+                    <MenuItem value={'ToS'}>Title OR Subtitle</MenuItem>
+                    <MenuItem value={'S'}>Subtitle</MenuItem>
+                    <MenuItem value={'SaA'}>Subtitle AND Author</MenuItem>
+                    <MenuItem value={'TaAoS'}>Title AND Author OR Subtitle</MenuItem>
+                  </Select>
+                </FormControl>      
+              </Box>
+              <Button style={{display:'flex',marginTop:'8px'}} variant="contained" color="primary" onClick={this.searchTweets}>
                 Search
               </Button>
             </Paper>
 
-            <Paper style={{minWidth:'30%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
-            <Box>
-                  <Typography variant='h6' style={{color:'#626262'}}>
-                    Total Tweets: 
-                    <Typography variant='h6' component="span">
-                      {' '}{this.state.allTweetCount}
-                    </Typography>
+            <Paper style={{width:'18%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
+              <Box>
+                <Typography variant='h6' style={{color:'#626262'}}>
+                  Total Tweets: 
+                  <Typography variant='h6' component="span" style={{color:'#000'}}>
+                    {' '}{this.state.allTweetCount}
                   </Typography>
-                  <Typography variant='h6' style={{color:'#626262'}}>
-                    Approved Tweets: 
-                    <Typography variant='h6' component="span">
-                      {' '}{this.state.approvedTweetCount}
-                    </Typography>
+                </Typography>
+                <Typography variant='h6' style={{color:'#626262'}}>
+                  Approved Tweets: 
+                  <Typography variant='h6' component="span" style={{color:'#000'}}>
+                    {' '}{this.state.approvedTweetCount}
                   </Typography>
-                  <Typography variant='h6' style={{color:'#626262'}}>
-                    Rejected Tweets: 
-                    <Typography variant='h6' component="span">
-                      {' '}{this.state.rejectedTweetCount}
-                    </Typography>
+                </Typography>
+                <Typography variant='h6' style={{color:'#626262'}}>
+                  Rejected Tweets: 
+                  <Typography variant='h6' component="span" style={{color:'#000'}}>
+                    {' '}{this.state.rejectedTweetCount}
                   </Typography>
-                  <Typography variant='h6' style={{color:'#626262'}}>
-                    Undecided Tweets: 
-                    <Typography variant='h6' component="span">
-                      {' '}{this.state.undecidedTweetCount}
-                    </Typography>
+                </Typography>
+                <Typography variant='h6' style={{color:'#626262'}}>
+                  Undecided Tweets: 
+                  <Typography variant='h6' component="span" style={{color:'#000'}}>
+                    {' '}{this.state.undecidedTweetCount}
                   </Typography>
-                </Box>
+                </Typography>
+              </Box>
             </Paper>
 
 
-            <Paper style={{minWidth:'30%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
-              <Box display='flex' justifyContent='space-around'>
-                
-                <Box display="flex" flexDirection='column' justifyContent='space-between'>
-                  <Box flexDirection='row'>
-                    <Typography variant='h6' component="span">Viewing:  </Typography>
+            <Paper style={{width:'28%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
+                <Box style={{height:'100%'}} display="flex" flexDirection='column' justifyContent='space-around' alignItems='center'>
+                  <Box display='flex' flexDirection='row'>
+                    <Typography variant='h6' component="span" style={{marginRight:'10px', color:'#626262'}}>Viewing Category:{' '}</Typography>
                     <FormControl className={classes.formControl}>
                       <Select
                         onChange={this.handleSelect}
@@ -384,14 +390,14 @@ class PublicationItem extends Component {
                         <MenuItem value='APPROVED'>Approved</MenuItem>
                         <MenuItem value='REJECTED'>Rejected</MenuItem>
                         </Select>
-                      <FormHelperText>Select Tweet Category</FormHelperText>
                       </FormControl>
                   </Box>
-                  <Button variant="contained" color="primary" href={'http://localhost:3000/#/books/'+this.props.match.params.id} target="_blank">
-                    View Book Page &nbsp;<PlayArrowIcon/>
-                  </Button>
+                  <Box display='flex'>
+                    <Button variant="contained" color="primary" href={'http://localhost:3000/#/books/'+this.props.match.params.id} target="_blank">
+                      View Book Page &nbsp;<PlayArrowIcon/>
+                    </Button>
+                  </Box>
                 </Box>
-              </Box>
             </Paper>
             
             
