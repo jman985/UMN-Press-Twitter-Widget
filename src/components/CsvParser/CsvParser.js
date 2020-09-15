@@ -51,7 +51,6 @@ class CsvParser extends Component {
                 flexDirection: "row",
                 marginBottom: "30px",
                 marginTop: "30px",
-                marginLeft: "3%",
               }}
             >
 
@@ -60,7 +59,7 @@ class CsvParser extends Component {
                 type="button"
                 onClick={this.handleOpenDialog}
               >
-                View Csv file
+                Preview CSV file
               </Button>
 
               {/* <div

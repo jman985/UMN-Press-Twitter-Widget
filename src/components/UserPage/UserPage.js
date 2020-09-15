@@ -51,22 +51,20 @@ class UserPage extends Component {
       },
     }))(TableCell);
     return (
-      <Box display='flex' flexDirection='column' alignItems="center">
-        <Paper display='flex' justifyContent="center" style={{maxWidth:'50%', padding: "30px", marginTop: "25px" }}>
+      <Box textAlign="center" display='flex' flexDirection='column' alignItems="center">
+        <Paper display='flex' justifyContent="center" style={{maxWidth:'50%', minWidth: '30%', padding: "30px", marginTop: "25px" }}>
           <Typography variant='h5'
             style={{ display: "inline-block", fontWeight: "100" }}
             id="welcome">
             Welcome, {this.props.user.username}! 
           </Typography>
-          <Typography variant='h5'>
-              Upload a CSV file.
+          <Typography variant='h6'>
+              Upload a CSV File
           </Typography>
           <CSVReader />
-        </Paper>
-
         {this.props.csv.loaded ? (
           <>
-
+            
               <Button
                 onClick={this.acceptCsv}
                 variant="outlined"
@@ -83,9 +81,15 @@ class UserPage extends Component {
                 Reject
               </Button>
 
-            <PublicationTable />
+            
           </>
         ) : null}
+        </Paper>
+
+        {this.props.csv.loaded ? 
+        <PublicationTable />
+        : null}
+
       </Box>
     );
   }
