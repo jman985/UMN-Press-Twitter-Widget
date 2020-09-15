@@ -167,7 +167,7 @@ function* approveTweet(action){
   } catch (error) {
       console.log('error with approving tweet', error);
   }
-  yield put({ type:'FETCH_DATABASE_TWEETS'});
+  // yield put({ type:'FETCH_DATABASE_TWEETS'});
 }
 
 function* rejectTweet(action){
@@ -176,7 +176,7 @@ function* rejectTweet(action){
   } catch (error) {
     console.log('error with rejecting tweet', error);
   }
-  yield put({ type:'FETCH_DATABASE_TWEETS'});
+  // yield put({ type:'FETCH_DATABASE_TWEETS'});
 }
 
 function* tweetSaga() {  
