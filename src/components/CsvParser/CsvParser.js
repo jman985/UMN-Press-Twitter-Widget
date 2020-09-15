@@ -54,34 +54,14 @@ class CsvParser extends Component {
                 marginLeft: "3%",
               }}
             >
-              {/* <Button
+
+              <Button
                 variant="outlined"
-                component="span"
-                className={classes.button}
-              >
-                Upload
-              </Button> */}
-              <button
                 type="button"
                 onClick={this.handleOpenDialog}
-                style={{
-                  borderRadius: "15px",
-                  border: ".5px solid black",
-                  marginLeft: 0,
-                  marginRight: 25,
-                  width: "18%",
-                  height: "50px",
-                  paddingLeft: 0,
-                  paddingRight: 0,
-                  backgroundColor: "#EEF5F5",
-
-                  fontSize: "16px",
-                }}
               >
-
                 View Csv file
-      
-              </button>
+              </Button>
 
               {/* <div
                 style={{
