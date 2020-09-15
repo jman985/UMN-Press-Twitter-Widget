@@ -70,7 +70,7 @@ class BookPageMock extends Component {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="shortcut icon" href="/++theme++ump.theme/_images/favicon.png" type="image/x-icon" />
         
-        <title>Bring That Beat Back — University of Minnesota Press</title><meta name="DC.description" content=" 
+        <title>Hungry Listening — University of Minnesota Press</title><meta name="DC.description" content=" 
 How sampling remade hip-hop over forty years, from pioneering superstar Grandmaster Flash through crate-digging preservationist and innovator Madlib
  " /><meta name="description" content=" 
 How sampling remade hip-hop over forty years, from pioneering superstar Grandmaster Flash through crate-digging preservationist and innovator Madlib
@@ -436,16 +436,19 @@ How sampling remade hip-hop over forty years, from pioneering superstar Grandmas
                       <img src={'https://www.upress.umn.edu/book-division/books/'+this.props.bookData.urlTitle+'/image'} alt={this.props.bookData.title}  height={300} width={198} />
                     </a>
                     <div className="customCopy webCopy">
-                      {/* <h3><a href="https://open.spotify.com/playlist/7yPaB5Qjm4VYpT0bR5FVaL?si=hnVnHqGTTf-cEdK1vsh5zQ">SPOTIFY PLAYLIST: BRING THAT BEAT BACK</a></h3> */}
-                      <p><strong /></p>
-                      <p><strong><em>{this.props.bookData.title}</em> 
-                      {this.props.bookData.subtitle ? <em>: {this.props.bookData.subtitle}</em> 
-                      : ''} is forty years, from pioneering through crate-digging preservationist and innovation.</strong></p>
-                      <p><span><em /></span></p>
-                      <p><span><em>{this.props.bookData.title}</em> traces the development of the transformative pop-cultural practice of sampling, 
-                      from its origins in the turntable-manning, record-spinning hip-hop DJs of 1970s New York through forty years of musical innovation and reinvention. 
-                      {this.props.bookData.authorName} tells the story of how sampling built hip-hop through the lens of four pivotal artists: Grandmaster Flash, Prince Paul, Dr. Dre, and Madlib.<br /><br /></span></p>
                       
+
+                      <div class="defaultCopy webCopy">
+                                    <div class="handle"><p>&#13;Reimagining how we understand and write about the Indigenous listening experience</p><p>&#13;&#13;</p>&#13;</div> 
+                                    <p>&#13;<em>{this.props.bookData.title} </em>is the first book to consider listening from both Indigenous and settler colonial perspectives, 
+                                    presenting case studies on Indigenous participation in classical music, musicals, and popular music. 
+                                    A critical response to what has been called the “whiteness of sound studies,” {this.props.bookData.authorName} evaluates how decolonial practices of listening emerge from increasing awareness of our listening positionality. &#13;</p>
+                                    <div class="blurb"> 
+                                      <div class="review-text"><p>&#13;In this brilliant and wide-ranging work, {this.props.bookData.authorName} refuses to write <em>about</em> anything. Instead he demonstrates what it means at the practical, ethical, and political levels to write relationally with other living beings, including music, sound, belongings, languages, lands, ancestors, and readers. In method and content, <em>{this.props.bookData.title}</em> is a challenge to settler colonial sensory and political orders as well as a powerful affirmation of Indigenous thought, practice, and art.&#13;</p></div>
+                                      <div class="review-source">—<p>&#13;Beth Piatote, author of <em>The Beadworkers</em> and <em>Domestic Subjects</em>&#13;</p></div>
+                                    </div>
+                                  </div>
+                                </div>
                       <br></br>
                       <br></br>
                       <br></br>
@@ -457,7 +460,6 @@ How sampling remade hip-hop over forty years, from pioneering superstar Grandmas
                       
                       <br /><strong>—Jack Hamilton</strong>, author of <i>Just around Midnight: Rock and Roll and the Racial Imagination</i></p> */}
                       
-                      </div>
                   </div>
                   {/* /overview.slide */} 
                   <div id="details" className="slide"> 
