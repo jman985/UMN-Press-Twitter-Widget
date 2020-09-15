@@ -295,9 +295,8 @@ class PublicationItem extends Component {
       if (this.props.publication[index] === undefined) return null;
       
 
-      return (
+      return(
         <>
-          {/* {JSON.stringify(this.state.key1)} */}
           <Typography variant='h4' style={{margin:'20px'}}>
               <span style={{textDecorationLine:'underline'}}>{this.props.publication[index].title}</span>
               <span> by {this.props.publication[index].author1}</span>
@@ -307,54 +306,14 @@ class PublicationItem extends Component {
           
             <Paper style={{minWidth:'30%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
               <Typography variant='h6'>
-                Total Tweets: 
-                <Typography variant='body1' component="span">
-                  {' '}{this.state.allTweetCount}
-                </Typography>
-              </Typography>
-              <Typography variant='h6'>
-                Approved Tweets: 
-                <Typography variant='body1' component="span">
-                  {' '}{this.state.approvedTweetCount}
-                </Typography>
-              </Typography>
-              <Typography variant='h6'>
-                Rejected Tweets: 
-                <Typography variant='body1' component="span">
-                  {' '}{this.state.rejectedTweetCount}
-                </Typography>
-              </Typography>
-              <Typography variant='h6'>
-                Undecided Tweets: 
-                <Typography variant='body1' component="span">
-                  {' '}{this.state.undecidedTweetCount}
-                </Typography>
-              </Typography>
-              <FormControl className={classes.formControl}>
-                <Select
-                  onChange={this.handleSelect}
-                  defaultValue='UNDECIDED'
-                  id="status-select"
-                >
-                  <MenuItem value='UNDECIDED'>Undecided</MenuItem>
-                  <MenuItem value='APPROVED'>Approved</MenuItem>
-                  <MenuItem value='REJECTED'>Rejected</MenuItem>
-                </Select>
-                <FormHelperText>Select Tweet Category</FormHelperText>
-              </FormControl>
-            </Paper>
-            
-            
-            <Paper style={{minWidth:'30%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
-              <Typography variant='h6'>
                 Last Search Date: 
-                <Typography variant='body1' component="span">
+                <Typography variant='h6' component="span">
                   {' '}{this.state.lastSearchedTime}
                 </Typography>
               </Typography>
-              <Typography variant='h6'>
-                Searches Remaining: <Typography variant='body1' component="span">{this.determineRateLimit()}</Typography>
-              </Typography>
+              {/* <Typography variant='h6'>
+                Searches Remaining: <Typography variant='h6' component="span">{this.determineRateLimit()}</Typography>
+                </Typography> */}
               <Typography variant='h6'>
                 Include in Batch Searches: <InclusionToggle publicationId={this.props.match.params.id} include={this.props.publication[index].include}/>
               </Typography>
@@ -378,18 +337,73 @@ class PublicationItem extends Component {
                 Search
               </Button>
             </Paper>
-            <Box display='flex' alignItems='center'>
-              <Button variant="contained" color="primary" href={'http://localhost:3000/#/books/'+this.props.match.params.id} target="_blank">
-                View Book Page &nbsp;<PlayArrowIcon/>
-              </Button>
-            </Box>
+
+            <Paper style={{minWidth:'30%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
+            <Box>
+                  <Typography variant='h6' style={{color:'#626262'}}>
+                    Total Tweets: 
+                    <Typography variant='h6' component="span">
+                      {' '}{this.state.allTweetCount}
+                    </Typography>
+                  </Typography>
+                  <Typography variant='h6' style={{color:'#626262'}}>
+                    Approved Tweets: 
+                    <Typography variant='h6' component="span">
+                      {' '}{this.state.approvedTweetCount}
+                    </Typography>
+                  </Typography>
+                  <Typography variant='h6' style={{color:'#626262'}}>
+                    Rejected Tweets: 
+                    <Typography variant='h6' component="span">
+                      {' '}{this.state.rejectedTweetCount}
+                    </Typography>
+                  </Typography>
+                  <Typography variant='h6' style={{color:'#626262'}}>
+                    Undecided Tweets: 
+                    <Typography variant='h6' component="span">
+                      {' '}{this.state.undecidedTweetCount}
+                    </Typography>
+                  </Typography>
+                </Box>
+            </Paper>
+
+
+            <Paper style={{minWidth:'30%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
+              <Box display='flex' justifyContent='space-around'>
+                
+                <Box display="flex" flexDirection='column' justifyContent='space-between'>
+                  <Box flexDirection='row'>
+                    <Typography variant='h6' component="span">Viewing:  </Typography>
+                    <FormControl className={classes.formControl}>
+                      <Select
+                        onChange={this.handleSelect}
+                        defaultValue='UNDECIDED'
+                        id="status-select"
+                      >
+                        <MenuItem value='UNDECIDED'>Undecided</MenuItem>
+                        <MenuItem value='APPROVED'>Approved</MenuItem>
+                        <MenuItem value='REJECTED'>Rejected</MenuItem>
+                        </Select>
+                      <FormHelperText>Select Tweet Category</FormHelperText>
+                      </FormControl>
+                  </Box>
+                  <Button variant="contained" color="primary" href={'http://localhost:3000/#/books/'+this.props.match.params.id} target="_blank">
+                    View Book Page &nbsp;<PlayArrowIcon/>
+                  </Button>
+                </Box>
+              </Box>
+            </Paper>
+            
+            
+            
           </Box>
 
           <Box display='flex' justifyContent='center'>
+            {this.state.key1 === Number(0) ? '' : <Box style={{padding:'10px'}}><Button color="primary" variant="contained" onClick={()=>this.seekPages('prev')}>Prev</Button></Box>}
+            {this.state.tweetsArray.length < 4 ? '' :
             <Box style={{padding:'10px'}}>
               <Button color="primary" variant="contained" onClick={()=>this.seekPages('next')}>Next</Button>
-            </Box>
-            {this.state.key1 === Number(0) ? '' : <Box style={{padding:'10px'}}><Button color="primary" variant="contained" onClick={()=>this.seekPages('prev')}>Prev</Button></Box>}
+            </Box>}
           </Box>
 
           <div className={classes.root} style={{display: "flex",flexWrap: "wrap",justifyContent:'center'}}>
@@ -397,7 +411,7 @@ class PublicationItem extends Component {
             {this.state.tweetsArray[this.state.key1] ?
               <Card className={classes.card} variant="outlined" style={{width:'450px',height:'600px',backgroundColor:'#f3f3f3'}}>
                 <CardContent style={{display:"flex", flexDirection:'column',justifyContent:'space-between',height:'100%'}}>
-                    <Typography gutterBottom variant="h6">
+                    <Typography gutterBottom variant="h6" style={{color:'#626262'}}>
                       Title: {this.state.tweetsArray[this.state.key1].title} <br />
                       Author: {this.state.tweetsArray[this.state.key1].author1}
                     </Typography>
@@ -417,7 +431,7 @@ class PublicationItem extends Component {
             {this.state.tweetsArray[this.state.key2] ?
               <Card className={classes.card} variant="outlined" style={{width:'450px',height:'600px',backgroundColor:'#f3f3f3'}}>
                 <CardContent style={{display:"flex", flexDirection:'column',justifyContent:'space-between',height:'100%'}}>
-                    <Typography gutterBottom variant="h6">
+                    <Typography gutterBottom variant="h6" style={{color:'#626262'}}>
                       Title: {this.state.tweetsArray[this.state.key2].title} <br />
                       Author: {this.state.tweetsArray[this.state.key2].author1}
                     </Typography>
@@ -437,7 +451,7 @@ class PublicationItem extends Component {
             {this.state.tweetsArray[this.state.key3] ?
               <Card className={classes.card} variant="outlined" style={{width:'450px',height:'600px',backgroundColor:'#f3f3f3'}}>
                 <CardContent style={{display:"flex", flexDirection:'column',justifyContent:'space-between',height:'100%'}}>
-                    <Typography gutterBottom variant="h6">
+                    <Typography gutterBottom variant="h6" style={{color:'#626262'}}>
                       Title: {this.state.tweetsArray[this.state.key3].title} <br />
                       Author: {this.state.tweetsArray[this.state.key3].author1}
                     </Typography>
