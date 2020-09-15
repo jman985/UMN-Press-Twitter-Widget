@@ -60,7 +60,6 @@ class PublicationItem extends Component {
         key1: 0,
         key2: 1,
         key3: 2,
-        tweetsLoaded: false
 
     }
 
@@ -72,7 +71,7 @@ class PublicationItem extends Component {
 
      
     componentDidUpdate(prevProps) {
-      if ((prevProps.dbTweets !== this.props.dbTweets && this.state.tweetsLoaded === false )|| prevProps.publication !== this.props.publication){
+      if ((prevProps.dbTweets !== this.props.dbTweets) || prevProps.publication !== this.props.publication){
         this.filterTweets();
         this.setState({tweetsLoaded: true}); 
 
@@ -138,6 +137,11 @@ class PublicationItem extends Component {
         userId: this.props.user.id, 
         limit: 1
       });
+      this.setState({
+        key1: 0,
+        key2: 1,
+        key3: 2,
+      })
     }
 
 
@@ -179,7 +183,6 @@ class PublicationItem extends Component {
       } else if (slot === 2){
         this.setState({ key3: Math.max(this.state.key1,this.state.key2,this.state.key3)+1});
       }
-      this.props.dispatch({type:'FETCH_DATABASE_TWEETS'})
     }
 
     
@@ -239,6 +242,7 @@ class PublicationItem extends Component {
       this.setState({
         status: status
       })
+      this.props.dispatch({type:'FETCH_DATABASE_TWEETS'})
     }// end handleSelect
 
     
