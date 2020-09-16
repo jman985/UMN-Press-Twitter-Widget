@@ -24,12 +24,10 @@ function* fetchUser() {
   }
 }
 
-// posts Tweets to Tweet table 
+// saves Twitter rate data to user table
 function* saveRate(action){
   try {
     yield axios.put('/api/user/rate', action.payload)
-    console.log('saving rate data:',action)
-
   } catch (error) {
     console.log("error saving rate to user table", error);
   }

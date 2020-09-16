@@ -13,18 +13,17 @@ import selectTweetID from './tweetidReducer'
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
 
-// Lets make a bigger object for our store, with the objects from our reducers.
-// This is what we get when we use 'state' inside of 'mapStateToProps'
+
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   loginMode, // will have a value of 'login' or 'registration' to control which screen is shown
   user, // will have an id and username if someone is logged in
-  csvReducer,
+  csvReducer, // holds csv publication data for the preview before moving it to database upon approval
   publication, // contains all publications from database 'publication' table
   tweets, // contains tweets returned from Axios request to Twitter API
-  bookData,
   dbTweets, // contains all tweets pulled from local database "tweet" table
   loading, // toggles bool when twitter search begins/ends to control loading overlay
+  bookData,
   selectTweetID
 });
 

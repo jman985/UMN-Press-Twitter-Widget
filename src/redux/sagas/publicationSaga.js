@@ -1,13 +1,14 @@
 import { put, takeLatest  } from 'redux-saga/effects';
 import axios from 'axios';
 
+
+// gets publication info from database and sends to reducer
 function* getPublications(action){
   try {
     // gets all publications rows from database
     const response = yield axios.get('/publications');
     // puts all publication rows into Publication reducer
     yield put({ type: 'SET_PUBLICATIONS', payload: response.data});
-    console.log('putting this in the publications reducer:', response.data)
   } catch (error) {
       console.log('error with setting publications to reducer', error);
   }
@@ -33,11 +34,12 @@ function* changeSearchType(action){
   }
 }
 
+
+// updates the search_type of every publication in database
 function* changeAllSearchType(action){
   try {
       yield axios.put('/publications/searchtypeall', {searchType: action.payload});
       yield put({type: 'FETCH_PUBLICATIONS'});
-
   } catch (error) {
       console.log('error changing all search types:', error);
   }

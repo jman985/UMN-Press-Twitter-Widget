@@ -1,7 +1,7 @@
 import { put, takeLatest  } from 'redux-saga/effects';
 import axios from 'axios';
 
-// updates 'Approved' column from 'False' to 'True' or 'True' to 'False'
+// toggles include value of a tweet between true & false
 function* toggleInclusion(action){
     try {
         yield axios.put('/publications', {id: action.payload});
@@ -11,6 +11,7 @@ function* toggleInclusion(action){
     }
 }
 
+// toggles include value of all tweets in database
 function* toggleInclusionAll(action){
     try {
         yield axios.put('/publications/all', {include: action.payload});
