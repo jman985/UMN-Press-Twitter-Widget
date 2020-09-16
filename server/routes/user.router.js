@@ -41,7 +41,7 @@ router.post('/logout', (req, res) => {
 });
 
 
-
+// updates rate information from Twitter about limits/searches reamining 
 router.put('/rate', (req, res) => {
   let userId = req.body.userId
   const queryText = `
@@ -55,10 +55,8 @@ router.put('/rate', (req, res) => {
     req.body.rateLimitReset,
     req.body.userId
   ]
-  console.log(req.body)
   pool.query(queryText, values)
   .then( (response) => {
-      console.log( 'Successfully updated rate info');
       res.sendStatus(200);
   })
   .catch( (err) => {
