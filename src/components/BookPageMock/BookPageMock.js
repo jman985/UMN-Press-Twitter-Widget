@@ -46,6 +46,7 @@ class BookPageMock extends Component {
 
   componentDidMount () {
     console.log('mock book page mounted')
+    console.log(this.props.bookData.urlTitle)
 
     this.props.dispatch({type: 'FETCH_TWEET_IDS', payload: this.props.match.params.publication_id});
     this.props.dispatch({type: 'FETCH_BOOK_DATA', payload: this.props.match.params.publication_id});
