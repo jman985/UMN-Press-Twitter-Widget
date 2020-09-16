@@ -5,11 +5,11 @@ const {default: axios} = require('axios');
 const token = process.env.BEARER_TOKEN;
 var cron = require('node-cron');
  
-// one schedule to rule them all, and in the Twitter find them
 
 
 let publications = [];
 
+// This function runs 
 cron.schedule('0 0,20,40 1,2 * * *', () => {
 
   // GET all publications from database and save to publications array
@@ -19,7 +19,6 @@ cron.schedule('0 0,20,40 1,2 * * *', () => {
   ORDER BY title ASC`
   pool.query(queryText)
   .then( (response) => {
-    console.log( 'Successfully got publication data');
     publications = response.rows;
 
     // Filter out any publications with include value of false
@@ -85,8 +84,6 @@ cron.schedule('0 0,20,40 1,2 * * *', () => {
         headers: {'Authorization': `Bearer ${token}`}
       })
       .then((response)=>{
-        console.log({body: response.data.data, header: response.headers});
-
 
         // iterate through each tweet and save their ids to the database
         let tweets = response.data.data;
@@ -147,8 +144,3 @@ function onlyRetweets(tweet){
       return false;
   }
 }//end onlyRetweets
-
-
-const schedule = console.log('SCHEDULE HI')
-
-module.exports = schedule;
