@@ -2,10 +2,10 @@ import { put, takeLatest } from "redux-saga/effects";
 import axios from "axios";
 
 
+// turns the publication objects into queries for Twitter and sends them to the search API
 function* getTweets(action) {
   try {
     yield put({ type: 'START_LOADING', payload: action.limit})
-    yield console.log(action.payload);
     let searchAmount = action.limit 
     // if the user has set the search limit to be greater than the total amount of publications
     // change the search limit to match the total amount of publications
@@ -16,9 +16,6 @@ function* getTweets(action) {
       yield put({ type: 'INCREASE_SEARCH_COUNT'})
       //hit Twitter Recent Search API with publication title, replace problem characters with "*" aka the "wild card" character
       //then normalize to replace å/a,ö/o, etc.
-      // console.log('this is the API query', action.payload[i].title.replace(/["&;#^%[\|{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''));
-      // let str= "['&;#^%[\|/{}]";
-      // console.log('this is the normalize test', str.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''));
       let response = 0
       let title = encodeURIComponent(action.payload[i].title.replace(/["&;#^%[\|/{}]/g,'*').replace(/]/g,'*').normalize('NFKD').replace(/[^\w\s.-_\*/']/g, ''));
       let author = ''
@@ -83,8 +80,6 @@ function* getTweets(action) {
           }
         });
       }
-      // console.log(response)
-      console.log("sending this to save tweet saga:", response.data.data);
       // update the last_searched timestamp of each publication
       yield axios.put('/publications/timestamp/' + action.payload[i].id )
     
@@ -111,13 +106,10 @@ function* getDbTweets(action){
   }
 }
 
-
-function onlyRetweets(tweet){  //check if tweet is only retweets
-  // console.log('this is tweet id', tweet.id);
-  // console.log('this is referenced tweets', tweet.referenced_tweets);
+//check if tweet is only retweets
+function onlyRetweets(tweet){  
   if(tweet.hasOwnProperty('referenced_tweets')){
       for(let j=0;j<tweet.referenced_tweets.length;j++){
-        // console.log('this is the ref tweets type',tweet.referenced_tweets[j].type);
           if(tweet.referenced_tweets[j].type==='quoted'||tweet.referenced_tweets[j].type==='replied_to'){
             return false;
           }
@@ -143,10 +135,6 @@ function* saveTweets(action){
         const publicationId = action.payload.publicationId;
         //filter out sensitive tweets and retweets
         if(tweet.possibly_sensitive === false && !onlyRetweets(tweet)){ 
-          console.log("sending these to tweet save route:", {
-            tweetId: tweetId,
-            publicationId: publicationId,
-          });
           yield axios.post("/tweets/database", {
             tweetId: tweetId,
             publicationId: publicationId,
@@ -161,22 +149,23 @@ function* saveTweets(action){
 }
 
 
+// sets approved value of tweet to true
 function* approveTweet(action){
   try {
     const response = yield axios.put('/tweets/database/approve', {id: action.payload})
   } catch (error) {
       console.log('error with approving tweet', error);
   }
-  // yield put({ type:'FETCH_DATABASE_TWEETS'});
 }
 
+
+// sets approve value of tweet to false
 function* rejectTweet(action){
   try {
     const response = yield axios.put('/tweets/database/reject', {id: action.payload})
   } catch (error) {
     console.log('error with rejecting tweet', error);
   }
-  // yield put({ type:'FETCH_DATABASE_TWEETS'});
 }
 
 function* tweetSaga() {  

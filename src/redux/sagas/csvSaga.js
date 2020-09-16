@@ -17,8 +17,6 @@ function* sendCsv(action) {
     const response = yield axios.post("/publications/csv", {
       payload: action.payload,
     });
-    console.log("SendCSV", response);
-
     yield put({ type: "SEND_CSV_DATA", payload: action.payload });
 
   } catch (err) {
