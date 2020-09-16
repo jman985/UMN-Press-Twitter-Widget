@@ -1,11 +1,9 @@
 
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import InclusionToggle from './InclusionToggle';
 import ToggleAll from './InclusionToggleAll';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import PublicationTable from '../PublicationTable/PublicationTable'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import PublicationTable2 from "../PublicationTable2/PublicationTable2";
@@ -14,7 +12,6 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import Box from '@material-ui/core/Box';
-import { NavigateBeforeSharp } from '@material-ui/icons';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
 class Publications extends Component {
@@ -24,10 +21,12 @@ class Publications extends Component {
     newTweets: 0
   }
 
+  // gets publication and tweet info when page first loads
   componentDidMount(){
     this.props.dispatch({type: 'FETCH_PUBLICATIONS'})
     this.props.dispatch({type: 'FETCH_DATABASE_TWEETS'})
   }
+
 
   componentDidUpdate(prevProps){
     if (this.props.dbTweets.length !== prevProps.dbTweets.length){
@@ -35,11 +34,12 @@ class Publications extends Component {
     }
   }
 
+
+  // runs the main search for as many publications as were specified
   handleClick = () => {
     this.setState({
       newTweets: 0
     })
-    console.log('this is the searchLimit', this.state.searchLimit)
     this.props.dispatch({
       type: 'FETCH_TWEETS', 
       payload: this.sortPublicationsForSearch(),
@@ -68,8 +68,8 @@ class Publications extends Component {
   }//end sortPublicationsForSearch
 
 
+  // this section checks for the most recent publication "last_searched" time and puts into readable format
   determineLastSearch = () => {
-    // this section checks for the most recent publication "last_searched" time and puts into readable format
     let readableTime = '';
     let lastSearchedAll;
 
@@ -89,8 +89,9 @@ class Publications extends Component {
     return readableTime;
   }//end determineLastSearch
 
-  determineRateLimit = ()=>{
+
   //checks to determine remaining searches in 15-min window
+  determineRateLimit = ()=>{
     if(this.props.user.rate_limit_refresh * 1000 < new Date().getTime() ){
       return this.props.user.rate_limit;
     }else{
@@ -98,16 +99,21 @@ class Publications extends Component {
     }
   }//end determineRateLimit
 
+
+  // turn timestamps into a more readable format
   parseRefreshTime = () => {
     let sqlDate = new Date(this.props.user.rate_limit_refresh * 1000)
     let refreshTime = (sqlDate).toLocaleTimeString();
     return refreshTime;
   }//end parseRefreshTime
   
+
+  // updates the state when user changes the search amount
   handleLimitChange = (event) => {
     this.setState({searchLimit: event.target.value})
   }
 
+  // changes the search type of every publications when a selection is made from the drop-down menu
   handleSearchTypeChange = (searchType) => {
     this.props.dispatch({type:'CHANGE_ALL_SEARCH_TYPES', payload: searchType})
   }
@@ -119,7 +125,6 @@ class Publications extends Component {
 
     return(
       <>
-
         <Box className='topBox' display='flex' justifyContent='center'>
           <Paper style={{width:'28%',margin:'20px',padding:'10px',backgroundColor:'#f3f3f3'}}>
             <Typography variant='h6' style={{color:'#626262'}}>

@@ -29,11 +29,13 @@ class LoginPage extends Component {
     }
   }; // end login
 
+
   handleInputChangeFor = (propertyName) => (event) => {
     this.setState({
       [propertyName]: event.target.value,
     });
   };
+
 
   render() {
     return (
@@ -131,9 +133,7 @@ class LoginPage extends Component {
   }
 }
 
-// Instead of taking everything from state, we just want the error messages.
-// if you wanted you could write this code like this:
-// const mapStateToProps = ({errors}) => ({ errors });
+
 const mapStateToProps = (state) => ({
   errors: state.errors,
 });

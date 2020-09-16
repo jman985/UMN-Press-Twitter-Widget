@@ -5,25 +5,18 @@ import {
   Redirect,
   Switch,
 } from "react-router-dom";
-
 import { connect } from "react-redux";
-
 import Nav from "../Nav/Nav";
 import Footer from "../Footer/Footer";
-
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-
-import AboutPage from "../AboutPage/AboutPage";
 import UserPage from "../UserPage/UserPage";
-import InfoPage from "../InfoPage/InfoPage";
 import Publications from "../Publications/Publications";
 import PublicationItem from "../PublicationItem/PublicationItem";
 import TweetsPage from "../TweetsPage/TweetsPage";
-
 import "./App.css";
-// import BookPage from "../../components/BookPage/BookPage";
 import BookPageMock from "../BookPageMock/BookPageMock";
 import BookPageMock2 from "../BookPageMock/BookPageMock2";
+
 
 class App extends Component {
   componentDidMount() {
@@ -32,6 +25,7 @@ class App extends Component {
     this.props.dispatch({type: 'FETCH_DATABASE_TWEETS'});
   }
 
+
   render() {
     return (
       <Router>
@@ -39,24 +33,17 @@ class App extends Component {
         {window.location.href.includes('/books/') ? null : 
         (<Nav />)}
           <Switch>
-            {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/publications" />
-            {/* Visiting localhost:3000/about will show the about page.
-            This is a route anyone can see, no login necessary */}
             <Route exact path="/books/:publication_id" component={BookPageMock} />
             <Route exact path="/books/2/:publication_id" component={BookPageMock2} />
-            <ProtectedRoute exact path="/about" component={AboutPage} />
-            <ProtectedRoute exact path="/publications" component={Publications} />
-            <ProtectedRoute exact path="/publications/:id" component={PublicationItem} />
-            <ProtectedRoute exact path="/tweets" component={TweetsPage} />
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
             Even though it seems like they are different pages, the user is always on localhost:3000/home */}
+            <ProtectedRoute exact path="/publications" component={Publications} />
+            <ProtectedRoute exact path="/publications/:id" component={PublicationItem} />
+            <ProtectedRoute exact path="/tweets" component={TweetsPage} />
             <ProtectedRoute exact path="/upload" component={UserPage} />
-            {/* This works the same as the other protected route, except that if the user is logged in,
-            they will see the info page instead. */}
-            <ProtectedRoute exact path="/info" component={InfoPage} />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
             </Switch>

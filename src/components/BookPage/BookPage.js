@@ -44,16 +44,11 @@ class BookPage extends Component {
 
 
     componentDidMount () {
-        console.log('book page mounted')
-
         this.props.dispatch({type: 'FETCH_TWEET_IDS', payload: this.props.match.params.publication_id});
         this.props.dispatch({type: 'FETCH_BOOK_DATA', payload: this.props.match.params.publication_id});
 
       }
       
-    // scriptLoaded() {
-    //   window.A.sort();
-    // }
     render() {
       const {classes} = this.props;
 

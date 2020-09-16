@@ -38,6 +38,10 @@ const styles = theme => ({
 
 class TweetsPage extends Component {
 
+
+  // The tweet view works by placing all undecided tweets into the tweetsArray
+  // The keys reference an index position in tweetsArray and the index they reference advances
+  // as tweets are approved & rejected.
   state = {
     tweetsArray: [1,2,3],
     key1: 0,
@@ -66,8 +70,8 @@ class TweetsPage extends Component {
 
 
 
+  // send the approve/reject based on which button was pressed
   handleApprove = (tweetId, slot, approved) => {
-    // send the approve/reject based on which button was pressed
     if (approved){
       this.props.dispatch({type:'APPROVE_TWEET', payload: tweetId});
     } else {
@@ -93,14 +97,11 @@ class TweetsPage extends Component {
 
   render() {
     const { classes } = this.props;
-    // prevents TypeError from init reducer 'dbTweets'
-    if (this.props.dbTweets.map === undefined) return null;
 
+    // these condidtionals force React to wait for reducers to load and prevent crashes
+    if (this.props.dbTweets.map === undefined) return null;
     if (this.state.tweetsArray === []) return null;
-
-    // prevent the DOM from rendering until the dbTweets array has loaded
     if (this.props.dbTweets.map === undefined) return null;
-
     if (this.state.tweetsArray[0] === undefined) return null;
     if (this.props.publication === undefined) return null;
     if (this.state.tweetsArray[this.state.key1].publication_id === undefined) return null;
@@ -109,6 +110,8 @@ class TweetsPage extends Component {
       <>
         <GridList className={classes.root} style={{display: "flex",flexWrap: "wrap",justifyContent:'center'}}>
         
+
+        {/* Each of the following blocks of code work as 'cards' to view the tweets */}
         {/* conditional rendering around each card prevents crash if tweetsArray doesn't have a corresponding index */}
         {this.state.tweetsArray[this.state.key1] ?
           <Card className={classes.card} variant="outlined" style={{width:'450px',height:'600px',backgroundColor:'#f3f3f3'}}>
@@ -234,7 +237,6 @@ class TweetsPage extends Component {
       </>
     )
   } 
-
 }
 
 TweetsPage.propTypes = {
