@@ -1,6 +1,6 @@
 # University of Minnesota Press Twitter Widget
 
-Code for the application was provided Prime Digital Academy alumni.
+Source code for the U of M Twitter Widget application provided by Prime Digital Academy alumni.
 
 ## Prerequisites for initial setup
 
@@ -45,7 +45,7 @@ CREATE TABLE "tweet" (
 
 ```
 
-If you would like to name your database something else, you will need to change `umn_app` to the name of your new database name in `server/modules/pool.js`
+If you would like to change the name your database to something else, you will need to update the name in the configuration object located on line 34 in `server/modules/pool.js`
 
 ## Development Setup Instructions
 
@@ -54,8 +54,8 @@ If you would like to name your database something else, you will need to change 
 - This file will need the fallowing keys.
 
   ```
-  SERVER_SESSION_SECRET= <Chosen Secret>
-  BEARER_TOKEN = <token provided from Twitter api>
+  SERVER_SESSION_SECRET= <Your Chosen Secret>
+  BEARER_TOKEN = <token provided by the Twitter api account>
   ```
 
   - To create a unique Server Secrete visit [Here](https://passwordsgenerator.net/)
