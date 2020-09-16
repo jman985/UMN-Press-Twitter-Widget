@@ -12,7 +12,6 @@ import Box from '@material-ui/core/Box';
 const styles = (theme) => ({
   root: {
     width: "80%",
-    //marginLeft: theme.spacing.unit * 3,
     margin: "100px auto",
     overflowX: "auto",
   },
@@ -21,7 +20,6 @@ const styles = (theme) => ({
   },
   row: {
     "&:nth-of-type(odd)": {
-      // backgroundColor: theme.palette.background.default,
       backgroundColor: "#f5f2ef",
     },
   },
@@ -95,42 +93,10 @@ class UserPage extends Component {
   }
 }
 
-// Instead of taking everything from state, we just want the user info.
 const mapStateToProps = (state) => ({
   user: state.user,
   csv: state.csvReducer,
 });
 
-// this allows us to use <App /> in index.js
+
 export default withStyles(styles)(connect(mapStateToProps)(UserPage));
-
-//  <div
-//             style={{
-//               width: "80%",
-//               border: "1px solid black",
-//               margin: "50px auto",
-//               padding: "20px",
-//             }}
-//           >
-//             <button onClick={this.acceptCsv}>Looks good!</button>
-//             <table>
-//               <thead>
-//                 <th>Title</th>
-//                 <th>Subtitle</th>
-//                 <th>Author</th>
-//               </thead>
-
-//               <tbody>
-//                 {this.props.csv.data.map((book, index) => (
-//                   <tr id={index}>
-//                     <td>{book.data.title}</td>
-//                     <td>{book.data.subtitle}</td>
-//                     <td>{book.data.author}</td>
-//                     <td>
-
-//                     </td>
-//                   </tr>
-//                 ))}
-//               </tbody>
-//             </table>
-//           </div>

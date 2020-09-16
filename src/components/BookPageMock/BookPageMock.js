@@ -13,7 +13,6 @@ import CardContent from '@material-ui/core/CardContent';
 import Card from '@material-ui/core/Card';
 import PropTypes from 'prop-types';
 
-// import './mobile.css'
 import './plone5fixes.css'
 import './style.css'
 import './viewsource.css'
@@ -45,22 +44,16 @@ const styles = theme => ({
 class BookPageMock extends Component {
 
   componentDidMount () {
-    console.log('mock book page mounted')
-
     this.props.dispatch({type: 'FETCH_TWEET_IDS', payload: this.props.match.params.publication_id});
     this.props.dispatch({type: 'FETCH_BOOK_DATA', payload: this.props.match.params.publication_id});
 
   }
 
   reverseAuthor = (name) =>{
-
-    console.log(name);
-    
     return name
   }
     
   render () {
-    // const { classes } = this.props;
 
     return(
       <>

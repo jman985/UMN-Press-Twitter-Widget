@@ -1,5 +1,4 @@
 import React from "react";
-import PublicationTable from "../PublicationTable/PublicationTable";
 
 // This is one of our simplest components
 // It doesn't have local state, so it can be a function component.
@@ -9,23 +8,8 @@ import PublicationTable from "../PublicationTable/PublicationTable";
 const InfoPage = () => (
   <div>
     <p>Info Page</p>
-    <PublicationTable />
   </div>
 );
 
-// If you needed to add local state or other things,
-// you can make it a class component like:
 
-/*
-class InfoPage extends React.Component {
-
-  render() {
-    return (
-      <div>
-        <p>Info Page</p>
-      </div>
-    )
-  }
-}
-*/
 export default InfoPage;

@@ -9,7 +9,9 @@ var cron = require('node-cron');
 
 let publications = [];
 
-// This function runs 
+// This module uses node cron to schedule automated Twitter searches for every publication in the database.
+// The scheduled times can be changed on line 15. Look up the "Cron Format" to see how the schedule should be structured. 
+// Currently, if the server is running this module will send 450 queries to Twitter 6 times at 1:00, 1:20, 1:40, 2:00, 2:20, and 2:40 AM.
 cron.schedule('0 0,20,40 1,2 * * *', () => {
 
   // GET all publications from database and save to publications array

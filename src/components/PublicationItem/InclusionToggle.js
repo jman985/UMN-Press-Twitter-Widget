@@ -24,6 +24,8 @@ class ToggleButtons extends React.Component {
     include: this.props.include,
   };
 
+
+  // Toggles the inclusion value of a publication between true and false when the checkbox is clicked
   handleInclusionToggle = (event, include) => {
     console.log("TOGGLE", this.props.publicationId);
     event.stopPropagation();

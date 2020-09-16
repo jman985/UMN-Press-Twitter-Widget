@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { CSVReader } from "react-papaparse";
 import { connect } from "react-redux";
-
 import Button from "@material-ui/core/Button";
-import { withStyles } from "@material-ui/core/styles";
+
 const buttonRef = React.createRef();
+
 
 class CsvParser extends Component {
   handleOpenDialog = (e) => {
@@ -25,9 +25,6 @@ class CsvParser extends Component {
     console.log(err);
   };
 
-  handleOnRemoveFile = (data) => {
-    // console.log(data);
-  };
 
   render() {
     const { classes } = this.props;
@@ -62,23 +59,6 @@ class CsvParser extends Component {
                 Preview CSV file
               </Button>
 
-              {/* <div
-                style={{
-                  borderWidth: 0.5,
-                  borderStyle: "solid",
-                  borderColor: "#ccc",
-                  height: 55,
-                  lineHeight: 2.5,
-                  marginTop: 5,
-                  marginBottom: 5,
-                  paddingLeft: "50px",
-                  paddingTop: 3,
-                  width: "30%",
-                  height: "45px",
-                }}
-              >
-                {file && file.name}
-              </div> */}
             </aside>
           )}
         </CSVReader>

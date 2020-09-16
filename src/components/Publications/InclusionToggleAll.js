@@ -24,6 +24,7 @@ class ToggleButtons extends React.Component {
     include: true,
   };
 
+  // toggles the inclusion value of all publications between true/false
   handleInclusionToggle = (event) => {
     event.stopPropagation();
     switch (this.state.include){
@@ -42,7 +43,6 @@ class ToggleButtons extends React.Component {
       default:
         return null;
     }
-    // this.setState({ include: false });
   };
 
   render() {
@@ -80,10 +80,12 @@ ToggleButtons.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
+
 const mapStateToProps = (state) => ({
   user: state.user,
   publication: state.publication,
 });
+
 
 export default connect(mapStateToProps)(
   withRouter(withStyles(styles)(ToggleButtons))
