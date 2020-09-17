@@ -302,7 +302,7 @@ hr {margin:0px 28px; }
 .wrapper #main #content {display:block; float:left; position:relative; width:635px; }
 .wrapper #main #content h1 {color:#1b1a1a; font-size:33.6px; font-weight:normal; line-height:38.4px; margin:30px 28px 17px;  }
 .portaltype-book .wrapper #main #content h1 {color:#5a1e00; font-size:33.6px; margin-bottom:0px; width:600px; }
-.portaltype-book .wrapper #main #content h2 {margin-top:0px; margin-bottom:22px; width:600px; }
+.portaltype-book .wrapper #main #content h2 {margin-top:0px; margin-bottom:22px; width:00px; }
 .wrapper #main #content pre, .mce-content-body pre,
 .wrapper #main #content div.documentDescription {color:#595956; font-size:16.8px; font-weight:normal; line-height:20.4px; margin:17px 28px 19px; display:none; }
 .wrapper #main #content h2, .mce-content-body h2 {color:#595956; font-size:21.6px; font-weight:normal; line-height:26.4px; margin:17px 28px 19px;  }
