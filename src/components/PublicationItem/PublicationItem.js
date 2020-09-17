@@ -379,7 +379,9 @@ class PublicationItem extends Component {
                   </FormControl>
               </Box>
               <Box display='flex'>
-                <Button variant="contained" color="primary" href={'http://localhost:3000/#/books/'+this.props.match.params.id} target="_blank">
+                <Button variant="contained" color="primary" onClick={() => {
+                  this.props.history.push('/books/'+this.props.match.params.id);
+                }} target="_blank">
                   View Book Page &nbsp;<PlayArrowIcon/>
                 </Button>
               </Box>
