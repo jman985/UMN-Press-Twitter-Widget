@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { TwitterTweetEmbed } from 'react-twitter-embed';
 import PropTypes from 'prop-types';
 import InclusionToggle from './InclusionToggle'
+import {Link} from 'react-router-dom'
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { withStyles } from '@material-ui/core/styles';
@@ -379,11 +380,11 @@ class PublicationItem extends Component {
                   </FormControl>
               </Box>
               <Box display='flex'>
-                <Button variant="contained" color="primary" onClick={() => {
-                  this.props.history.push('/books/'+this.props.match.params.id);
-                }} target="_blank">
+              <Link to= {'/books/'+this.props.match.params.id} target="_blank">
+                <Button variant="contained" color="primary" >
                   View Book Page &nbsp;<PlayArrowIcon/>
                 </Button>
+                </Link>
               </Box>
             </Box>
         </Paper>
