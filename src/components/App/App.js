@@ -34,7 +34,6 @@ class App extends Component {
           <Switch>
             <Redirect exact from="/" to="/publications" />
             <Route exact path="/books/:publication_id" component={BookPageMock} />
-            <ProtectedRoute exact path="/about" component={AboutPage} />
             <ProtectedRoute exact path="/publications" component={Publications} />
             <ProtectedRoute exact path="/publications/:id" component={PublicationItem} />
             <ProtectedRoute exact path="/tweets" component={TweetsPage} />
