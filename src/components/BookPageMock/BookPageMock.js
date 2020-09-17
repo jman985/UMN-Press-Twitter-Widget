@@ -650,7 +650,7 @@ Contents</p><p>
             <CardContent style={{display:"flex", flexDirection:'column',justifyContent:'space-between',height:'100%'}}>
               <CardActionArea >
               </CardActionArea> */}
-                <div style={{maxHeight:"330px", overflow:"auto"}}>
+                <div style={{maxHeight:"325px", overflow:"auto"}}>
 
                 {this.props.selectTweetID.map( tweetID =>
         

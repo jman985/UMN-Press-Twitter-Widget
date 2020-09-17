@@ -817,7 +817,7 @@ div.listingBar a, nav.pagination a {
 
 
 .wrapper #main #content #purchase {background-color:#f3f3f3; display:block; float:left; height:455px; margin-top:-100px; width:255px; }
-.wrapper #main #content #purchase h3 {background:url('./_images/header-purchase.gif') top left no-repeat; height:43px; margin:0px; padding:0px; text-indent:-10000px; width:255px; }
+.wrapper #main #content #purchase h3 {background:url('./_images/header-purchase.gif') top left no-repeat; height:50px; margin:0px; padding:0px; text-indent:-10000px; width:px; }
 .wrapper #main #content #purchase #details-product-list h3 {background:transparent; clear:left; color:#1b1a1a; float:left; font-size:12px; height:auto; line-height:18px; padding:10px; padding-right:0px; text-indent:0px; text-transform:none; width:62px; }
 .wrapper #main #content #purchase #details-product-list p {background:url('./_images/buy-now.gif') 65px 10px no-repeat; text-align:right; float:right; line-height:18px; margin:0px; padding:10px; padding-right:48px; width:46px; font-size: 14.4px; }
 .wrapper #main #content #purchase #details-product-list .add-to-cart-button {display:none; }

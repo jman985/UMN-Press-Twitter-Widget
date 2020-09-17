@@ -15,7 +15,6 @@ import PublicationItem from "../PublicationItem/PublicationItem";
 import TweetsPage from "../TweetsPage/TweetsPage";
 import "./App.css";
 import BookPageMock from "../BookPageMock/BookPageMock";
-import BookPageMock2 from "../BookPageMock/BookPageMock2";
 
 
 class App extends Component {
@@ -35,7 +34,10 @@ class App extends Component {
           <Switch>
             <Redirect exact from="/" to="/publications" />
             <Route exact path="/books/:publication_id" component={BookPageMock} />
-            <Route exact path="/books/2/:publication_id" component={BookPageMock2} />
+            <ProtectedRoute exact path="/about" component={AboutPage} />
+            <ProtectedRoute exact path="/publications" component={Publications} />
+            <ProtectedRoute exact path="/publications/:id" component={PublicationItem} />
+            <ProtectedRoute exact path="/tweets" component={TweetsPage} />
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
