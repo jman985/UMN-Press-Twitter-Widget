@@ -7,7 +7,7 @@ This app is designed to find and display Twitter mentions of publications from t
 
 ![Overview](public/images/tweets.gif)
 
-To see the fully functional site, please visit [UMN PRESS TWITTER SEARCH APPLICATION](https://powerful-island-90935.herokuapp.com/)
+To see the fully functional application, please visit the [UMN PRESS TWITTER SEARCH APPLICATION](https://powerful-island-90935.herokuapp.com/)
 
 
 ## Usage
