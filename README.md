@@ -7,6 +7,9 @@ This app is designed to find and display Twitter mentions of publications from t
 
 ![Overview](public/images/tweets.gif)
 
+To see the fully functional site, please visit [UMN PRESS TWITTER SEARCH APPLICATION](https://powerful-island-90935.herokuapp.com/)
+
+
 ## Usage
 
 ### Login
@@ -164,3 +167,6 @@ We'd like to thank the University of Minnesota Press, and especially Maggie Satt
 We'd also like to thank Twitter for making tweet data easily accessible to developers via their Developer Portal and their APIs. 
 
 Finally, thanks go to our instructors and peers at [Prime Digital Academy](https://www.primeacademy.io) especially Mary Mosman and Dev Jana who equipped us with the skills and knowledge to make this application a reality.
+
+## Support
+If you have suggestions or issues, please email me at [jman985@gmail.com](www.google.com)
