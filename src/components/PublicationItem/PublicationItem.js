@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { TwitterTweetEmbed } from 'react-twitter-embed';
 import PropTypes from 'prop-types';
 import InclusionToggle from './InclusionToggle'
-import {Link} from 'react-router-dom'
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { withStyles } from '@material-ui/core/styles';
@@ -16,6 +15,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import Box from '@material-ui/core/Box';
+import {Link} from 'react-router-dom'
 
 const styles = theme => ({
   root: {
@@ -383,8 +383,8 @@ class PublicationItem extends Component {
               <Link to= {'/books/'+this.props.match.params.id} target="_blank">
                 <Button variant="contained" color="primary" >
                   View Book Page &nbsp;<PlayArrowIcon/>
-                </Button>
-                </Link>
+              </Button>
+              </Link>
               </Box>
             </Box>
         </Paper>

@@ -28,12 +28,6 @@ class Publications extends Component {
   }
 
 
-  componentDidUpdate(prevProps){
-    if (this.props.dbTweets.length !== prevProps.dbTweets.length){
-      this.props.dispatch({type: 'ADD_NEW_TWEET_COUNT'})
-    }
-  }
-
 
   // runs the main search for as many publications as were specified
   handleClick = () => {

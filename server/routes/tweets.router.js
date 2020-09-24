@@ -3,13 +3,14 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const {default: axios} = require('axios');
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
-const token = process.env.BEARER_TOKEN;
+const authToken = process.env.BEARER_TOKEN;
+const limitToken = process.env.SEARCH_RESULT_LIMIT;
 
 // Search Twitter API for searchTerm
 router.get('/twitter/:searchTerm', rejectUnauthenticated, (req, res) => {
-    axios.get(`https://api.twitter.com/2/tweets/search/recent?query=${req.params.searchTerm}&max_results=10&tweet.fields=possibly_sensitive,referenced_tweets`, {
+    axios.get(`https://api.twitter.com/2/tweets/search/recent?query=${req.params.searchTerm}&max_results=${limitToken}&tweet.fields=possibly_sensitive,referenced_tweets`, {
         headers: {
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${authToken}`
         }
     })
         .then((response)=>{
@@ -82,6 +83,22 @@ router.put('/database/reject', rejectUnauthenticated, (req, res) => {
   })
   .catch( (err) => {
       console.log('An error occured while rejecting tweet:', err);
+      res.sendStatus(500);
+  })
+})
+
+
+// Updates approved value of tweets in tweet table to false
+router.delete('/database/delete', rejectUnauthenticated, (req, res) => {
+  const queryText = `
+  DELETE FROM tweet 
+  WHERE approved IS null OR approved = false;`
+  pool.query(queryText)
+  .then( (response) => {
+      res.send(response.rows);
+  })
+  .catch( (err) => {
+      console.log('An error occured while deleting tweets:', err);
       res.sendStatus(500);
   })
 })

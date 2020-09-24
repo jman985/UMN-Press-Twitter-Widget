@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
 
 
 const styles = theme => ({
@@ -43,7 +44,7 @@ class TweetsPage extends Component {
   // The keys reference an index position in tweetsArray and the index they reference advances
   // as tweets are approved & rejected.
   state = {
-    tweetsArray: [1,2,3],
+    tweetsArray: [],
     key1: 0,
     key2: 1,
     key3: 2,
@@ -68,6 +69,12 @@ class TweetsPage extends Component {
     }
   }
 
+
+  // deletes all unapproved tweets
+  deleteUnapproved = () => {
+    this.props.dispatch({type:'DELETE_UNAPPROVED_TWEETS'})
+    this.props.history.push("/publications");
+  }
 
 
   // send the approve/reject based on which button was pressed
@@ -104,7 +111,8 @@ class TweetsPage extends Component {
     if (this.props.dbTweets.map === undefined) return null;
     if (this.state.tweetsArray[0] === undefined) return null;
     if (this.props.publication === undefined) return null;
-    if (this.state.tweetsArray[this.state.key1].publication_id === undefined) return null;
+    if (this.state.tweetsArray === undefined) return null;
+    // if (this.state.tweetsArray[this.state.key1].publication_id === undefined) return null;
 
     return(
       <>
@@ -234,6 +242,9 @@ class TweetsPage extends Component {
           : ''}
 
         </GridList>
+        <Box display='flex' justifyContent='center' style={{marginTop:'60px'}}>
+          <Button variant="contained" color="secondary" onClick={this.deleteUnapproved}>Delete ALL Unapproved Tweets</Button>
+        </Box>
       </>
     )
   } 

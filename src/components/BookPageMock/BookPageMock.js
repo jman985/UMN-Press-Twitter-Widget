@@ -409,15 +409,15 @@ How sampling remade hip-hop over forty years, from pioneering superstar Grandmas
                     </div>
                   </div> 
                 </div>
-              </div>
-              <div id="content" className="full">
-                <div style={{maxWidth: "600px"}}>
+              </div><div id="content" className="full">
+              <div style={{maxWidth: "600px"}}>
                 <h1>{this.props.bookData.title}</h1>
 
                 {this.props.bookData.subtitle ? 
                 <h2>{this.props.bookData.subtitle}</h2>:
                             ''   }
                     </div>
+
                 <div className="details"> 
                   <div className="pub"><strong>2020</strong></div> • &nbsp;
                   <div className="author">
